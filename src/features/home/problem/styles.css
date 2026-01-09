@@ -1,0 +1,56 @@
+@reference "../../../app/globals.css";
+
+/* Problem section mirrors hero width and pacing */
+.problem-section {
+  @apply container mx-auto relative px-6 lg:px-8;
+  @apply py-20 md:py-24;
+  @apply bg-background;
+}
+
+.problem-content {
+  @apply w-full max-w-2xl lg:max-w-3xl; /* same width as hero */
+  @apply ml-auto; /* creates breathing room against the line on larger screens */
+}
+
+.problem-animate {
+  @apply animate-[fade-in_1s_ease-out_0.2s_both];
+}
+
+.problem-kicker {
+  @apply text-sm uppercase tracking-[0.08em] text-foreground/60 font-sans mb-4;
+}
+
+.problem-heading {
+  @apply text-xl md:text-2xl font-medium text-primary font-sans;
+  @apply leading-relaxed mb-8;
+}
+
+.problem-notes {
+  @apply flex flex-col gap-4 mb-8;
+}
+
+.problem-note {
+  @apply text-base md:text-lg text-foreground font-sans leading-relaxed;
+}
+
+.problem-secondary {
+  @apply text-base md:text-lg text-foreground font-sans leading-relaxed;
+  @apply mt-2 mb-10; /* small pause from notes */
+}
+
+.problem-closing {
+  @apply text-base md:text-lg font-medium text-primary font-sans leading-relaxed;
+}
+
+/* Subtle guiding line */
+.problem-line {
+  @apply hidden sm:block absolute top-12 bottom-10 left-0 w-px;
+  @apply bg-secondary/30;
+}
+
+/* Mobile behavior: hide the line; spacing stays intact */
+@media (max-width: 639px) {
+  .problem-section {
+    @apply py-16;
+  }
+}
