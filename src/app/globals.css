@@ -336,6 +336,74 @@
     @apply h-2 w-3;
   }
 
+  /* Footer – quiet signature at the bottom */
+  .footer {
+    @apply w-full bg-transparent;
+  }
+
+  .footer-divider {
+    @apply w-full h-px bg-primary/10 mb-10;
+  }
+
+  .footer-container {
+    @apply container mx-auto px-6 lg:px-8 max-w-3xl;
+    @apply pb-14 md:pb-16;
+  }
+
+  .footer-top {
+    @apply flex flex-col gap-10 md:flex-row md:items-start md:justify-between;
+  }
+
+  .footer-identity {
+    @apply space-y-3 max-w-sm;
+  }
+
+  .footer-logo {
+    @apply text-2xl font-semibold font-break text-primary tracking-tight;
+  }
+
+  .footer-tagline {
+    @apply text-sm text-foreground/70 font-sans leading-relaxed;
+  }
+
+  .footer-nav {
+    @apply flex flex-wrap items-center gap-5 md:gap-6;
+  }
+
+  .footer-nav-link {
+    @apply relative text-base text-foreground font-sans transition-colors duration-200;
+    @apply after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-secondary after:transition-all after:duration-300 after:ease-out;
+  }
+
+  .footer-nav-link:hover {
+    @apply after:w-full;
+  }
+
+  .footer-social {
+    @apply flex items-center gap-5 text-foreground/60;
+  }
+
+  .footer-social a {
+    @apply inline-flex items-center justify-center transition-opacity duration-200;
+  }
+
+  .footer-social a:hover {
+    @apply opacity-100;
+  }
+
+  .footer-icon {
+    @apply h-5 w-5 stroke-current;
+  }
+
+  .footer-bottom {
+    @apply mt-10;
+  }
+
+  .footer-meta {
+    @apply text-sm text-foreground/60 font-sans leading-relaxed;
+    @apply text-center md:text-left;
+  }
+
   /* 
    * Global Animation Keyframes
    * Designed to feel human and natural across all components
