@@ -1,0 +1,84 @@
+@reference "../../../app/globals.css";
+
+/* Slightly wider feel than previous sections, but same calm tone */
+.services-section {
+  @apply container mx-auto px-6 lg:px-10;
+  @apply pt-24 pb-28 md:pt-28 md:pb-32;
+  @apply bg-background;
+}
+
+.services-content {
+  @apply w-full max-w-5xl mx-auto;
+}
+
+.services-kicker {
+  @apply text-sm uppercase tracking-[0.08em] text-foreground/60 font-sans mb-4;
+}
+
+.services-heading {
+  @apply text-xl md:text-2xl font-medium text-primary font-sans leading-relaxed mb-6;
+}
+
+.services-intro {
+  @apply text-base md:text-lg text-foreground font-sans leading-relaxed mb-14;
+}
+
+.services-grid {
+  @apply grid gap-8 lg:gap-10;
+  @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}
+
+.services-card {
+  @apply bg-background border border-primary/10 rounded-xl;
+  @apply px-6 py-8 lg:px-7 lg:py-10;
+  @apply transition-all duration-300 ease-out;
+  @apply animate-[fade-in_1s_ease-out_both];
+}
+
+.services-card:focus-visible {
+  @apply outline-none ring-2 ring-secondary/40 ring-offset-2 ring-offset-background;
+}
+
+.services-card:hover {
+  @apply border-secondary/60 translate-y-[-2px];
+}
+
+.services-label {
+  @apply text-xs uppercase tracking-[0.12em] text-secondary font-sans mb-4;
+}
+
+.services-title {
+  @apply text-lg md:text-xl font-medium text-primary font-sans leading-relaxed mb-5;
+}
+
+.services-lines {
+  @apply space-y-3 mb-6;
+}
+
+.services-line {
+  @apply text-base text-foreground font-sans leading-relaxed;
+}
+
+.services-outcomes {
+  @apply space-y-2;
+}
+
+.services-outcome {
+  @apply text-sm md:text-base text-foreground/80 font-sans leading-relaxed;
+}
+
+.services-closing {
+  @apply text-base md:text-lg text-foreground font-sans leading-relaxed;
+  @apply mt-14 md:mt-16;
+}
+
+/* Tablet / mobile spacing and behavior */
+@media (max-width: 639px) {
+  .services-section {
+    @apply pt-20 pb-24;
+  }
+
+  .services-card {
+    @apply px-5 py-7;
+  }
+}
