@@ -184,3 +184,150 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+@layer components {
+  /* 
+   * Navbar Component Styles
+   * Designed to feel calm, reliable, and intentional
+   * Always out of the way but available when needed
+   */
+
+  /* Main navbar container - sticky with smooth transitions */
+  .navbar {
+    @apply fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-out bg-transparent translate-y-0;
+  }
+
+  /* Navbar when scrolled - gains background and subtle border */
+  .navbar-scrolled {
+    @apply bg-background border-b border-primary/10;
+  }
+
+  /* Navbar visibility states for hide/show behavior */
+  .navbar-visible {
+    @apply translate-y-0;
+  }
+
+  .navbar-hidden {
+    @apply -translate-y-full;
+  }
+
+  /* Inner container with proper alignment and spacing */
+  .navbar-container {
+    @apply mx-auto flex h-16 container items-center justify-between px-6 md:h-16 lg:px-8;
+  }
+
+  /* Logo zone styling */
+  .navbar-logo-zone {
+    @apply flex items-center;
+  }
+
+  .navbar-logo-link {
+    @apply block transition-opacity duration-200 hover:opacity-90;
+  }
+
+  .navbar-logo-image {
+    @apply h-auto w-auto max-h-8;
+  }
+
+  /* Desktop navigation container */
+  .navbar-nav-desktop {
+    @apply hidden items-center space-x-8 md:flex;
+  }
+
+  /* Navigation link styling with editorial underline behavior */
+  .navbar-nav-link {
+    @apply relative px-1 py-2 text-base font-normal font-sans text-foreground transition-all duration-300;
+    @apply after:content-[""] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-secondary after:transition-all after:duration-300 after:ease-out;
+  }
+
+  .navbar-nav-link:hover,
+  .navbar-nav-link-active {
+    @apply after:w-full;
+  }
+
+  /* Utility zone for language selector and mobile toggle */
+  .navbar-utility-zone {
+    @apply flex items-center space-x-6;
+  }
+
+  /* Language selector styling */
+  .navbar-language-selector {
+    @apply hidden cursor-pointer items-center space-x-1 text-foreground/70 font-sans transition-opacity duration-200 md:flex;
+  }
+
+  .navbar-language-selector:hover {
+    @apply text-foreground;
+  }
+
+  .navbar-language-text {
+    @apply text-sm font-normal;
+  }
+
+  .navbar-language-arrow {
+    @apply h-2 w-3 transition-transform duration-200;
+  }
+
+  .navbar-language-selector:hover .navbar-language-arrow {
+    @apply translate-y-0.5;
+  }
+
+  /* Mobile menu toggle button */
+  .navbar-mobile-toggle {
+    @apply relative flex h-6 w-6 flex-col items-center justify-center space-y-1 md:hidden;
+  }
+
+  .navbar-mobile-toggle-line {
+    @apply h-0.5 w-5 rounded-full bg-foreground transition-all duration-300;
+  }
+
+  /* Mobile overlay for menu backdrop */
+  .navbar-mobile-overlay {
+    @apply fixed inset-0 z-40 bg-black/20 transition-opacity duration-300 md:hidden;
+  }
+
+  /* Mobile menu panel with slide-in animation */
+  .navbar-mobile-menu {
+    @apply fixed right-0 top-0 z-50 h-full w-80 max-w-sm transform bg-white shadow-xl transition-transform duration-300 ease-in-out md:hidden;
+    @apply translate-x-full;
+  }
+
+  .navbar-mobile-menu-open {
+    @apply translate-x-0;
+  }
+
+  .navbar-mobile-menu-content {
+    @apply flex h-full flex-col px-6 py-20;
+  }
+
+  /* Mobile navigation styling */
+  .navbar-mobile-nav {
+    @apply flex flex-col space-y-6;
+  }
+
+  .navbar-mobile-nav-link {
+    @apply relative block py-3 text-lg font-normal font-sans text-foreground transition-all duration-200;
+    @apply after:content-[""] after:absolute after:bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-secondary after:transition-all after:duration-300 after:ease-out;
+  }
+
+  .navbar-mobile-nav-link:active,
+  .navbar-mobile-nav-link-active {
+    @apply after:w-full;
+  }
+
+  /* Mobile language selector */
+  .navbar-mobile-language {
+    @apply mt-8 flex cursor-pointer items-center space-x-2 border-t border-gray-200 pt-6 text-foreground/70 transition-opacity duration-200;
+  }
+
+  .navbar-mobile-language:hover {
+    @apply text-foreground;
+  }
+
+  .navbar-mobile-language-text {
+    @apply text-sm font-normal font-sans;
+  }
+
+  .navbar-mobile-language-arrow {
+    @apply h-2 w-3;
+  }
+}
