@@ -1,0 +1,68 @@
+@reference "../../../app/globals.css";
+
+/* 
+ * Hero Section Styles
+ * Purpose: Create quiet authority and establish thinking approach
+ * Design: Slow the user down, feel like opening a consultant's notebook
+ */
+
+/* Hero section container with calm, spacious layout */
+.hero-section {
+  @apply container mx-auto min-h-0 py-16 sm:min-h-[75vh] lg:min-h-[85vh] bg-background;
+  @apply flex items-center justify-start px-6 lg:px-8;
+}
+
+/* Content container with intentional narrow width */
+.hero-content {
+  @apply w-full max-w-2xl lg:max-w-3xl;
+  /* Slightly above true center for visual balance */
+  @apply pt-8 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24;
+}
+
+/* Main headline styling with restrained elegance */
+.hero-headline {
+  @apply text-2xl leading-snug mb-6 sm:text-3xl md:text-4xl lg:text-5xl sm:leading-relaxed sm:mb-8 font-medium text-primary font-sans;
+  /* Prevent more than 2.5 lines on mobile */
+  @apply max-w-xs sm:max-w-lg md:max-w-2xl;
+}
+
+/* Supporting statement with intentional pause spacing */
+.hero-support {
+  @apply text-base mb-5 sm:text-lg md:text-xl sm:mb-6 text-foreground font-sans font-normal;
+  @apply leading-relaxed;
+  @apply max-w-sm sm:max-w-xl;
+}
+
+/* Context line with subtle presence */
+.hero-context {
+  @apply text-sm mb-8 sm:text-base md:text-lg sm:mb-12 text-foreground/75 font-sans;
+  @apply leading-relaxed;
+  @apply max-w-xs sm:max-w-lg;
+}
+
+/* CTA area with inviting, non-urgent spacing */
+.hero-cta-area {
+  @apply flex flex-col sm:flex-row items-start gap-4 sm:gap-6;
+}
+
+/* Hero-specific animation classes using global keyframes */
+.hero-animate-headline {
+  @apply animate-[fade-up_1.2s_ease-out_0.3s_both];
+}
+
+.hero-animate-support {
+  @apply animate-[fade-up_1.2s_ease-out_0.8s_both];
+}
+
+.hero-animate-context {
+  @apply animate-[fade-up_1.2s_ease-out_1.2s_both];
+}
+
+.hero-animate-cta {
+  @apply animate-[fade-in_1s_ease-out_1.6s_both];
+}
+
+/* Optional subtle background shape (can be enabled later) */
+.hero-background-shape {
+  @apply absolute bottom-0 right-0 opacity-5 pointer-events-none;
+}
