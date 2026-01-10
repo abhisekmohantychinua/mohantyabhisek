@@ -1,11 +1,30 @@
-import ProblemInteractive from "./interactive";
 import "./styles.css";
+
+const lines = [
+  "You know something needs to be done, but not what should come first.",
+  "Everyone suggests a solution, but few understand your context.",
+  "Time, money, and credibility are already involved.",
+  "Fixing later often costs far more than thinking now.",
+];
 
 export default function Problem() {
   return (
     <section className="problem-section" aria-labelledby="problem-heading">
       <div className="problem-shell">
-        <ProblemInteractive />
+        <div className="problem-heading-wrap">
+          <p className="problem-kicker">Problem Framing</p>
+          <h2 id="problem-heading" className="problem-heading">
+            Before moving forward
+          </h2>
+        </div>
+        <div className="problem-divider" aria-hidden />
+        <div className="problem-text-slot" aria-live="polite">
+          {lines.map((text, i) => (
+            <p key={i} className="problem-text-line">
+              {text}
+            </p>
+          ))}
+        </div>
       </div>
     </section>
   );
