@@ -1,56 +1,103 @@
 @reference "../../../app/globals.css";
 
-/* Problem section mirrors hero width and pacing */
+/* Layout shell */
 .problem-section {
-  @apply container mx-auto relative px-6 lg:px-8;
-  @apply py-4 md:py-8;
-  @apply bg-background;
+  @apply container mx-auto bg-[#F7F9FC];
+  @apply py-20 md:py-24;
+  @apply min-h-[70vh] md:min-h-[78vh];
 }
 
-.problem-content {
-  @apply w-full max-w-2xl lg:max-w-3xl; /* same width as hero */
-  @apply ml-auto; /* creates breathing room against the line on larger screens */
+.problem-shell {
+  @apply relative w-full mx-auto px-6 lg:px-8;
+  @apply max-w-4xl;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
-.problem-animate {
-  @apply animate-[fade-in_1s_ease-out_0.2s_both];
+.problem-heading-wrap {
+  @apply flex flex-col gap-3;
 }
 
 .problem-kicker {
-  @apply text-sm uppercase tracking-[0.08em] text-foreground/60 font-sans mb-4;
+  @apply text-sm uppercase tracking-[0.08em] text-foreground/60 font-sans;
 }
 
 .problem-heading {
-  @apply text-xl md:text-2xl font-medium text-primary font-sans;
-  @apply leading-relaxed mb-8;
+  @apply text-xl md:text-2xl font-medium text-primary font-sans leading-relaxed;
 }
 
-.problem-notes {
-  @apply flex flex-col gap-4 mb-8;
+.problem-body {
+  @apply relative w-full;
+  min-height: calc(62vh + (var(--problem-steps, 4) * 40vh));
 }
 
-.problem-note {
-  @apply text-base md:text-lg text-foreground font-sans leading-relaxed;
+.problem-pin {
+  @apply sticky flex flex-col gap-6;
+  top: 14vh;
 }
 
-.problem-secondary {
-  @apply text-base md:text-lg text-foreground font-sans leading-relaxed;
-  @apply mt-2 mb-10; /* small pause from notes */
-}
-
-.problem-closing {
-  @apply text-base md:text-lg font-medium text-primary font-sans leading-relaxed;
-}
-
-/* Subtle guiding line */
 .problem-line {
-  @apply hidden sm:block absolute top-12 bottom-10 left-0 w-px;
-  @apply bg-secondary/30;
+  @apply w-full max-w-[68%];
+  height: 1.25px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Mobile behavior: hide the line; spacing stays intact */
+.problem-line-bar {
+  @apply block w-full h-full;
+  background: rgba(58, 125, 124, 0.6);
+  transform: translateY(1.2px) skewX(2.2deg) scaleX(1.01);
+  transition: transform 1.4s ease-out;
+}
+
+.problem-line.problem-line-straight .problem-line-bar {
+  transform: translateY(0) skewX(0deg) scaleX(1);
+}
+
+.problem-text-slot {
+  @apply relative w-full overflow-hidden;
+  @apply min-h-[6.25rem];
+}
+
+.problem-text-line {
+  @apply font-sans text-foreground leading-relaxed;
+  font-size: clamp(1.2rem, 3.3vw, 2.05rem);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  will-change: transform, opacity;
+}
+
+.problem-text-line.current {
+  z-index: 2;
+  transform: translateY(calc(var(--problem-blend, 0) * -100%));
+  opacity: calc(1 - var(--problem-blend, 0));
+}
+
+.problem-text-line.next {
+  z-index: 1;
+  transform: translateY(calc((1 - var(--problem-blend, 0)) * 100%));
+  opacity: var(--problem-blend, 0);
+}
+
 @media (max-width: 639px) {
   .problem-section {
     @apply py-16;
+    min-height: 70vh;
+  }
+
+  .problem-body {
+    min-height: calc(64vh + (var(--problem-steps, 4) * 34vh));
+  }
+
+  .problem-line {
+    @apply max-w-full;
+  }
+
+  .problem-pin {
+    top: 12vh;
   }
 }
