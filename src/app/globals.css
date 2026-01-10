@@ -188,6 +188,9 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+  main {
+    @apply mt-16;
+  }
 }
 
 @layer components {

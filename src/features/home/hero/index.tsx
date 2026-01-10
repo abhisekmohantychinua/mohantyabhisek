@@ -24,21 +24,18 @@ export default function Hero() {
       <div className="hero-content">
         {/* Primary headline - establishes core value proposition */}
         <h1 id="hero-headline" className="hero-headline hero-animate-headline">
-          I help businesses decide what they actually need before building
-          anything.
+          Start with clarity. <br /> Build with purpose.
         </h1>
 
-        {/* Supporting statement - introduces problem → insight without blame */}
+        {/* Supporting statement - process that provides quality */}
         <p className="hero-support hero-animate-support">
-          Most projects fail because clarity comes too late.
-          <br />I focus on structure first.
-        </p>
-
-        {/* Context line - grounds abstract thinking and clarifies scope */}
-        <p className="hero-context hero-animate-context">
-          Websites, SaaS products, and internal systems.
-          <br />
-          Built with purpose, not noise.
+          Work begins by understanding the problem in its full context. This
+          makes it easier to see what actually needs to be built, and what does
+          not. With that understanding in place, solutions are defined before
+          any execution starts. Structure keeps the work focused and reduces
+          unnecessary complexity. The same approach applies to websites, SaaS
+          products, and internal systems. Each is designed for reliable,
+          practical use over time.
         </p>
 
         {/* CTA area - inviting, not urgent */}
@@ -65,25 +62,6 @@ export default function Hero() {
             See how I work
           </Button>
         </div>
-
-        {/* Screen reader descriptions for CTAs */}
-        <div className="sr-only">
-          <p id="primary-cta-description">
-            Begin a discussion about your project needs and structure
-          </p>
-          <p id="secondary-cta-description">
-            Learn about the process and methodology for project clarity
-          </p>
-        </div>
-      </div>
-
-      {/* Optional subtle background shape - hidden by default */}
-      <div
-        className="hero-background-shape"
-        aria-hidden="true"
-        role="presentation"
-      >
-        {/* Future: Very subtle abstract shape with <6% opacity */}
       </div>
     </section>
   );
