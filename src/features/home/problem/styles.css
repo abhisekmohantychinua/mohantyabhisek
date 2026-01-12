@@ -1,16 +1,12 @@
 @reference "../../../app/globals.css";
 
 .problem-section {
-  @apply container mx-auto bg-background min-h-[80vh];
-  @apply py-24;
-}
-
-.problem-shell {
-  @apply relative w-full mx-auto px-6 lg:px-8 max-w-[42rem];
+  @apply container mx-auto h-full;
+  @apply py-4 px-6 lg:px-8;
 }
 
 .problem-heading-wrap {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-3 mx-auto w-full max-w-2xl;
 }
 
 .problem-kicker {
@@ -22,14 +18,18 @@
 }
 
 .problem-divider {
-  @apply h-px w-3/5 bg-secondary/80 my-8;
+  @apply h-px w-full bg-secondary/80 my-8 mx-auto max-w-2xl;
+}
+
+.problem-pin-wrap {
+  @apply relative h-[70vh];
+  @apply pt-[20vh];
 }
 
 .problem-text-slot {
-  @apply relative min-h-[7rem] overflow-hidden;
+  @apply relative grid h-full w-full max-w-4xl mx-auto;
 }
 
 .problem-text-line {
-  @apply absolute inset-0 text-[clamp(1.2rem,3.2vw,2rem)] leading-[1.45];
-  @apply will-change-[transform,opacity];
+  @apply text-2xl md:text-5xl text-foreground font-sans leading-relaxed h-[30vh] row-start-1 row-end-2 col-start-1 col-end-2 bg-background;
 }

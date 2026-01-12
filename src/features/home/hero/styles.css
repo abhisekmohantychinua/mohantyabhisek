@@ -1,42 +1,29 @@
 @reference "../../../app/globals.css";
 
-/* 
- * Hero Section Styles
- * Purpose: Create quiet authority and establish thinking approach
- * Design: Slow the user down, feel like opening a consultant's notebook
- */
-
-/* Hero section container with calm, spacious layout */
 .hero-section {
-  @apply container mx-auto py-8 lg:py-16 2xl:py-28 bg-background;
+  @apply container mx-auto py-16 2xl:py-28 bg-background;
   @apply text-start px-6 lg:px-8;
 }
 
-/* Content container with intentional narrow width */
 .hero-content {
   @apply w-full max-w-2xl lg:max-w-3xl;
 }
 
-/* Main headline styling with restrained elegance */
 .hero-headline {
   @apply text-2xl leading-snug mb-4 sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl sm:leading-tight sm:mb-6 2xl:mb-8 text-primary font-sans font-semibold;
-  /* Prevent more than 2.5 lines on mobile */
   @apply max-w-xs sm:max-w-lg md:max-w-2xl;
 }
 
-/* Supporting statement with intentional pause spacing */
 .hero-support {
   @apply text-sm mb-5 sm:text-base md:text-lg 2xl:text-xl sm:mb-6 2xl:mb-8 text-foreground font-sans font-normal;
   @apply leading-relaxed;
   @apply max-w-sm sm:max-w-xl;
 }
 
-/* CTA area with inviting, non-urgent spacing */
 .hero-cta-area {
   @apply flex flex-col sm:flex-row items-start gap-4 sm:gap-6;
 }
 
-/* Hero-specific animation classes using global keyframes */
 .hero-animate-headline {
   @apply animate-[fade-up_1.2s_ease-out_0.3s_both];
 }
