@@ -3,9 +3,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-export default function StepAnimator() {
+export default function ServicesCardAnimator() {
   useGSAP(() => {
-    const stepCards = gsap.utils.toArray<HTMLElement>(".thinking-step");
+    const stepCards = gsap.utils.toArray<HTMLElement>(".services-card");
     stepCards.forEach((card) => {
       const cardTimeline = gsap.timeline({
         scrollTrigger: {
@@ -16,27 +16,27 @@ export default function StepAnimator() {
         },
       });
       cardTimeline
-        .to(card.querySelector(".thinking-step-number"), {
-          backgroundColor: "var(--color-secondary)",
-          color: "var(--color-background)",
-          duration: 0.3,
-          ease: "none",
-        })
-        .from(card.querySelector(".thinking-step-title"), {
+        .from(card.querySelector(".services-title"), {
           y: 20,
           opacity: 0,
           duration: 0.3,
           ease: "none",
         })
+        .from(card.querySelector(".services-image"), {
+          scale: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: "none",
+        })
         .from(
-          card.querySelector(".thinking-step-text"),
+          card.querySelector(".services-lines"),
           {
             y: 20,
             opacity: 0,
             duration: 0.3,
             ease: "none",
           },
-          "-=0.2"
+          "-=0.5"
         );
     });
   });

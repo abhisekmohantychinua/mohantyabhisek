@@ -2,13 +2,13 @@
 
 /* Slightly wider feel than previous sections, but same calm tone */
 .services-section {
-  @apply container mx-auto px-6 lg:px-10;
+  @apply container mx-auto px-6 lg:px-8;
   @apply pt-24 pb-28 md:pt-28 md:pb-32;
   @apply bg-background;
 }
 
 .services-content {
-  @apply w-full max-w-5xl mx-auto;
+  @apply w-full;
 }
 
 .services-kicker {
@@ -16,11 +16,11 @@
 }
 
 .services-heading {
-  @apply text-xl md:text-2xl font-medium text-primary font-sans leading-relaxed mb-6;
+  @apply text-xl md:text-2xl 2xl:text-4xl font-medium text-primary font-sans leading-relaxed mb-2;
 }
 
 .services-intro {
-  @apply text-base md:text-lg text-foreground font-sans leading-relaxed mb-14;
+  @apply text-base md:text-lg 2xl:text-xl text-foreground font-sans leading-relaxed mb-14;
 }
 
 .services-grid {
@@ -29,38 +29,38 @@
 }
 
 .services-card {
-  @apply bg-background border border-primary/10 rounded-xl;
-  @apply px-6 py-8 lg:px-7 lg:py-10;
+  @apply bg-card border border-primary/10 rounded-2xl p-4 md:p-6;
   @apply transition-all duration-300 ease-out;
-  @apply animate-[fade-in_1s_ease-out_both];
-}
-
-.services-card:focus-visible {
-  @apply outline-none ring-2 ring-secondary/40 ring-offset-2 ring-offset-background;
-}
-
-.services-card:hover {
-  @apply border-secondary/60 translate-y-[-2px];
-}
-
-.services-label {
-  @apply text-xs uppercase tracking-[0.12em] text-secondary font-sans mb-4;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  @apply hover:border-secondary/50 hover:-translate-y-1 hover:shadow-md;
 }
 
 .services-title {
-  @apply text-lg md:text-xl font-medium text-primary font-sans leading-relaxed mb-5;
+  @apply text-lg md:text-2xl font-medium text-primary font-sans mb-4;
+}
+
+.services-image {
+  @apply w-full h-[370px] rounded-2xl mx-auto mb-6 bg-background relative z-10 overflow-hidden;
+}
+.services-image img {
+  @apply w-full h-full object-cover;
+}
+/* subtle dark overlay on image */
+.services-image::after {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full rounded-2xl z-20 bg-foreground/5;
+}
+.services-card:hover .services-image img {
+  @apply scale-105 transition-transform duration-300 ease-out;
 }
 
 .services-lines {
-  @apply space-y-3 mb-6;
+  @apply mb-6;
 }
 
 .services-line {
   @apply text-base text-foreground font-sans leading-relaxed;
-}
-
-.services-outcomes {
-  @apply space-y-2;
+  @apply flex items-start gap-3;
 }
 
 .services-outcome {

@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .hero-section {
-  @apply container mx-auto py-16 2xl:py-28 bg-background;
+  @apply container mx-auto py-16 2xl:py-28 bg-background relative;
   @apply text-start px-6 lg:px-8;
 }
 

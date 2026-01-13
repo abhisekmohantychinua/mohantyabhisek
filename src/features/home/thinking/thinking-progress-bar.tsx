@@ -1,14 +1,14 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import "./progress-bar.css";
+import "./thinking-progress-bar.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProgressBar() {
+export default function ThinkingProgressBar() {
   const progressFill = useRef<HTMLDivElement>(null);
   useGSAP(() => {
     gsap.to(progressFill.current, {

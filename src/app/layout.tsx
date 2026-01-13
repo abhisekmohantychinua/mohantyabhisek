@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
+import GSAPInit from "@/components/shared/gsap-init";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,6 +22,7 @@ export default function RootLayout({
         </header>
         <main>{children}</main>
         <Footer />
+        <GSAPInit />
       </body>
     </html>
   );

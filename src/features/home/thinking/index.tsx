@@ -1,6 +1,6 @@
-import ContentAnimator from "./content-animator";
-import ProgressBar from "./progress-bar";
-import StepAnimator from "./step-animator";
+import ThinkingContentAnimator from "./thinking-content-animator";
+import ThinkingProgressBar from "./thinking-progress-bar";
+import ThinkingStepAnimator from "./thinking-step-animator";
 import "./styles.css";
 
 type ThinkingStep = {
@@ -85,9 +85,9 @@ export default function Thinking() {
           })}
         </div>
       </div>
-      <ProgressBar />
-      <ContentAnimator />
-      <StepAnimator />
+      <ThinkingProgressBar />
+      <ThinkingContentAnimator />
+      <ThinkingStepAnimator />
     </section>
   );
 }

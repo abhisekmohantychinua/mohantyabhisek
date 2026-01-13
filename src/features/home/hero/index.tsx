@@ -1,24 +1,14 @@
 import { Button } from "@/components/ui/button";
 import "./styles.css";
+import ScrollControl from "@/components/shared/scroll-control";
 
-/**
- * Hero Section Component
- *
- * Purpose: Establish how we think and set expectations for the rest of the page
- * Design Philosophy: Create quiet authority in under 5 seconds
- *
- * Key Behaviors:
- * - Slows the user down rather than exciting them
- * - Feels like opening the first page of a consultant's notebook
- * - Invites conversation, not conversion
- * - No selling or explaining everything
- */
 export default function Hero() {
   return (
     <section
       className="hero-section"
       role="banner"
       aria-labelledby="hero-headline"
+      id="hero-section"
     >
       {/* Content container with intentional narrow width to force intention */}
       <div className="hero-content">
@@ -63,6 +53,7 @@ export default function Hero() {
           </Button>
         </div>
       </div>
+      <ScrollControl />
     </section>
   );
 }

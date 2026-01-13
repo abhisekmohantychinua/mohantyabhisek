@@ -1,45 +1,40 @@
+import Image from "next/image";
 import "./styles.css";
+import ServicesContentAnimator from "./services-content-animator";
+import ServicesCardAnimator from "./services-card-animator";
 
 type ServiceCard = {
-  label: string;
   title: string;
+  image: string;
   lines: string[];
-  outcomes: string[];
 };
 
 const services: ServiceCard[] = [
   {
-    label: "WHEN YOU NEED CLARITY FAST",
-    title: "Landing Page / Simple Website",
+    title: "A presence people trust quickly",
+    image: "/services/landing.webp",
     lines: [
-      "You already have a service.",
-      "You need people to understand it quickly.",
-      "And trust it enough to contact you.",
+      "People understand what you do in seconds",
+      "Your business looks credible, not improvised",
+      "Enquiries feel intentional, not random",
     ],
-    outcomes: ["Clear message.", "Simple structure.", "No unnecessary pages."],
   },
   {
-    label: "WHEN YOU ARE BUILDING A PRODUCT",
-    title: "SaaS / Custom Web App",
+    title: "A product users don’t struggle with",
+    image: "/services/saas.webp",
     lines: [
-      "The idea exists.",
-      "Decisions are still forming.",
-      "Structure matters more than speed.",
+      "Users know what to do without being taught",
+      "Features support decisions, not confusion",
+      "The product feels stable as it grows",
     ],
-    outcomes: ["Thoughtful flows.", "Practical systems.", "Room to grow."],
   },
   {
-    label: "WHEN OPERATIONS ARE COSTING TIME",
-    title: "ERP / CRM / Management System",
+    title: "Systems that save real time",
+    image: "/services/dashboard.webp",
     lines: [
-      "Work is repeating.",
-      "Information is scattered.",
-      "Decisions take longer than they should.",
-    ],
-    outcomes: [
-      "Less friction.",
-      "Clear workflows.",
-      "Time saved across teams.",
+      "Daily work takes fewer steps",
+      "Repetition reduces across teams",
+      "Time goes back into running the business",
     ],
   },
 ];
@@ -48,35 +43,39 @@ export default function Services() {
   return (
     <section className="services-section" aria-labelledby="services-heading">
       <div className="services-content">
-        <p className="services-kicker">Services</p>
+        <p className="services-kicker">Solutions</p>
 
         <h2 id="services-heading" className="services-heading">
-          Different problems need different systems.
+          Find your way
         </h2>
 
-        <p className="services-intro">
-          I don&apos;t start with services.
-          <br />I start with the situation.
-        </p>
+        <p className="services-intro">Different goals, clear outcomes.</p>
 
         <div
           className="services-grid"
           role="list"
           aria-label="Service options framed as situations"
         >
-          {services.map((service, index) => {
-            const delay = 0.18 + index * 0.12;
+          {services.map((service) => {
             return (
               <article
                 key={service.title}
                 className="services-card"
                 role="listitem"
-                style={{ animationDelay: `${delay}s` }}
                 tabIndex={0}
-                aria-label={`${service.title} — ${service.label}`}
+                aria-label={`${service.title}`}
               >
-                <p className="services-label">{service.label}</p>
                 <h3 className="services-title">{service.title}</h3>
+                <figure className="services-image">
+                  <Image
+                    src={service.image}
+                    alt=""
+                    width={400}
+                    height={250}
+                    loading="lazy"
+                  />
+                </figure>
+
                 <div className="services-lines">
                   {service.lines.map((line) => (
                     <p key={line} className="services-line">
@@ -84,27 +83,13 @@ export default function Services() {
                     </p>
                   ))}
                 </div>
-                <div
-                  className="services-outcomes"
-                  aria-label="Expected outcomes"
-                >
-                  {service.outcomes.map((outcome) => (
-                    <p key={outcome} className="services-outcome">
-                      {outcome}
-                    </p>
-                  ))}
-                </div>
               </article>
             );
           })}
         </div>
-
-        <p className="services-closing">
-          Choosing the wrong system is expensive.
-          <br />
-          Taking time to decide is not.
-        </p>
       </div>
+      <ServicesContentAnimator />
+      <ServicesCardAnimator />
     </section>
   );
 }

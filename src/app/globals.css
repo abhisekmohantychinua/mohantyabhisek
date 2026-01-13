@@ -341,20 +341,20 @@
 
   /* Footer – quiet signature at the bottom */
   .footer {
-    @apply w-full bg-transparent;
+    @apply container mx-auto bg-transparent;
   }
 
   .footer-divider {
-    @apply w-full h-px bg-primary/10 mb-10;
+    @apply w-full h-px bg-primary/10 my-5;
   }
 
   .footer-container {
-    @apply container mx-auto px-6 lg:px-8 max-w-3xl;
-    @apply pb-14 md:pb-16;
+    @apply container mx-auto px-6 lg:px-8;
+    @apply py-4 md:py-8;
   }
 
   .footer-top {
-    @apply flex flex-col gap-10 md:flex-row md:items-start md:justify-between;
+    @apply flex flex-col items-center gap-5 md:gap-10 md:flex-row md:items-start md:justify-between;
   }
 
   .footer-identity {
@@ -362,15 +362,15 @@
   }
 
   .footer-logo {
-    @apply text-2xl font-semibold font-break text-primary tracking-tight;
+    @apply w-[150px] h-[45px] object-center object-cover mb-8;
   }
 
   .footer-tagline {
-    @apply text-sm text-foreground/70 font-sans leading-relaxed;
+    @apply text-sm lg:text-base text-foreground/70 font-sans leading-relaxed;
   }
 
   .footer-nav {
-    @apply flex flex-wrap items-center gap-5 md:gap-6;
+    @apply flex flex-wrap items-center justify-center gap-5 md:gap-6 w-full max-w-sm;
   }
 
   .footer-nav-link {
@@ -383,15 +383,11 @@
   }
 
   .footer-social {
-    @apply flex items-center gap-5 text-foreground/60;
+    @apply flex items-center justify-center md:justify-end gap-5 text-foreground/60 w-full max-w-sm;
   }
 
   .footer-social a {
-    @apply inline-flex items-center justify-center transition-opacity duration-200;
-  }
-
-  .footer-social a:hover {
-    @apply opacity-100;
+    @apply inline-flex items-center justify-center rounded-full bg-accent/0 p-2 hover:bg-accent/20 hover:text-accent transition-colors duration-200;
   }
 
   .footer-icon {
@@ -399,19 +395,21 @@
   }
 
   .footer-bottom {
-    @apply mt-10;
+    @apply mt-10 w-full;
   }
 
   .footer-meta {
     @apply text-sm text-foreground/60 font-sans leading-relaxed;
-    @apply text-center md:text-left;
+    @apply text-center;
   }
 
-  /* 
-   * Global Animation Keyframes
-   * Designed to feel human and natural across all components
-   * No bouncing, scaling, or aggressive motion
-   */
+  /* Scroll Control Component */
+  .scroll-control {
+    @apply absolute -bottom-28 left-1/2 -translate-x-1/2 w-full flex flex-col justify-center items-center animate-bounce duration-1000 z-10;
+  }
+  .scroll-text {
+    @apply text-xs md:text-sm;
+  }
 
   /* Global keyframe definitions for reusable animations */
   @keyframes fade-up {

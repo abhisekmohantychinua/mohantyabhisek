@@ -3,16 +3,16 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-export default function ContentAnimator() {
+export default function ServicesContentAnimator() {
   useGSAP(() => {
-    gsap.from(".thinking-content", {
+    gsap.from(".services-content", {
       y: 50,
       opacity: 0,
       duration: 0.3,
       stagger: 1,
       ease: "none",
       scrollTrigger: {
-        trigger: ".thinking-content",
+        trigger: ".services-content",
         start: "top 75%",
         end: "top 75%",
         toggleActions: "play none none reverse",
