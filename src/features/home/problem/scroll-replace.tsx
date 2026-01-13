@@ -52,9 +52,19 @@ export default function ScrollReplace() {
       // Instead of scaling down the previous line, we just move the new line into place and fade it in
       tl.from(
         line,
-        { y: window.innerHeight, opacity: 0, duration: 1, ease: "none" },
+        {
+          y: window.innerHeight,
+          scale: 1.8,
+          opacity: 0,
+          duration: 1,
+          ease: "none",
+        },
         i
-      ).to(line, { opacity: 1, duration: 0.2, ease: "none" }, i + 0.8);
+      ).to(
+        line,
+        { scale: 1, opacity: 1, duration: 0.2, ease: "none" },
+        i + 0.8
+      );
     });
   });
 

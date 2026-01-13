@@ -1,0 +1,8 @@
+@reference "./styles.css";
+
+.progress-bar {
+  @apply absolute left-4 top-1/2 transform -translate-y-1/2 h-4/5 w-[2px] bg-foreground/80;
+}
+.progress-fill {
+  @apply h-0 w-[2px] bg-accent origin-top;
+}

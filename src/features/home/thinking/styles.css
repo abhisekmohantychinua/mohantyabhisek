@@ -7,65 +7,36 @@
   @apply bg-background;
 }
 
-/* Optional faint divider to signal shift from observation to reasoning */
-.thinking-divider {
-  @apply h-px w-full bg-primary/5 mb-12;
-}
-
 .thinking-content {
-  @apply w-full max-w-2xl lg:max-w-3xl;
-}
-
-.thinking-kicker {
-  @apply text-sm uppercase tracking-[0.08em] text-foreground/60 font-sans mb-4;
+  @apply w-full max-w-2xl lg:max-w-3xl mx-auto text-center;
 }
 
 .thinking-heading {
-  @apply text-xl md:text-2xl font-medium text-primary font-sans leading-relaxed mb-5;
+  @apply text-xl md:text-2xl 2xl:text-4xl font-medium text-primary font-sans leading-relaxed mb-2;
 }
 
 .thinking-intro {
-  @apply text-base md:text-lg text-foreground font-sans leading-relaxed mb-10;
+  @apply text-base md:text-lg 2xl:text-xl text-foreground font-sans leading-relaxed mb-10;
 }
 
 .thinking-steps {
-  @apply relative flex flex-col gap-10;
-  @apply mt-4;
-}
-
-/* Subtle vertical connector */
-.thinking-steps::before {
-  content: "";
-  @apply absolute left-3 md:left-4 top-0 bottom-0 w-px bg-secondary/25;
+  @apply relative flex flex-col items-center gap-10 text-start;
+  @apply mt-5;
 }
 
 .thinking-step {
-  @apply relative flex gap-4 md:gap-5 items-start;
-  @apply pl-6 md:pl-8;
+  @apply relative flex flex-col md:flex-row gap-4 md:gap-5 items-start text-start w-full max-w-2xl;
+  @apply pl-2 md:pl-8;
 }
 
 .thinking-step-number {
-  @apply text-sm font-medium text-secondary font-sans leading-none pt-0.5;
-  animation: fade-in 0.9s ease-out both;
-}
-
-.thinking-step-body {
-  @apply space-y-1.5;
+  @apply text-sm font-medium text-secondary font-sans leading-none p-2 rounded-full mt-px;
 }
 
 .thinking-step-title {
-  @apply text-base md:text-lg font-medium text-foreground font-sans leading-relaxed;
-  animation: fade-in 1s ease-out both;
+  @apply text-base md:text-lg 2xl:text-2xl font-medium text-foreground font-sans mb-2;
 }
 
 .thinking-step-text {
-  @apply text-base text-foreground/80 font-sans leading-relaxed;
-  animation: fade-in 1s ease-out both;
-}
-
-/* Mobile: hide the connector line but keep spacing */
-@media (max-width: 639px) {
-  .thinking-steps::before {
-    content: none;
-  }
+  @apply text-base text-foreground/80 font-sans leading-relaxed mb-2;
 }
