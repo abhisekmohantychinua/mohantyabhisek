@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import "./styles.css";
 import ScrollControl from "@/components/shared/scroll-control";
+import CtaPopover from "@/components/shared/cta-popover";
 
 export default function Hero() {
   return (
@@ -31,15 +32,7 @@ export default function Hero() {
         {/* CTA area - inviting, not urgent */}
         <div className="hero-cta-area hero-animate-cta">
           {/* Primary CTA - conversation starter */}
-          <Button
-            variant="accent"
-            size="lg"
-            className="font-sans"
-            type="button"
-            aria-describedby="primary-cta-description"
-          >
-            Start a conversation
-          </Button>
+          <CtaPopover />
 
           {/* Secondary CTA - low-commitment option to reduce friction */}
           <Button

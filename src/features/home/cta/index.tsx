@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import "./styles.css";
 import CtaContentAnimator from "./cta-content-animator";
+import CtaPopover from "@/components/shared/cta-popover";
 
 export default function Cta() {
   return (
@@ -10,15 +11,7 @@ export default function Cta() {
           The costliest mistakes usually happen before anything is built.
         </h2>
 
-        <Button
-          variant="accent"
-          size="lg"
-          className="cta-button"
-          type="button"
-          aria-describedby="primary-cta-description"
-        >
-          Start a conversation
-        </Button>
+        <CtaPopover />
         <p className="cta-reassure" aria-label="Response reassurance">
           One conversation for clarity. No commitment.
         </p>
