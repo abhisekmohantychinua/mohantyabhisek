@@ -21,7 +21,7 @@ export default function CtaPopover() {
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        <h4 className="font-semibold mb-4">Take the next step</h4>
+        <h4 className="font-semibold mb-4">Let’s understand your situation</h4>
         <CtaForm onSubmitSuccess={() => setOpen(false)} />
       </PopoverContent>
     </Popover>

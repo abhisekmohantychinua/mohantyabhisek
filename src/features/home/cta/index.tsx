@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import "./styles.css";
 import CtaContentAnimator from "./cta-content-animator";
 import CtaPopover from "@/components/shared/cta-popover";
@@ -10,8 +9,9 @@ export default function Cta() {
         <h2 id="cta-heading" className="cta-heading">
           The costliest mistakes usually happen before anything is built.
         </h2>
-
-        <CtaPopover />
+        <div className="cta-popover-wrap">
+          <CtaPopover />
+        </div>
         <p className="cta-reassure" aria-label="Response reassurance">
           One conversation for clarity. No commitment.
         </p>
