@@ -1,137 +1,164 @@
 # Project Practices & Guidelines
 
-This document captures the conventions actually used in the codebase. Keep it aligned as patterns evolve.
+This document captures the conventions actually used in the codebase. Keep it aligned as patterns evolve — it reflects current, opinionated conventions used across this repository.
 
 ## 📁 File & Folder Organization
 
 ### Current Structure
 
 ```text
+components.json
+docs/
+ └── practices.md
+public/
+ ├── fonts/
+ │   ├── break/
+ │   └── neutral-sans/
+ ├── logo.png
+ └── services/
 src/
-├── app/
-│   ├── globals.css        # Global styles, tokens, component layer, keyframes
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Homepage
-├── components/
-│   ├── shared/
-│   │   └── navbar.tsx     # Primary navigation
-│   └── ui/
-│       └── button.tsx     # shadcn button (CVA variants)
-├── features/
-│   └── home/
-│       └── hero/
-│           ├── index.tsx  # Hero content + shadcn buttons
-│           └── styles.css # Scoped Tailwind styles with responsive prefixes
-└── lib/
-   └── utils.ts           # `cn` helper (clsx + tailwind-merge)
+ ├── app/
+ │   ├── api/
+ │   │   └── contact/route.ts
+ │   ├── globals.css
+ │   ├── layout.tsx
+ │   └── page.tsx
+ ├── components/
+ │   ├── shared/   # reusable feature-agnostic components (Navbar, Footer, ScrollControl)
+ │   └── ui/       # design-system primitives (shadcn + CVA variants)
+ ├── features/
+ │   └── home/
+ │       ├── cta/
+ │       ├── hero/
+ │       ├── problem/
+ │       ├── services/
+ │       └── thinking/
+ ├── lib/          # utilities (cn, helpers)
+ └── schemas/      # zod/type schemas (contact, etc.)
 
-docs/practices.md           # This guide
-public/fonts/               # Custom font files (Neutral Sans, Break)
-public/logo.png             # Brand asset
+package.json
+next.config.ts
+tsconfig.json
+README.md
 ```
 
 ### Naming Conventions
 
-- Files and folders: kebab-case (e.g., `hero-section`, `navbar`)
-- Components: PascalCase (e.g., `Navbar`, `Hero`)
-- Variants/state: clear suffixes (`-active`, `-open`, `-scrolled`)
+- Files and folders: kebab-case (e.g., hero-section, navbar)
+- Components: PascalCase (e.g., Navbar, Hero)
+- Variants/state: clear suffixes (-active, -open, -scrolled)
 
 ### Component Placement
 
 - Shared, reusable UI: `src/components/shared`
-- Design-system primitives (shadcn): `src/components/ui`
+- Design-system primitives: `src/components/ui` (shadcn, CVA variants)
 - Feature-scoped UI: `src/features/<area>/<component>` with colocated CSS when needed
 
 ## 💻 Code Writing Guidelines
 
-- TypeScript everywhere in `src/`; prefer explicit prop typing
-- Functional components with hooks at the top; avoid inline anonymous components when possible
-- Use early returns for loading/error paths when they materially simplify logic
-- Keep comments purposeful: component intent, non-obvious logic, accessibility rationale
+- **TypeScript-first:** All source under `src/` uses TypeScript. Prefer explicit prop and return types for public components and exported helper functions. Define small interfaces for props rather than large implicit `any` objects.
+- **Server vs Client:** Use Next.js App Router patterns: prefer server components by default; add `"use client"` only where DOM APIs, hooks, or client-only libraries (GSAP, lucide-react, etc.) are required. Keep client components as small and focused as possible.
+- **Component shape:** Functional components with clear prop types and named exports. Avoid anonymous inline components for readability and devtools clarity. Prefer small presentational components composed by higher-level containers.
+- **Hooks & effects:** Keep effects deterministic and idempotent. Clean up listeners (`removeEventListener`, `observer.disconnect()`, cancel animation frames) and prefer passive listeners where appropriate (e.g., `addEventListener('scroll', fn, { passive: true })`). Use `startTransition` when deferring non-urgent state updates after navigation.
+- **State & rendering:** Prefer early returns for loading/empty states. Keep heavy logic out of render — compute derived values with `useMemo` only when beneficial. Keep key lists and static content outside rendering loops (top-level constants) to avoid reallocation on each render.
+- **Utilities & composition:** Use the repository `cn` helper (`src/lib/utils.ts`) for class composition and `cva` for variant-driven UI primitives (see `src/components/ui/button.tsx`). Keep variant definitions in UI primitives and reuse them across features.
+- **Data types & schemas:** Centralize shared schemas in `src/schemas/` (Zod/TS types) and prefer typed data boundaries between server and client code.
 
 ### Accessibility
 
-- Semantic elements (`nav`, `section`, `button`, etc.)
-- ARIA for stateful controls (`aria-expanded`, `aria-controls`, `aria-label`)
-- Keyboard support by default; avoid pointer-only interactions
-- Screen reader helpers via `sr-only` for CTA descriptions and similar content
+- **Semantic markup:** Prefer `nav`, `main`, `section`, `article`, `figure`, `figcaption`, `button`, `ul/ol` where appropriate.
+- **ARIA & dynamic updates:** Use ARIA only when necessary. For visually driven, dynamic text swaps (Problem section) combine visual GSAP swaps with an `aria-live` region or programmatic announcements to assistive tech; set `aria-atomic` if partial updates should be read as a whole.
+- **Keyboard & focus:** Provide `tabIndex` and clear focus-visible styles for interactive cards and custom controls. Use `focus-visible`/`outline` utilities from global components.
+- **Images & alt text:** Use `next/image` and supply `alt` where meaningful; use empty `alt=""` for decorative images.
+- **Performance-friendly animations:** Avoid animating layout properties where possible; prefer `transform` + `opacity` and GPU-friendly easings. Respect reduced-motion preferences where appropriate.
 
 ## 🎨 Styling & CSS Guidelines
 
-### Tailwind v4 + Custom Properties
+### Tailwind + Tokens
 
-- Tailwind is pulled via `@import "tailwindcss";` in `globals.css`
-- Design tokens live in `:root` (`--background`, `--foreground`, `--primary`, `--secondary`, `--accent`, etc.)
-- `@theme inline` maps tokens to Tailwind variables; prefer semantic utilities (`bg-background`, `text-foreground`)
-- Fonts are defined with `@font-face` and exposed as `--font-neutral-sans` and `--font-break`; use `font-sans` / `font-break`
+- **Single source of tokens:** Global design tokens (colors, radii, fonts, keyframes) live in `src/app/globals.css` and are consumed via CSS custom properties (`:root`) and Tailwind utilities. Prefer these tokens (`bg-background`, `text-foreground`) rather than raw hex values.
+- **Fonts & performance:** Fonts are declared with `@font-face` in `globals.css` and use `font-display: swap`. Map font families to custom properties (`--font-neutral-sans`, `--font-break`) and use those in components.
 
-### Component Layer
+### Component Layer & `@layer components`
 
-- Use `@layer components` in `globals.css` for shared component classes (navbar, animations)
-- Prefer `@apply` with utilities over raw CSS properties
-- Mobile-first, then `sm:`, `md:`, `lg:` prefixes for responsive adjustments (see hero styles)
+- **Global component styles:** Shared visual patterns live under `@layer components` in `globals.css` (navbar, footer, focus rings, utility tokens). Use these for consistent focus/hover/transition rules.
+- **Prefer `@apply`:** Compose Tailwind utilities with `@apply` for readable component CSS. Reserve raw CSS for layout calculations, pseudo-elements, and complex selectors that Tailwind can't express succinctly.
+- **Mobile-first:** Author styles mobile-first and progressively enhance with responsive prefixes (`sm:`, `md:`, `lg:`).
 
-### Scoped CSS (feature-level)
+### Scoped feature CSS
 
-- Import globals with `@reference "../../../app/globals.css";` when using a scoped CSS file
-- Keep scoped files Tailwind-first; limit custom properties unless necessary
-- Use Tailwind responsive prefixes instead of manual media queries
+- **Colocated scoped files:** Feature-level CSS lives under `src/features/*/` and imports global tokens via `@reference "../../../app/globals.css"` when needed. Scoped files follow a Tailwind-first approach with a small set of custom properties to control local behavior (e.g., `--line-growth`).
+- **Naming & structure:** Use clear BEM-like or semantic class names per feature (e.g., `.problem-section`, `.services-card`) and keep animations and layout rules near related markup.
 
-### Animations
+### Animations & motion
 
-- Global keyframes: `fade-up`, `fade-in`, `fade-down`, `slide-in-left`, `slide-in-right` defined in `globals.css`
-- Use Tailwind arbitrary animations: `animate-[fade-up_1.2s_ease-out_0.3s_both]`, etc.
-- Avoid bouncy/scale-heavy motion; prefer gentle translate/opacity
+- **Transform + opacity:** Prefer `transform` and `opacity` for motion. GSAP + ScrollTrigger is used for scrubbed/pinned interactions (Problem section). Keep timelines predictable, scrubbed, and accessible.
+- **Reduce motion & a11y:** Honor `prefers-reduced-motion` where appropriate and provide non-animated fallbacks for critical content.
 
-### Pseudo-elements
+### Images & media
 
-- Use Tailwind pseudo utilities (`after:*`) for simple cases; fall back to `::after` with `content: "";` when clearer
+- **Next/image:** Use `next/image` for responsive images; prefer `loading="lazy"` when appropriate and provide sizes when possible.
+- **Overflow & pin caveats:** Avoid `overflow: hidden` on ancestors of pinned/sticky elements. Pin wrappers should live in non-clipped containers and use a small top offset (e.g., `10vh`) to avoid pinned content sitting flush to the viewport top.
 
-## 🌊 Tailwind & Design System Patterns
+### Utilities & primitives
 
-- Design tokens first; avoid hard-coded colors when a token exists
-- Opacity modifiers: `text-foreground/70`, `border-primary/10`, etc.
-- Spacing and layout: lean on Tailwind utilities; `container` + padding for consistent page gutters
-- Responsive visibility: `hidden md:flex` for desktop-only sections, `md:hidden` for mobile-only
+- **Design primitives:** Keep UI primitives in `src/components/ui` (CVA for variants, Radix Slot for `asChild` patterns). Export variant props from primitives so features can reuse them consistently (see `Button` example).
+- **Class composition:** Use `cn` (`src/lib/utils.ts`) to merge classes and `twMerge` for conflict resolution.
+
+### Practical CSS rules
+
+- Keep component custom properties minimal and documented in the scoped file header.
+- Use `vh`-based shells for scroll-pinned sections and tune them to minimize trailing empty space.
+- Use pseudo-elements for decorative gradients/overlays to keep markup focused on content.
+
+## 🌊 Animations & Scroll
+
+- This project intentionally favors calm, content-first motion: gentle translate + opacity is the baseline.
+- GSAP + ScrollTrigger are used for complex, scrubbed, pinned scroll interactions (e.g., the Problem section). Use GSAP timelines for precise control over pinning, scrub, and per-step easing.
+- When implementing sticky/pin behavior, be aware: `position: sticky`/`pin` can be broken by ancestor `overflow` rules — avoid `overflow: hidden` on ancestors that contain sticky elements.
+- Prefer scrubbed timelines over time-based delays for scroll-linked sequences; guard against duplicated final state by conditionally rendering the target element only when appropriate.
+- For accessible dynamic text swaps, combine GSAP-driven visual swaps with `aria-live` regions so screen readers announce content changes.
+
+## 🌊 Scroll & Pin Caveats (practical rules)
+
+- Pin wrappers should be placed inside non-clipped containers (no `overflow: hidden` on ancestors that require pin/sticky behavior).
+- Use a small top offset (e.g., 10vh) when pinning so pinned headings don't sit at the absolute top of the viewport.
+- Tune scroll shell heights per component (vh-based blocks) to minimize trailing empty scroll space.
 
 ## 🧩 shadcn/ui & Utilities
 
-- Buttons come from `src/components/ui/button.tsx` using CVA variants
-  - Variants: `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`, `accent`
-  - Sizes: `default`, `sm`, `lg`, `icon`, `icon-sm`, `icon-lg`
-- Compose classes with `cn` from `src/lib/utils.ts` (clsx + tailwind-merge)
-- Prefer variant props over ad-hoc class stacking to stay consistent with the design system
+- Buttons and primitives live in `src/components/ui` and use CVA variants; prefer variants over ad-hoc class lists.
+- Compose classes with `cn` from `src/lib/utils.ts` (clsx + tailwind-merge).
 
-## 🧭 Design Philosophy (Current UI)
+## 🧭 Design Philosophy
 
-- Calm, content-first, "quiet authority" tone
-- Subtle motion with staged delays to guide reading order (hero uses stepped fade-up/fade-in)
-- Clear focus and hover states without visual noise
-- Progressive disclosure: keep nav simple, invite conversation over conversion
+- Calm, content-first visual language — quiet authority rather than loud UI flourishes.
+- Subtle motion guides reading order (hero and problem use staged translate + fade).
+- Maintain strong focus and hover states without visual noise.
 
 ## 📊 Performance Notes
 
-- Fonts use `font-display: swap`
-- Use `next/image` with dimensions for logo/imagery
-- Keep custom CSS minimal so Tailwinds tree-shaking is effective
+- Use `font-display: swap` for custom fonts.
+- Prefer `next/image` for images where appropriate and specify sizes to enable optimal delivery.
+- Keep custom CSS minimal so Tailwind tree-shaking remains effective.
 
 ## 🔄 Development Workflow
 
-1. Clarify intent and accessibility before coding
-2. Build mobile-first, layer in `sm:`/`md:`/`lg:`
-3. Favor Tailwind utilities and shared component classes; add scoped CSS only when needed
-4. Use shadcn primitives (e.g., `Button`) with variants; avoid bespoke buttons
-5. Document non-obvious choices inline; keep this guide updated when patterns change
+1. Clarify intent and accessibility before coding.
+2. Implement mobile-first, add responsive prefixes.
+3. Prefer Tailwind utilities and shared component classes; add scoped CSS only when necessary.
+4. Use shadcn primitives (Button) with variants; avoid bespoke buttons.
+5. When a change requires multiple steps (scan, update, test), track it with the project's task plan tool (use the repo's TODO process).
 
 ### Code Review Checklist
 
-- [ ] Types are explicit and props are clear
-- [ ] Accessibility is wired (ARIA, semantics, focus states)
-- [ ] Tailwind-first, tokens instead of raw values
-- [ ] Responsive prefixes applied (mobile-first)
-- [ ] Reuses shared components/variants where possible
-- [ ] Animations use global keyframes and are purposefully timed
+- Types are explicit and props are clear.
+- Accessibility is wired (ARIA, semantics, focus states).
+- Tailwind-first, tokens instead of raw values.
+- Responsive prefixes applied (mobile-first).
+- Reuse shared components/variants where possible.
+- Animations use GSAP/ScrollTrigger for complex scroll interactions and are purposefully timed and accessible.
 
 ---
 
-Last updated: January 2026
+Last updated: January 15, 2026

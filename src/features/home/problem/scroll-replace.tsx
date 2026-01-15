@@ -40,8 +40,9 @@ export default function ScrollReplace() {
         onUpdate: (self) => {
           const min = 20; // vh
           const max = window.innerWidth <= 560 ? 40 : 70; // vh
-          const value = min + (max - min) * self.progress;
+          const value = min + (max - min) * self.progress; // Calculate line growth based on scroll progress
 
+          // Update the CSS variable for line growth
           gsap.set(".problem-pin-wrap", {
             "--line-growth": `${value}vh`,
           });
@@ -78,6 +79,7 @@ export default function ScrollReplace() {
   });
 
   useGSAP(() => {
+    // Animate the after pseudo-element to slide up into view
     gsap.fromTo(
       ".problem-pin-wrap",
       { "--after-y": "100%" },

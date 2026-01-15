@@ -3,6 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+/**
+ * CtaContentAnimator Component
+ * Purpose: Animates the content of the Call to Action (CTA) section as it enters the viewport.
+ */
 export default function CtaContentAnimator() {
   useGSAP(() => {
     gsap.from(".cta-inner > *", {

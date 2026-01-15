@@ -3,6 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+/**
+ * ServicesCardAnimator Component
+ * Purpose: Animates the entrance of each services card and its children.
+ */
 export default function ServicesCardAnimator() {
   useGSAP(() => {
     const stepCards = gsap.utils.toArray<HTMLElement>(".services-card");

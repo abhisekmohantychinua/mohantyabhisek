@@ -2,19 +2,25 @@ import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+// Navigation links for the footer
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Work", href: "/work" },
   { name: "Contact", href: "/contact" },
 ];
 
+/**
+ * Footer component with company info, navigation, and social links
+ */
 export default function Footer() {
   return (
     <footer className="footer" role="contentinfo">
+      {/* Footer divider */}
       <div className="footer-divider" aria-hidden="true" />
 
       <div className="footer-container">
         <div className="footer-top">
+          {/* Footer identity section */}
           <div className="footer-identity">
             <Link href="/" className="footer-logo" aria-label="Abhisek home">
               <Image
@@ -30,6 +36,7 @@ export default function Footer() {
             </p>
           </div>
 
+          {/* Footer navigation links */}
           <nav className="footer-nav" aria-label="Footer navigation">
             {navLinks.map((item) => (
               <Link
@@ -42,6 +49,7 @@ export default function Footer() {
             ))}
           </nav>
 
+          {/* Social media links */}
           <div className="footer-social" aria-label="Social links">
             <Link
               href="https://www.linkedin.com/in/mohanty-abhisek"

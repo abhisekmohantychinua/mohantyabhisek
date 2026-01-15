@@ -1,9 +1,9 @@
 @reference "../../../app/globals.css";
 
 .services-section {
-  @apply container mx-auto px-6 lg:px-8;
-  @apply pt-24 pb-28 md:pt-28 md:pb-32;
-  @apply bg-background;
+  @apply container mx-auto px-6 pt-24 pb-28 bg-background;
+  @apply md:pt-28 md:pb-32;
+  @apply lg:px-8;
 }
 
 .services-content {
@@ -15,59 +15,54 @@
 }
 
 .services-heading {
-  @apply text-xl md:text-2xl 2xl:text-4xl font-medium text-primary font-sans leading-relaxed mb-2;
+  @apply text-xl font-medium text-primary font-sans leading-relaxed mb-2;
+  @apply md:text-2xl;
+  @apply 2xl:text-4xl;
 }
 
 .services-intro {
-  @apply text-base md:text-lg 2xl:text-xl text-foreground font-sans leading-relaxed mb-14;
+  @apply text-base text-foreground font-sans leading-relaxed mb-14;
+  @apply md:text-lg;
+  @apply 2xl:text-xl;
 }
 
 .services-grid {
-  @apply grid gap-8 lg:gap-10;
-  @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  @apply grid gap-8 grid-cols-1;
+  @apply md:grid-cols-2;
+  @apply lg:gap-10 lg:grid-cols-3;
 }
 
 .services-card {
-  @apply bg-card border border-primary/10 rounded-2xl p-4 md:p-6;
-  @apply transition-all duration-300 ease-out;
+  @apply bg-card border border-primary/10 rounded-2xl p-4;
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   @apply hover:border-secondary/50 hover:-translate-y-1 hover:shadow-md;
+  @apply transition-all duration-300 ease-out;
+  @apply md:p-6;
 }
 
 .services-subtitle {
-  @apply text-sm md:text-base text-secondary font-sans mb-px px-2;
+  @apply text-sm text-secondary font-sans mb-px px-2;
+  @apply md:text-base;
 }
 
 .services-title {
-  @apply text-lg md:text-2xl font-medium text-primary font-sans mb-4 px-2;
+  @apply text-lg font-medium text-primary font-sans mb-4 px-2;
+  @apply md:text-2xl;
 }
 
 .services-image {
   @apply w-full h-[370px] rounded-2xl mx-auto mb-4 bg-background relative z-10 overflow-hidden;
+  @apply after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:z-20 after:bg-foreground/5;
 }
 .services-image img {
   @apply w-full h-full object-cover;
 }
-/* subtle dark overlay on image */
-.services-image::after {
-  content: "";
-  @apply absolute top-0 left-0 w-full h-full rounded-xl z-20 bg-foreground/5;
-}
+
 .services-card:hover .services-image img {
   @apply scale-105 transition-transform duration-300 ease-out;
 }
 
 .services-outcome {
-  @apply text-sm md:text-base text-foreground/80 font-sans leading-relaxed px-2;
-}
-
-/* Tablet / mobile spacing and behavior */
-@media (max-width: 639px) {
-  .services-section {
-    @apply pt-20 pb-24;
-  }
-
-  .services-card {
-    @apply px-5 py-7;
-  }
+  @apply text-sm text-foreground/80 font-sans leading-relaxed px-2;
+  @apply md:text-base;
 }

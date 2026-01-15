@@ -8,6 +8,9 @@ const lines = [
   "Fixing later often costs far more than thinking now.",
 ];
 
+/**
+ * Problem Framing Section Component
+ */
 export default function Problem() {
   return (
     <>

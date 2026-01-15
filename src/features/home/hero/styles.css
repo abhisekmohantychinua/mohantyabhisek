@@ -1,37 +1,36 @@
 @reference "../../../app/globals.css";
 
 .hero-section {
-  @apply container mx-auto py-16 2xl:py-28 bg-background relative;
-  @apply text-start px-6 lg:px-8;
+  @apply container mx-auto py-16 text-start px-6 bg-background relative;
+  @apply lg:px-8;
+  @apply 2xl:py-28;
 }
 
 .hero-content {
-  @apply w-full max-w-2xl lg:max-w-3xl;
+  @apply w-full max-w-2xl;
+  @apply lg:max-w-3xl;
 }
 
 .hero-headline {
-  @apply text-2xl leading-snug mb-4 sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl sm:leading-tight sm:mb-6 2xl:mb-8 text-primary font-sans font-semibold;
-  @apply max-w-xs sm:max-w-lg md:max-w-2xl;
-}
-
-.hero-support {
-  @apply text-sm mb-5 sm:text-base md:text-lg 2xl:text-xl sm:mb-8 md:mb-10 2xl:mb-12 text-foreground font-sans font-normal;
-  @apply leading-relaxed;
-  @apply max-w-sm sm:max-w-xl;
-}
-
-.hero-cta-area {
-  @apply flex flex-col sm:flex-row items-center lg:items-start gap-4 sm:gap-6;
-}
-
-.hero-animate-headline {
+  @apply max-w-xs text-2xl leading-snug mb-4 text-primary font-sans font-semibold;
+  @apply sm:text-3xl sm:leading-tight sm:mb-6 sm:max-w-lg;
+  @apply md:text-4xl md:max-w-2xl;
+  @apply lg:text-5xl;
+  @apply 2xl:text-6xl 2xl:mb-8;
   @apply animate-[fade-up_0.35s_cubic-bezier(0.4,0,0.2,1)_0.3s_both];
 }
 
-.hero-animate-support {
+.hero-support {
+  @apply text-sm mb-5 leading-relaxed max-w-sm text-foreground font-sans font-normal;
+  @apply sm:text-base sm:mb-8 sm:max-w-xl;
+  @apply md:text-lg md:mb-10;
+  @apply 2xl:text-xl 2xl:mb-12;
   @apply animate-[fade-up_0.35s_cubic-bezier(0.4,0,0.2,1)_0.55s_both];
 }
 
-.hero-animate-cta {
+.hero-cta-area {
+  @apply flex flex-col items-center gap-4;
+  @apply sm:flex-row sm:gap-6;
+  @apply lg:items-start;
   @apply animate-[fade-in_0.35s_cubic-bezier(0.4,0,0.2,1)_0.8s_both];
 }

@@ -3,6 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+/**
+ * ThinkingStepAnimator Component
+ * Purpose: Animates each thinking step card as it scrolls into view.
+ */
 export default function ThinkingStepAnimator() {
   useGSAP(() => {
     const stepCards = gsap.utils.toArray<HTMLElement>(".thinking-step");

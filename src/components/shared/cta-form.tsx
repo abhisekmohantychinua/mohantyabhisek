@@ -19,14 +19,31 @@ import { Input } from "../ui/input";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { toast } from "sonner";
 
-type FormStep = "message" | "contact";
-
+// Props for the CtaForm component
 type CtaFormProps = {
   onSubmitSuccess?: () => void;
 };
 
+// Define the steps of the form to manage multi-step behavior
+type FormStep = "message" | "contact";
+
+/**
+ * CtaForm Component
+ *
+ * Purpose: A multi-step contact form that collects a message and contact details.
+ *
+ * Key Features:
+ * - Step 1: Collects the user's message with validation.
+ * - Step 2: Collects optional contact details (email, phone, Instagram, LinkedIn) with validation.
+ * - Uses react-hook-form for form state management and validation with zod.
+ * - Provides user feedback with toast notifications on form submission.
+ *
+ * @param onSubmitSuccess - Optional callback function to be called on successful form submission.
+ */
 export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
+  // State to track the current step of the form
   const [currentStep, setCurrentStep] = useState<FormStep>("message");
+  // Initialize the form with react-hook-form and zod validation
   const form = useForm<z.infer<typeof contactDetailSchema>>({
     defaultValues: {
       message: "",
@@ -38,10 +55,19 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
     resolver: zodResolver(contactDetailSchema),
   });
 
+  /**
+   * Handle form submission. Logs the data, resets the form,
+   * calls the success callback, and sends the data to the server.
+   * Uses toast notifications for user feedback.
+   *
+   * @param data - The validated form data
+   */
   function onSubmit(data: z.infer<typeof contactDetailSchema>) {
     console.log("Form submitting:", data);
-    form.reset();
-    onSubmitSuccess?.();
+    form.reset(); // Reset the form fields
+    onSubmitSuccess?.(); // Call the success callback if provided
+
+    // Send form data to the server
     const formSubmitPromise = fetch("/api/contact", {
       method: "POST",
       headers: {
@@ -50,15 +76,20 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
       body: JSON.stringify(data),
     })
       .then((response) => {
+        // Check if the response is OK, supposedly a 201 status
         if (response.ok) {
           return;
         }
+        // If not OK, throw an error to be caught below
         throw new Error("Failed to submit form");
       })
       .catch((error) => {
+        // Log any errors that occur during submission
         console.error("Error submitting form:", error);
+        // Rethrow the error for toast notification
         throw error;
       });
+    // Show toast notifications based on the promise state
     toast.promise(formSubmitPromise, {
       loading: "Sending your message...",
       success: "Message sent successfully!",
@@ -66,21 +97,27 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
     });
   }
 
+  // Function to change the current step of the form
   function changeStep() {
+    // Validate the current step before moving to the next
     if (currentStep === "message") {
+      // Validate the message step before proceeding
       form.trigger("message").then((isValid) => {
+        // Only proceed to the contact step if the message is valid
         if (isValid) {
           setCurrentStep("contact");
         }
       });
     } else {
+      // Move back to the message step
       setCurrentStep("message");
     }
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="">
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup>
+        {/* Initial message step */}
         {currentStep === "message" && (
           <>
             <Controller
@@ -104,7 +141,9 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
                 </Field>
               )}
             />
+            {/* Close button and next button */}
             <div className="w-full flex items-center justify-between gap-2 mt-px">
+              {/* Close the popover when clicked, Important to use PopoverClose */}
               <PopoverClose asChild>
                 <Button variant="ghost" type="button">
                   Close
@@ -122,8 +161,10 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
             </div>
           </>
         )}
+        {/* Contact details step */}
         {currentStep === "contact" && (
           <>
+            {/* Email control */}
             <Controller
               control={form.control}
               name="email"
@@ -147,6 +188,7 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
                 </Field>
               )}
             />
+            {/* Phone control */}
             <Controller
               control={form.control}
               name="phone"
@@ -170,6 +212,7 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
                 </Field>
               )}
             />
+            {/* Instagram control */}
             <Controller
               control={form.control}
               name="instagram"
@@ -193,6 +236,7 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
                 </Field>
               )}
             />
+            {/* LinkedIn control */}
             <Controller
               control={form.control}
               name="linkedin"
@@ -216,6 +260,7 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
                 </Field>
               )}
             />
+            {/* Back button and submit button */}
             <div className="w-full flex items-center justify-between gap-2 mt-px">
               <Button
                 type="button"

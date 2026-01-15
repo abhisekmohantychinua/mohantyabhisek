@@ -3,6 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+/**
+ * ThinkingContentAnimator Component
+ * Purpose: Animates the entrance of the thinking content section as it scrolls into view.
+ */
 export default function ThinkingContentAnimator() {
   useGSAP(() => {
     gsap.from(".thinking-content", {

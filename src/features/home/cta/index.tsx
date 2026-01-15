@@ -2,6 +2,9 @@ import "./styles.css";
 import CtaContentAnimator from "./cta-content-animator";
 import CtaPopover from "@/components/shared/cta-popover";
 
+/**
+ * Call to Action (CTA) Section Component
+ */
 export default function Cta() {
   return (
     <section className="cta-section" aria-labelledby="cta-heading">

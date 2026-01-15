@@ -3,6 +3,7 @@ import "./styles.css";
 import ServicesContentAnimator from "./services-content-animator";
 import ServicesCardAnimator from "./services-card-animator";
 
+// Define the structure for a service card
 type ServiceCard = {
   title: string;
   subTitle: string;
@@ -10,6 +11,7 @@ type ServiceCard = {
   description: string;
 };
 
+// List of service cards with their details
 const services: ServiceCard[] = [
   {
     subTitle: "A presence people trust quickly",
@@ -34,6 +36,9 @@ const services: ServiceCard[] = [
   },
 ];
 
+/**
+ * Services Section Component
+ */
 export default function Services() {
   return (
     <section className="services-section" aria-labelledby="services-heading">

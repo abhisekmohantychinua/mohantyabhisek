@@ -2,23 +2,24 @@
 
 /* Calm, full-width invitation with centered narrow column */
 .cta-section {
-  @apply w-full bg-primary text-primary-foreground;
-  @apply py-16 md:py-20;
+  @apply w-full bg-primary text-primary-foreground py-16;
+  @apply md:py-20;
 }
 
 .cta-inner {
-  @apply container mx-auto px-6 lg:px-8;
-  @apply max-w-3xl text-center flex flex-col items-center;
+  @apply container mx-auto px-6 max-w-3xl text-center flex flex-col items-center;
+  @apply lg:px-8;
 }
 
 .cta-heading {
-  @apply text-xl md:text-2xl 2xl:text-4xl font-medium font-sans leading-relaxed mb-8 md:mb-16;
+  @apply text-xl font-medium font-sans leading-relaxed mb-8;
+  @apply md:text-2xl md:mb-16;
+  @apply 2xl:text-4xl;
 }
 
 .cta-button {
   @apply mb-px;
 }
 .cta-reassure {
-  @apply text-sm font-sans text-primary-foreground/70 leading-relaxed;
-  @apply mt-2;
+  @apply text-sm font-sans text-primary-foreground/70 leading-relaxed mt-2;
 }

@@ -3,11 +3,12 @@
 import { useGSAP } from "@gsap/react";
 import "./thinking-progress-bar.css";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
+/**
+ * ThinkingProgressBar Component
+ * Purpose: Displays a vertical progress bar that fills as the user scrolls through the thinking section.
+ */
 export default function ThinkingProgressBar() {
   const progressFill = useRef<HTMLDivElement>(null);
   useGSAP(() => {

@@ -3,6 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+/**
+ * ServicesContentAnimator Component
+ * Purpose: Animates the entrance of the services content section.
+ */
 export default function ServicesContentAnimator() {
   useGSAP(() => {
     gsap.from(".services-content > *", {

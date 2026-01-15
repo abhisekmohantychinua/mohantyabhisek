@@ -5,6 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+/**
+ * Navbar Component
+ * Purpose: Provides a responsive navigation bar with scroll behavior and mobile menu support.
+ *
+ * Key Features:
+ * - Responsive design for desktop and mobile
+ * - Scroll-triggered background appearance
+ * - Optional hide/show behavior based on scroll direction
+ * - Mobile menu with slide-in panel
+ */
 export default function Navbar() {
   // State management for scroll behavior and mobile menu
   const [isScrolled, setIsScrolled] = useState(false);

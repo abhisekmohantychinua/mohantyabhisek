@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import "./styles.css";
-import ScrollControl from "@/components/shared/scroll-control";
 import CtaPopover from "@/components/shared/cta-popover";
 
+/**
+ * Hero Section Component
+ */
 export default function Hero() {
   return (
     <section

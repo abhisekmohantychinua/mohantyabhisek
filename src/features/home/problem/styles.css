@@ -1,8 +1,9 @@
 @reference "../../../app/globals.css";
 
 .problem-section {
-  @apply container mx-auto overflow-hidden;
-  @apply px-6 lg:px-8 py-8 md:py-16;
+  @apply container mx-auto overflow-hidden px-6 py-8;
+  @apply md:py-16;
+  @apply lg:px-8;
 }
 
 .problem-heading-wrap {
@@ -15,7 +16,9 @@
 }
 
 .problem-heading {
-  @apply text-xl md:text-2xl 2xl:text-4xl font-medium text-primary leading-relaxed;
+  @apply text-xl font-medium text-primary leading-relaxed;
+  @apply md:text-2xl;
+  @apply 2xl:text-4xl;
   @apply animate-[fade-in_0.35s_cubic-bezier(0.4,0,0.2,1)_1.3s_both];
 }
 
@@ -26,10 +29,14 @@
 .problem-pin-wrap {
   --line-growth: 20vh;
   --after-y: 110%;
-  @apply relative h-screen px-4;
-  @apply pt-[40vh];
-  @apply before:content-[''] before:h-(--line-growth) before:w-px before:absolute before:left-0 before:top-0 before:bg-secondary/80 before:-translate-y-[5vh] lg:before:-translate-y-[10vh];
-  @apply after:content-[''] after:h-(--line-growth) after:w-px after:absolute after:right-0 after:bottom-0 after:bg-secondary/80 after:translate-y-(--after-y) lg:after:translate-y-(--after-y);
+
+  @apply relative h-screen pt-[40vh] px-4;
+
+  @apply before:content-[''] before:h-(--line-growth) before:w-px before:absolute before:left-0 before:top-0 before:bg-secondary/80 before:-translate-y-[5vh];
+  @apply lg:before:-translate-y-[10vh];
+
+  @apply after:content-[''] after:h-(--line-growth) after:w-px after:absolute after:right-0 after:bottom-0 after:bg-secondary/80 after:translate-y-(--after-y);
+  @apply lg:after:translate-y-(--after-y);
 }
 
 .problem-text-slot {
@@ -37,5 +44,6 @@
 }
 
 .problem-text-line {
-  @apply text-2xl md:text-5xl text-foreground font-sans leading-relaxed h-[30vh] row-start-1 row-end-2 col-start-1 col-end-2 flex items-start justify-center text-center;
+  @apply text-2xl text-foreground font-sans leading-relaxed h-[30vh] row-start-1 row-end-2 col-start-1 col-end-2 flex items-start justify-center text-center;
+  @apply md:text-5xl;
 }

@@ -196,8 +196,6 @@
 @layer components {
   /* 
    * Navbar Component Styles
-   * Designed to feel calm, reliable, and intentional
-   * Always out of the way but available when needed
    */
 
   /* Main navbar container - sticky with smooth transitions */
@@ -221,7 +219,9 @@
 
   /* Inner container with proper alignment and spacing */
   .navbar-container {
-    @apply mx-auto flex h-16 container items-center justify-between px-6 md:h-16 lg:px-8;
+    @apply mx-auto flex h-16 container items-center justify-between px-6;
+    @apply md:h-16;
+    @apply lg:px-8;
   }
 
   /* Logo zone styling */
@@ -229,25 +229,32 @@
     @apply flex items-center;
   }
 
+  /* Logo link styling with hover effect */
   .navbar-logo-link {
-    @apply block transition-opacity duration-200 hover:opacity-90;
+    @apply block;
+    @apply hover:opacity-80;
+    @apply transition-opacity duration-200;
   }
 
+  /* Logo image sizing */
   .navbar-logo-image {
     @apply h-auto w-auto max-h-8;
   }
 
   /* Desktop navigation container */
   .navbar-nav-desktop {
-    @apply hidden items-center space-x-8 md:flex;
+    @apply hidden items-center space-x-8;
+    @apply md:flex;
   }
 
   /* Navigation link styling with editorial underline behavior */
   .navbar-nav-link {
-    @apply relative px-1 py-2 text-base font-normal font-sans text-foreground transition-all duration-300;
+    @apply relative px-1 py-2 text-base font-normal font-sans text-foreground;
+    @apply transition-all duration-300;
     @apply after:content-[""] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-secondary after:transition-all after:duration-300 after:ease-out;
   }
 
+  /* Hover and active states for navigation links */
   .navbar-nav-link:hover,
   .navbar-nav-link-active {
     @apply after:w-full;
@@ -260,17 +267,19 @@
 
   /* Language selector styling */
   .navbar-language-selector {
-    @apply hidden cursor-pointer items-center space-x-1 text-foreground/70 font-sans transition-opacity duration-200 md:flex;
+    @apply hidden cursor-pointer items-center space-x-1 text-foreground/70 font-sans transition-opacity duration-200;
+    @apply md:flex;
   }
 
+  /* Hover effect for language selector */
   .navbar-language-selector:hover {
     @apply text-foreground;
   }
-
+  /* Language selector text and arrow */
   .navbar-language-text {
     @apply text-sm font-normal;
   }
-
+  /* Language selector arrow styling and hover animation */
   .navbar-language-arrow {
     @apply h-2 w-3 transition-transform duration-200;
   }
@@ -283,7 +292,7 @@
   .navbar-mobile-toggle {
     @apply relative flex h-6 w-6 flex-col items-center justify-center space-y-1 md:hidden;
   }
-
+  /* Hamburger lines styling */
   .navbar-mobile-toggle-line {
     @apply h-0.5 w-5 rounded-full bg-foreground transition-all duration-300;
   }
@@ -298,11 +307,11 @@
     @apply fixed right-0 top-0 z-50 h-full w-80 max-w-sm transform bg-white shadow-xl transition-transform duration-300 ease-in-out md:hidden;
     @apply translate-x-full;
   }
-
+  /* Mobile menu open state */
   .navbar-mobile-menu-open {
     @apply translate-x-0;
   }
-
+  /* Mobile menu content padding and layout */
   .navbar-mobile-menu-content {
     @apply flex h-full flex-col px-6 py-20;
   }
@@ -311,12 +320,12 @@
   .navbar-mobile-nav {
     @apply flex flex-col space-y-6;
   }
-
+  /* Mobile navigation link styling with underline effect */
   .navbar-mobile-nav-link {
     @apply relative block py-3 text-lg font-normal font-sans text-foreground transition-all duration-200;
     @apply after:content-[""] after:absolute after:bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-secondary after:transition-all after:duration-300 after:ease-out;
   }
-
+  /* Hover and active states for mobile navigation links */
   .navbar-mobile-nav-link:active,
   .navbar-mobile-nav-link-active {
     @apply after:w-full;
@@ -326,142 +335,139 @@
   .navbar-mobile-language {
     @apply mt-8 flex cursor-pointer items-center space-x-2 border-t border-gray-200 pt-6 text-foreground/70 transition-opacity duration-200;
   }
-
+  /* Hover effect for mobile language selector */
   .navbar-mobile-language:hover {
     @apply text-foreground;
   }
 
+  /* Mobile language selector text and arrow */
   .navbar-mobile-language-text {
     @apply text-sm font-normal font-sans;
   }
-
+  /* Mobile language selector arrow styling */
   .navbar-mobile-language-arrow {
     @apply h-2 w-3;
   }
+
+  /*
+   * Footer Component Styles
+   */
 
   /* Footer – quiet signature at the bottom */
   .footer {
     @apply container mx-auto bg-transparent;
   }
-
+  /* Footer divider line */
   .footer-divider {
     @apply w-full h-px bg-primary/10 my-5;
   }
-
+  /* Footer main container with padding */
   .footer-container {
     @apply container mx-auto px-6 lg:px-8;
     @apply py-4 md:py-8;
   }
-
+  /* Top section of the footer with flex layout */
   .footer-top {
     @apply flex flex-col items-center gap-5 md:gap-10 md:flex-row md:items-start md:justify-between;
   }
-
+  /* Footer identity section with logo and tagline */
   .footer-identity {
     @apply space-y-3 max-w-sm;
   }
-
+  /* Footer logo styling */
   .footer-logo {
     @apply w-[150px] h-[45px] object-center object-cover mb-8;
   }
-
+  /* Footer tagline styling */
   .footer-tagline {
     @apply text-sm lg:text-base text-foreground/70 font-sans leading-relaxed;
   }
-
+  /* Footer navigation links */
   .footer-nav {
     @apply flex flex-wrap items-center justify-center gap-5 md:gap-6 w-full max-w-sm;
   }
-
+  /* Individual footer navigation link styling with underline effect */
   .footer-nav-link {
     @apply relative text-base text-foreground font-sans transition-colors duration-200;
     @apply after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-secondary after:transition-all after:duration-300 after:ease-out;
   }
-
+  /* Hover effect for footer navigation links */
   .footer-nav-link:hover {
     @apply after:w-full;
   }
-
+  /* Social media icons container */
   .footer-social {
     @apply flex items-center justify-center md:justify-end gap-5 text-foreground/60 w-full max-w-sm;
   }
-
+  /* Individual social media link styling with hover effect */
   .footer-social a {
     @apply inline-flex items-center justify-center rounded-full bg-accent/0 p-2 hover:bg-accent/20 hover:text-accent transition-colors duration-200;
   }
-
+  /* Social media icon sizing */
   .footer-icon {
     @apply h-5 w-5 stroke-current;
   }
-
+  /* Bottom section of the footer */
   .footer-bottom {
     @apply mt-10 w-full;
   }
-
+  /* Footer meta information styling */
   .footer-meta {
     @apply text-sm text-foreground/60 font-sans leading-relaxed;
     @apply text-center;
   }
+}
 
-  /* Scroll Control Component */
-  .scroll-control {
-    @apply absolute -bottom-28 left-1/2 -translate-x-1/2 w-full flex flex-col justify-center items-center animate-bounce duration-1000 z-10;
+/* Global keyframe definitions for reusable animations */
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
   }
-  .scroll-text {
-    @apply text-xs md:text-sm;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  /* Global keyframe definitions for reusable animations */
-  @keyframes fade-up {
-    0% {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fade-in {
+  0% {
+    opacity: 0;
   }
-
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  100% {
+    opacity: 1;
   }
+}
 
-  @keyframes fade-down {
-    0% {
-      opacity: 0;
-      transform: translateY(-24px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px);
   }
-
-  @keyframes slide-in-left {
-    0% {
-      opacity: 0;
-      transform: translateX(-24px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  @keyframes slide-in-right {
-    0% {
-      opacity: 0;
-      transform: translateX(24px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

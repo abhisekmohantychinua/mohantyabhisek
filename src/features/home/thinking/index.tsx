@@ -3,12 +3,14 @@ import ThinkingProgressBar from "./thinking-progress-bar";
 import ThinkingStepAnimator from "./thinking-step-animator";
 import "./styles.css";
 
+// Define the structure for a thinking step
 type ThinkingStep = {
   number: string;
   title: string;
   text: string[];
 };
 
+// List of thinking steps with their details
 const steps: ThinkingStep[] = [
   {
     number: "01",
@@ -48,6 +50,9 @@ const steps: ThinkingStep[] = [
   },
 ];
 
+/**
+ * Thinking Process Section Component
+ */
 export default function Thinking() {
   return (
     <section className="thinking-section" aria-labelledby="thinking-heading">
