@@ -16,15 +16,14 @@ export default function Problem() {
         id="problem-section"
         aria-labelledby="problem-heading"
       >
+        <div className="problem-heading-wrap">
+          <p className="problem-kicker">Problem Framing</p>
+          <h2 id="problem-heading" className="problem-heading">
+            Before moving forward
+          </h2>
+        </div>
+        <div className="problem-divider" />
         <div className="problem-pin-wrap">
-          <div className="problem-heading-wrap">
-            <p className="problem-kicker">Problem Framing</p>
-            <h2 id="problem-heading" className="problem-heading">
-              Before moving forward
-            </h2>
-          </div>
-          <div className="problem-divider" />
-
           <div className="problem-content">
             <div className="problem-text-slot">
               {lines.map((text, i) => (

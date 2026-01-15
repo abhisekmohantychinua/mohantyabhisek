@@ -46,7 +46,7 @@ export default function Hero() {
           </Button>
         </div>
       </div>
-      <ScrollControl />
+      {/* <ScrollControl /> */}
     </section>
   );
 }

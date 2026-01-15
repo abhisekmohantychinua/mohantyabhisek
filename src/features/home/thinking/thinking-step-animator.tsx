@@ -10,8 +10,8 @@ export default function ThinkingStepAnimator() {
       const cardTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: card,
-          start: "top 70%",
-          end: "top 30%",
+          start: "top 85%",
+          end: "top 15%",
           toggleActions: "play none none reverse",
         },
       });
@@ -19,24 +19,24 @@ export default function ThinkingStepAnimator() {
         .to(card.querySelector(".thinking-step-number"), {
           backgroundColor: "var(--color-secondary)",
           color: "var(--color-background)",
-          duration: 0.3,
-          ease: "none",
+          duration: 0.35,
+          ease: "materialEase",
         })
         .from(card.querySelector(".thinking-step-title"), {
           y: 20,
           opacity: 0,
-          duration: 0.3,
-          ease: "none",
+          duration: 0.35,
+          ease: "materialEase",
         })
         .from(
           card.querySelector(".thinking-step-text"),
           {
             y: 20,
             opacity: 0,
-            duration: 0.3,
-            ease: "none",
+            duration: 0.35,
+            ease: "materialEase",
           },
-          "-=0.2"
+          "-=0.25"
         );
     });
   });

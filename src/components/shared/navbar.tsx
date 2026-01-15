@@ -5,16 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-/**
- * Primary navigation component that provides orientation and establishes identity.
- * Designed to feel calm, reliable, and intentional while staying out of the way.
- *
- * Key behaviors:
- * - Transparent initially, gains background on scroll
- * - Sticky positioning with optional hide/show on scroll
- * - Responsive design with slide-in mobile menu
- * - Subtle hover animations with editorial-style underlines
- */
 export default function Navbar() {
   // State management for scroll behavior and mobile menu
   const [isScrolled, setIsScrolled] = useState(false);

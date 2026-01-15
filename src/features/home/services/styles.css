@@ -1,6 +1,5 @@
 @reference "../../../app/globals.css";
 
-/* Slightly wider feel than previous sections, but same calm tone */
 .services-section {
   @apply container mx-auto px-6 lg:px-8;
   @apply pt-24 pb-28 md:pt-28 md:pb-32;
@@ -35,12 +34,16 @@
   @apply hover:border-secondary/50 hover:-translate-y-1 hover:shadow-md;
 }
 
+.services-subtitle {
+  @apply text-sm md:text-base text-secondary font-sans mb-px px-2;
+}
+
 .services-title {
-  @apply text-lg md:text-2xl font-medium text-primary font-sans mb-4;
+  @apply text-lg md:text-2xl font-medium text-primary font-sans mb-4 px-2;
 }
 
 .services-image {
-  @apply w-full h-[370px] rounded-2xl mx-auto mb-6 bg-background relative z-10 overflow-hidden;
+  @apply w-full h-[370px] rounded-2xl mx-auto mb-4 bg-background relative z-10 overflow-hidden;
 }
 .services-image img {
   @apply w-full h-full object-cover;
@@ -48,28 +51,14 @@
 /* subtle dark overlay on image */
 .services-image::after {
   content: "";
-  @apply absolute top-0 left-0 w-full h-full rounded-2xl z-20 bg-foreground/5;
+  @apply absolute top-0 left-0 w-full h-full rounded-xl z-20 bg-foreground/5;
 }
 .services-card:hover .services-image img {
   @apply scale-105 transition-transform duration-300 ease-out;
 }
 
-.services-lines {
-  @apply mb-6;
-}
-
-.services-line {
-  @apply text-base text-foreground font-sans leading-relaxed;
-  @apply flex items-start gap-3;
-}
-
 .services-outcome {
-  @apply text-sm md:text-base text-foreground/80 font-sans leading-relaxed;
-}
-
-.services-closing {
-  @apply text-base md:text-lg text-foreground font-sans leading-relaxed;
-  @apply mt-14 md:mt-16;
+  @apply text-sm md:text-base text-foreground/80 font-sans leading-relaxed px-2;
 }
 
 /* Tablet / mobile spacing and behavior */

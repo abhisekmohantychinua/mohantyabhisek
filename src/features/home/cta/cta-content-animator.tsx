@@ -8,13 +8,13 @@ export default function CtaContentAnimator() {
     gsap.from(".cta-inner > *", {
       y: 50,
       opacity: 0,
-      duration: 0.3,
-      stagger: 0.15,
-      ease: "none",
+      duration: 0.35,
+      stagger: 0.25,
+      ease: "materialEase",
       scrollTrigger: {
         trigger: ".cta-section",
-        start: "top 75%",
-        end: "top 75%",
+        start: "top 85%",
+        end: "top 85%",
         toggleActions: "play none none reverse",
       },
     });

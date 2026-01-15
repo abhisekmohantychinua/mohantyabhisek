@@ -37,6 +37,15 @@ export default function ScrollReplace() {
         scrub: 1, // Smooth scrubbing effect
         pin: true, // Pin the trigger element during the animation
         anticipatePin: 1, // Anticipate pinning for smoother experience
+        onUpdate: (self) => {
+          const min = 20; // vh
+          const max = window.innerWidth <= 560 ? 40 : 70; // vh
+          const value = min + (max - min) * self.progress;
+
+          gsap.set(".problem-pin-wrap", {
+            "--line-growth": `${value}vh`,
+          });
+        },
       },
     });
     lines.forEach((line, i) => {
@@ -46,7 +55,7 @@ export default function ScrollReplace() {
       // Animate the previous line scaling out and the current line scaling in
       tl.to(
         previousLine,
-        { scale: 1, opacity: 0, duration: 1, ease: "none" },
+        { scale: 1, opacity: 0, duration: 1.35, ease: "materialEase" },
         i
       );
       // Instead of scaling down the previous line, we just move the new line into place and fade it in
@@ -56,16 +65,33 @@ export default function ScrollReplace() {
           y: window.innerHeight,
           scale: 1.8,
           opacity: 0,
-          duration: 1,
-          ease: "none",
+          duration: 1.35,
+          ease: "materialEase",
         },
         i
       ).to(
         line,
-        { scale: 1, opacity: 1, duration: 0.2, ease: "none" },
+        { scale: 1, opacity: 1, duration: 1.35, ease: "materialEase" },
         i + 0.8
       );
     });
+  });
+
+  useGSAP(() => {
+    gsap.fromTo(
+      ".problem-pin-wrap",
+      { "--after-y": "100%" },
+      {
+        "--after-y": "0%",
+        duration: 0.35,
+        ease: "materialEase",
+        scrollTrigger: {
+          trigger: ".problem-pin-wrap",
+          start: "top 10%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
   });
 
   // This component does not render any visible elements itself

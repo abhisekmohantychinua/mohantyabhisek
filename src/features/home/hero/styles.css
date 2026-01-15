@@ -25,13 +25,13 @@
 }
 
 .hero-animate-headline {
-  @apply animate-[fade-up_1.2s_ease-out_0.3s_both];
+  @apply animate-[fade-up_0.35s_cubic-bezier(0.4,0,0.2,1)_0.3s_both];
 }
 
 .hero-animate-support {
-  @apply animate-[fade-up_1.2s_ease-out_0.8s_both];
+  @apply animate-[fade-up_0.35s_cubic-bezier(0.4,0,0.2,1)_0.55s_both];
 }
 
 .hero-animate-cta {
-  @apply animate-[fade-in_1s_ease-out_1.2s_both];
+  @apply animate-[fade-in_0.35s_cubic-bezier(0.4,0,0.2,1)_0.8s_both];
 }

@@ -5,37 +5,32 @@ import ServicesCardAnimator from "./services-card-animator";
 
 type ServiceCard = {
   title: string;
+  subTitle: string;
   image: string;
-  lines: string[];
+  description: string;
 };
 
 const services: ServiceCard[] = [
   {
-    title: "A presence people trust quickly",
+    subTitle: "A presence people trust quickly",
+    title: "Landing pages, Business websites",
     image: "/services/landing.webp",
-    lines: [
-      "People understand what you do in seconds",
-      "Your business looks credible, not improvised",
-      "Enquiries feel intentional, not random",
-    ],
+    description:
+      "People understand what you do within seconds of arriving. Your business feels credible and considered, not improvised. Enquiries come from the right context, not confusion.",
   },
   {
-    title: "A product users don’t struggle with",
+    subTitle: "A product users don’t struggle with",
+    title: "SaaS products, Custom web apps",
     image: "/services/saas.webp",
-    lines: [
-      "Users know what to do without being taught",
-      "Features support decisions, not confusion",
-      "The product feels stable as it grows",
-    ],
+    description:
+      "Users know what to do without being guided step by step. Features support decisions instead of adding friction. The product stays stable as it grows and changes.",
   },
   {
-    title: "Systems that save real time",
+    subTitle: "Systems that save real time",
+    title: "ERP, CRM, Management systems",
     image: "/services/dashboard.webp",
-    lines: [
-      "Daily work takes fewer steps",
-      "Repetition reduces across teams",
-      "Time goes back into running the business",
-    ],
+    description:
+      "Daily work takes fewer steps and less manual effort. Repetition reduces across teams as systems take over. Time goes back into running the business, not managing chaos.",
   },
 ];
 
@@ -65,7 +60,6 @@ export default function Services() {
                 tabIndex={0}
                 aria-label={`${service.title}`}
               >
-                <h3 className="services-title">{service.title}</h3>
                 <figure className="services-image">
                   <Image
                     src={service.image}
@@ -75,14 +69,9 @@ export default function Services() {
                     loading="lazy"
                   />
                 </figure>
-
-                <div className="services-lines">
-                  {service.lines.map((line) => (
-                    <p key={line} className="services-line">
-                      {line}
-                    </p>
-                  ))}
-                </div>
+                <p className="services-subtitle">{service.subTitle}</p>
+                <h3 className="services-title">{service.title}</h3>
+                <p className="services-outcome">{service.description}</p>
               </article>
             );
           })}

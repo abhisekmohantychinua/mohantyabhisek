@@ -5,16 +5,16 @@ import gsap from "gsap";
 
 export default function ServicesContentAnimator() {
   useGSAP(() => {
-    gsap.from(".services-content", {
+    gsap.from(".services-content > *", {
       y: 50,
       opacity: 0,
-      duration: 0.3,
-      stagger: 1,
-      ease: "none",
+      duration: 0.35,
+      stagger: 0.25,
+      ease: "materialEase",
       scrollTrigger: {
         trigger: ".services-content",
-        start: "top 75%",
-        end: "top 75%",
+        start: "top 85%",
+        end: "top 85%",
         toggleActions: "play none none reverse",
       },
     });
