@@ -17,6 +17,7 @@ import { Button } from "../ui/button";
 import { ArrowLeftIcon, ArrowRightIcon, Send } from "lucide-react";
 import { Input } from "../ui/input";
 import { PopoverClose } from "@radix-ui/react-popover";
+import { toast } from "sonner";
 
 type FormStep = "message" | "contact";
 
@@ -38,10 +39,31 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
   });
 
   function onSubmit(data: z.infer<typeof contactDetailSchema>) {
-    console.log("Form submitted:", data);
+    console.log("Form submitting:", data);
     form.reset();
-    setCurrentStep("message");
     onSubmitSuccess?.();
+    const formSubmitPromise = fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return;
+        }
+        throw new Error("Failed to submit form");
+      })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+        throw error;
+      });
+    toast.promise(formSubmitPromise, {
+      loading: "Sending your message...",
+      success: "Message sent successfully!",
+      error: "Failed to send your message.",
+    });
   }
 
   function changeStep() {

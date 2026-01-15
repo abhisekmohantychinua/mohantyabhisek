@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import GSAPInit from "@/components/shared/gsap-init";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,6 +24,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <GSAPInit />
+        <Toaster position="bottom-right" richColors />
       </body>
     </html>
   );
