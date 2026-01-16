@@ -47,6 +47,7 @@ export const contactDetailSchema = z
       .transform(transformString)
       .optional(),
   })
+  .strict()
   // Ensure at least one contact method is provided
   .refine(
     (data) => !!(data.phone || data.email || data.instagram || data.linkedin),
