@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="container mx-auto min-h-screen flex flex-col justify-center items-center gap-6">
+    <section className="container mx-auto min-h-[80vh] flex flex-col justify-center items-center gap-6 px-6 lg:px-8">
       <FuzzyText
         baseIntensity={0.07}
         hoverIntensity={0.2}

@@ -59,13 +59,15 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://mohantyabhisek.com/#organization",
   name: "Abhisek",
   url: "https://mohantyabhisek.com",
   logo: "https://mohantyabhisek.com/logo-transparent-512x512.png",
   founder: {
     "@type": "Person",
+    "@id": "https://mohantyabhisek.com/#person",
     name: "Abhisek Mohanty",
-    jobTitle: "Website Consultant",
+    jobTitle: "Website & Web App Consultant",
     url: "https://mohantyabhisek.com",
   },
   sameAs: [
