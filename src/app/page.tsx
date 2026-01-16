@@ -3,6 +3,7 @@ import Problem from "@/features/home/problem";
 import Thinking from "@/features/home/thinking";
 import Services from "@/features/home/services";
 import Cta from "@/features/home/cta";
+import { Metadata } from "next";
 
 export default function Home() {
   return (
@@ -12,6 +13,65 @@ export default function Home() {
       <Thinking />
       <Services />
       <Cta />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Website & Web App Solutions for Businesses | Abhisek",
+  description:
+    "Struggling to decide what website or web app your business actually needs? Get clarity, structure, and purpose-driven solutions before building.",
+  openGraph: {
+    type: "website",
+    title: "Website & Web App Solutions for Businesses",
+    description:
+      "Struggling to decide what website or web app your business actually needs? Get clarity, structure, and purpose-driven solutions before building.",
+    url: "https://mohantyabhisek.com",
+    images: [
+      {
+        url: "https://mohantyabhisek.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Website & Web App Solutions for Businesses | Abhisek",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Website & Web App Solutions for Businesses | Abhisek",
+    description:
+      "Struggling to decide what website or web app your business actually needs? Get clarity, structure, and purpose-driven solutions before building.",
+    images: ["https://mohantyabhisek.com/og-image.png"],
+  },
+  alternates: {
+    canonical: "https://mohantyabhisek.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Abhisek",
+  url: "https://mohantyabhisek.com",
+  logo: "https://mohantyabhisek.com/logo-transparent-512x512.png",
+  founder: {
+    "@type": "Person",
+    name: "Abhisek Mohanty",
+    jobTitle: "Website Consultant",
+    url: "https://mohantyabhisek.com",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/mohanty-abhisek",
+    "https://www.instagram.com/coderabhisek",
+  ],
+  description:
+    "Purpose & clarity-driven website and web app solutions for businesses, led by Abhisek.",
+};
