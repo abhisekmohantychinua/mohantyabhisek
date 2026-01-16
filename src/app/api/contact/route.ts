@@ -37,7 +37,9 @@ export async function POST(request: Request) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(contactData),
-  }).catch((error) => {
+  })
+  .then(() => {console.log('Added to sheet')})
+  .catch((error) => {
     console.error(
       "Error sending data to Google Apps Script:",
       error,
