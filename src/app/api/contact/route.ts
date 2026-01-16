@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { contactDetailSchema } from "@/schemas/contact-detail-schema";
 
 const GOOGLE_APP_SCRIPT_URL = process.env.GOOGLE_APP_SCRIPT_URL as string;
