@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   contactData.phone = contactData.phone?.replace(/\+/g, "");
 
   // Send data to Google Apps Script endpoint asynchronously
-  fetch(GOOGLE_APP_SCRIPT_URL, {
+  await fetch(GOOGLE_APP_SCRIPT_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
