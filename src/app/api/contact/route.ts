@@ -30,16 +30,14 @@ export async function POST(request: Request) {
   // '+' from phone number
   contactData.phone = contactData.phone?.replace(/\+/g, "");
 
-  // Send data to Google Apps Script endpoint asynchronously
+  // Send data to Google Apps Script endpoint synchronously
   await fetch(GOOGLE_APP_SCRIPT_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(contactData),
-  })
-  .then(() => {console.log('Added to sheet')})
-  .catch((error) => {
+  }).catch((error) => {
     console.error(
       "Error sending data to Google Apps Script:",
       error,
