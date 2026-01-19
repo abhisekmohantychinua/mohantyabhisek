@@ -47,10 +47,10 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
   const form = useForm<z.infer<typeof contactDetailSchema>>({
     defaultValues: {
       message: "",
-      phone: undefined,
-      email: undefined,
-      instagram: undefined,
-      linkedin: undefined,
+      phone: "",
+      email: "",
+      instagram: "",
+      linkedin: "",
     },
     resolver: zodResolver(contactDetailSchema),
   });
