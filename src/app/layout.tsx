@@ -5,6 +5,11 @@ import Footer from "@/components/shared/footer";
 import GSAPInit from "@/components/shared/gsap-init";
 import { Toaster } from "sonner";
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID as string;
+if (!GA_ID) {
+  throw new Error("Google Analytics ID not provided.");
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
