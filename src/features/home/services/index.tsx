@@ -68,7 +68,7 @@ export default function Services() {
                 <figure className="services-image">
                   <Image
                     src={service.image}
-                    alt=""
+                    alt={service.title}
                     width={400}
                     height={250}
                     loading="lazy"

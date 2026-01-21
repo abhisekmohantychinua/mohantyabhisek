@@ -111,6 +111,7 @@ export const metadata: Metadata = {
     canonical: "https://mohantyabhisek.com/contact",
   },
   robots: { index: true, follow: true },
+  keywords: ["abhisek", "abhishek", "mohantyabhisek", "mohantyabhishek"],
 };
 
 const jsonLd = {

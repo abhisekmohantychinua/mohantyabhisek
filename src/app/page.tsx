@@ -54,6 +54,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  keywords: ["abhisek", "abhishek", "mohantyabhisek", "mohantyabhishek"],
 };
 
 const jsonLd = {

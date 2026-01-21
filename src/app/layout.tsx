@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
@@ -21,6 +21,7 @@ export default function RootLayout({
         <GSAPInit />
         <Toaster position="bottom-right" richColors />
       </body>
+      <GoogleAnalytics gaId="G-1Q5WZHE67B" />
     </html>
   );
 }
