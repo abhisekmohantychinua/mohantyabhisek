@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
@@ -6,8 +6,9 @@ import GSAPInit from "@/components/shared/gsap-init";
 import { Toaster } from "sonner";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID as string;
-if (!GA_ID) {
-  throw new Error("Google Analytics ID not provided.");
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID as string;
+if (!GA_ID && !GTM_ID) {
+  throw new Error("Google Analytics/TagManager ID not provided.");
 }
 
 export default function RootLayout({
@@ -26,7 +27,8 @@ export default function RootLayout({
         <GSAPInit />
         <Toaster position="bottom-right" richColors />
       </body>
-      <GoogleAnalytics gaId="G-1Q5WZHE67B" />
+      {/* <GoogleAnalytics gaId="G-1Q5WZHE67B" /> */}
+      <GoogleTagManager gtmId={GTM_ID} />
     </html>
   );
 }
