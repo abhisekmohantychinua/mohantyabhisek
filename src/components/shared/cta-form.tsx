@@ -18,6 +18,7 @@ import { ArrowLeftIcon, ArrowRightIcon, Send } from "lucide-react";
 import { Input } from "../ui/input";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { toast } from "sonner";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 // Props for the CtaForm component
 type CtaFormProps = {
@@ -66,6 +67,7 @@ export default function CtaForm({ onSubmitSuccess }: CtaFormProps) {
     console.log("Form submitting:", data);
     form.reset(); // Reset the form fields
     onSubmitSuccess?.(); // Call the success callback if provided
+    sendGTMEvent({ event: "cta_send" });
 
     // Send form data to the server
     const formSubmitPromise = fetch("/api/contact", {

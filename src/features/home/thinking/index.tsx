@@ -2,6 +2,7 @@ import ThinkingContentAnimator from "./thinking-content-animator";
 import ThinkingProgressBar from "./thinking-progress-bar";
 import ThinkingStepAnimator from "./thinking-step-animator";
 import "./styles.css";
+import SectionView from "@/components/shared/section-view";
 
 // Define the structure for a thinking step
 type ThinkingStep = {
@@ -55,7 +56,11 @@ const steps: ThinkingStep[] = [
  */
 export default function Thinking() {
   return (
-    <section className="thinking-section" aria-labelledby="thinking-heading">
+    <section
+      id="thinking-section"
+      className="thinking-section"
+      aria-labelledby="thinking-heading"
+    >
       <div className="thinking-divider" aria-hidden="true" />
 
       <div className="thinking-content">
@@ -93,6 +98,7 @@ export default function Thinking() {
       <ThinkingProgressBar />
       <ThinkingContentAnimator />
       <ThinkingStepAnimator />
+      <SectionView targetId="thinking-section" />
     </section>
   );
 }
