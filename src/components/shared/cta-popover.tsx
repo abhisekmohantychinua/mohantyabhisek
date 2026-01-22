@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import CtaForm from "./cta-form";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 /**
  * CTA Popover Component
@@ -14,6 +15,11 @@ import CtaForm from "./cta-form";
 export default function CtaPopover() {
   // State to manage popover open/close status
   const [open, setOpen] = useState(false);
+
+  function sendCtaClickToGtm() {
+    sendGTMEvent({ event: "cta_click" });
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       {/* Trigger button for the popover */}
@@ -24,6 +30,7 @@ export default function CtaPopover() {
           className="font-sans"
           type="button"
           aria-describedby="primary-cta-description"
+          onClick={sendCtaClickToGtm}
         >
           Start a conversation
         </Button>
