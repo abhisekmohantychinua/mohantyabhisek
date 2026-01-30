@@ -1,6 +1,5 @@
 import { blogsData, blogsMetadata } from "@/data/blog-data";
 import { notFound } from "next/navigation";
-import DOMPurify from "isomorphic-dompurify";
 import "./styles.css";
 import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 
@@ -19,7 +18,7 @@ export default async function BlogPage({ params }: BlogPageParams) {
     return notFound();
   }
 
-  const rawHtml = DOMPurify.sanitize(blog.content);
+  const rawHtml = blog.content;
 
   return (
     <>
