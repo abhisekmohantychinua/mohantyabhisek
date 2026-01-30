@@ -1,0 +1,128 @@
+@reference "../../globals.css";
+
+/* Scope everything inside blog-wrapper */
+.blog-wrapper {
+  /* Headings */
+  h1 {
+    @apply text-3xl leading-snug mb-4 text-primary font-sans font-semibold mx-auto px-4;
+    @apply sm:text-4xl sm:leading-tight sm:mb-6;
+    @apply md:text-5xl md:max-w-3xl md:px-0;
+    @apply lg:text-5xl lg:max-w-full md:px-4;
+    @apply xl:max-w-5xl xl:px-0;
+    @apply 2xl:text-5xl 2xl:mb-6; /* smaller relative to previous 2xl 6xl */
+  }
+
+  h2 {
+    @apply max-w-5xl mx-auto mt-10 mb-4 text-2xl font-semibold text-primary leading-snug;
+    @apply sm:text-2xl;
+    @apply md:text-3xl;
+  }
+
+  h3 {
+    @apply max-w-5xl mx-auto mt-8 mb-3 text-xl font-semibold text-primary;
+    @apply sm:text-xl;
+    @apply md:text-2xl;
+  }
+
+  h4 {
+    @apply max-w-5xl mx-auto mt-6 mb-2 text-lg font-semibold text-primary;
+    @apply sm:text-lg;
+  }
+
+  /* Sections */
+  section {
+    @apply container mx-auto px-4;
+  }
+
+  /* Paragraphs */
+  p {
+    @apply max-w-5xl mx-auto mb-6 text-base leading-relaxed text-muted-foreground;
+    @apply sm:text-lg sm:leading-8;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary underline underline-offset-4 transition-colors;
+  }
+
+  a:hover {
+    @apply text-primary/80;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    @apply max-w-5xl mx-auto mb-6 pl-6 text-muted-foreground;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply mb-2 leading-relaxed;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    @apply max-w-5xl mx-auto my-8 border-l-4 border-primary pl-6 italic text-muted-foreground;
+  }
+
+  /* Code blocks */
+  pre {
+    @apply max-w-5xl mx-auto my-8 overflow-x-auto rounded-lg bg-muted p-4 text-sm;
+  }
+
+  code {
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+  }
+
+  /* Images */
+  img {
+    @apply max-w-5xl mx-auto my-8 rounded-lg;
+  }
+
+  /* Horizontal rule */
+  hr {
+    @apply max-w-5xl mx-auto my-12 border-border;
+  }
+
+  /* Tables */
+  table {
+    @apply max-w-5xl mx-auto my-8 w-full border-collapse;
+  }
+
+  th,
+  td {
+    @apply border border-border px-4 py-2 text-left;
+  }
+
+  th {
+    @apply bg-muted font-semibold;
+  }
+
+  caption {
+    @apply text-left mb-4 font-semibold text-primary;
+  }
+
+  /* Definition lists */
+  dl {
+    @apply max-w-5xl mx-auto my-8;
+  }
+
+  dt {
+    @apply mt-6 font-semibold text-primary;
+  }
+
+  dd {
+    @apply mt-2 mb-4 pl-4 text-muted-foreground leading-relaxed;
+  }
+
+  .blog-wrapper hr {
+    @apply border-border my-12;
+  }
+}

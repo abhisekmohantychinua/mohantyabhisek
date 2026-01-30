@@ -1,8 +1,8 @@
 import ThinkingContentAnimator from "./thinking-content-animator";
-import ThinkingProgressBar from "./thinking-progress-bar";
 import ThinkingStepAnimator from "./thinking-step-animator";
 import "./styles.css";
 import SectionView from "@/components/shared/section-view";
+import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 
 // Define the structure for a thinking step
 type ThinkingStep = {
@@ -95,7 +95,12 @@ export default function Thinking() {
           })}
         </div>
       </div>
-      <ThinkingProgressBar />
+
+      <ScrollProgressBar
+        containerClass="thinking-section"
+        scrollTriggerStart="top+=100 center"
+        scrollTriggerEnd="bottom-=100 center"
+      />
       <ThinkingContentAnimator />
       <ThinkingStepAnimator />
       <SectionView targetId="thinking-section" />
