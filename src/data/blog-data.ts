@@ -5,7 +5,7 @@ export const blogsData: Blog[] = [
     slug: "focused-lead-generation-websites-and-landing-pages",
     postedAt: new Date(),
     content: `
-    <h1>Focused lead generation websites and landing pages designed to support clear decisions</h1>
+    <h1>Focused lead-generation websites and landing pages built for clear decisions</h1>
 
     <section id="why-leads-fail" aria-labelledby="why-leads-fail">
         <h2 id="why-leads-fail">Why online presence efforts fail to generate leads</h2>
@@ -402,23 +402,23 @@ export const blogsMetadata: BlogMetadata[] = [
     slug: "focused-lead-generation-websites-and-landing-pages",
     postedAt: new Date(),
     title:
-      "Focused lead generation websites and landing pages designed to support clear decisions, not noise.",
+      "Focused lead-generation websites and landing pages built for clear decisions",
     description:
-      "Discover how a focused, lead-driven website and purpose-built landing pages help businesses attract higher-quality leads by reducing friction, clarifying intent, and guiding prospects toward confident decisions.",
+      "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
     openGraph: {
       title:
-        "Focused lead generation websites and landing pages designed to support clear decisions, not noise.",
+        "Focused lead-generation websites and landing pages built for clear decisions",
       description:
-        "Discover how a focused, lead-driven website and purpose-built landing pages help businesses attract higher-quality leads by reducing friction, clarifying intent, and guiding prospects toward confident decisions.",
+        "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
       type: "article",
       url: "https://mohantyabhisek.com/blogs/focused-lead-generation-websites-and-landing-pages",
     },
     twitter: {
       card: "summary",
       title:
-        "Focused lead generation websites and landing pages designed to support clear decisions, not noise.",
+        "Focused lead-generation websites and landing pages built for clear decisions",
       description:
-        "Discover how a focused, lead-driven website and purpose-built landing pages help businesses attract higher-quality leads by reducing friction, clarifying intent, and guiding prospects toward confident decisions.",
+        "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
     },
     robots: {
       index: false,
