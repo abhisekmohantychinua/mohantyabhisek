@@ -418,7 +418,7 @@ export const blogsMetadata: BlogMetadata[] = [
         "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
     },
     robots: {
-      index: false,
+      index: true,
       follow: true,
     },
     alternates: {
