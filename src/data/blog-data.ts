@@ -5,7 +5,7 @@ export const blogsData: Blog[] = [
     slug: "focused-lead-generation-websites-and-landing-pages",
     postedAt: new Date(),
     content: `
-    <h1>Focused lead-generation websites and landing pages built for clear decisions</h1>
+    <h1>Focused lead generation websites and landing pages designed to support clear decisions</h1>
 
     <section id="why-leads-fail" aria-labelledby="why-leads-fail">
         <h2 id="why-leads-fail">Why online presence efforts fail to generate leads</h2>
@@ -401,13 +401,11 @@ export const blogsMetadata: BlogMetadata[] = [
   {
     slug: "focused-lead-generation-websites-and-landing-pages",
     postedAt: new Date(),
-    title:
-      "Focused lead-generation websites and landing pages built for clear decisions",
+    title: "Websites and Landing Pages Built for Clear Decisions",
     description:
       "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
     openGraph: {
-      title:
-        "Focused lead-generation websites and landing pages built for clear decisions",
+      title: "Websites and Landing Pages Built for Clear Decisions",
       description:
         "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
       type: "article",
@@ -415,8 +413,7 @@ export const blogsMetadata: BlogMetadata[] = [
     },
     twitter: {
       card: "summary",
-      title:
-        "Focused lead-generation websites and landing pages built for clear decisions",
+      title: "Websites and Landing Pages Built for Clear Decisions",
       description:
         "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
     },

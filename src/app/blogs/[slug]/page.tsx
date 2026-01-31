@@ -59,8 +59,7 @@ const jsonLd = {
   "@type": "BlogPosting",
   "@id":
     "https://mohantyabhisek.com/blogs/focused-lead-generation-websites-and-landing-pages#blogposting",
-  headline:
-    "Focused lead-generation websites and landing pages built for clear decisions",
+  headline: "Websites and Landing Pages Built for Clear Decisions",
   description:
     "Learn how focused websites and landing pages reduce friction, clarify intent, and help businesses attract better leads and support confident decisions.",
   datePublished: "2026-02-01",
