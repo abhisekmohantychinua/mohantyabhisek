@@ -637,8 +637,8 @@ export const blogsData: Blog[] = [
     },
     content: `
     <h1>Helping Small Businesses Grow Online Through Structure, Clarity, and Purposeful Digital Systems</h1>
-    <p class="px-4">This guide is written for business owners who are trying to understand how to grow a small business online without relying on guesswork, trends, or constant manual effort.</p>
-    <p class="px-4">Whether you are exploring how to grow your online business, trying to improve your online business growth process, or learning how your business can grow online predictably, the focus here is on clarity before speed.</p>
+    <p class="px-4 md:px-0 lg:px-4 xl:px-0">This guide is written for business owners who are trying to understand how to grow a small business online without relying on guesswork, trends, or constant manual effort.</p>
+    <p class="px-4 md:px-0 lg:px-4 xl:px-0">Whether you are exploring how to grow your online business, trying to improve your online business growth process, or learning how your business can grow online predictably, the focus here is on clarity before speed.</p>
 
     <section id="who-this-guide-is-meant-for" aria-labelledby="who-this-guide-is-meant-for">
         <h2 id="who-this-guide-is-meant-for">Who This Guide Is Meant For</h2>
