@@ -1044,7 +1044,7 @@ export const blogsMetadata: BlogMetadata[] = [
         "Learn how small businesses can grow online sustainably through structured systems, clear guidance, and purposeful digital tools.",
     },
     robots: {
-      index: false,
+      index: true,
       follow: true,
     },
     alternates: {
