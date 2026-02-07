@@ -20,5 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    // {
+    //   url: "https://mohantyabhisek.com/blogs/small-business-online-growth-structure-clarity-systems",
+    //   lastModified: new Date("2026-02-08"),
+    //   changeFrequency: "yearly",
+    //   priority: 0.6,
+    // },
   ];
 }
