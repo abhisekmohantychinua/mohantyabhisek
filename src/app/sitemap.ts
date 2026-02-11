@@ -1,7 +1,11 @@
+import { BlogSitemap } from "@/models/blog";
+import { getAllBlogSitemap } from "@/services/blog-service";
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+export const revalidate = 86400; // 5 for testing
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticPaths: MetadataRoute.Sitemap = [
     {
       url: "https://mohantyabhisek.com",
       lastModified: new Date("2026-01-22T16:02:59.617Z"),
@@ -14,17 +18,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.8,
     },
-    {
-      url: "https://mohantyabhisek.com/blogs/focused-lead-generation-websites-and-landing-pages",
-      lastModified: new Date("2026-02-01"),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: "https://mohantyabhisek.com/blogs/small-business-online-growth-structure-clarity-systems",
-      lastModified: new Date("2026-02-08"),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
   ];
+
+  const dynamicPaths = await getDynamicPaths();
+  return staticPaths.concat(dynamicPaths);
+}
+
+async function getDynamicPaths(): Promise<MetadataRoute.Sitemap> {
+  return getAllBlogSitemap()
+    .then((blogs: BlogSitemap[]): MetadataRoute.Sitemap => {
+      return blogs.map((blog: BlogSitemap) => {
+        return {
+          url: `https://mohantyabhisek.com/blogs/${blog.slug}`,
+          lastModified: blog.lastModifiedAt,
+          changeFrequency: "yearly",
+          priority: 0.6,
+        };
+      });
+    })
+    .catch((err) => {
+      console.error("Error fetching sitemap: ", err);
+      return [];
+    });
 }
