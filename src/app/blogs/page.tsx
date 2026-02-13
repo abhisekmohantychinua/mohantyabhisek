@@ -18,7 +18,6 @@ export default async function Blogs({ searchParams }: BlogsParams) {
   } else {
     blogs = await getBlogCards();
   }
-  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   return (
     <>
