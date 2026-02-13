@@ -3,11 +3,13 @@ import BlogSearch from "@/features/blogs/search";
 import { BlogCard } from "@/models/blog";
 import { getBlogCards, getBlogCardsByQuery } from "@/services/blog-service";
 import { Metadata } from "next";
-// import "./styles.css"; // Removed page-level CSS usage
 
 type BlogsParams = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
+
+export const revalidate = 86400; // 24 hours
+
 export default async function Blogs({ searchParams }: BlogsParams) {
   const q = (await searchParams).q;
   const query = Array.isArray(q) ? q[0] : q;
