@@ -17,6 +17,10 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
     </>
   );
 }
@@ -77,4 +81,16 @@ const jsonLd = {
   ],
   description:
     "Purpose & clarity-driven website and web app solutions for businesses, led by Abhisek.",
+};
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://mohantyabhisek.com/#website",
+  url: "https://mohantyabhisek.com",
+  name: "Abhisek",
+  description:
+    "Purpose-driven website and web app consulting with structured insights on digital systems and execution.",
+  publisher: {
+    "@id": "https://mohantyabhisek.com/#organization",
+  },
 };

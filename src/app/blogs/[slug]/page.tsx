@@ -14,7 +14,7 @@ type BlogPageParams = {
 };
 
 export const dynamicParams = true;
-export const revalidate = 86400; // 5 min
+export const revalidate = 86400;
 
 export default async function BlogPage({ params }: BlogPageParams) {
   const blog = await getBySlug((await params).slug);
@@ -105,6 +105,17 @@ function mapToJsonLd(blog: Blog) {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,
     },
+    isPartOf: [
+      {
+        "@type": "CollectionPage",
+        "@id": `${SITE_URL}/blogs/#webpage`,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+      },
+    ],
+
     publisher: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,

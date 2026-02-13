@@ -1,0 +1,18 @@
+@reference "../../../app/globals.css";
+
+.blog-list-section {
+  @apply container mx-auto mb-12 px-6 min-h-[50vh];
+  @apply lg:px-8;
+}
+
+.blog-list-heading {
+  @apply text-xl md:text-2xl font-medium text-primary mb-4;
+}
+
+.blog-list-empty {
+  @apply text-sm text-foreground/70;
+}
+
+.blog-list-grid {
+  @apply grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}

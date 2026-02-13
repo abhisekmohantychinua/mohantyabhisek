@@ -18,6 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.8,
     },
+    {
+      url: "https://mohantyabhisek.com/blogs",
+      lastModified: new Date("2026-02-15T12:00:00.000Z"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
   ];
 
   const dynamicPaths = await getDynamicPaths();

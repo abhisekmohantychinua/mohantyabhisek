@@ -142,9 +142,11 @@
   --radius: 0.625rem;
 
   /* Custom Font Families */
-  --font-neutral-sans: "Neutral Sans", "Neutral Sans VF", -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-break: "Break", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --font-neutral-sans:
+    "Neutral Sans", "Neutral Sans VF", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-break:
+    "Break", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 
   /* Custom Color Palette */
@@ -415,6 +417,45 @@
   .footer-meta {
     @apply text-sm text-foreground/60 font-sans leading-relaxed;
     @apply text-center;
+  }
+
+  /*
+  * Blog Card Component Styles
+  */
+  .blog-card {
+    @apply bg-card border border-primary/10 rounded-2xl p-5;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply transition-all duration-300 ease-out transform;
+    @apply hover:border-secondary/50 hover:-translate-y-1 hover:shadow-md;
+  }
+  .blog-card-heading {
+    @apply mb-2;
+  }
+  .blog-card-title {
+    @apply text-lg font-medium text-primary overflow-hidden h-[3.5rem];
+    @apply md:text-xl;
+    @apply hover:underline;
+
+    /* Force two-line visual block and truncate overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+  .blog-card-description {
+    @apply text-sm text-foreground/80 mb-4 h-[4.25rem] overflow-hidden leading-relaxed;
+
+    /* Force three-line visual block and truncate overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+  .blog-card-footer {
+    @apply mt-4 flex items-center justify-between text-sm text-foreground/60;
+  }
+  .blog-card-date {
+    @apply not-italic;
   }
 }
 
