@@ -106,6 +106,8 @@ function mapToJsonLd(blog: Blog) {
     author: {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,
+      name: "Abhisek Mohanty",
+      url: SITE_URL,
     },
     isPartOf: [
       {
