@@ -8,8 +8,6 @@ type BlogsParams = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export const revalidate = 86400; // 24 hours
-
 export default async function Blogs({ searchParams }: BlogsParams) {
   const q = (await searchParams).q;
   const query = Array.isArray(q) ? q[0] : q;
