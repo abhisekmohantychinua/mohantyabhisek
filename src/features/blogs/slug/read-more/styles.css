@@ -1,0 +1,12 @@
+@reference "../../../../app/globals.css";
+
+.read-more-section {
+  @apply container mx-auto px-6 mb-12;
+  @apply lg:px-8;
+}
+.read-more-heading {
+  @apply text-xl md:text-2xl font-medium text-primary mb-4;
+}
+.read-more-grid {
+  @apply grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}

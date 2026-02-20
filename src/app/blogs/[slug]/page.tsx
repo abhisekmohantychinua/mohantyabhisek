@@ -5,6 +5,7 @@ import Blog from "@/models/blog";
 import { getBySlug } from "@/services/blog-service";
 import { Metadata } from "next";
 import { getBlogMetadataBySlug } from "@/services/blog-metadata-service";
+import ReadMore from "@/features/blogs/slug/read-more";
 
 const SITE_URL = "https://mohantyabhisek.com";
 type BlogPageParams = {
@@ -33,6 +34,7 @@ export default async function BlogPage({ params }: BlogPageParams) {
         id="blog-wrapper"
         dangerouslySetInnerHTML={{ __html: rawHtml }}
       ></article>
+      <ReadMore slug={blog.slug} />
       <ScrollProgressBar
         containerClass="blog-wrapper"
         className="fixed left-1! xl:hidden"

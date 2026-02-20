@@ -29,6 +29,40 @@ export async function getBlogCards(): Promise<BlogCard[]> {
   }));
 }
 
+export async function getLatestThreeBlogCardsExceptSlug(
+  exceptSlug: string,
+): Promise<BlogCard[]> {
+  const db = await getMongoDb();
+
+  const blogs = await db
+    .collection("blogs")
+    .find(
+      {
+        status: "PUBLISHED",
+        slug: { $ne: exceptSlug },
+      },
+      {
+        projection: {
+          _id: 0,
+          slug: 1,
+          title: 1,
+          description: 1,
+          postedAt: 1,
+        },
+      },
+    )
+    .sort({ postedAt: -1 })
+    .limit(3)
+    .toArray();
+
+  return blogs.map(({ slug, title, description, postedAt }) => ({
+    slug,
+    title,
+    description,
+    postedAt,
+  }));
+}
+
 export async function getBlogCardsByQuery(query: string): Promise<BlogCard[]> {
   const db = await getMongoDb();
 
