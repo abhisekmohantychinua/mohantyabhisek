@@ -21,9 +21,7 @@ export default async function Blogs({ searchParams }: BlogsParams) {
         Thoughtful writing on websites, structure, and practical execution.
       </p>
       <BlogSearch query={query} />
-      <Suspense fallback={<BlogListSkeleton />}>
-        <BlogList query={query} />
-      </Suspense>
+      <BlogList query={query} />
     </>
   );
 }

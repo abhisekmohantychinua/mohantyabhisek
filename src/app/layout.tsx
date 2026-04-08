@@ -21,13 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <header>
-          <Suspense>
-            <Navbar />
-          </Suspense>
+          <Navbar />
         </header>
-        <main>
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-        </main>
+        <main>{children}</main>
         <Footer />
         <GSAPInit />
         <Toaster position="bottom-right" richColors />

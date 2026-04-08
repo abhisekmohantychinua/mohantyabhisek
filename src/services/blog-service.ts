@@ -1,11 +1,16 @@
 import { getMongoDb } from "@/lib/mongodb";
 import Blog, { BlogCard, BlogSitemap } from "@/models/blog";
-import { cacheLife } from "next/cache";
+import { unstable_cache } from "next/cache";
 
-export async function getBlogCards(): Promise<BlogCard[]> {
-  "use cache";
-  cacheLife("days");
+export const getBlogCardsCached = unstable_cache(
+  getBlogCards,
+  ["getBlogCardsCached"],
+  {
+    revalidate: 86400, // 24 hours in seconds
+  },
+);
 
+async function getBlogCards(): Promise<BlogCard[]> {
   const db = await getMongoDb();
 
   const blogs = await db

@@ -1,7 +1,10 @@
 import BlogCardComponent from "@/components/shared/blog-card";
 import { BlogCard } from "@/models/blog";
 import "./styles.css";
-import { getBlogCards, getBlogCardsByQuery } from "@/services/blog-service";
+import {
+  getBlogCardsCached,
+  getBlogCardsByQuery,
+} from "@/services/blog-service";
 
 type BlogListProps = {
   query: string | undefined;
@@ -11,7 +14,7 @@ export default async function BlogList({ query }: BlogListProps) {
   if (query && query.trim() !== "") {
     blogs = await getBlogCardsByQuery(query);
   } else {
-    blogs = await getBlogCards();
+    blogs = await getBlogCardsCached();
   }
   return (
     <>

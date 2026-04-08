@@ -16,9 +16,9 @@ export default function BlogCardComponent({ blogCard }: BlogCardProps) {
       <div className="blog-card-footer">
         <time
           className="blog-card-date"
-          dateTime={blogCard.postedAt.toISOString()}
+          dateTime={new Date(blogCard.postedAt).toISOString()}
         >
-          {blogCard.postedAt.toLocaleDateString(undefined, {
+          {new Date(blogCard.postedAt).toLocaleDateString(undefined, {
             year: "numeric",
             month: "long",
             day: "numeric",

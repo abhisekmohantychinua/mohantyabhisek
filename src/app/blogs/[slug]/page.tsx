@@ -2,13 +2,13 @@ import { notFound } from "next/navigation";
 import "./styles.css";
 import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 import Blog from "@/models/blog";
-import { getBySlug } from "@/services/blog-service";
+import { getBlogCardsCached, getBySlug } from "@/services/blog-service";
 import { Metadata } from "next";
 import { getBlogMetadataBySlug } from "@/services/blog-metadata-service";
 import ReadMore from "@/features/blogs/slug/read-more";
-import { cacheLife } from "next/cache";
 
 const SITE_URL = "https://mohantyabhisek.com";
+export const revalidate = 86400; // revalidate every 24 hours
 
 type BlogPageParams = {
   params: Promise<{
@@ -16,10 +16,14 @@ type BlogPageParams = {
   }>;
 };
 
-export default async function BlogPage({ params }: BlogPageParams) {
-  "use cache";
-  cacheLife("days");
+export async function generateStaticParams() {
+  const blogs = await getBlogCardsCached();
+  return blogs.map((blog) => ({
+    slug: blog.slug,
+  }));
+}
 
+export default async function BlogPage({ params }: BlogPageParams) {
   const blog = await getBySlug((await params).slug);
   if (!blog) {
     return notFound();
@@ -56,9 +60,6 @@ export default async function BlogPage({ params }: BlogPageParams) {
 export async function generateMetadata({
   params,
 }: BlogPageParams): Promise<Metadata> {
-  "use cache";
-  cacheLife("days");
-
   const slug = (await params).slug;
 
   const metadata = await getBlogMetadataBySlug(slug);
