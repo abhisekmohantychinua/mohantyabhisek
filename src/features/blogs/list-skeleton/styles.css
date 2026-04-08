@@ -1,0 +1,22 @@
+@reference "../../../app/globals.css";
+
+.blog-list-skeleton-section {
+	@apply container mx-auto mb-12 px-6 min-h-[50vh];
+	@apply lg:px-8;
+}
+
+.blog-list-skeleton-heading {
+	@apply mb-4 space-y-2;
+}
+
+.blog-list-skeleton-title {
+	@apply h-6 w-full md:h-7;
+}
+
+.blog-list-skeleton-title-short {
+	@apply w-2/3;
+}
+
+.blog-list-skeleton-grid {
+	@apply grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}

@@ -1,7 +1,11 @@
 import { getMongoDb } from "@/lib/mongodb";
 import Blog, { BlogCard, BlogSitemap } from "@/models/blog";
+import { cacheLife } from "next/cache";
 
 export async function getBlogCards(): Promise<BlogCard[]> {
+  "use cache";
+  cacheLife("minutes");
+
   const db = await getMongoDb();
 
   const blogs = await db

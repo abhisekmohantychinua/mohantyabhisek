@@ -1,5 +1,3 @@
-export const runtime = "nodejs";
-
 import { contactDetailSchema } from "@/schemas/contact-detail-schema";
 
 const GOOGLE_APP_SCRIPT_URL = process.env.GOOGLE_APP_SCRIPT_URL as string;
@@ -42,7 +40,7 @@ export async function POST(request: Request) {
     console.error(
       "Error sending data to Google Apps Script:",
       error,
-      new Date().toISOString()
+      new Date().toISOString(),
     );
   });
 

@@ -457,6 +457,38 @@
   .blog-card-date {
     @apply not-italic;
   }
+
+  /*
+  * Blog Card Skeleton Styles
+  */
+  .blog-card-skeleton {
+    @apply bg-card border border-primary/10 rounded-2xl p-5;
+  }
+  .blog-card-skeleton-heading {
+    @apply mb-3 space-y-2;
+  }
+  .blog-card-skeleton-title {
+    @apply h-5 w-full;
+    @apply md:h-6;
+  }
+  .blog-card-skeleton-title-short {
+    @apply w-3/4;
+  }
+  .blog-card-skeleton-body {
+    @apply mb-4 space-y-2;
+  }
+  .blog-card-skeleton-line {
+    @apply h-3 w-full;
+  }
+  .blog-card-skeleton-line-short {
+    @apply w-5/6;
+  }
+  .blog-card-skeleton-footer {
+    @apply mt-4;
+  }
+  .blog-card-skeleton-date {
+    @apply h-3 w-32;
+  }
 }
 
 /* Global keyframe definitions for reusable animations */

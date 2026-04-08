@@ -4,6 +4,8 @@ import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import GSAPInit from "@/components/shared/gsap-init";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
+import Loading from "./loader";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID as string;
 if (!GTM_ID) {
@@ -19,9 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <header>
-          <Navbar />
+          <Suspense>
+            <Navbar />
+          </Suspense>
         </header>
-        <main>{children}</main>
+        <main>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </main>
         <Footer />
         <GSAPInit />
         <Toaster position="bottom-right" richColors />

@@ -1,10 +1,12 @@
 import { BlogSitemap } from "@/models/blog";
 import { getAllBlogSitemap } from "@/services/blog-service";
 import { MetadataRoute } from "next";
-
-export const revalidate = 86400; // 5 for testing
+import { cacheLife } from "next/cache";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  "use cache";
+  cacheLife("minutes");
+
   const staticPaths: MetadataRoute.Sitemap = [
     {
       url: "https://mohantyabhisek.com",

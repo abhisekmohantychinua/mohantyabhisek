@@ -1,26 +1,18 @@
-import { notFound } from "next/navigation";
+import { getBySlug } from "@/services/blog-service";
 import "./styles.css";
+import { notFound } from "next/navigation";
+import ReadMore from "../read-more";
 import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 import Blog from "@/models/blog";
-import { getBySlug } from "@/services/blog-service";
-import { Metadata } from "next";
-import { getBlogMetadataBySlug } from "@/services/blog-metadata-service";
-import ReadMore from "@/features/blogs/slug/read-more";
-import { cacheLife } from "next/cache";
 
 const SITE_URL = "https://mohantyabhisek.com";
 
-type BlogPageParams = {
-  params: Promise<{
-    slug: string;
-  }>;
+type BlogContentProps = {
+  slug: string;
 };
 
-export default async function BlogPage({ params }: BlogPageParams) {
-  "use cache";
-  cacheLife("minutes");
-
-  const blog = await getBySlug((await params).slug);
+export default async function BlogContent({ slug }: BlogContentProps) {
+  const blog = await getBySlug(slug);
   if (!blog) {
     return notFound();
   }
@@ -28,7 +20,6 @@ export default async function BlogPage({ params }: BlogPageParams) {
   const rawHtml = blog.content;
   const jsonLdSchema = mapToJsonLd(blog);
   const faqJsonLdSchema = mapToFaqJsonLd(blog);
-
   return (
     <>
       <article
@@ -51,50 +42,6 @@ export default async function BlogPage({ params }: BlogPageParams) {
       />
     </>
   );
-}
-
-export async function generateMetadata({
-  params,
-}: BlogPageParams): Promise<Metadata> {
-  "use cache";
-  cacheLife("minutes");
-
-  const slug = (await params).slug;
-
-  const metadata = await getBlogMetadataBySlug(slug);
-
-  if (!metadata) {
-    notFound();
-  }
-
-  const url = `${SITE_URL}/blogs/${metadata.slug}`;
-
-  return {
-    title: metadata.title,
-    description: metadata.description,
-
-    openGraph: {
-      title: metadata.title,
-      description: metadata.description,
-      type: "article",
-      url,
-    },
-
-    twitter: {
-      card: "summary",
-      title: metadata.title,
-      description: metadata.description,
-    },
-
-    robots: {
-      index: true,
-      follow: true,
-    },
-
-    alternates: {
-      canonical: url,
-    },
-  };
 }
 
 function mapToJsonLd(blog: Blog) {
