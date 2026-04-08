@@ -18,7 +18,7 @@ type BlogPageParams = {
 
 export default async function BlogPage({ params }: BlogPageParams) {
   "use cache";
-  cacheLife("minutes");
+  cacheLife("days");
 
   const blog = await getBySlug((await params).slug);
   if (!blog) {
@@ -57,7 +57,7 @@ export async function generateMetadata({
   params,
 }: BlogPageParams): Promise<Metadata> {
   "use cache";
-  cacheLife("minutes");
+  cacheLife("days");
 
   const slug = (await params).slug;
 

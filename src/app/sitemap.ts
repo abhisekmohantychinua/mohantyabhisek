@@ -5,7 +5,7 @@ import { cacheLife } from "next/cache";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   "use cache";
-  cacheLife("minutes");
+  cacheLife("days");
 
   const staticPaths: MetadataRoute.Sitemap = [
     {
