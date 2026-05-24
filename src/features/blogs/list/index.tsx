@@ -1,44 +1,31 @@
-import BlogCardComponent from "@/components/shared/blog-card";
 import { BlogCard } from "@/models/blog";
 import "./styles.css";
 import {
-  getBlogCardsCached,
-  getBlogCardsByQuery,
+  getCachedBlogCardsPage,
+  getBlogCardsPage,
 } from "@/services/blog-service";
+import PageResponse from "@/models/page-response";
+import BlogListClient from "../list-client";
 
 type BlogListProps = {
   query: string | undefined;
 };
 export default async function BlogList({ query }: BlogListProps) {
-  let blogs: BlogCard[] = [];
+  let response: PageResponse<BlogCard>;
+
   if (query && query.trim() !== "") {
-    blogs = await getBlogCardsByQuery(query);
+    response = await getBlogCardsPage(query, 0);
   } else {
-    blogs = await getBlogCardsCached();
+    response = await getCachedBlogCardsPage(0);
   }
   return (
     <>
-      <section
-        className="blog-list-section"
-        aria-labelledby="blog-list-heading"
-      >
-        <h2 className="blog-list-heading" id="blog-list-heading">
-          {query ? `Search results for "${query}"` : "Read our latest Blogs"}
-        </h2>
-        {blogs.length === 0 ? (
-          <p className="blog-list-empty">No blogs found.</p>
-        ) : (
-          <div className="blog-list-grid">
-            {blogs.map((blogCard) => (
-              <BlogCardComponent key={blogCard.slug} blogCard={blogCard} />
-            ))}
-          </div>
-        )}
-      </section>
+      <BlogListClient initialResponse={response} query={query} />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(createJsonLd(blogs)),
+          __html: JSON.stringify(createJsonLd(response.items)),
         }}
       />
     </>

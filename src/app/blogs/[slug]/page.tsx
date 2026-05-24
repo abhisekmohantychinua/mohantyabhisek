@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import "./styles.css";
 import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 import Blog from "@/models/blog";
-import { getBlogCardsCached, getBySlug } from "@/services/blog-service";
+import { getAllBlogSlugs, getBySlug } from "@/services/blog-service";
 import { Metadata } from "next";
 import { getBlogMetadataBySlug } from "@/services/blog-metadata-service";
 import ReadMore from "@/features/blogs/slug/read-more";
@@ -17,9 +17,9 @@ type BlogPageParams = {
 };
 
 export async function generateStaticParams() {
-  const blogs = await getBlogCardsCached();
-  return blogs.map((blog) => ({
-    slug: blog.slug,
+  const blogs = await getAllBlogSlugs();
+  return blogs.map((slug) => ({
+    slug: slug,
   }));
 }
 
