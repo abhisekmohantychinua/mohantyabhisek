@@ -1,11 +1,17 @@
-import { notFound } from "next/navigation";
 import "./styles.css";
+
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import type { JSX } from "react";
+
 import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
-import Blog from "@/models/blog";
-import { getAllBlogSlugs, getBySlug } from "@/services/blog-service";
-import { Metadata } from "next";
-import { getBlogMetadataBySlug } from "@/services/blog-metadata-service";
-import ReadMore from "@/features/blogs/slug/read-more";
+import ReadMore from "@/features/blogs/components/read-more";
+import type Blog from "@/features/blogs/models/blog";
+import { getBlogMetadataBySlug } from "@/features/blogs/services/blog-metadata-service";
+import {
+  getAllBlogSlugs,
+  getBySlug,
+} from "@/features/blogs/services/blog-service";
 
 const SITE_URL = "https://mohantyabhisek.com";
 export const revalidate = 86400; // revalidate every 24 hours
@@ -16,14 +22,20 @@ type BlogPageParams = {
   }>;
 };
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<
+  {
+    slug: string;
+  }[]
+> {
   const blogs = await getAllBlogSlugs();
   return blogs.map((slug) => ({
     slug: slug,
   }));
 }
 
-export default async function BlogPage({ params }: BlogPageParams) {
+export default async function BlogPage({
+  params,
+}: BlogPageParams): Promise<JSX.Element> {
   const blog = await getBySlug((await params).slug);
   if (!blog) {
     return notFound();
@@ -98,7 +110,7 @@ export async function generateMetadata({
   };
 }
 
-function mapToJsonLd(blog: Blog) {
+function mapToJsonLd(blog: Blog): object {
   const blogUrl = `${SITE_URL}/blogs/${blog.slug}`;
 
   return {
@@ -141,7 +153,7 @@ function mapToJsonLd(blog: Blog) {
   };
 }
 
-function mapToFaqJsonLd(blog: Blog) {
+function mapToFaqJsonLd(blog: Blog): object {
   const blogUrl = `${SITE_URL}/blogs/${blog.slug}`;
   return {
     "@context": "https://schema.org",

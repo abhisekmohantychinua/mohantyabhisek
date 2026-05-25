@@ -1,0 +1,36 @@
+import "./styles.css";
+
+import Link from "next/link";
+import type { JSX } from "react";
+
+import type { BlogCard } from "@/features/blogs/models/blog";
+
+type BlogCardProps = {
+  blogCard: BlogCard;
+};
+export default function BlogCardComponent({
+  blogCard,
+}: BlogCardProps): JSX.Element {
+  return (
+    <article className="blog-card">
+      <h3 className="blog-card-heading">
+        <Link href={`/blogs/${blogCard.slug}`} className="blog-card-title">
+          {blogCard.title}
+        </Link>
+      </h3>
+      <p className="blog-card-description">{blogCard.description}</p>
+      <div className="blog-card-footer">
+        <time
+          className="blog-card-date"
+          dateTime={new Date(blogCard.postedAt).toISOString()}
+        >
+          {new Date(blogCard.postedAt).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+      </div>
+    </article>
+  );
+}

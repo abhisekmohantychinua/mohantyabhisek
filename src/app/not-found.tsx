@@ -1,10 +1,12 @@
 "use client";
 
-import FuzzyText from "@/components/FuzzyText";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import type { JSX } from "react";
 
-export default function NotFound() {
+import { Button } from "@/components/ui/button";
+import FuzzyText from "@/components/ui/fuzzy-text";
+
+export default function NotFound(): JSX.Element {
   return (
     <section className="container mx-auto min-h-[80vh] flex flex-col justify-center items-center gap-6 px-6 lg:px-8">
       <FuzzyText

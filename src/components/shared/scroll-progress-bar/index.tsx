@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import type { JSX } from "react";
+import { useRef } from "react";
 
 interface ScrollProgressBarProps {
   containerClass: string; // class of container to track
@@ -16,7 +17,7 @@ export default function ScrollProgressBar({
   className = "",
   scrollTriggerStart,
   scrollTriggerEnd,
-}: ScrollProgressBarProps) {
+}: ScrollProgressBarProps): JSX.Element {
   const progressFill = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -35,7 +36,7 @@ export default function ScrollProgressBar({
     <div
       className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-4/5 w-[2px] bg-foreground/80 ${className}`}
     >
-      <div ref={progressFill} className={`h-0 w-[2px] bg-accent origin-top`} />
+      <div ref={progressFill} className={"h-0 w-[2px] bg-accent origin-top"} />
     </div>
   );
 }

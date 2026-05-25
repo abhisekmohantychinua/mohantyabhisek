@@ -1,14 +1,16 @@
-import BlogList from "@/features/blogs/list";
-import BlogListSkeleton from "@/features/blogs/list-skeleton";
-import BlogSearch from "@/features/blogs/search";
-import { Metadata } from "next";
-import { Suspense } from "react";
+import type { Metadata } from "next";
+import type { JSX } from "react";
+
+import BlogList from "@/features/blogs/components/list";
+import BlogSearch from "@/features/blogs/components/search";
 
 type BlogsParams = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function Blogs({ searchParams }: BlogsParams) {
+export default async function Blogs({
+  searchParams,
+}: BlogsParams): Promise<JSX.Element> {
   const q = (await searchParams).q;
   const query = Array.isArray(q) ? q[0] : q;
 

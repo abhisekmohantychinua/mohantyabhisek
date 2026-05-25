@@ -1,6 +1,7 @@
-import { BlogSitemap } from "@/models/blog";
-import { getAllBlogSitemap } from "@/services/blog-service";
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+
+import type { BlogSitemap } from "@/features/blogs/models/blog";
+import { getAllBlogSitemap } from "@/features/blogs/services/blog-service";
 
 export const revalidate = 86400; // 24 hours in seconds
 

@@ -1,9 +1,10 @@
-import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from "next";
+import type { JSX } from "react";
 
-export default async function Contact() {
+export default async function Contact(): Promise<JSX.Element> {
   return (
     <section className="container mx-auto h-[80vh] flex flex-col justify-center items-center">
       <div className="h-60 w-60 rounded-full object-cover overflow-hidden mb-5">

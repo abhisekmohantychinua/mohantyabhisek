@@ -1,5 +1,6 @@
-export default interface PageResponse<T> {
+interface PageResponse<T> {
   items: T[];
   currentIndex: number;
   isLastIndex: boolean;
 }
+export default PageResponse;

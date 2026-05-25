@@ -1,11 +1,26 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
+import type { BlogCard } from "@/features/blogs/models/blog";
 import {
   getBlogCardsPage,
   getCachedBlogCardsPage,
-} from "@/services/blog-service";
+} from "@/features/blogs/services/blog-service";
+import type ErrorResponse from "@/models/error-response";
+import type PageResponse from "@/models/page-response";
 
-export async function GET(request: NextRequest) {
+/**
+ * Fetches a paginated list of blog cards.
+ *
+ * Query searches are dynamically fetched while
+ * non-query pages may use cached responses.
+ *
+ * @param request - Incoming Next.js request object containing search params.
+ * @returns JSON response containing paginated blog cards or an error message.
+ */
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<PageResponse<BlogCard> | ErrorResponse>> {
   try {
     const searchParams = request.nextUrl.searchParams;
 

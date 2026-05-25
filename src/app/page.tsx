@@ -1,11 +1,13 @@
-import Hero from "@/features/home/hero";
-import Problem from "@/features/home/problem";
-import Thinking from "@/features/home/thinking";
-import Services from "@/features/home/services";
-import Cta from "@/features/home/cta";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import type { JSX } from "react";
 
-export default function Home() {
+import Cta from "@/features/home/components/cta";
+import Hero from "@/features/home/components/hero";
+import Problem from "@/features/home/components/problem";
+import Services from "@/features/home/components/services";
+import Thinking from "@/features/home/components/thinking";
+
+export default function Home(): JSX.Element {
   return (
     <>
       <Hero />
