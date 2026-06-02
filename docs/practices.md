@@ -19,22 +19,40 @@ public/
 src/
  ├── app/
  │   ├── api/
+ │   │   ├── blogs/route.ts
  │   │   └── contact/route.ts
+ │   ├── blogs/
+ │   │   ├── page.tsx
+ │   │   └── [slug]/page.tsx
  │   ├── globals.css
  │   ├── layout.tsx
- │   └── page.tsx
+ │   ├── page.tsx
+ │   └── sitemap.ts
  ├── components/
- │   ├── shared/   # reusable feature-agnostic components (Navbar, Footer, ScrollControl)
- │   └── ui/       # design-system primitives (shadcn + CVA variants)
+ │   ├── shared/   # reusable feature-agnostic components (Navbar, Footer, ScrollProgressBar, CTA Form)
+ │   └── ui/       # shadcn primitives and variants (Button, Card, Field, Input, Label, Popover, Separator, Skeleton)
  ├── features/
+ │   ├── blogs/
+ │   │   ├── components/
+ │   │   │   ├── blog-card/
+ │   │   │   ├── blog-card-skeleton/
+ │   │   │   ├── list/
+ │   │   │   ├── list-client/
+ │   │   │   ├── list-skeleton/
+ │   │   │   ├── read-more/
+ │   │   │   └── blog-content/
+ │   │   └── services/
+ │   │       └── blog-service.ts
  │   └── home/
- │       ├── cta/
- │       ├── hero/
- │       ├── problem/
- │       ├── services/
- │       └── thinking/
- ├── lib/          # utilities (cn, helpers)
- └── schemas/      # zod/type schemas (contact, etc.)
+ │       └── components/
+ │           ├── cta/
+ │           ├── hero/
+ │           ├── problem/
+ │           ├── services/
+ │           └── thinking/
+ ├── lib/          # utilities (cn, mongodb helpers)
+ ├── models/       # shared data shapes and page-response types
+ └── schemas/      # typed validation schemas
 
 package.json
 next.config.ts
@@ -44,121 +62,165 @@ README.md
 
 ### Naming Conventions
 
-- Files and folders: kebab-case (e.g., hero-section, navbar)
-- Components: PascalCase (e.g., Navbar, Hero)
-- Variants/state: clear suffixes (-active, -open, -scrolled)
+- Files and folders: kebab-case (e.g. `blog-card`, `list-client`, `generate-metadata`).
+- Components: PascalCase (e.g. `Navbar`, `BlogListClient`).
+- Hooks/helpers: camelCase.
+- Variants/state classes: descriptive suffixes (`-active`, `-open`, `-scrolled`, `-skeleton`).
 
 ### Component Placement
 
-- Shared, reusable UI: `src/components/shared`
-- Design-system primitives: `src/components/ui` (shadcn, CVA variants)
-- Feature-scoped UI: `src/features/<area>/<component>` with colocated CSS when needed
+- Shared, cross-cutting components: `src/components/shared`.
+- Design-system primitives: `src/components/ui`.
+- Feature-specific UI and skeletons: `src/features/<area>/components`.
+- Feature services and data access: `src/features/<area>/services`.
+- Shared type definitions: `src/models`.
+- API routes: `src/app/api/*`.
 
 ## 💻 Code Writing Guidelines
 
-- **TypeScript-first:** All source under `src/` uses TypeScript. Prefer explicit prop and return types for public components and exported helper functions. Define small interfaces for props rather than large implicit `any` objects.
-- **Server vs Client:** Use Next.js App Router patterns: prefer server components by default; add `"use client"` only where DOM APIs, hooks, or client-only libraries (GSAP, lucide-react, etc.) are required. Keep client components as small and focused as possible.
-- **Component shape:** Functional components with clear prop types and named exports. Avoid anonymous inline components for readability and devtools clarity. Prefer small presentational components composed by higher-level containers.
-- **Hooks & effects:** Keep effects deterministic and idempotent. Clean up listeners (`removeEventListener`, `observer.disconnect()`, cancel animation frames) and prefer passive listeners where appropriate (e.g., `addEventListener('scroll', fn, { passive: true })`). Use `startTransition` when deferring non-urgent state updates after navigation.
-- **State & rendering:** Prefer early returns for loading/empty states. Keep heavy logic out of render — compute derived values with `useMemo` only when beneficial. Keep key lists and static content outside rendering loops (top-level constants) to avoid reallocation on each render.
-- **Utilities & composition:** Use the repository `cn` helper (`src/lib/utils.ts`) for class composition and `cva` for variant-driven UI primitives (see `src/components/ui/button.tsx`). Keep variant definitions in UI primitives and reuse them across features.
-- **Data types & schemas:** Centralize shared schemas in `src/schemas/` (Zod/TS types) and prefer typed data boundaries between server and client code.
+- **TypeScript-first:** All source under `src/` uses TypeScript. Prefer explicit prop and return types for public components and exported helper functions. Define narrow interfaces rather than broad `any` objects.
+- **App Router by default:** Prefer server components for page logic and initial rendering. Use `"use client"` only for browser-only behavior, hooks, or interactive state.
+- **Client boundaries:** Keep client components small and focused. Examples: `Navbar`, `ScrollProgressBar`, `BlogListClient`, `section-view`, `gsap-init`, `cta-form`.
+- **Data flow:** Keep server-side data fetches in feature services, not in presentation components. The blog list pattern is:
+  - `BlogList` (server) loads initial page data,
+  - `BlogListClient` handles infinite scrolling and loading states.
+
+  Example:
+
+  ```ts
+  // src/features/blogs/components/list/index.tsx
+  import { getCachedBlogCardsPage } from "@/features/blogs/services/blog-service";
+
+  export default async function BlogList() {
+    const page = await getCachedBlogCardsPage({ page: 1 });
+    return <BlogListClient initialPage={page} />;
+  }
+  ```
+
+  ```tsx
+  // src/features/blogs/components/list-client/index.tsx
+  "use client";
+  import { useState } from "react";
+
+  export default function BlogListClient({ initialPage }) {
+    const [page, setPage] = useState(initialPage);
+    // client-side fetches /api/blogs?page=2 for pagination
+  }
+  ```
+
+- **Service caching:** Use Next.js `unstable_cache` for cacheable server fetchers. Example: `getCachedBlogCardsPage()` mirrors `getBlogCardsPage()` but adds a cached wrapper with `revalidate`.
+- **Page-level revalidation:** Use `export const revalidate = 86400` on stable routes and `generateStaticParams()` for static slug generation.
+- **Route metadata:** Use `generateMetadata()` and the `Metadata` type for route-level SEO, Open Graph, and canonical values.
+- **Component shape:** Functional components with named exports and typed props. Avoid anonymous inline components for readability and devtools clarity.
+- **Hooks & effects:** Keep effects deterministic, clean up observers and listeners, and prefer passive event listeners for scroll/resize.
+- **State & rendering:** Prefer early returns for loading/empty states. Keep heavy logic out of render and use stable list keys.
+- **Utilities & composition:** Use `cn` from `src/lib/utils.ts` and cva-driven design primitives in `src/components/ui`.
+- **Data boundaries:** Serialize server data explicitly. Treat `postedAt` as a string at network boundaries and convert to `Date` only where formatting is required.
 
 ### Accessibility
 
 - **Semantic markup:** Prefer `nav`, `main`, `section`, `article`, `figure`, `figcaption`, `button`, `ul/ol` where appropriate.
-- **ARIA & dynamic updates:** Use ARIA only when necessary. For visually driven, dynamic text swaps (Problem section) combine visual GSAP swaps with an `aria-live` region or programmatic announcements to assistive tech; set `aria-atomic` if partial updates should be read as a whole.
-- **Keyboard & focus:** Provide `tabIndex` and clear focus-visible styles for interactive cards and custom controls. Use `focus-visible`/`outline` utilities from global components.
-- **Images & alt text:** Use `next/image` and supply `alt` where meaningful; use empty `alt=""` for decorative images.
-- **Performance-friendly animations:** Avoid animating layout properties where possible; prefer `transform` + `opacity` and GPU-friendly easings. Respect reduced-motion preferences where appropriate.
+- **ARIA & dynamic updates:** Use ARIA only when necessary. For content swaps, combine visual motion with screen-reader-friendly announcements or `aria-live` regions.
+- **Keyboard & focus:** Provide clear focus-visible states. Use shared focus styles from global CSS rather than ad hoc outlines.
+- **Images & alt text:** Use `next/image` with meaningful `alt`; use empty `alt=""` for purely decorative visuals.
+- **Performance-friendly animations:** Avoid layout animations when possible; prefer `transform` and `opacity`. Respect reduced-motion preferences.
 
 ## 🎨 Styling & CSS Guidelines
 
 ### Tailwind + Tokens
 
-- **Single source of tokens:** Global design tokens (colors, radii, fonts, keyframes) live in `src/app/globals.css` and are consumed via CSS custom properties (`:root`) and Tailwind utilities. Prefer these tokens (`bg-background`, `text-foreground`) rather than raw hex values.
-- **Fonts & performance:** Fonts are declared with `@font-face` in `globals.css` and use `font-display: swap`. Map font families to custom properties (`--font-neutral-sans`, `--font-break`) and use those in components.
+- Global design tokens live in `src/app/globals.css` using CSS custom properties. Use token utilities like `bg-background`, `text-foreground`, `border-primary/10`, and `rounded-2xl`.
+- Fonts are declared in `globals.css` with `@font-face` and `font-display: swap`. Custom font families are mapped to properties like `--font-neutral-sans` and `--font-break`.
 
-### Component Layer & `@layer components`
+### Global component styles
 
-- **Global component styles:** Shared visual patterns live under `@layer components` in `globals.css` (navbar, footer, focus rings, utility tokens). Use these for consistent focus/hover/transition rules.
-- **Prefer `@apply`:** Compose Tailwind utilities with `@apply` for readable component CSS. Reserve raw CSS for layout calculations, pseudo-elements, and complex selectors that Tailwind can't express succinctly.
-- **Mobile-first:** Author styles mobile-first and progressively enhance with responsive prefixes (`sm:`, `md:`, `lg:`).
+- Shared visual patterns belong under `@layer components` in `src/app/globals.css`.
+- Global component rules include the navbar, footer, blog card surface, focus rings, and skeleton defaults.
+- Use `@apply` to compose Tailwind utilities and reserve raw CSS for layout, pseudo-elements, and truncation rules.
 
 ### Scoped feature CSS
 
-- **Colocated scoped files:** Feature-level CSS lives under `src/features/*/` and imports global tokens via `@reference "../../../app/globals.css"` when needed. Scoped files follow a Tailwind-first approach with a small set of custom properties to control local behavior (e.g., `--line-growth`).
-- **Naming & structure:** Use clear BEM-like or semantic class names per feature (e.g., `.problem-section`, `.services-card`) and keep animations and layout rules near related markup.
+- Feature CSS lives under `src/features/*/components` and imports global tokens via `@reference "../../../app/globals.css"`.
+- Keep scoped files mobile-first and use responsive prefixes for enhancements.
+- Use semantic class names and keep styles close to the feature markup.
+
+### Skeleton styling
+
+- Skeletons are built with the shadcn `Skeleton` primitive and a muted base tone (`bg-primary/20`) rather than the bold accent color.
+- `BlogCardSkeleton` mirrors blog card layout; `BlogListSkeleton` provides heading and grid placeholders for loading states.
 
 ### Animations & motion
 
-- **Transform + opacity:** Prefer `transform` and `opacity` for motion. GSAP + ScrollTrigger is used for scrubbed/pinned interactions (Problem section). Keep timelines predictable, scrubbed, and accessible.
-- **Reduce motion & a11y:** Honor `prefers-reduced-motion` where appropriate and provide non-animated fallbacks for critical content.
+- Prefer GPU-friendly motion: `transform`, `opacity`, and subtle transitions.
+- Use GSAP where precise scroll-driven timing or pinning is required.
+- Keep client animation logic inside client components and avoid global side effects.
 
-### Images & media
+### Layout and pinning
 
-- **Next/image:** Use `next/image` for responsive images; prefer `loading="lazy"` when appropriate and provide sizes when possible.
-- **Overflow & pin caveats:** Avoid `overflow: hidden` on ancestors of pinned/sticky elements. Pin wrappers should live in non-clipped containers and use a small top offset (e.g., `10vh`) to avoid pinned content sitting flush to the viewport top.
+- Avoid `overflow: hidden` on ancestors of sticky/pinned sections.
+- Pin wrappers should live in non-clipped containers and use a small top offset when needed.
+- Use `vh`-based shells for scroll interactions and tune them to minimize trailing empty space.
 
 ### Utilities & primitives
 
-- **Design primitives:** Keep UI primitives in `src/components/ui` (CVA for variants, Radix Slot for `asChild` patterns). Export variant props from primitives so features can reuse them consistently (see `Button` example).
-- **Class composition:** Use `cn` (`src/lib/utils.ts`) to merge classes and `twMerge` for conflict resolution.
+- Keep primitives in `src/components/ui` and reuse them across features.
+- Use `cn` for class composition and `twMerge` for conflict resolution.
+- Prefer primitive variants over ad hoc button or card class lists.
 
-### Practical CSS rules
+## 🌐 Architecture and feature separation
 
-- Keep component custom properties minimal and documented in the scoped file header.
-- Use `vh`-based shells for scroll-pinned sections and tune them to minimize trailing empty space.
-- Use pseudo-elements for decorative gradients/overlays to keep markup focused on content.
+- Feature grouping is domain-driven. Example:
+  - `src/features/blogs/components/*`
+  - `src/features/blogs/services/blog-service.ts`
+  - `src/features/blogs/models/blog.ts`
+- Shared UI lives in `src/components/shared` and `src/components/ui`.
+- `src/models` contains shared response and error types.
+- `src/lib` contains runtime helpers such as `cn` and Mongo helpers.
 
-## 🌊 Animations & Scroll
+## 🧩 shadcn/ui & utilities
 
-- This project intentionally favors calm, content-first motion: gentle translate + opacity is the baseline.
-- GSAP + ScrollTrigger are used for complex, scrubbed, pinned scroll interactions (e.g., the Problem section). Use GSAP timelines for precise control over pinning, scrub, and per-step easing.
-- When implementing sticky/pin behavior, be aware: `position: sticky`/`pin` can be broken by ancestor `overflow` rules — avoid `overflow: hidden` on ancestors that contain sticky elements.
-- Prefer scrubbed timelines over time-based delays for scroll-linked sequences; guard against duplicated final state by conditionally rendering the target element only when appropriate.
-- For accessible dynamic text swaps, combine GSAP-driven visual swaps with `aria-live` regions so screen readers announce content changes.
+- Use shadcn primitives for consistent UI behavior.
+- Keep primitives small and composable: Button, Card, Field, Input, Label, Popover, Separator, Skeleton, Textarea.
+- Avoid duplicating primitive behavior in feature code.
 
-## 🌊 Scroll & Pin Caveats (practical rules)
+## 🧠 Client/server boundaries
 
-- Pin wrappers should be placed inside non-clipped containers (no `overflow: hidden` on ancestors that require pin/sticky behavior).
-- Use a small top offset (e.g., 10vh) when pinning so pinned headings don't sit at the absolute top of the viewport.
-- Tune scroll shell heights per component (vh-based blocks) to minimize trailing empty scroll space.
+- Server components fetch data and render initial markup.
+- Client components handle interactivity and browser-only APIs.
+- Example pattern: `BlogList` server component renders initial data; `BlogListClient` handles infinite scroll and loading.
+- Mark client-boundary files with `"use client"` and keep responsibilities narrow.
 
-## 🧩 shadcn/ui & Utilities
+## 🔄 API and pagination
 
-- Buttons and primitives live in `src/components/ui` and use CVA variants; prefer variants over ad-hoc class lists.
-- Compose classes with `cn` from `src/lib/utils.ts` (clsx + tailwind-merge).
+- API routes live in `src/app/api/*`.
+- Search queries are dynamic; non-query blog pages can use cached responses.
+- The blog API route uses query params and returns typed `PageResponse<BlogCard>`.
+- Use explicit error responses and logging for API failures.
 
-## 🧭 Design Philosophy
+## 🧪 Performance notes
 
-- Calm, content-first visual language — quiet authority rather than loud UI flourishes.
-- Subtle motion guides reading order (hero and problem use staged translate + fade).
-- Maintain strong focus and hover states without visual noise.
+- Cache non-search blog pages with `unstable_cache` and explicit TTLs.
+- Use `revalidate` exports on stable pages to keep stale content bounded.
+- Keep custom CSS minimal to preserve Tailwind tree-shaking.
+- Prefer `next/image` and specify sizes for images.
 
-## 📊 Performance Notes
+## 🧭 Design philosophy
 
-- Use `font-display: swap` for custom fonts.
-- Prefer `next/image` for images where appropriate and specify sizes to enable optimal delivery.
-- Keep custom CSS minimal so Tailwind tree-shaking remains effective.
+- Calm, content-first visual language.
+- Quiet authority through strong typography, restrained motion, and soft accents.
+- Subtle motion should guide reading order, not distract.
 
-## 🔄 Development Workflow
+## ✅ Code Review Checklist
 
-1. Clarify intent and accessibility before coding.
-2. Implement mobile-first, add responsive prefixes.
-3. Prefer Tailwind utilities and shared component classes; add scoped CSS only when necessary.
-4. Use shadcn primitives (Button) with variants; avoid bespoke buttons.
-5. When a change requires multiple steps (scan, update, test), track it with the project's task plan tool (use the repo's TODO process).
-
-### Code Review Checklist
-
-- Types are explicit and props are clear.
-- Accessibility is wired (ARIA, semantics, focus states).
-- Tailwind-first, tokens instead of raw values.
-- Responsive prefixes applied (mobile-first).
-- Reuse shared components/variants where possible.
-- Animations use GSAP/ScrollTrigger for complex scroll interactions and are purposefully timed and accessible.
+- Are prop types explicit and data shapes typed?
+- Is server/client separation correct and minimal?
+- Are shared tokens used instead of raw values?
+- Are scoped feature styles imported with `@reference` and kept local?
+- Are skeletons present for async list loading?
+- Is metadata and JSON-LD handled in page routes?
+- Is `unstable_cache` used for cacheable server data, and are stable routes configured with `revalidate`?
+- Is `use client` limited to interactive components and side effects?
 
 ---
 
-Last updated: January 15, 2026
+Last updated: June 2, 2026
