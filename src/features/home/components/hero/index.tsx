@@ -65,6 +65,11 @@ export default function Hero(): JSX.Element {
           <figcaption className="hero__figure-caption">
             Every solution starts with understanding the business.
           </figcaption>
+          <BrandMark
+            className="hero__figure-brand-circle"
+            variant="circle"
+            height={100}
+          />
         </figure>
       </div>
       <div className="hero__scroll-down">
