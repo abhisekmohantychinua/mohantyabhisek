@@ -1,54 +1,76 @@
 import "./styles.css";
 
+import { ArrowUpRightIcon } from "lucide-react";
+import Image from "next/image";
 import type { JSX } from "react";
 
+import BrandMark from "@/components/shared/brand-mark";
 import CtaPopover from "@/components/shared/cta-popover";
 import { Button } from "@/components/ui/button";
 
 export default function Hero(): JSX.Element {
   return (
     <section
-      className="hero-section"
+      className="hero__section"
       role="banner"
       aria-labelledby="hero-headline"
-      id="hero-section"
+      id="hero__section"
     >
-      {/* Content container with intentional narrow width to force intention */}
-      <div className="hero-content">
-        {/* Primary headline - establishes core value proposition */}
-        <h1 id="hero-headline" className="hero-headline hero-animate-headline">
-          Start with clarity. <br /> Build with purpose.
-        </h1>
-
-        {/* Supporting statement - process that provides quality */}
-        <p className="hero-support hero-animate-support">
-          Work begins by understanding the problem in its full context. This
-          makes it easier to see what actually needs to be built, and what does
-          not. With that understanding in place, solutions are defined before
-          any execution starts. Structure keeps the work focused and reduces
-          unnecessary complexity. The same approach applies to websites, SaaS
-          products, and internal systems. Each is designed for reliable,
-          practical use over time.
-        </p>
-
-        {/* CTA area - inviting, not urgent */}
-        <div className="hero-cta-area hero-animate-cta">
-          {/* Primary CTA - conversation starter */}
-          <CtaPopover />
-
-          {/* Secondary CTA - low-commitment option to reduce friction */}
-          <Button
-            variant="ghost"
-            size="default"
-            className="hero-cta-secondary"
-            type="button"
-            aria-describedby="secondary-cta-description"
-          >
-            See how I work
-          </Button>
+      <div className="hero__content">
+        <div className="hero__header">
+          <h1 id="hero__heading" className="hero__heading">
+            Custom Websites <br className="hero__heading-br-infrequent" /> And
+            Web <br className="hero__heading-br-frequent" />
+            Applications <br className="hero__heading-br-infrequent" /> Built
+            With <br className="hero__heading-br-frequent" />
+            <span className="highlight">Clarity</span>{" "}
+            <br className="hero__heading-br-infrequent" />
+            And Purpose.
+          </h1>
+          <p className="hero__description">
+            Every project starts with understanding the business, defining clear
+            objectives, and choosing the right solution before development
+            begins. From websites to custom web applications, the focus remains
+            on purpose, structure, and long-term value.
+          </p>
         </div>
+
+        <div className="hero__actions">
+          <div className="hero__actions-cta-wrapper">
+            <CtaPopover />
+          </div>
+          <div className="hero__actions-cta-secondary-wrapper">
+            <Button
+              variant="ghost"
+              size="default"
+              className="hero__cta-secondary"
+              type="button"
+              aria-describedby="secondary-cta-description"
+              data-icon="inline-end"
+            >
+              View my work
+              <ArrowUpRightIcon />
+            </Button>
+          </div>
+        </div>
+
+        <figure className="hero__figure">
+          <Image
+            src="/hero.png"
+            alt=""
+            width={1140}
+            height={510}
+            className="hero__figure-image"
+          />
+          <figcaption className="hero__figure-caption">
+            Every solution starts with understanding the business.
+          </figcaption>
+        </figure>
       </div>
-      {/* <ScrollControl /> */}
+      <div className="hero__scroll-down">
+        <BrandMark height={510} />
+        <span className="hero__scroll-down-text">Scroll Down</span>
+      </div>
     </section>
   );
 }

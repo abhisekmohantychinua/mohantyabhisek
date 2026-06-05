@@ -1,36 +1,64 @@
 @reference "../../../../app/globals.css";
 
-.hero-section {
-  @apply container mx-auto py-16 text-start px-6 bg-background relative;
-  @apply lg:px-8;
-  @apply 2xl:py-28;
+.hero__section {
+  @apply bg-background relative container mx-auto px-6 pt-12 text-start;
+  @apply max-xl:pt-8;
+  @apply max-sm:px-4 max-sm:pt-4;
 }
 
-.hero-content {
-  @apply w-full max-w-2xl;
-  @apply lg:max-w-3xl;
+.hero__header,
+.hero__actions {
+  @apply mb-6 flex w-full items-start justify-between gap-2;
+  @apply max-lg:mb-4 max-lg:flex-col;
 }
 
-.hero-headline {
-  @apply max-w-xs text-2xl leading-snug mb-4 text-primary font-sans font-semibold;
-  @apply sm:text-3xl sm:leading-tight sm:mb-6 sm:max-w-lg;
-  @apply md:text-4xl md:max-w-2xl;
-  @apply lg:text-5xl;
-  @apply 2xl:text-6xl 2xl:mb-8;
-  @apply animate-[fade-up_0.35s_cubic-bezier(0.4,0,0.2,1)_0.3s_both];
+.hero__heading {
+  @apply max-w-[740px] text-6xl leading-16;
+  @apply max-2xl:max-w-[590px] max-2xl:text-5xl;
+  @apply max-sm:text-4xl max-sm:leading-12;
 }
 
-.hero-support {
-  @apply text-sm mb-5 leading-relaxed max-w-sm text-foreground font-sans font-normal;
-  @apply sm:text-base sm:mb-8 sm:max-w-xl;
-  @apply md:text-lg md:mb-10;
-  @apply 2xl:text-xl 2xl:mb-12;
-  @apply animate-[fade-up_0.35s_cubic-bezier(0.4,0,0.2,1)_0.55s_both];
+.hero__heading-br-frequent {
+  @apply inline;
+  @apply max-xl:hidden;
+  @apply max-lg:inline;
+  @apply max-sm:hidden;
+}
+.hero__heading-br-infrequent {
+  @apply hidden;
+  @apply max-xl:inline;
+  @apply max-lg:hidden;
 }
 
-.hero-cta-area {
-  @apply flex flex-col items-center gap-4;
-  @apply sm:flex-row sm:gap-6;
-  @apply lg:items-start;
-  @apply animate-[fade-in_0.35s_cubic-bezier(0.4,0,0.2,1)_0.8s_both];
+.hero__description {
+  @apply max-w-md text-lg leading-7;
+  @apply max-2xl:max-w-lg max-2xl:text-xl;
+  @apply max-sm:text-base;
+}
+
+.hero__actions {
+  @apply mb-16;
+  @apply max-sm:mb-8;
+}
+
+.hero__actions-cta-wrapper {
+  @apply max-w-[740px];
+  @apply max-2xl:max-w-[590px];
+}
+.hero__actions-cta-secondary-wrapper {
+  @apply max-w-md text-start;
+  @apply max-2xl:max-w-lg;
+}
+
+.hero__figure {
+  @apply h-[512px] w-full overflow-hidden rounded-2xl;
+}
+
+.hero__scroll-down {
+  @apply absolute bottom-0 left-full flex max-w-fit items-end justify-center;
+  @apply max-2xl:hidden;
+}
+
+.hero__scroll-down-text {
+  @apply w-max origin-top-left translate-y-7 rotate-270 text-sm leading-7 tracking-[30%] uppercase;
 }
