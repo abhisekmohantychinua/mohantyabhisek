@@ -202,10 +202,10 @@
     @apply overflow-x-hidden;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply text-foreground overflow-x-hidden bg-white font-sans;
   }
   main {
-    @apply mt-16;
+    @apply mt-16 overflow-x-hidden;
   }
   img {
     @apply h-full w-full object-cover object-center;
@@ -218,5 +218,12 @@
 @layer components {
   .highlight {
     @apply text-accent font-bold;
+  }
+  .kicker {
+    @apply text-secondary rounded-full bg-[#2B2B2B1A] px-6 py-3 text-xl leading-16;
+    @apply max-sm:text-lg;
+  }
+  .divider {
+    @apply bg-foreground mx-auto h-px w-full;
   }
 }

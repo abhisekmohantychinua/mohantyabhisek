@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import type { JSX } from "react";
 
+import AboutUs from "@/features/home/components/about-us";
 import Cta from "@/features/home/components/cta";
 import Hero from "@/features/home/components/hero";
-import Problem from "@/features/home/components/problem";
 import Services from "@/features/home/components/services";
 import Thinking from "@/features/home/components/thinking";
 
@@ -11,7 +11,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Hero />
-      <Problem />
+      <AboutUs />
       <Thinking />
       <Services />
       <Cta />

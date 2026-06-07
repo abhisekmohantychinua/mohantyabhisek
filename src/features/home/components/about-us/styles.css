@@ -1,0 +1,73 @@
+@reference "../../../../app/globals.css";
+
+.about-us {
+  @apply relative my-10 pt-12 text-center;
+  @apply max-xl:my-6 max-xl:px-8 max-xl:pt-8;
+  @apply max-sm:px-4 max-sm:pt-4 max-sm:text-start;
+}
+
+.about-us::after,
+.about-us::before {
+  @apply bg-accent pointer-events-none absolute top-0 h-full w-52 rounded-full opacity-70 blur-[400px] content-[""];
+  @apply max-sm:top-16 max-sm:h-1/5 max-sm:w-20 max-sm:blur-[120px];
+}
+
+.about-us::after {
+  @apply -right-[104px];
+  @apply max-sm:-right-10;
+}
+.about-us::before {
+  @apply -left-[104px];
+  @apply max-sm:-left-10;
+}
+
+.about-us__heading {
+  @apply sr-only;
+}
+
+.about-us__description {
+  @apply mx-auto mt-8 max-w-[1440px] text-4xl leading-14;
+  @apply max-2xl:max-w-6xl;
+  @apply max-lg:max-w-3xl;
+  @apply max-md:max-w-lg;
+  @apply max-sm:text-3xl max-sm:leading-10;
+}
+
+.about-us__divider {
+  @apply my-16 max-w-[1440px];
+  @apply max-2xl:max-w-6xl;
+  @apply max-lg:max-w-3xl;
+  @apply max-md:max-w-lg max-sm:my-10;
+}
+
+.about-us__stats-container {
+  @apply mx-auto grid w-fit grid-cols-4 justify-center;
+  @apply max-lg:grid-cols-2;
+  @apply max-sm:w-auto;
+}
+
+.about-us__stats {
+  @apply relative space-y-5 overflow-hidden p-14 text-start;
+  @apply max-sm:p-4;
+}
+
+.about-us__stats:not(:last-child)::after {
+  @apply bg-foreground absolute top-1/4 right-0 h-1/2 w-px content-[""];
+}
+.about-us__stats:nth-child(2)::after {
+  @apply max-xl:hidden;
+}
+
+.about-us__stats-value {
+  @apply text-primary text-start text-4xl leading-14 font-bold;
+  @apply max-sm:text-3xl max-sm:leading-10;
+}
+
+.about-us__stats-label {
+  @apply text-lg leading-7;
+  @apply leading-6 max-sm:text-base;
+}
+
+.about-us__stats-brand-line {
+  @apply max-sm:w-full;
+}

@@ -1,7 +1,7 @@
 @reference "../../../../app/globals.css";
 
 .hero__section {
-  @apply bg-background relative container mx-auto px-12 pt-12 text-start;
+  @apply relative container mx-auto px-12 pt-12 text-start;
   @apply max-xl:px-8 max-xl:pt-8;
   @apply max-sm:px-4 max-sm:pt-4;
 }
@@ -46,7 +46,7 @@
   @apply max-2xl:max-w-[590px];
 }
 .hero__actions-cta-secondary-wrapper {
-  @apply max-w-md text-start;
+  @apply w-full max-w-md text-start;
   @apply max-2xl:max-w-lg;
 }
 

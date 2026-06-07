@@ -3,14 +3,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface BrandMarkProps extends React.SVGAttributes<SVGSVGElement> {
-  variant?: "line" | "circle";
+  variant?: "line-vertical" | "line-horizontal" | "circle";
   thickness?: number;
   height?: number;
   accentPercent?: number;
 }
 
 export function BrandMark({
-  variant = "line",
+  variant = "line-vertical",
   thickness,
   height,
   accentPercent,
@@ -62,15 +62,44 @@ export function BrandMark({
     );
   }
 
-  const barWidth = thickness ?? 1;
-  const barHeight = height ?? 150;
+  const thicknessValue = thickness ?? 1;
+  const length = height ?? 150;
   const accent = (accentPercent ?? 50) / 100;
+
+  if (variant === "line-horizontal") {
+    return (
+      <svg
+        width={length}
+        height={thicknessValue}
+        viewBox={`0 0 ${length} ${thicknessValue}`}
+        className={cn("shrink-0", className)}
+        aria-hidden="true"
+        {...props}
+      >
+        <rect
+          x={0}
+          y={0}
+          width={length * accent}
+          height={thicknessValue}
+          fill="var(--color-accent)"
+        />
+
+        <rect
+          x={length * accent}
+          y={0}
+          width={length * (1 - accent)}
+          height={thicknessValue}
+          fill="var(--color-primary)"
+        />
+      </svg>
+    );
+  }
 
   return (
     <svg
-      width={barWidth}
-      height={barHeight}
-      viewBox={`0 0 ${barWidth} ${barHeight}`}
+      width={thicknessValue}
+      height={length}
+      viewBox={`0 0 ${thicknessValue} ${length}`}
       className={cn("shrink-0", className)}
       aria-hidden="true"
       {...props}
@@ -78,16 +107,16 @@ export function BrandMark({
       <rect
         x={0}
         y={0}
-        width={barWidth}
-        height={barHeight * accent}
+        width={thicknessValue}
+        height={length * accent}
         fill="var(--color-accent)"
       />
 
       <rect
         x={0}
-        y={barHeight * accent}
-        width={barWidth}
-        height={barHeight * (1 - accent)}
+        y={length * accent}
+        width={thicknessValue}
+        height={length * (1 - accent)}
         fill="var(--color-primary)"
       />
     </svg>

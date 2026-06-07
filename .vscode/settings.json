@@ -16,5 +16,6 @@
   },
   "markdownlint.config": {
     "MD036": false
-  }
+  },
+  "mermaidChart.showGenerateDiagramCodeLens": false
 }
