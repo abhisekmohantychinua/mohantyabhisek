@@ -4,7 +4,7 @@ import type { JSX } from "react";
 import AboutUs from "@/features/home/components/about-us";
 import Cta from "@/features/home/components/cta";
 import Hero from "@/features/home/components/hero";
-import Services from "@/features/home/components/services";
+import Solutions from "@/features/home/components/solutions";
 import Thinking from "@/features/home/components/thinking";
 
 export default function Home(): JSX.Element {
@@ -12,8 +12,8 @@ export default function Home(): JSX.Element {
     <>
       <Hero />
       <AboutUs />
+      <Solutions />
       <Thinking />
-      <Services />
       <Cta />
       <script
         type="application/ld+json"

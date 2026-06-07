@@ -1,0 +1,70 @@
+@reference "../../../../app/globals.css";
+
+.solutions {
+  @apply relative container mx-auto px-12 pt-12 text-center;
+  @apply max-xl:px-8 max-xl:pt-8;
+  @apply max-sm:px-4 max-sm:pt-4;
+}
+
+.solutions__heading {
+  @apply my-9 text-4xl leading-14;
+  @apply max-sm:my-6 max-sm:text-3xl max-sm:leading-10;
+}
+
+.solutions__description {
+  @apply mx-auto max-w-5xl text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+}
+
+.solutions__brand-mark {
+  @apply my-16 w-full;
+  @apply max-sm:my-10;
+}
+
+.solutions__carousel {
+  @apply mx-auto max-w-[1440px];
+  @apply max-2xl:max-w-6xl;
+  @apply max-lg:max-w-3xl;
+  @apply max-md:max-w-lg;
+}
+
+.solutions__card-item {
+  @apply me-4 basis-auto last:me-0;
+  @apply max-sm:me-px;
+}
+
+.solutions__card {
+  @apply text-background relative flex h-[448px] w-2xl flex-col items-start justify-end overflow-hidden rounded-xl p-8;
+
+  @apply max-sm:h-[480px] max-sm:w-xs max-sm:p-4;
+}
+.solutions__card::before {
+  @apply from-foreground/80 via-foreground/40 absolute inset-0 -z-10 h-full w-full bg-linear-to-t to-transparent content-[""];
+}
+
+.solutions__card-tag {
+  @apply text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+}
+
+.solutions__card-heading {
+  @apply text-start text-3xl leading-11;
+  @apply max-sm:text-xl max-sm:leading-9;
+}
+
+.solutions__card-divider {
+  @apply bg-background;
+}
+
+.solutions__card-description {
+  @apply text-start text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+}
+
+.solutions__card-background {
+  @apply absolute inset-0 -z-20;
+}
+
+.solutions__card-image {
+  @apply h-full w-full object-cover object-center;
+}
