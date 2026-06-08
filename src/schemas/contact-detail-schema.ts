@@ -23,7 +23,7 @@ export const contactDetailSchema = z
       .string()
       .regex(
         /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._]+$/,
-        "Invalid Instagram profile URL"
+        "Invalid Instagram profile URL",
       )
       .or(z.literal("")),
 
@@ -32,7 +32,7 @@ export const contactDetailSchema = z
       .string()
       .regex(
         /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9-_%]+$/,
-        "Invalid LinkedIn profile URL"
+        "Invalid LinkedIn profile URL",
       )
       .or(z.literal("")),
   })
@@ -44,5 +44,5 @@ export const contactDetailSchema = z
       message:
         "At least one contact method (phone, email, Instagram, or LinkedIn) must be provided",
       path: ["phone"],
-    }
+    },
   );

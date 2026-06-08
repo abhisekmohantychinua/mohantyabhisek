@@ -5,7 +5,7 @@ import Image from "next/image";
 import type { JSX } from "react";
 
 import BrandMark from "@/components/shared/brand-mark";
-import CtaPopover from "@/components/shared/cta-popover";
+import CtaDialog from "@/components/shared/cta-dialog";
 import { Button } from "@/components/ui/button";
 
 export default function Hero(): JSX.Element {
@@ -37,7 +37,7 @@ export default function Hero(): JSX.Element {
 
         <div className="hero__actions">
           <div className="hero__actions-cta-wrapper">
-            <CtaPopover />
+            <CtaDialog />
           </div>
           <div className="hero__actions-cta-secondary-wrapper">
             <Button

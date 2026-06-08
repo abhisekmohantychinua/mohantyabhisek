@@ -2,7 +2,7 @@ import "./styles.css";
 
 import type { JSX } from "react";
 
-import CtaPopover from "@/components/shared/cta-popover";
+import CtaDialog from "@/components/shared/cta-dialog";
 
 import CtaContentAnimator from "./cta-content-animator";
 
@@ -14,7 +14,7 @@ export default function Cta(): JSX.Element {
           The costliest mistakes usually happen before anything is built.
         </h2>
         <div className="cta-popover-wrap">
-          <CtaPopover />
+          <CtaDialog />
         </div>
         <p className="cta-reassure" aria-label="Response reassurance">
           One conversation for clarity. No commitment.

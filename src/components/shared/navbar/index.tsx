@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 import type { JSX } from "react";
 import { startTransition, useEffect, useState } from "react";
 
+import { CtaLink } from "../cta-link";
+
 export default function Navbar(): JSX.Element {
   // State management for scroll behavior and mobile menu
   const [isScrolled, setIsScrolled] = useState(false);
@@ -139,27 +141,14 @@ export default function Navbar(): JSX.Element {
 
           {/* Utility zone - language selector */}
           <div className="navbar-utility-zone">
-            {/* Language selector placeholder */}
-            <div className="navbar-language-selector">
-              <span className="navbar-language-text">EN</span>
-              <svg
-                className="navbar-language-arrow"
-                width="12"
-                height="8"
-                viewBox="0 0 12 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1 1.5L6 6.5L11 1.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+            <CtaLink
+              href="tel:+919439485166"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex"
+            >
+              Call Me
+            </CtaLink>
 
             {/* Mobile menu toggle */}
             <button
@@ -212,28 +201,13 @@ export default function Navbar(): JSX.Element {
               </Link>
             ))}
           </nav>
-
-          {/* Mobile language selector */}
-          <div className="navbar-mobile-language">
-            <span className="navbar-mobile-language-text">EN</span>
-            <svg
-              className="navbar-mobile-language-arrow"
-              width="12"
-              height="8"
-              viewBox="0 0 12 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M1 1.5L6 6.5L11 1.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+          <CtaLink
+            href="tel:+919439485166"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Call Me
+          </CtaLink>
         </div>
       </div>
     </>
