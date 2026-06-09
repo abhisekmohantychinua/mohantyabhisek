@@ -1,9 +1,9 @@
 @reference "../../../../app/globals.css";
 
 .blogs {
-  @apply relative my-10 pt-12 text-center;
-  @apply max-xl:my-6 max-xl:px-8 max-xl:pt-8;
-  @apply max-sm:px-4 max-sm:pt-4;
+  @apply relative py-12 text-center;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
 }
 
 .blogs::after,

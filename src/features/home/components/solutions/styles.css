@@ -1,9 +1,9 @@
 @reference "../../../../app/globals.css";
 
 .solutions {
-  @apply relative container mx-auto px-12 pt-12 text-center;
-  @apply max-xl:px-8 max-xl:pt-8;
-  @apply max-sm:px-4 max-sm:pt-4;
+  @apply relative container mx-auto px-12 py-12 text-center;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
 }
 
 .solutions__heading {

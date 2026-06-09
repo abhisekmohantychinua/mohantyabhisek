@@ -28,29 +28,29 @@ export default function Home(): JSX.Element {
 }
 
 export const metadata: Metadata = {
-  title: "Website & Web App Solutions for Businesses | Abhisek",
+  title: "Websites, Web Applications & Business Systems | Abhisek",
   description:
-    "Struggling to decide what website or web app your business actually needs? Get clarity, structure, and purpose-driven solutions before building.",
+    "Custom website development, web applications, and business systems built with clarity and purpose. Helping businesses plan, design, and build digital solutions around real goals.",
   openGraph: {
     type: "website",
-    title: "Website & Web App Solutions for Businesses",
+    title: "Websites, Web Applications & Business Systems | Abhisek",
     description:
-      "Struggling to decide what website or web app your business actually needs? Get clarity, structure, and purpose-driven solutions before building.",
+      "Custom website development, web applications, and business systems built with clarity and purpose. Helping businesses plan, design, and build digital solutions around real goals.",
     url: "https://mohantyabhisek.com",
     images: [
       {
         url: "https://mohantyabhisek.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Website & Web App Solutions for Businesses | Abhisek",
+        alt: "Websites, Web Applications & Business Systems | Abhisek",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Website & Web App Solutions for Businesses | Abhisek",
+    title: "Websites, Web Applications & Business Systems | Abhisek",
     description:
-      "Struggling to decide what website or web app your business actually needs? Get clarity, structure, and purpose-driven solutions before building.",
+      "Custom website development, web applications, and business systems built with clarity and purpose. Helping businesses plan, design, and build digital solutions around real goals.",
     images: ["https://mohantyabhisek.com/og-image.png"],
   },
   alternates: {
@@ -82,7 +82,7 @@ const jsonLd = {
     "https://www.instagram.com/coderabhisek",
   ],
   description:
-    "Purpose & clarity-driven website and web app solutions for businesses, led by Abhisek.",
+    "Custom website development, web applications, and business systems built with clarity, purpose, and a deep understanding of business goals.",
 };
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -91,7 +91,7 @@ const websiteJsonLd = {
   url: "https://mohantyabhisek.com",
   name: "Abhisek",
   description:
-    "Purpose-driven website and web app consulting with structured insights on digital systems and execution.",
+    "Custom website development, web applications, and business systems built with clarity, purpose, and a deep understanding of business goals.",
   publisher: {
     "@id": "https://mohantyabhisek.com/#organization",
   },

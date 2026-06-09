@@ -20,9 +20,9 @@
 
 /* Inner container with proper alignment and spacing */
 .navbar-container {
-  @apply container mx-auto flex h-16 items-center justify-between px-6;
-  @apply md:h-16;
-  @apply lg:px-8;
+  @apply container mx-auto flex h-16 items-center justify-between px-12;
+  @apply max-2xl:px-8;
+  @apply max-sm:px-4;
 }
 
 /* Logo zone styling */
@@ -39,7 +39,7 @@
 
 /* Logo image sizing */
 .navbar-logo-image {
-  @apply h-auto max-h-8 w-auto;
+  @apply h-[45px] w-40;
 }
 
 /* Desktop navigation container */
@@ -50,7 +50,8 @@
 
 /* Navigation link styling with editorial underline behavior */
 .navbar-nav-link {
-  @apply text-foreground relative px-1 py-2 font-sans text-base font-normal;
+  @apply relative text-lg leading-7 font-normal;
+  @apply max-sm:text-base max-sm:leading-6;
   @apply transition-all duration-300;
   @apply after:bg-secondary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-all after:duration-300 after:ease-out after:content-[""];
 }

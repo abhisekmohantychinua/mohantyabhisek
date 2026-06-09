@@ -1,30 +1,48 @@
 @reference "../../../../app/globals.css";
 
 .blog-card-skeleton {
-  @apply bg-card border border-primary/10 rounded-2xl p-5;
+  @apply bg-background border-background flex h-[518.4px] w-md flex-col rounded-xl border px-8 py-11;
+  @apply max-2xl:h-[444px] max-2xl:w-xs max-2xl:px-6 max-2xl:py-9;
 }
+
+/* Date */
+.blog-card-skeleton-date {
+  @apply mb-5 h-7 w-40;
+  @apply max-2xl:mb-4;
+}
+
+/* Title */
 .blog-card-skeleton-heading {
-  @apply mb-3 space-y-2;
+  @apply mb-10 space-y-3;
+  @apply max-2xl:mb-8;
 }
+
 .blog-card-skeleton-title {
-  @apply h-5 w-full;
-  @apply md:h-6;
+  @apply h-10 w-full;
 }
+
 .blog-card-skeleton-title-short {
   @apply w-3/4;
 }
+
+/* Description */
 .blog-card-skeleton-body {
-  @apply mb-4 space-y-2;
+  @apply space-y-3;
 }
+
 .blog-card-skeleton-line {
-  @apply h-3 w-full;
+  @apply h-6 w-full;
 }
+
 .blog-card-skeleton-line-short {
   @apply w-5/6;
 }
+
+/* CTA */
 .blog-card-skeleton-footer {
-  @apply mt-4;
+  @apply mt-auto;
 }
-.blog-card-skeleton-date {
-  @apply h-3 w-32;
+
+.blog-card-skeleton-button {
+  @apply h-9 w-28 rounded-md;
 }
