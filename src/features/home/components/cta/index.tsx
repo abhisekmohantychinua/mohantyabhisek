@@ -4,23 +4,18 @@ import type { JSX } from "react";
 
 import CtaDialog from "@/components/shared/cta-dialog";
 
-import CtaContentAnimator from "./cta-content-animator";
-
 export default function Cta(): JSX.Element {
   return (
     <section className="cta-section" aria-labelledby="cta-heading">
-      <div className="cta-inner">
-        <h2 id="cta-heading" className="cta-heading">
-          The costliest mistakes usually happen before anything is built.
-        </h2>
-        <div className="cta-popover-wrap">
-          <CtaDialog />
-        </div>
-        <p className="cta-reassure" aria-label="Response reassurance">
-          One conversation for clarity. No commitment.
-        </p>
-      </div>
-      <CtaContentAnimator />
+      <h2 id="cta-heading" className="cta-section__heading">
+        Let&apos;s Find The Right Solution For Your Business
+      </h2>
+      <p className="cta-section__description">
+        Custom website development, web applications, and business systems built
+        with clarity and purpose. Helping businesses plan, design, and build
+        digital solutions around real goals.
+      </p>
+      <CtaDialog ctaButtonVariant="accent" />
     </section>
   );
 }

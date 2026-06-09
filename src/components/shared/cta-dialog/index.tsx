@@ -9,7 +9,13 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { CtaButton } from "../cta-button";
 import CtaStepper from "./cta-stepper";
 
-export default function CtaDialog(): JSX.Element {
+type CtaDialogProps = {
+  ctaButtonVariant?: "default" | "accent";
+};
+
+export default function CtaDialog({
+  ctaButtonVariant = "default",
+}: CtaDialogProps): JSX.Element {
   // State to manage dialog open/close status
   const [open, setOpen] = useState(false);
 
@@ -22,6 +28,7 @@ export default function CtaDialog(): JSX.Element {
       {/* Trigger button for the popover */}
       <DialogTrigger asChild>
         <CtaButton
+          ctaVariant={ctaButtonVariant}
           aria-describedby="primary-cta-description"
           onClick={sendCtaClickToGtm}
         >
