@@ -1,37 +1,51 @@
 @reference "../../../../app/globals.css";
 
 .blog-card {
-  @apply bg-card border border-primary/10 rounded-2xl p-5;
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-  @apply transition-all duration-300 ease-out transform;
-  @apply hover:border-secondary/50 hover:-translate-y-1 hover:shadow-md;
+  @apply bg-background border-background block h-[518.4px] w-md rounded-xl border px-8 py-11 text-start;
+  @apply max-2xl:h-[444px] max-2xl:w-xs max-2xl:px-6 max-2xl:py-9;
+  @apply focus-visible:ring-foreground focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
+  @apply transform transition-all duration-300 ease-out;
+  @apply hover:border-foreground hover:shadow-lg;
 }
-.blog-card-heading {
-  @apply mb-2;
+.blog-card-date {
+  @apply mb-5 text-lg leading-7 not-italic;
+  @apply max-2xl:mb-4;
+  @apply max-sm:text-base max-sm:leading-6;
 }
-.blog-card-title {
-  @apply text-lg font-medium text-primary overflow-hidden h-[3.5rem];
-  @apply md:text-xl;
-  @apply hover:underline;
 
-  /* Force two-line visual block and truncate overflow */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-}
-.blog-card-description {
-  @apply text-sm text-foreground/80 mb-4 h-[4.25rem] overflow-hidden leading-relaxed;
+.blog-card-heading {
+  @apply text-foreground mb-10 overflow-hidden text-3xl leading-11;
+  @apply max-2xl:mb-8;
+  @apply max-sm:text-xl max-sm:leading-9;
 
   /* Force three-line visual block and truncate overflow */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+
+  @media (width < 96rem) {
+    -webkit-line-clamp: 3;
+  }
+  @media (width < 40rem) {
+    -webkit-line-clamp: 4;
+  }
 }
-.blog-card-footer {
-  @apply mt-4 flex items-center justify-between text-sm text-foreground/60;
-}
-.blog-card-date {
-  @apply not-italic;
+
+.blog-card-description {
+  @apply text-foreground mb-7 overflow-hidden text-lg leading-7;
+  @apply max-2xl:mb-6;
+
+  @apply max-sm:text-base max-sm:leading-6;
+
+  /* Force three-line visual and overflow */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+
+  @media (width < 96rem) {
+    -webkit-line-clamp: 4;
+  }
+  @media (width < 40rem) {
+    -webkit-line-clamp: 5;
+  }
 }

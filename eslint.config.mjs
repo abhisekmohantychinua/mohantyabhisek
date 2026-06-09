@@ -228,6 +228,15 @@ const eslintConfig = defineConfig([
         },
 
         // =====================================================
+        // FEATURE SHARED PUBLIC API
+        // =====================================================
+
+        {
+          type: "feature-shared",
+          pattern: "src/features/*/shared/**",
+        },
+
+        // =====================================================
         // FEATURES
         // =====================================================
 
@@ -249,15 +258,6 @@ const eslintConfig = defineConfig([
         {
           type: "feature-works",
           pattern: "src/features/works/**",
-        },
-
-        // =====================================================
-        // FEATURE SHARED PUBLIC API
-        // =====================================================
-
-        {
-          type: "feature-shared",
-          pattern: "src/features/*/shared/**",
         },
 
         // =====================================================

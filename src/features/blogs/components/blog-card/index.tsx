@@ -1,8 +1,10 @@
 import "./styles.css";
 
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import type { JSX } from "react";
 
+import { Button } from "@/components/ui/button";
 import type { BlogCard } from "@/features/blogs/models/blog";
 
 type BlogCardProps = {
@@ -12,14 +14,8 @@ export default function BlogCardComponent({
   blogCard,
 }: BlogCardProps): JSX.Element {
   return (
-    <article className="blog-card">
-      <h3 className="blog-card-heading">
-        <Link href={`/blogs/${blogCard.slug}`} className="blog-card-title">
-          {blogCard.title}
-        </Link>
-      </h3>
-      <p className="blog-card-description">{blogCard.description}</p>
-      <div className="blog-card-footer">
+    <Link href={`blogs/${blogCard.slug}`} className="blog-card">
+      <article className="">
         <time
           className="blog-card-date"
           dateTime={new Date(blogCard.postedAt).toISOString()}
@@ -30,7 +26,13 @@ export default function BlogCardComponent({
             day: "numeric",
           })}
         </time>
-      </div>
-    </article>
+        <h3 className="blog-card-heading">{blogCard.title}</h3>
+        <p className="blog-card-description">{blogCard.description}</p>
+        <Button variant="ghost" size="sm">
+          Read More
+          <ArrowUpRight />
+        </Button>
+      </article>
+    </Link>
   );
 }

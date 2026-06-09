@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { JSX } from "react";
 
 import AboutUs from "@/features/home/components/about-us";
+import Blogs from "@/features/home/components/blogs";
 import Cta from "@/features/home/components/cta";
 import Hero from "@/features/home/components/hero";
 import Solutions from "@/features/home/components/solutions";
@@ -14,6 +15,7 @@ export default function Home(): JSX.Element {
       <AboutUs />
       <Solutions />
       <Testimonials />
+      <Blogs />
       <Cta />
       <script
         type="application/ld+json"
