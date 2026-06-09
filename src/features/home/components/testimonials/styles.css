@@ -1,0 +1,80 @@
+@reference "../../../../app/globals.css";
+
+.testimonials {
+  @apply relative container mx-auto px-12 py-12 text-center;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
+}
+
+.testimonials__heading {
+  @apply my-9 text-4xl leading-14;
+  @apply max-sm:my-6 max-sm:text-3xl max-sm:leading-10;
+}
+.testimonials__carousel {
+  @apply mx-auto w-full max-w-4xl;
+  @apply max-xl:max-w-xl;
+  @apply max-md:max-w-md;
+  @apply max-sm:max-w-64;
+}
+
+.testimonials__carousel-item {
+  @apply basis-full;
+}
+
+.testimonials__carousel-action {
+  @apply border-primary text-accent h-14 w-14 -translate-y-28 bg-white;
+  @apply max-sm:h-9 max-sm:w-9;
+}
+.testimonials__carousel-action > svg {
+  @apply size-6;
+  @apply size-5;
+}
+
+.testimonials__carousel-action-prev {
+  @apply -left-28;
+  @apply max-xl:-left-20;
+  @apply max-sm:-left-10;
+}
+.testimonials__carousel-action-next {
+  @apply -right-28;
+  @apply max-xl:-right-20;
+  @apply max-sm:-right-10;
+}
+
+.testimonials__card {
+  @apply flex flex-col items-center;
+}
+.testimonials__card-quote {
+  @apply relative;
+}
+.testimonials__card-quote::before {
+  @apply pointer-events-none absolute top-0 left-1/2 -z-10 h-40 w-40 -translate-x-1/2 content-[""];
+
+  background-image: url("/quote.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.testimonials__card-content {
+  @apply text-3xl leading-11 font-medium;
+  @apply leading-8 max-sm:text-xl;
+}
+
+.testimonials__card-profile {
+  @apply mt-24 flex w-fit items-center justify-center gap-2 text-start;
+  @apply max-xl:mt-16;
+  @apply max-sm:mt-10;
+}
+
+.testimonials__card-profile-avatar {
+  @apply h-16 w-16;
+}
+
+.testimonials__card-profile-name {
+  @apply text-xl;
+}
+
+.testimonials__card-profile-designation {
+  @apply text-lg;
+}
