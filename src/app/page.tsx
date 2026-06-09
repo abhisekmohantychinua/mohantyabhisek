@@ -3,7 +3,6 @@ import type { JSX } from "react";
 
 import AboutUs from "@/features/home/components/about-us";
 import Blogs from "@/features/home/components/blogs";
-import Cta from "@/features/home/components/cta";
 import Hero from "@/features/home/components/hero";
 import Solutions from "@/features/home/components/solutions";
 import Testimonials from "@/features/home/components/testimonials";
@@ -16,7 +15,6 @@ export default function Home(): JSX.Element {
       <Solutions />
       <Testimonials />
       <Blogs />
-      <Cta />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

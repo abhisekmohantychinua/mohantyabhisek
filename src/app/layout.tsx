@@ -4,8 +4,8 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import type { JSX } from "react";
 import { Toaster } from "sonner";
 
+import Cta from "@/components/shared/cta";
 import Footer from "@/components/shared/footer";
-import GSAPInit from "@/components/shared/gsap-init";
 import Navbar from "@/components/shared/navbar";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID as string;
@@ -25,8 +25,8 @@ export default function RootLayout({
           <Navbar />
         </header>
         <main>{children}</main>
+        <Cta />
         <Footer />
-        <GSAPInit />
         <Toaster position="bottom-right" richColors />
       </body>
       <GoogleTagManager gtmId={GTM_ID} />
