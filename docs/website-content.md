@@ -1,6 +1,8 @@
 # Website Content - mohantyabhisek.com
 
-## Hero Section
+## Home Page
+
+### Hero Section
 
 **Heading**
 Custom Websites And Web Applications Built With  
@@ -18,7 +20,7 @@ View My Work ->
 **Image**
 ![Every solution starts with understanding the business.](../public/hero.png)
 
-## About Section
+### About Section
 
 **Label**
 About
@@ -36,7 +38,7 @@ I work with businesses that need more than a website and less than unnecessary c
 - 90% Client Satisfaction
 - 4+ Industries Served
 
-## Solutions Section
+### Solutions Section
 
 **Label**
 Solutions
@@ -47,7 +49,7 @@ Websites, Web Applications, And Business Systems
 **Description**
 From establishing an online presence to building products and improving internal operations, solutions are designed around business goals, practical requirements, and long-term usability.
 
-### Landing Page Card
+#### Landing Page Card
 
 **Tag**
 Website Development
@@ -61,7 +63,7 @@ Websites designed to communicate clearly, build credibility, and help people und
 **Image**
 ![Helping people understand your business before the first conversation.](../public/services/business-website.png)
 
-### Custom Web Apps Card
+#### Custom Web Apps Card
 
 **Tag**
 Web Application Development
@@ -75,7 +77,7 @@ Applications designed around user workflows, product requirements, and business 
 **Image**
 ![From product ideas to usable software.](../public/services/saas.png)
 
-### ERP, CRM Systems Card
+#### ERP, CRM Systems Card
 
 **Tag**
 Business Systems
@@ -89,7 +91,7 @@ Custom systems that help teams manage operations, centralize information, and st
 **Image**
 ![Bringing people, processes, and information together.](../public/services/business-operations.png)
 
-## Testimonials Section
+### Testimonials Section
 
 **Label**
 
@@ -99,7 +101,7 @@ Testimonials
 
 What People Say About Working Together
 
-### Testimonial 1
+#### Testimonial 1
 
 **Content**
 
@@ -117,7 +119,7 @@ Product Designer | B2B & AI Products
 
 Professional Portrait
 
-### Testimonial 2
+#### Testimonial 2
 
 **Content**
 
@@ -135,7 +137,7 @@ UI/UX Designer
 
 Professional Portrait
 
-### Testimonial 3
+#### Testimonial 3
 
 **Content**
 
@@ -153,7 +155,7 @@ Frontend Developer
 
 Professional Portrait
 
-### Testimonial 4
+#### Testimonial 4
 
 **Content**
 
@@ -171,7 +173,7 @@ Brand Designer
 
 Professional Portrait
 
-### Testimonial 5
+#### Testimonial 5
 
 **Content**
 
@@ -189,7 +191,7 @@ Product Consultant
 
 Professional Portrait
 
-## Blogs Section
+### Blogs Section
 
 **Label**
 Blog
@@ -206,7 +208,7 @@ Continue Reading
 **Section CTA**
 Visit Blog ->  
 
-## CTA Section
+### CTA Section
 
 **Heading**
 Let's Find The Right Solution For Your Business.
@@ -214,7 +216,7 @@ Let's Find The Right Solution For Your Business.
 **Description**
 Whether you're planning a website, web application, or internal system, the first step is understanding the goals, challenges, and opportunities behind it.
 
-## Metadata
+### Metadata
 
 **title**
 Websites, Web Applications & Business Systems | Abhisek
@@ -222,7 +224,7 @@ Websites, Web Applications & Business Systems | Abhisek
 **description**
 Custom website development, web applications, and business systems built with clarity and purpose. Helping businesses plan, design, and build digital solutions around real goals.
 
-## JsonLD
+### JsonLD
 
 **organization -> description**
 Custom website development, web applications, and business systems built with clarity, purpose, and a deep understanding of business goals.
@@ -230,3 +232,57 @@ Custom website development, web applications, and business systems built with cl
 **website -> description**
 
 Custom websites, web applications, and business systems designed around business goals, practical requirements, and long-term usability.
+
+## Works Page
+
+**Heading**
+Selected `Case Studies` And Digital Projects
+
+**Description**
+A collection of projects, ideas, and digital solutions built across different industries, requirements, and business contexts. Each case study explores the challenge, approach, and outcome behind the work.
+
+### Works Section
+
+**Heading**
+Website, Web Application, And Business System Case Studies
+
+**Description**
+Browse case studies covering custom website development, web application development, SaaS products, ERP systems, CRM systems, and other digital solutions built for different business requirements and industries.
+
+### Metadata
+
+**title**
+Selected Case Studies & Digital Projects | Abhisek
+
+**description**
+Explore case studies and digital projects across websites, web applications, and business systems. Discover the challenges, approaches, and outcomes behind each solution.
+
+### JsonLD
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://mohantyabhisek.com/work#collection",
+  "url": "https://mohantyabhisek.com/work",
+  "name": "Selected Case Studies And Digital Projects",
+  "description": "A collection of projects, ideas, and digital solutions built across different industries, requirements, and business contexts. Each case study explores the challenge, approach, and outcome behind the work.",
+  "isPartOf": {
+    "@id": "https://mohantyabhisek.com/#website"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Website Development"
+    },
+    {
+      "@type": "Thing",
+      "name": "Web Application Development"
+    },
+    {
+      "@type": "Thing",
+      "name": "Business Systems"
+    }
+  ]
+}
+```

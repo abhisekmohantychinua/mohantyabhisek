@@ -24,8 +24,10 @@ export default function RootLayout({
         <header>
           <Navbar />
         </header>
-        <main>{children}</main>
-        <Cta />
+        <main>
+          {children}
+          <Cta />
+        </main>
         <Footer />
         <Toaster position="bottom-right" richColors />
       </body>
