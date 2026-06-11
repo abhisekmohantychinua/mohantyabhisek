@@ -3,7 +3,6 @@ import "./styles.css";
 import { notFound } from "next/navigation";
 import type { JSX } from "react";
 
-import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 import type Blog from "@/features/blogs/models/blog";
 import { getBySlug } from "@/features/blogs/services/blog-service";
 
@@ -34,10 +33,6 @@ export default async function BlogContent({
         dangerouslySetInnerHTML={{ __html: rawHtml }}
       ></article>
       <ReadMore slug={blog.slug} />
-      <ScrollProgressBar
-        containerClass="blog-wrapper"
-        className="fixed left-1! xl:hidden"
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}

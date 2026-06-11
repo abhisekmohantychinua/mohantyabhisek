@@ -2,6 +2,7 @@ import "./styles.css";
 
 import { ArrowUpRightIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { JSX } from "react";
 
 import BrandMark from "@/components/shared/brand-mark";
@@ -47,9 +48,12 @@ export default function Hero(): JSX.Element {
               type="button"
               aria-describedby="secondary-cta-description"
               data-icon="inline-end"
+              asChild
             >
-              View my work
-              <ArrowUpRightIcon />
+              <Link href="/works">
+                View my work
+                <ArrowUpRightIcon />
+              </Link>
             </Button>
           </div>
         </div>
