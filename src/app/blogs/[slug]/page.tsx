@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { JSX } from "react";
 
-import ScrollProgressBar from "@/components/shared/scroll-progress-bar";
 import ReadMore from "@/features/blogs/components/read-more";
 import type Blog from "@/features/blogs/models/blog";
 import { getBlogMetadataBySlug } from "@/features/blogs/services/blog-metadata-service";
@@ -53,10 +52,6 @@ export default async function BlogPage({
         dangerouslySetInnerHTML={{ __html: rawHtml }}
       ></article>
       <ReadMore slug={blog.slug} />
-      <ScrollProgressBar
-        containerClass="blog-wrapper"
-        className="fixed left-1! xl:hidden"
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}

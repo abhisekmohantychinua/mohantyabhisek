@@ -25,7 +25,7 @@ export default function Navbar(): JSX.Element {
    */
   const navigationItems = [
     { name: "Home", href: "/" },
-    { name: "Work", href: "/work" },
+    { name: "Work", href: "/works" },
     { name: "Contact", href: "/contact" },
     { name: "Blogs", href: "/blogs" },
   ];

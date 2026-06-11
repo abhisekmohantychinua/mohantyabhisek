@@ -4,39 +4,41 @@
 .blog-wrapper {
   /* Headings */
   h1 {
-    @apply text-3xl leading-snug mb-4 text-primary font-sans font-semibold mx-auto px-4;
-    @apply sm:text-4xl sm:leading-tight sm:mb-6;
-    @apply md:text-5xl md:max-w-3xl md:px-0;
-    @apply lg:text-5xl lg:max-w-full lg:px-4;
+    @apply text-primary mx-auto mb-4 px-4 font-sans text-3xl leading-snug font-semibold;
+    @apply sm:mb-6 sm:text-4xl sm:leading-tight;
+    @apply md:max-w-3xl md:px-0 md:text-5xl;
+    @apply lg:max-w-full lg:px-4 lg:text-5xl;
     @apply xl:max-w-5xl xl:px-0;
-    @apply 2xl:text-5xl 2xl:mb-6; /* smaller relative to previous 2xl 6xl */
+    @apply 2xl:mb-6 2xl:text-5xl; /* smaller relative to previous 2xl 6xl */
   }
 
   h2 {
-    @apply max-w-5xl mx-auto mt-10 mb-4 text-2xl font-semibold text-primary leading-snug;
+    @apply text-primary mx-auto mt-10 mb-4 max-w-5xl text-2xl leading-snug font-semibold;
     @apply sm:text-2xl;
     @apply md:text-3xl;
   }
 
   h3 {
-    @apply max-w-5xl mx-auto mt-8 mb-3 text-xl font-semibold text-primary;
+    @apply text-primary mx-auto mt-8 mb-3 max-w-5xl text-xl font-semibold;
     @apply sm:text-xl;
     @apply md:text-2xl;
   }
 
   h4 {
-    @apply max-w-5xl mx-auto mt-6 mb-2 text-lg font-semibold text-primary;
+    @apply text-primary mx-auto mt-6 mb-2 max-w-5xl text-lg font-semibold;
     @apply sm:text-lg;
   }
 
   /* Sections */
   section {
-    @apply container mx-auto px-4;
+    @apply container mx-auto px-12 py-12;
+    @apply max-xl:px-8 max-xl:py-8;
+    @apply max-sm:px-4 max-sm:py-4;
   }
 
   /* Paragraphs */
   p {
-    @apply max-w-5xl mx-auto mb-6 text-base leading-relaxed text-muted-foreground;
+    @apply text-muted-foreground mx-auto mb-6 max-w-5xl text-base leading-relaxed;
     @apply sm:text-lg sm:leading-8;
   }
 
@@ -52,7 +54,7 @@
   /* Lists */
   ul,
   ol {
-    @apply max-w-5xl mx-auto mb-6 pl-6 text-muted-foreground;
+    @apply text-muted-foreground mx-auto mb-6 max-w-5xl pl-6;
   }
 
   ul {
@@ -69,36 +71,36 @@
 
   /* Blockquotes */
   blockquote {
-    @apply max-w-5xl mx-auto my-8 border-l-4 border-primary pl-6 italic text-muted-foreground;
+    @apply border-primary text-muted-foreground mx-auto my-8 max-w-5xl border-l-4 pl-6 italic;
   }
 
   /* Code blocks */
   pre {
-    @apply max-w-5xl mx-auto my-8 overflow-x-auto rounded-lg bg-muted p-4 text-sm;
+    @apply bg-muted mx-auto my-8 max-w-5xl overflow-x-auto rounded-lg p-4 text-sm;
   }
 
   code {
-    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+    @apply bg-muted rounded px-1.5 py-0.5 font-mono text-sm;
   }
 
   /* Images */
   img {
-    @apply max-w-5xl mx-auto my-8 rounded-lg;
+    @apply mx-auto my-8 max-w-5xl rounded-lg;
   }
 
   /* Horizontal rule */
   hr {
-    @apply max-w-5xl mx-auto my-12 border-border;
+    @apply border-border mx-auto my-12 max-w-5xl;
   }
 
   /* Tables */
   table {
-    @apply max-w-5xl mx-auto my-8 w-full border-collapse;
+    @apply mx-auto my-8 w-full max-w-5xl border-collapse;
   }
 
   th,
   td {
-    @apply border border-border px-4 py-2 text-left;
+    @apply border-border border px-4 py-2 text-left;
   }
 
   th {
@@ -106,20 +108,20 @@
   }
 
   caption {
-    @apply text-left mb-4 font-semibold text-primary;
+    @apply text-primary mb-4 text-left font-semibold;
   }
 
   /* Definition lists */
   dl {
-    @apply max-w-5xl mx-auto my-8;
+    @apply mx-auto my-8 max-w-5xl;
   }
 
   dt {
-    @apply mt-6 font-semibold text-primary;
+    @apply text-primary mt-6 font-semibold;
   }
 
   dd {
-    @apply mt-2 mb-4 pl-4 text-muted-foreground leading-relaxed;
+    @apply text-muted-foreground mt-2 mb-4 pl-4 leading-relaxed;
   }
 
   .blog-wrapper hr {

@@ -8,7 +8,7 @@ import type { JSX } from "react";
 // Navigation links for the footer
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Work", href: "/work" },
+  { name: "Work", href: "/works" },
   { name: "Contact", href: "/contact" },
   { name: "Blogs", href: "/blogs" },
 ];

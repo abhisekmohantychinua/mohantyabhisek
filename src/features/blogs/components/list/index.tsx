@@ -44,9 +44,27 @@ function createJsonLd(blogs: BlogCard[]): object {
     "@type": "CollectionPage",
     "@id": "https://mohantyabhisek.com/blogs/#webpage",
     url: "https://mohantyabhisek.com/blogs",
-    name: "Blogs on Websites, Systems & Clarity",
+    name: "Thoughtful Writing On Websites, Applications, And Business Systems",
     description:
-      "Articles exploring clarity in web design, structure in digital systems, and practical execution for businesses.",
+      "A collection of blog posts exploring websites, web applications, business systems, and the decisions behind building digital solutions with clarity and purpose.",
+    about: [
+      {
+        "@type": "Thing",
+        name: "Website Development",
+      },
+      {
+        "@type": "Thing",
+        name: "Web Application Development",
+      },
+      {
+        "@type": "Thing",
+        name: "Business Systems",
+      },
+      {
+        "@type": "Thing",
+        name: "Digital Strategy",
+      },
+    ],
     isPartOf: {
       "@type": "WebSite",
       "@id": "https://mohantyabhisek.com/#website",

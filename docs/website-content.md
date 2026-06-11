@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD024 -->
 # Website Content - mohantyabhisek.com
 
 ## Home Page
@@ -282,6 +283,64 @@ Explore case studies and digital projects across websites, web applications, and
     {
       "@type": "Thing",
       "name": "Business Systems"
+    }
+  ]
+}
+```
+
+## Blogs Page
+
+**Heading**
+Thoughtful `Writing` On Websites, Applications, And Business Systems
+
+**Description**
+A collection of blog posts exploring websites, web applications, business systems, and the decisions behind building digital solutions with clarity and purpose.
+
+### Blogs Section
+
+**Heading**
+Blogs About Websites, Web Applications, And Business Systems
+
+**Description**
+Browse blog posts covering website development, web application development, SaaS products, ERP systems, CRM systems, business automation, digital strategy, software planning, and technology decisions for businesses.
+
+### Metadata
+
+**title**
+Blogs On Websites, Web Applications & Business Systems | Abhisek
+
+**description**
+Explore blogs covering website development, web applications, business systems, software planning, digital strategy, and technology decisions for modern businesses.
+
+### JsonLD
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://mohantyabhisek.com/blog#collection",
+  "url": "https://mohantyabhisek.com/blog",
+  "name": "Thoughtful Writing On Websites, Applications, And Business Systems",
+  "description": "A collection of blog posts exploring websites, web applications, business systems, and the decisions behind building digital solutions with clarity and purpose.",
+  "isPartOf": {
+    "@id": "https://mohantyabhisek.com/#website"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Website Development"
+    },
+    {
+      "@type": "Thing",
+      "name": "Web Application Development"
+    },
+    {
+      "@type": "Thing",
+      "name": "Business Systems"
+    },
+    {
+      "@type": "Thing",
+      "name": "Digital Strategy"
     }
   ]
 }
