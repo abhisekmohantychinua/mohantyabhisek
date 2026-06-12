@@ -24,35 +24,35 @@ const testimonials: Testimonial[] = [
       "Abhisek developed a fully functional website for us with both frontend and backend capabilities. He ensured every requirement was met while paying close attention to detail. His dedication, technical skill, and commitment to quality are reflected in both the functionality and overall experience of the final product.",
     name: "Umang Dayal",
     designation: "Product Designer | B2B & AI Products",
-    avatar: "",
+    avatar: "/testimonials/umang-dayal.png",
   },
   {
     content:
       "Working with Abhisek was a valuable experience. The project was well organized, collaboration was smooth, and the environment encouraged learning and growth. His attention to quality and willingness to support the team made a meaningful impact throughout the project.",
     name: "Priya Sharma",
     designation: "UI/UX Designer",
-    avatar: "",
+    avatar: "/testimonials/priya-sharma.png",
   },
   {
     content:
       "The collaboration was both enjoyable and educational. I gained a deeper understanding of project structure, maintainable code, and professional development practices. Communication remained clear throughout, making the entire experience productive and rewarding.",
     name: "Rahul Verma",
     designation: "Frontend Developer",
-    avatar: "",
+    avatar: "/testimonials/rahul-verma.png",
   },
   {
     content:
       "Communication was always clear, expectations were well defined, and the workflow remained structured from start to finish. The collaborative approach created a productive environment and made it easy to move the project forward with confidence.",
     name: "Ananya Patel",
     designation: "Brand Designer",
-    avatar: "",
+    avatar: "/testimonials/ananya-patel.png",
   },
   {
     content:
       "What stood out most was the combination of trust, clarity, and thoughtful decision-making. Every discussion focused on finding the right solution rather than simply completing tasks, which made the collaboration both effective and enjoyable.",
     name: "Michael Carter",
     designation: "Product Consultant",
-    avatar: "",
+    avatar: "/testimonials/michael-carter.png",
   },
 ];
 
