@@ -14,17 +14,17 @@ export default function BlogListSkeleton({
 }: BlogListSkeletonProps): JSX.Element {
   return (
     <section
-      className="blog-list-skeleton-section"
+      className="blog-list-skeleton__section"
       aria-labelledby="blog-list-skeleton-heading"
     >
       <div
-        className="blog-list-skeleton-heading"
+        className="blog-list-skeleton__heading"
         id="blog-list-skeleton-heading"
       >
-        <Skeleton className="blog-list-skeleton-title" />
-        <Skeleton className="blog-list-skeleton-title blog-list-skeleton-title-short" />
+        <Skeleton className="blog-list-skeleton__title" />
+        <Skeleton className="blog-list-skeleton__title blog-list-skeleton__title-short" />
       </div>
-      <div className="blog-list-skeleton-grid">
+      <div className="blog-list-skeleton__grid">
         {Array.from({ length: count }).map((_, index) => (
           <BlogCardSkeleton key={`blog-card-skeleton-${index}`} />
         ))}

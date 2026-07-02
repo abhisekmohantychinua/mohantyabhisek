@@ -1,0 +1,27 @@
+@reference "../../../../app/globals.css";
+
+.blog-list__section {
+  @apply container mx-auto mb-12 min-h-[50vh] px-12 py-12;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
+}
+
+.blog-list__heading {
+  @apply sr-only;
+}
+
+.blog-list__empty {
+  @apply text-foreground/70 text-sm;
+}
+
+.blog-list__grid {
+  @apply grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3;
+}
+
+.blog-list__scroll-anchor {
+  @apply h-10 w-full;
+}
+
+.blog-list__loading {
+  @apply text-foreground/70 mt-6 text-center text-sm;
+}
