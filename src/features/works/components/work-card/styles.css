@@ -1,0 +1,38 @@
+@reference "../../../../app/globals.css";
+
+.work-card__wrapper {
+  @apply block w-[528px] rounded-xl p-2 text-start;
+  @apply max-2xl:w-[464px];
+  @apply max-sm:w-[328px] max-sm:p-1;
+  @apply focus-visible:ring-foreground focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
+  @apply transform transition-all duration-300 ease-out;
+  @apply hover:bg-background;
+}
+
+.work-card__figure {
+  @apply mb-4 h-96 w-lg rounded-xl;
+  @apply max-2xl:h-[336px] max-2xl:w-md;
+  @apply max-sm:mb-2 max-sm:h-60 max-sm:w-xs;
+}
+.work-card__image {
+  @apply rounded-xl;
+}
+
+.work-card__heading {
+  @apply text-foreground mb-2 overflow-hidden text-3xl leading-11;
+  @apply max-sm:mb-1 max-sm:text-xl max-sm:leading-9;
+  /* Force three-line visual block and truncate overflow */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.work-card__description {
+  @apply text-foreground overflow-hidden text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+
+  /* Force three-line visual and overflow */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

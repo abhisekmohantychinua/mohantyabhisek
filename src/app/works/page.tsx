@@ -2,11 +2,19 @@ import type { Metadata } from "next";
 import type { JSX } from "react";
 
 import Header from "@/features/works/components/header";
+import WorkList from "@/features/works/components/work-list";
+import type { WorkCard } from "@/features/works/models/work";
 
 export default function Works(): JSX.Element {
+  const workCards: WorkCard[] = Array.from({ length: 8 }, (_, index) => ({
+    ...mockWorkCard,
+    slug: `premium-portfolio-website-${index + 1}`,
+    title: `Premium Portfolio Website ${index + 1}`,
+  }));
   return (
     <>
       <Header />
+      <WorkList workCards={workCards} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -76,4 +84,21 @@ const jsonLd = {
       name: "Business Systems",
     },
   ],
+};
+
+const mockWorkCard: WorkCard = {
+  title: "Premium Portfolio Website",
+  description:
+    "A minimal portfolio website focused on storytelling, motion, and performance.",
+  slug: "premium-portfolio-website",
+  image: {
+    slug: "portfolio-cover",
+    url: "/work-image.jpg",
+    alt: "Portfolio website homepage",
+    caption: "Homepage hero section",
+    title: "Portfolio Cover",
+    description: "Cover image for the portfolio case study",
+    width: 1600,
+    height: 900,
+  },
 };
