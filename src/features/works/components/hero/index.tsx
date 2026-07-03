@@ -38,7 +38,7 @@ export default function Hero({
             ))}
           </ul>
         </div>
-        <VideoPlayer selectorPrefix="hero" video={featuredVideo} />
+        <VideoPlayer selectorPrefix="hero__" autoPlay video={featuredVideo} />
       </section>
     </>
   );

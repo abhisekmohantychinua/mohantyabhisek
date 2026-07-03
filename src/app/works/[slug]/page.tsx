@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { JSX } from "react";
 
 import Hero from "@/features/works/components/hero";
+import WorkGallery from "@/features/works/components/work-gallery";
 import WorkInfo from "@/features/works/components/work-info";
 import { works } from "@/features/works/store/works-store";
 
@@ -36,6 +37,7 @@ export default async function WorkPage({
         teamMembers={work.teamMembers}
         collaborators={work.collaborators}
       />
+      <WorkGallery gallery={work.gallery} />
     </>
   );
 }

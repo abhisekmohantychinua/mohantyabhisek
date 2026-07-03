@@ -1,0 +1,24 @@
+@reference "../../../../app/globals.css";
+
+.work-gallery {
+  @apply container mx-auto px-12 py-12 text-start;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
+}
+
+.work-gallery__video-video-player-figure,
+.work-gallery__image-figure {
+  @apply mx-auto mb-6 h-[810px] w-[1440px] overflow-hidden rounded-2xl last:mb-0;
+  @apply max-2xl:h-[648px] max-2xl:w-6xl;
+  @apply max-xl:h-[504px] max-xl:w-4xl;
+  @apply max-lg:h-[378px] max-lg:w-2xl;
+  @apply max-md:h-72 max-md:w-lg;
+  @apply max-sm:mb-4 max-sm:h-auto max-sm:w-full max-sm:last:mb-0;
+}
+.work-gallery__image-figure {
+  @apply relative;
+}
+
+.work-gallery__image-image {
+  @apply h-full w-full object-cover object-center;
+}

@@ -15,17 +15,19 @@ const Player = createPlayer({ features: videoFeatures });
 type VideoPlayerProps = {
   selectorPrefix?: string;
   video: VideoType;
+  autoPlay?: boolean;
 };
 
 export default function VideoPlayer({
   selectorPrefix,
   video,
+  autoPlay = false,
 }: VideoPlayerProps): JSX.Element {
   return (
     <figure
       className={cn(
         "video-player__figure",
-        selectorPrefix && `${selectorPrefix}__figure`,
+        selectorPrefix && `${selectorPrefix}video-player-figure`,
       )}
     >
       <Player.Provider>
@@ -34,7 +36,7 @@ export default function VideoPlayer({
             src={video.url}
             poster={video.thumbnail.url}
             aria-label={video.alt}
-            autoPlay
+            autoPlay={autoPlay}
             loop
             muted
             playsInline
@@ -44,7 +46,7 @@ export default function VideoPlayer({
       <figcaption
         className={cn(
           "video-player__figcaption",
-          selectorPrefix && `${selectorPrefix}__figcaption`,
+          selectorPrefix && `${selectorPrefix}video-player-figcaption`,
         )}
       >
         {video.caption}
@@ -52,13 +54,13 @@ export default function VideoPlayer({
       <details
         className={cn(
           "video-player__details",
-          selectorPrefix && `${selectorPrefix}__details`,
+          selectorPrefix && `${selectorPrefix}video-player-details`,
         )}
       >
         <summary
           className={cn(
             "video-player__details-summary",
-            selectorPrefix && `${selectorPrefix}__details-summary`,
+            selectorPrefix && `${selectorPrefix}video-player-details-summary`,
           )}
         >
           Video transcript
@@ -66,7 +68,7 @@ export default function VideoPlayer({
         <p
           className={cn(
             "video-player__details-paragraph",
-            selectorPrefix && `${selectorPrefix}__details-paragraph`,
+            selectorPrefix && `${selectorPrefix}video-player-details-paragraph`,
           )}
         >
           {video.transcript}

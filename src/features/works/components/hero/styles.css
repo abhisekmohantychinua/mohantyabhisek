@@ -41,7 +41,7 @@
   @apply bg-secondary/15 hover:bg-secondary/25 text-foreground rounded-sm px-3 py-2;
 }
 
-.hero__figure {
+.hero__video-player-figure {
   @apply mx-auto h-[810px] w-[1440px] overflow-hidden;
   @apply max-2xl:h-[648px] max-2xl:w-6xl;
   @apply max-xl:h-[504px] max-xl:w-4xl;
