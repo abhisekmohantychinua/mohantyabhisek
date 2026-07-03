@@ -1,0 +1,51 @@
+@reference "../../../../app/globals.css";
+
+.hero {
+  @apply container mx-auto px-12 py-12 text-start;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
+}
+
+.hero__header,
+.hero__bottom {
+  @apply flex w-full items-start justify-between gap-2;
+  @apply max-lg:flex-col;
+}
+
+.hero__bottom {
+  @apply my-6;
+  @apply max-lg:my-4;
+}
+
+.hero__header-heading {
+  @apply max-w-[740px] text-6xl leading-16;
+  @apply max-2xl:max-w-[590px] max-2xl:text-5xl;
+  @apply max-sm:text-4xl max-sm:leading-12;
+}
+
+.hero__header-description {
+  @apply max-w-md text-lg leading-7;
+  @apply max-2xl:max-w-lg max-2xl:text-xl;
+  @apply max-sm:text-base;
+}
+
+.hero__bottom-sectors {
+  @apply max-w-[740px];
+  @apply max-2xl:w-[590px];
+}
+
+.hero__bottom-sectors {
+  @apply flex items-start justify-start gap-2;
+}
+.hero__bottom-sector {
+  @apply bg-secondary/15 hover:bg-secondary/25 text-foreground rounded-sm px-3 py-2;
+}
+
+.hero__figure {
+  @apply mx-auto h-[810px] w-[1440px] overflow-hidden;
+  @apply max-2xl:h-[648px] max-2xl:w-6xl;
+  @apply max-xl:h-[504px] max-xl:w-4xl;
+  @apply max-lg:h-[378px] max-lg:w-2xl;
+  @apply max-md:h-72 max-md:w-lg;
+  @apply max-sm:h-auto max-sm:w-full;
+}

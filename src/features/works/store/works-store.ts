@@ -50,7 +50,7 @@ const mockWork: Work = {
 
   featuredVideo: {
     slug: "portfolio-showcase-video",
-    url: "/videos/portfolio-showcase.mp4",
+    url: "/work-video.mp4",
     alt: "Portfolio website walkthrough",
     caption: "Project showcase video",
     transcript: "A walkthrough of the portfolio website project.",
@@ -59,7 +59,7 @@ const mockWork: Work = {
     duration: 120,
     thumbnail: {
       slug: "portfolio-video-thumbnail",
-      url: "/images/portfolio-video-thumbnail.jpg",
+      url: "/work-image.jpg",
       alt: "Portfolio video thumbnail",
       caption: "Video thumbnail",
       title: "Portfolio Video Thumbnail",
@@ -67,6 +67,7 @@ const mockWork: Work = {
       width: 1600,
       height: 900,
     },
+    uploadedAt: new Date(),
   },
 
   gallery: [

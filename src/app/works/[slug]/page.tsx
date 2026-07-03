@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { JSX } from "react";
 
+import Hero from "@/features/works/components/hero";
 import WorkInfo from "@/features/works/components/work-info";
-import WorkTop from "@/features/works/components/work-top";
 import { works } from "@/features/works/store/works-store";
 
 type WorkPageParams = {
@@ -23,10 +23,11 @@ export default async function WorkPage({
 
   return (
     <>
-      <WorkTop
+      <Hero
         title={work.title}
         description={work.description}
         sectors={work.sectors}
+        featuredVideo={work.featuredVideo}
       />
       <WorkInfo
         contents={work.contents}

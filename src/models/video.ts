@@ -11,8 +11,9 @@ interface Video {
   title: string;
   description: string;
 
-  duration: number;
   thumbnail: Image;
+  duration: number;
+  uploadedAt: Date;
 }
 
 export default Video;
