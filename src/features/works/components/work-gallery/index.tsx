@@ -21,7 +21,7 @@ export default function WorkGallery({ gallery }: WorkGallery): JSX.Element {
             >
               <Image
                 src={imageOrVideo.url}
-                alt={imageOrVideo.url}
+                alt={imageOrVideo.alt}
                 width={1440}
                 height={810}
                 className="work-gallery__image-image"

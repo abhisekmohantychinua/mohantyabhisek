@@ -70,8 +70,9 @@ export async function generateMetadata({
   const slug = (await params).slug;
 
   const metadata = await getBlogMetadataBySlug(slug);
+  const blog = await getBySlug(slug);
 
-  if (!metadata) {
+  if (!metadata || !blog) {
     notFound();
   }
 
@@ -86,6 +87,8 @@ export async function generateMetadata({
       description: metadata.description,
       type: "article",
       url,
+      publishedTime: blog.postedAt.toISOString(),
+      modifiedTime: blog.lastModifiedAt.toISOString(),
     },
 
     twitter: {
@@ -93,6 +96,16 @@ export async function generateMetadata({
       title: metadata.title,
       description: metadata.description,
     },
+
+    authors: [
+      {
+        name: "Abhisek Mohanty",
+        url: SITE_URL,
+      },
+    ],
+
+    creator: "Abhisek Mohanty",
+    publisher: "Abhisek Mohanty",
 
     robots: {
       index: true,
