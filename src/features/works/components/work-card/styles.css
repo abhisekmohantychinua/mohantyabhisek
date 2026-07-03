@@ -10,9 +10,9 @@
 }
 
 .work-card__figure {
-  @apply mb-4 h-96 w-lg rounded-xl;
-  @apply max-2xl:h-[336px] max-2xl:w-md;
-  @apply max-sm:mb-2 max-sm:h-60 max-sm:w-xs;
+  @apply mb-4 h-72 w-lg rounded-xl;
+  @apply max-2xl:h-[252px] max-2xl:w-md;
+  @apply max-sm:mb-2 max-sm:h-[180px] max-sm:w-xs;
 }
 .work-card__image {
   @apply rounded-xl;

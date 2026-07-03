@@ -1,27 +1,27 @@
-import Faq from "@/models/faq";
-import Image from "@/models/image";
-import Metadata from "@/models/metadata";
-import Video from "@/models/video";
+import type Faq from "@/models/faq";
+import type Image from "@/models/image";
+import type Metadata from "@/models/metadata";
+import type Video from "@/models/video";
 
 interface Work {
   slug: string;
 
-  metadta: Metadata;
+  metadata: Metadata;
 
   title: string;
   description: string;
   sectors: string[]; // categories
   url: string; // live link
 
-  content: string[];
+  contents: string[];
 
   featuredVideo: Video;
-  galery: Array<Image | Video>;
+  gallery: Array<Image | Video>;
 
-  client?: ProjectAssociate;
-  partners?: ProjectAssociate;
-  team?: ProjectAssociate;
-  collaborators?: ProjectAssociate;
+  clients: ProjectAssociate[];
+  partners: ProjectAssociate[];
+  teamMembers: ProjectAssociate[];
+  collaborators: ProjectAssociate[];
 
   faqs: Faq[];
 
