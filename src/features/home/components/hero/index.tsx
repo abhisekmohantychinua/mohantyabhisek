@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export default function Hero(): JSX.Element {
   return (
     <section
-      className="hero__section"
+      className="hero"
       role="banner"
       aria-labelledby="hero-headline"
       id="hero__section"

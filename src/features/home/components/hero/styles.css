@@ -1,6 +1,6 @@
 @reference "../../../../app/globals.css";
 
-.hero__section {
+.hero {
   @apply relative container mx-auto px-12 py-12 text-start;
   @apply max-xl:px-8 max-xl:py-8;
   @apply max-sm:px-4 max-sm:py-4;
