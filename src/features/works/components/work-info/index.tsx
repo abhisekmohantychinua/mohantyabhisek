@@ -32,7 +32,7 @@ export default function WorkInfo({
       <Collapsible className="work-info__collapsible">
         <div className="work-info__header">
           <h2 className="work-info__heading">
-            Complete Project <span className="highlight">Information</span>
+            Project <span className="highlight">Context</span> And Details
           </h2>
           <CollapsibleTrigger asChild>
             <WorkInfoCollapsibleActionButton />

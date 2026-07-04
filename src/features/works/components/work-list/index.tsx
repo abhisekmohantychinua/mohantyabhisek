@@ -13,11 +13,11 @@ export default function WorkList({ workCards }: WorkListProps): JSX.Element {
   return (
     <section className="work-list__section" aria-labelledby="work-list-heading">
       <h2 className="work-list__heading" id="work-list-heading">
-        Read our latest Blogs
+        More Projects And Case Studies
       </h2>
 
       {workCards.length === 0 ? (
-        <p className="work-list__empty">No blogs found.</p>
+        <p className="work-list__empty">No case studies found.</p>
       ) : (
         <>
           <div className="work-list__grid">

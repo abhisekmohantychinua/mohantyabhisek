@@ -23,7 +23,9 @@ export default function WorkInfoAssociates({
 
   return (
     <div className="work-info__associates">
-      <h3 className="sr-only">Project Associates</h3>
+      <h3 className="sr-only">
+        Project Team, Clients, Partners, And Collaborators
+      </h3>
 
       <div className="work-info__associates-grid">
         {sections.map(
