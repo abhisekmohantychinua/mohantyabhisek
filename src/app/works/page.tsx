@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import type { JSX } from "react";
 
 import Header from "@/features/works/components/header";
+import WorkList from "@/features/works/components/work-list";
+import { workCards } from "@/features/works/store/works-store";
 
 export default function Works(): JSX.Element {
   return (
     <>
       <Header />
+      <WorkList workCards={workCards} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

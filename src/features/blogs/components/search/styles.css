@@ -1,20 +1,20 @@
 @reference "../../../../app/globals.css";
 
-.blog-search-section {
-  @apply container mx-auto px-6 mb-6;
+.blog-search__section {
+  @apply container mx-auto mb-6 px-6;
   @apply lg:px-8;
 }
 
-.blog-search-form {
-  @apply max-w-md mx-auto w-full;
+.blog-search__form {
+  @apply mx-auto w-full max-w-md;
   @apply md:max-w-lg;
 }
 
-.blog-search-input {
-  @apply w-full bg-card border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-foreground/50;
-  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-shadow duration-200;
+.blog-search__input {
+  @apply bg-card border-border text-foreground placeholder:text-foreground/50 w-full rounded-lg border px-4 py-3 text-sm;
+  @apply focus-visible:ring-primary/30 transition-shadow duration-200 focus:outline-none focus-visible:ring-2;
 }
 
-.blog-search-input:focus {
+.blog-search__input:focus {
   @apply shadow-sm;
 }

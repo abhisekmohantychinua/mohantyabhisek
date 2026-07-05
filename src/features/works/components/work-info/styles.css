@@ -1,0 +1,77 @@
+@reference "../../../../app/globals.css";
+
+.work-info {
+  @apply container mx-auto flex w-full items-start justify-between gap-2 px-12 py-12 text-start;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-lg:flex-col;
+  @apply max-sm:px-4 max-sm:py-4;
+}
+
+.work-info__collapsible {
+  @apply w-full;
+}
+
+.work-info__header {
+  @apply flex w-full items-center justify-between gap-2;
+  @apply max-sm:flex-col;
+}
+
+.work-info__heading {
+  @apply text-4xl leading-14;
+  @apply max-sm:text-center max-sm:text-3xl max-sm:leading-10;
+}
+
+.work-info__collapsible-action {
+  @apply border-foreground hover:bg-primary text-foreground border bg-white px-2.5 py-5 font-sans text-lg hover:text-white;
+}
+
+.work-info__collapsible-action-icon-wrapper {
+  @apply bg-accent flex size-7 items-center justify-center rounded-full;
+}
+
+.work-info__collapsible-action-icon {
+  @apply size-3;
+}
+
+.work-info__divider {
+  @apply my-10;
+  @apply max-sm:my-6;
+}
+
+.work-info__content,
+.work-info__associate-link,
+.work-info__associate-name {
+  @apply mb-7 text-lg leading-7;
+  @apply mb-6 max-sm:text-base max-sm:leading-6;
+  @apply last:mb-0;
+}
+
+.work-info__associates {
+  @apply bg-background rounded-2xl px-10 py-20;
+  @apply max-sm:px-5 max-sm:py-10;
+}
+.work-info__associates-grid {
+  @apply grid grid-cols-4 gap-4;
+  @apply max-lg:grid-cols-2 max-lg:gap-x-2 max-lg:gap-y-8;
+}
+
+.work-info__associates-grid-item {
+  @apply relative ps-2;
+  @apply after:bg-foreground/80 after:absolute after:top-0 after:-left-2 after:h-full after:w-px after:content-[""];
+  @apply max-lg:ps-0 max-lg:after:hidden;
+}
+
+.work-info__associates-title {
+  @apply mb-2 text-3xl leading-11;
+  @apply max-sm:text-2xl max-sm:leading-7;
+}
+
+.work-info__associate-link,
+.work-info__associate-name {
+  @apply ms-2;
+  @apply max-lg:ms-0;
+}
+
+.work-info__associate-link {
+  @apply underline underline-offset-2;
+}

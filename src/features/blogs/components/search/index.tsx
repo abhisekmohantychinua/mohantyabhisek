@@ -11,12 +11,12 @@ export default function BlogSearch({
   query,
 }: BlogSearchProps): JSX.Element | null {
   return (
-    <section className="blog-search-section" aria-labelledby="search-heading">
+    <section className="blog-search__section" aria-labelledby="search-heading">
       <h2 id="search-heading" className="sr-only">
         Search Blogs
       </h2>
-      <form className="blog-search-form" method="get" action="/blogs">
-        <label htmlFor="blog-search-input" className="sr-only">
+      <form className="blog-search__form" method="get" action="/blogs">
+        <label htmlFor="blog-search__input" className="sr-only">
           Search blogs
         </label>
         <Input
@@ -25,7 +25,7 @@ export default function BlogSearch({
           name="q"
           placeholder="Search blogs..."
           defaultValue={query || ""}
-          className="blog-search-input"
+          className="blog-search__input"
         />
       </form>
     </section>

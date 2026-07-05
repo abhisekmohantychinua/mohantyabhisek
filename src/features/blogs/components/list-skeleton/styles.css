@@ -1,22 +1,22 @@
 @reference "../../../../app/globals.css";
 
-.blog-list-skeleton-section {
-  @apply container mx-auto mb-12 px-6 min-h-[50vh];
+.blog-list-skeleton__section {
+  @apply container mx-auto mb-12 min-h-[50vh] px-6;
   @apply lg:px-8;
 }
 
-.blog-list-skeleton-heading {
+.blog-list-skeleton__heading {
   @apply mb-4 space-y-2;
 }
 
-.blog-list-skeleton-title {
+.blog-list-skeleton__title {
   @apply h-6 w-full md:h-7;
 }
 
-.blog-list-skeleton-title-short {
+.blog-list-skeleton__title-short {
   @apply w-2/3;
 }
 
-.blog-list-skeleton-grid {
-  @apply grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+.blog-list-skeleton__grid {
+  @apply grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3;
 }

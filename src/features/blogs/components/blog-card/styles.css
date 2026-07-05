@@ -1,19 +1,19 @@
 @reference "../../../../app/globals.css";
 
-.blog-card {
+.blog-card__wrapper {
   @apply bg-background border-background block h-[518.4px] w-md rounded-xl border px-8 py-11 text-start;
   @apply max-2xl:h-[444px] max-2xl:w-xs max-2xl:px-6 max-2xl:py-9;
   @apply focus-visible:ring-foreground focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
   @apply transform transition-all duration-300 ease-out;
   @apply hover:border-foreground hover:shadow-lg;
 }
-.blog-card-date {
+.blog-card__date {
   @apply mb-5 text-lg leading-7 not-italic;
   @apply max-2xl:mb-4;
   @apply max-sm:text-base max-sm:leading-6;
 }
 
-.blog-card-heading {
+.blog-card__heading {
   @apply text-foreground mb-10 overflow-hidden text-3xl leading-11;
   @apply max-2xl:mb-8;
   @apply max-sm:text-xl max-sm:leading-9;
@@ -31,7 +31,7 @@
   }
 }
 
-.blog-card-description {
+.blog-card__description {
   @apply text-foreground mb-7 overflow-hidden text-lg leading-7;
   @apply max-2xl:mb-6;
 

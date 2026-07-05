@@ -1,3 +1,5 @@
+import Faq from "@/models/faq";
+
 interface Blog {
   slug: string;
   title: string;
@@ -7,11 +9,6 @@ interface Blog {
   faqs: Faq[];
   postedAt: Date;
   lastModifiedAt: Date;
-}
-
-export interface Faq {
-  question: string;
-  answer: string;
 }
 
 export type BlogCard = Pick<
