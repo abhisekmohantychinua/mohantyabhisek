@@ -12,7 +12,7 @@ import type { BlogCard } from "../models/blog";
  * @param query - Optional search query.
  * @returns Promise resolving to a paginated blog card response.
  */
-export function fetchBlogCardsPage(
+export async function fetchBlogCardsPage(
   index: number,
   signal: AbortSignal,
   query?: string,

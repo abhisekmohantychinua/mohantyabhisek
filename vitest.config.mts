@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     env: loadEnv("test", process.cwd(), ""),
+    include: ["src/**/*.spec.{ts,tsx}"],
   },
   resolve: {
     tsconfigPaths: true,

@@ -1,4 +1,4 @@
-import Faq from "@/models/faq";
+import type Faq from "@/models/faq";
 
 interface Blog {
   slug: string;
