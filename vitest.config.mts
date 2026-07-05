@@ -8,6 +8,7 @@ export default defineConfig({
     environment: "jsdom",
     env: loadEnv("test", process.cwd(), ""),
     include: ["src/**/*.spec.{ts,tsx}"],
+    setupFiles: ["./tests/vitest-setup.ts"],
   },
   resolve: {
     tsconfigPaths: true,
