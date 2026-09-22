@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { JSX } from "react";
 
+import AnimatedBrandMark from "@/components/shared/animated-brand-mark";
 import BrandMark from "@/components/shared/brand-mark";
 import CtaDialog from "@/components/shared/cta-dialog";
 import { Button } from "@/components/ui/button";
@@ -69,7 +70,7 @@ export default function Hero(): JSX.Element {
           <figcaption className="hero__figure-caption">
             Every solution starts with understanding the business.
           </figcaption>
-          <BrandMark
+          <AnimatedBrandMark
             className="hero__figure-brand-circle"
             variant="circle"
             height={100}
@@ -77,7 +78,7 @@ export default function Hero(): JSX.Element {
         </figure>
       </div>
       <div className="hero__scroll-down">
-        <BrandMark height={510} />
+        <AnimatedBrandMark height={510} />
         <span className="hero__scroll-down-text">Scroll Down</span>
       </div>
     </section>
