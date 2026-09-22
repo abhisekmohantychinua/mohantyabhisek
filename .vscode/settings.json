@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "blogmetadatas",
+    "Embla",
     "GSAP",
     "Mohanty",
     "mohantyabhisek",
@@ -9,13 +10,20 @@
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Generate a commit message with header from: Feature, Refactor, Fix, Test, Todo. Each header represents a section. Meaning of each header goes like this: Feature → new functionality, Refactor → code restructuring, Fix → bug fixes, Test → testing-related changes, Todo → tasks to be done. Each file should be analyzed separately and understood in order to find out the changes. Multiple sections can be used based on staged changes. Format: Header followed by ':' and newline bullet points. Each bullet must start with '-' and use past tense verbs like Added, Updated, Removed, Refactored, Implemented. Keep it concise and well grouped. Do NOT use conventional commit format."
+    },
+    {
+      "file": ".vscode/copilot/commit-message.md"
     }
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "markdownlint.config": {
-    "MD036": false
-  },
-  "mermaidChart.showGenerateDiagramCodeLens": false
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "js/ts.referencesCodeLens.enabled": true,
+  "js/ts.implementationsCodeLens.enabled": false,
+  "mermaidChart.showGenerateDiagramCodeLens": false,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

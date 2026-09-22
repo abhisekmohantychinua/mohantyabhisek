@@ -23,7 +23,7 @@ const solutions: SolutionCard[] = [
     heading: "Websites For Businesses",
     description:
       "Websites designed to communicate clearly, build credibility, and help people understand your business before the first conversation begins.",
-    image: "/services/business-website.png",
+    image: "/services/business-website.jpg",
     caption:
       "Helping people understand your business before the first conversation.",
   },
@@ -32,7 +32,7 @@ const solutions: SolutionCard[] = [
     heading: "Custom Web Applications & SaaS Products",
     description:
       "Applications designed around user workflows, product requirements, and business objectives, with scalability and usability considered from the start.",
-    image: "/services/saas.png",
+    image: "/services/saas.jpg",
     caption: "From product ideas to usable software.",
   },
   {
@@ -40,7 +40,7 @@ const solutions: SolutionCard[] = [
     heading: "ERP, CRM & Internal Management Systems",
     description:
       "Custom systems that help teams manage operations, centralize information, and streamline day-to-day processes across the business.",
-    image: "/services/business-operations.png",
+    image: "/services/business-operations.jpg",
     caption: "Bringing people, processes, and information together.",
   },
 ];

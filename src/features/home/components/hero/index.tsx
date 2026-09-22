@@ -60,7 +60,7 @@ export default function Hero(): JSX.Element {
 
         <figure className="hero__figure">
           <Image
-            src="/hero.png"
+            src="/hero.jpg"
             alt=""
             width={1140}
             height={510}

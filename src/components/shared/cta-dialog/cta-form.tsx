@@ -92,7 +92,7 @@ export default function CtaForm({
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form role="form" onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup>
         {currentStepperStep === "message" ? (
           <CtaFormMessageStep form={form} />

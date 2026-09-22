@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     url: "https://mohantyabhisek.com",
     images: [
       {
-        url: "https://mohantyabhisek.com/og-image.png",
+        url: "https://mohantyabhisek.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Websites, Web Applications & Business Systems | Abhisek",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "Websites, Web Applications & Business Systems | Abhisek",
     description:
       "Custom website development, web applications, and business systems built with clarity and purpose. Helping businesses plan, design, and build digital solutions around real goals.",
-    images: ["https://mohantyabhisek.com/og-image.png"],
+    images: ["https://mohantyabhisek.com/og-image.jpg"],
   },
   alternates: {
     canonical: "https://mohantyabhisek.com",
