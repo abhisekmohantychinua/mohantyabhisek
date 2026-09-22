@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     url: "https://mohantyabhisek.com/blogs",
     images: [
       {
-        url: "https://mohantyabhisek.com/blogs-og-image.png",
+        url: "https://mohantyabhisek.com/blogs-og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Blogs On Websites, Web Applications & Business Systems | Abhisek",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Blogs On Websites, Web Applications & Business Systems | Abhisek",
     description:
       "Explore blogs covering website development, web applications, business systems, software planning, digital strategy, and technology decisions for modern businesses.",
-    images: ["https://mohantyabhisek.com/works-og-image.png"],
+    images: ["https://mohantyabhisek.com/works-og-image.jpg"],
   },
   alternates: {
     canonical: "https://mohantyabhisek.com/blogs",

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     url: "https://mohantyabhisek.com",
     images: [
       {
-        url: "https://mohantyabhisek.com/works-og-image.png",
+        url: "https://mohantyabhisek.com/works-og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Selected Case Studies & Digital Projects | Abhisek",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Selected Case Studies & Digital Projects | Abhisek",
     description:
       "A collection of projects, ideas, and digital solutions built across different industries, requirements, and business contexts. Each case study explores the challenge, approach, and outcome behind the work.",
-    images: ["https://mohantyabhisek.com/works-og-image.png"],
+    images: ["https://mohantyabhisek.com/works-og-image.jpg"],
   },
   alternates: {
     canonical: "https://mohantyabhisek.com",

@@ -6,8 +6,8 @@ import type { JSX } from "react";
 
 export default async function Contact(): Promise<JSX.Element> {
   return (
-    <section className="container mx-auto h-[80vh] flex flex-col justify-center items-center">
-      <div className="h-60 w-60 rounded-full object-cover overflow-hidden mb-5">
+    <section className="container mx-auto flex h-[80vh] flex-col items-center justify-center">
+      <div className="mb-5 h-60 w-60 overflow-hidden rounded-full object-cover">
         <Image
           src="/developer.jpg"
           alt="Developer Photo"
@@ -20,25 +20,25 @@ export default async function Contact(): Promise<JSX.Element> {
 
       <h1
         id="contact-heading"
-        className="text-4xl md:text-6xl font-break font-bold text-primary text-center"
+        className="font-break text-primary text-center text-4xl font-bold md:text-6xl"
       >
         Abhisek Mohanty
       </h1>
       <p className="text-xl md:text-2xl">Website & Web App Consultant</p>
-      <div className="w-full max-w-md bg-secondary h-px my-4"></div>
-      <p className="text-sm md:text-lg text-foreground/80">
+      <div className="bg-secondary my-4 h-px w-full max-w-md"></div>
+      <p className="text-foreground/80 text-sm md:text-lg">
         Start with clarity, build with purpose.
         <br />A practical,structured approach.
       </p>
 
       {/* Social media links */}
       <div
-        className="w-full flex justify-center items-center space-x-4 my-2"
+        className="my-2 flex w-full items-center justify-center space-x-4"
         aria-label="Social links"
       >
         <Link
           href="https://www.linkedin.com/in/mohanty-abhisek"
-          className="inline-flex items-center justify-center rounded-full bg-accent/0 p-2 hover:bg-accent/20 hover:text-accent transition-colors duration-200"
+          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
           aria-label="LinkedIn"
           target="_blank"
           rel="noopener noreferrer"
@@ -47,7 +47,7 @@ export default async function Contact(): Promise<JSX.Element> {
         </Link>
         <Link
           href="https://www.instagram.com/abhisek.mohanty/"
-          className="inline-flex items-center justify-center rounded-full bg-accent/0 p-2 hover:bg-accent/20 hover:text-accent transition-colors duration-200"
+          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
           aria-label="Instagram"
           target="_blank"
           rel="noopener noreferrer"
@@ -56,7 +56,7 @@ export default async function Contact(): Promise<JSX.Element> {
         </Link>
         <Link
           href="mailto:mohantyabhisek@hotmail.com"
-          className="inline-flex items-center justify-center rounded-full bg-accent/0 p-2 hover:bg-accent/20 hover:text-accent transition-colors duration-200"
+          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
           aria-label="Email"
           target="_blank"
           rel="noopener noreferrer"
@@ -65,7 +65,7 @@ export default async function Contact(): Promise<JSX.Element> {
         </Link>
         <Link
           href="tel:+919439485166"
-          className="inline-flex items-center justify-center rounded-full bg-accent/0 p-2 hover:bg-accent/20 hover:text-accent transition-colors duration-200"
+          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
           aria-label="Phone"
           target="_blank"
           rel="noopener noreferrer"
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     url: "https://mohantyabhisek.com/contact",
     images: [
       {
-        url: "https://mohantyabhisek.com/og-image.png",
+        url: "https://mohantyabhisek.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Website & Web App Solutions for Businesses | Abhisek",
@@ -106,7 +106,7 @@ export const metadata: Metadata = {
     title: "Clarity Before You Build — Contact Abhisek",
     description:
       "For those who want clarity and structure before committing to a website or web app.",
-    images: ["https://mohantyabhisek.com/og-image.png"],
+    images: ["https://mohantyabhisek.com/og-image.jpg"],
   },
   alternates: {
     canonical: "https://mohantyabhisek.com/contact",

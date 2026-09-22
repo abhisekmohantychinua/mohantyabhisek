@@ -21,5 +21,8 @@
   "editor.formatOnSave": true,
   "js/ts.referencesCodeLens.enabled": true,
   "js/ts.implementationsCodeLens.enabled": false,
-  "mermaidChart.showGenerateDiagramCodeLens": false
+  "mermaidChart.showGenerateDiagramCodeLens": false,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }
