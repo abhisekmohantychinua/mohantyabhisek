@@ -5,7 +5,9 @@ import { describe, expect, test, vi } from "vitest";
 import type VideoType from "@/models/video";
 
 vi.mock("@videojs/react", () => ({
-  createPlayer: () => ({
+  createPlayer: (): {
+    Provider: ({ children }: { children: React.ReactNode }) => JSX.Element;
+  } => ({
     Provider: ({ children }: { children: React.ReactNode }): JSX.Element => (
       <>{children}</>
     ),

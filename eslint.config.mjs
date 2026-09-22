@@ -228,12 +228,22 @@ const eslintConfig = defineConfig([
         },
 
         // =====================================================
-        // FEATURE SHARED PUBLIC API
+        // FEATURE PUBLIC APIs
         // =====================================================
 
         {
-          type: "feature-shared",
-          pattern: "src/features/*/shared/**",
+          type: "feature-home-public",
+          pattern: "src/features/home/shared/**",
+        },
+
+        {
+          type: "feature-blogs-public",
+          pattern: "src/features/blogs/shared/**",
+        },
+
+        {
+          type: "feature-works-public",
+          pattern: "src/features/works/shared/**",
         },
 
         // =====================================================
@@ -332,7 +342,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-home" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-home-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -349,7 +359,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-contact" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-contact-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -366,7 +376,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-blogs" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-blogs-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -383,7 +393,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-works" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-works-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -404,7 +414,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-home" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-home-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -421,7 +431,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-contact" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-contact-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -438,7 +448,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-blogs" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-blogs-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -455,7 +465,7 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-works" } },
-                { to: { type: "feature-shared" } },
+                { to: { type: "feature-works-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -476,7 +486,11 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-home" } },
-                { to: { type: "feature-shared" } },
+
+                // Other feature public APIs
+                { to: { type: "feature-blogs-public" } },
+                { to: { type: "feature-works-public" } },
+                { to: { type: "feature-contact-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -493,7 +507,11 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-contact" } },
-                { to: { type: "feature-shared" } },
+
+                // Other feature public APIs
+                { to: { type: "feature-home-public" } },
+                { to: { type: "feature-blogs-public" } },
+                { to: { type: "feature-works-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -510,7 +528,11 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-blogs" } },
-                { to: { type: "feature-shared" } },
+
+                // Other feature public APIs
+                { to: { type: "feature-home-public" } },
+                { to: { type: "feature-works-public" } },
+                { to: { type: "feature-contact-public" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
@@ -527,7 +549,63 @@ const eslintConfig = defineConfig([
 
               allow: [
                 { to: { type: "feature-works" } },
-                { to: { type: "feature-shared" } },
+
+                // Other feature public APIs
+                { to: { type: "feature-home-public" } },
+                { to: { type: "feature-blogs-public" } },
+                { to: { type: "feature-contact-public" } },
+
+                { to: { type: "components" } },
+                { to: { type: "services" } },
+                { to: { type: "hooks" } },
+                { to: { type: "stores" } },
+                { to: { type: "models" } },
+                { to: { type: "lib" } },
+                { to: { type: "config" } },
+              ],
+            },
+
+            // =================================================
+            // FEATURE PUBLIC APIs
+            // =================================================
+
+            {
+              from: { type: "feature-home-public" },
+
+              allow: [
+                { to: { type: "feature-home" } },
+
+                { to: { type: "components" } },
+                { to: { type: "services" } },
+                { to: { type: "hooks" } },
+                { to: { type: "stores" } },
+                { to: { type: "models" } },
+                { to: { type: "lib" } },
+                { to: { type: "config" } },
+              ],
+            },
+
+            {
+              from: { type: "feature-blogs-public" },
+
+              allow: [
+                { to: { type: "feature-blogs" } },
+
+                { to: { type: "components" } },
+                { to: { type: "services" } },
+                { to: { type: "hooks" } },
+                { to: { type: "stores" } },
+                { to: { type: "models" } },
+                { to: { type: "lib" } },
+                { to: { type: "config" } },
+              ],
+            },
+
+            {
+              from: { type: "feature-works-public" },
+
+              allow: [
+                { to: { type: "feature-works" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },

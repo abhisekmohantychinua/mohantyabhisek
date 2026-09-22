@@ -1,3 +1,4 @@
+import type { RenderResult } from "@testing-library/react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import type { JSX, ReactNode } from "react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
@@ -28,9 +29,14 @@ vi.mock("@/components/ui/dialog", () => ({
   ),
 }));
 
-const renderForm = (overrides = {}) => {
-  const onSubmitSuccess = vi.fn();
-  const changeStepperStep = vi.fn();
+const renderForm = (
+  overrides = {},
+): RenderResult & {
+  onSubmitSuccess: ReturnType<typeof vi.fn<() => void>>;
+  changeStepperStep: ReturnType<typeof vi.fn<() => void>>;
+} => {
+  const onSubmitSuccess = vi.fn<() => void>();
+  const changeStepperStep = vi.fn<() => void>();
 
   const result = render(
     <CtaForm
