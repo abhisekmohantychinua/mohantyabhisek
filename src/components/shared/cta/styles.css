@@ -9,7 +9,7 @@
 
 .cta-section::before {
   @apply absolute top-0 left-1/2 -z-10 h-full w-screen -translate-x-1/2 content-[""];
-  background-image: url("/cta-bg.png");
+  background-image: url("/cta-bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

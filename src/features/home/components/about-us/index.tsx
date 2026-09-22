@@ -2,7 +2,7 @@ import "./styles.css";
 
 import type { JSX } from "react";
 
-import BrandMark from "@/components/shared/brand-mark";
+import AnimatedBrandMark from "@/components/shared/animated-brand-mark";
 
 export default function AboutUs(): JSX.Element {
   return (
@@ -27,7 +27,7 @@ export default function AboutUs(): JSX.Element {
           <p className="about-us__stats-value stats-value">
             <span className="about-us__stats-number stats-number">3</span>+
           </p>
-          <BrandMark
+          <AnimatedBrandMark
             variant="line-horizontal"
             className="about-us__stats-brand-line stats-brand-line"
           />
@@ -37,7 +37,7 @@ export default function AboutUs(): JSX.Element {
           <p className="about-us__stats-value stats-value">
             <span className="about-us__stats-number stats-number">25</span>+
           </p>
-          <BrandMark
+          <AnimatedBrandMark
             variant="line-horizontal"
             className="about-us__stats-brand-line stats-brand-line"
           />
@@ -47,7 +47,7 @@ export default function AboutUs(): JSX.Element {
           <p className="about-us__stats-value stats-value">
             <span className="about-us__stats-number stats-number">90</span>%
           </p>
-          <BrandMark
+          <AnimatedBrandMark
             variant="line-horizontal"
             className="about-us__stats-brand-line stats-brand-line"
           />
@@ -57,7 +57,7 @@ export default function AboutUs(): JSX.Element {
           <p className="about-us__stats-value stats-value">
             <span className="about-us__stats-number stats-number">4</span>+
           </p>
-          <BrandMark
+          <AnimatedBrandMark
             variant="line-horizontal"
             className="about-us__stats-brand-line stats-brand-line"
           />
