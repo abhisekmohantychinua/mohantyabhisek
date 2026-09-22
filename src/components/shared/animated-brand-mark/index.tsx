@@ -50,6 +50,11 @@ export default function AnimatedBrandMark({
             strokeDasharray: `${accentLength} ${circumference - accentLength}`,
             duration,
             ease: "materialEase",
+            scrollTrigger: {
+              trigger: container,
+              start: "top 90%",
+              once: true,
+            },
           },
         );
 
@@ -69,6 +74,11 @@ export default function AnimatedBrandMark({
             width: accentLength,
             duration,
             ease: "materialEase",
+            scrollTrigger: {
+              trigger: container,
+              start: "top 90%",
+              once: true,
+            },
           },
         );
 
@@ -84,6 +94,11 @@ export default function AnimatedBrandMark({
           height: accentLength,
           duration,
           ease: "materialEase",
+          scrollTrigger: {
+            trigger: container,
+            start: "top 90%",
+            once: true,
+          },
         },
       );
     },

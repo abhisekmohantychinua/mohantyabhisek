@@ -9,8 +9,10 @@ const { gsapFromTo } = vi.hoisted(() => ({
 }));
 
 vi.mock("@gsap/react", () => ({
-  useGSAP: (callback: () => void) => {
-    React.useLayoutEffect(callback, []);
+  useGSAP: (callback: () => void): void => {
+    React.useLayoutEffect(() => {
+      callback();
+    }, [callback]);
   },
 }));
 
@@ -52,7 +54,7 @@ describe("AnimatedBrandMark", () => {
   });
 
   describe("animation", () => {
-    test("animates the accent of a vertical line", () => {
+    test("animates the accent of a vertical line when it enters the viewport", () => {
       render(
         <AnimatedBrandMark
           variant="line-vertical"
@@ -75,11 +77,16 @@ describe("AnimatedBrandMark", () => {
           height: 50,
           duration: 1.5,
           ease: "materialEase",
+          scrollTrigger: {
+            trigger: expect.any(SVGSVGElement),
+            start: "top 90%",
+            once: true,
+          },
         },
       );
     });
 
-    test("animates the accent of a horizontal line", () => {
+    test("animates the accent of a horizontal line when it enters the viewport", () => {
       render(
         <AnimatedBrandMark
           variant="line-horizontal"
@@ -102,11 +109,16 @@ describe("AnimatedBrandMark", () => {
           width: 50,
           duration: 1.5,
           ease: "materialEase",
+          scrollTrigger: {
+            trigger: expect.any(SVGSVGElement),
+            start: "top 90%",
+            once: true,
+          },
         },
       );
     });
 
-    test("animates the accent of a circle", () => {
+    test("animates the accent of a circle when it enters the viewport", () => {
       render(
         <AnimatedBrandMark
           variant="circle"
@@ -135,6 +147,11 @@ describe("AnimatedBrandMark", () => {
           strokeDasharray: `${accentLength} ${circumference - accentLength}`,
           duration: 1,
           ease: "materialEase",
+          scrollTrigger: {
+            trigger: expect.any(SVGSVGElement),
+            start: "top 90%",
+            once: true,
+          },
         },
       );
     });
@@ -153,7 +170,9 @@ describe("AnimatedBrandMark", () => {
       expect(gsapFromTo).toHaveBeenCalledWith(
         accent,
         expect.anything(),
-        expect.anything(),
+        expect.objectContaining({
+          scrollTrigger: expect.any(Object),
+        }),
       );
     });
 
@@ -168,6 +187,11 @@ describe("AnimatedBrandMark", () => {
         },
         expect.objectContaining({
           height: 50,
+          scrollTrigger: {
+            trigger: expect.any(SVGSVGElement),
+            start: "top 90%",
+            once: true,
+          },
         }),
       );
     });
