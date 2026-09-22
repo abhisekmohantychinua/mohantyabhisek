@@ -1,5 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import { act, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import type { JSX } from "react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
@@ -81,7 +80,8 @@ describe("Navbar", () => {
     vi.clearAllMocks();
 
     usePathnameMock.mockReturnValue("/");
-    document.body.style.overflow = "unset";
+
+    document.body.style.overflow = "";
 
     Object.defineProperty(window, "scrollY", {
       writable: true,
@@ -124,26 +124,30 @@ describe("Navbar", () => {
     test("renders all desktop navigation links", (): void => {
       render(<Navbar />);
 
+      const navigation = screen.getByRole("navigation", {
+        name: /primary navigation/i,
+      });
+
       expect(
-        screen.getByRole("menuitem", {
+        within(navigation).getByRole("link", {
           name: /^home$/i,
         }),
       ).toHaveAttribute("href", "/");
 
       expect(
-        screen.getByRole("menuitem", {
+        within(navigation).getByRole("link", {
           name: /^work$/i,
         }),
       ).toHaveAttribute("href", "/works");
 
       expect(
-        screen.getByRole("menuitem", {
+        within(navigation).getByRole("link", {
           name: /^contact$/i,
         }),
       ).toHaveAttribute("href", "/contact");
 
       expect(
-        screen.getByRole("menuitem", {
+        within(navigation).getByRole("link", {
           name: /^blogs$/i,
         }),
       ).toHaveAttribute("href", "/blogs");
@@ -152,22 +156,12 @@ describe("Navbar", () => {
     test("renders call me cta link", (): void => {
       render(<Navbar />);
 
-      expect(
-        screen.getByRole("link", {
-          name: /call me/i,
-        }),
-      ).toHaveAttribute("href", "tel:+919439485166");
-      fireEvent.click(
-        screen.getByRole("button", {
-          name: /toggle navigation menu/i,
-        }),
-      );
+      const callLinks = screen.getAllByRole("link", {
+        name: /call me/i,
+      });
 
-      expect(
-        screen.getAllByRole("link", {
-          name: /call me/i,
-        }),
-      ).toHaveLength(2);
+      expect(callLinks).toHaveLength(1);
+      expect(callLinks[0]).toHaveAttribute("href", "tel:+919439485166");
     });
 
     test("renders mobile menu toggle button", (): void => {
@@ -175,7 +169,7 @@ describe("Navbar", () => {
 
       expect(
         screen.getByRole("button", {
-          name: /toggle navigation menu/i,
+          name: /open navigation menu/i,
         }),
       ).toBeInTheDocument();
     });
@@ -187,15 +181,16 @@ describe("Navbar", () => {
 
       render(<Navbar />);
 
-      const homeLinks = screen.getAllByRole("menuitem", {
+      const navigation = screen.getByRole("navigation", {
+        name: /primary navigation/i,
+      });
+
+      const homeLink = within(navigation).getByRole("link", {
         name: /^home$/i,
       });
 
-      for (const link of homeLinks) {
-        expect(link).toHaveClass("navbar-nav-link-active", {
-          exact: false,
-        });
-      }
+      expect(homeLink).toHaveClass("navbar-nav-link-active");
+      expect(homeLink).toHaveAttribute("aria-current", "page");
     });
 
     test("marks work as active on work route", (): void => {
@@ -203,13 +198,16 @@ describe("Navbar", () => {
 
       render(<Navbar />);
 
-      const workLinks = screen.getAllByRole("menuitem", {
+      const navigation = screen.getByRole("navigation", {
+        name: /primary navigation/i,
+      });
+
+      const workLink = within(navigation).getByRole("link", {
         name: /^work$/i,
       });
 
-      for (const link of workLinks) {
-        expect(link.className).toContain("active");
-      }
+      expect(workLink).toHaveClass("navbar-nav-link-active");
+      expect(workLink).toHaveAttribute("aria-current", "page");
     });
 
     test("marks contact as active on contact route", (): void => {
@@ -217,13 +215,16 @@ describe("Navbar", () => {
 
       render(<Navbar />);
 
-      const contactLinks = screen.getAllByRole("menuitem", {
+      const navigation = screen.getByRole("navigation", {
+        name: /primary navigation/i,
+      });
+
+      const contactLink = within(navigation).getByRole("link", {
         name: /^contact$/i,
       });
 
-      for (const link of contactLinks) {
-        expect(link.className).toContain("active");
-      }
+      expect(contactLink).toHaveClass("navbar-nav-link-active");
+      expect(contactLink).toHaveAttribute("aria-current", "page");
     });
 
     test("marks blogs as active on blog route", (): void => {
@@ -231,13 +232,16 @@ describe("Navbar", () => {
 
       render(<Navbar />);
 
-      const blogLinks = screen.getAllByRole("menuitem", {
+      const navigation = screen.getByRole("navigation", {
+        name: /primary navigation/i,
+      });
+
+      const blogsLink = within(navigation).getByRole("link", {
         name: /^blogs$/i,
       });
 
-      for (const link of blogLinks) {
-        expect(link.className).toContain("active");
-      }
+      expect(blogsLink).toHaveClass("navbar-nav-link-active");
+      expect(blogsLink).toHaveAttribute("aria-current", "page");
     });
 
     test("does not mark unrelated links as active", (): void => {
@@ -245,118 +249,148 @@ describe("Navbar", () => {
 
       render(<Navbar />);
 
-      const homeLinks = screen.getAllByRole("menuitem", {
+      const navigation = screen.getByRole("navigation", {
+        name: /primary navigation/i,
+      });
+
+      const homeLink = within(navigation).getByRole("link", {
         name: /^home$/i,
       });
 
-      const contactLinks = screen.getAllByRole("menuitem", {
+      const contactLink = within(navigation).getByRole("link", {
         name: /^contact$/i,
       });
 
-      const blogLinks = screen.getAllByRole("menuitem", {
+      const blogsLink = within(navigation).getByRole("link", {
         name: /^blogs$/i,
       });
 
-      for (const link of [...homeLinks, ...contactLinks, ...blogLinks]) {
-        expect(link.className).not.toContain("active");
-      }
+      expect(homeLink).not.toHaveClass("navbar-nav-link-active");
+      expect(contactLink).not.toHaveClass("navbar-nav-link-active");
+      expect(blogsLink).not.toHaveClass("navbar-nav-link-active");
+
+      expect(homeLink).not.toHaveAttribute("aria-current");
+      expect(contactLink).not.toHaveAttribute("aria-current");
+      expect(blogsLink).not.toHaveAttribute("aria-current");
     });
   });
 
   describe("mobile menu", () => {
     test("is closed by default", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
-      const mobileMenu = screen.getByRole("menu", {
-        hidden: true,
-      });
+      const mobileMenu = document.getElementById("mobile-menu");
 
+      expect(mobileMenu).toBeInTheDocument();
       expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
-      expect(mobileMenu.className).not.toContain("navbar-mobile-menu-open");
+      expect(mobileMenu).toHaveAttribute("inert");
+      expect(mobileMenu).not.toHaveClass("navbar-mobile-menu-open");
     });
 
     test("opens when toggle button is clicked", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
       const toggleButton = screen.getByRole("button", {
-        name: /toggle navigation menu/i,
+        name: /open navigation menu/i,
       });
 
       fireEvent.click(toggleButton);
 
-      const mobileMenu = screen.getByRole("menu", {
-        hidden: true,
-      });
+      const mobileMenu = document.getElementById("mobile-menu");
 
       expect(toggleButton).toHaveAttribute("aria-expanded", "true");
-      expect(mobileMenu.className).toContain("navbar-mobile-menu-open");
+      expect(toggleButton).toHaveAccessibleName("Close navigation menu");
+
       expect(mobileMenu).toHaveAttribute("aria-hidden", "false");
+      expect(mobileMenu).not.toHaveAttribute("inert");
+      expect(mobileMenu).toHaveClass("navbar-mobile-menu-open");
     });
 
     test("closes when toggle button is clicked again", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
       const toggleButton = screen.getByRole("button", {
-        name: /toggle navigation menu/i,
+        name: /open navigation menu/i,
       });
 
       fireEvent.click(toggleButton);
-      fireEvent.click(toggleButton);
 
-      const mobileMenu = screen.getByRole("menu", {
-        hidden: true,
+      const closeButton = screen.getByRole("button", {
+        name: /close navigation menu/i,
       });
+
+      fireEvent.click(closeButton);
+
+      const mobileMenu = document.getElementById("mobile-menu");
 
       expect(toggleButton).toHaveAttribute("aria-expanded", "false");
-      expect(mobileMenu.className).not.toContain("navbar-mobile-menu-open");
+      expect(
+        screen.getByRole("button", {
+          name: /open navigation menu/i,
+        }),
+      ).toBeInTheDocument();
+
       expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
+      expect(mobileMenu).toHaveAttribute("inert");
+      expect(mobileMenu).not.toHaveClass("navbar-mobile-menu-open");
     });
 
     test("renders mobile navigation links", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
-      fireEvent.click(
-        screen.getByRole("button", {
-          name: /toggle navigation menu/i,
-        }),
-      );
-
-      const mobileMenu = screen.getByRole("menu", {
-        hidden: true,
+      const toggleButton = screen.getByRole("button", {
+        name: /open navigation menu/i,
       });
 
-      const mobileNav = within(mobileMenu).getByRole("menubar");
+      fireEvent.click(toggleButton);
+
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      expect(mobileMenu).toBeInTheDocument();
+
+      const mobileNavigation = within(mobileMenu as HTMLElement).getByRole(
+        "navigation",
+        {
+          name: /mobile navigation/i,
+          hidden: true,
+        },
+      );
 
       expect(
-        within(mobileNav).getByRole("menuitem", { name: /home/i }),
+        within(mobileNavigation).getByRole("link", {
+          name: /^home$/i,
+          hidden: true,
+        }),
       ).toBeInTheDocument();
+
       expect(
-        within(mobileNav).getByRole("menuitem", { name: /work/i }),
+        within(mobileNavigation).getByRole("link", {
+          name: /^work$/i,
+          hidden: true,
+        }),
       ).toBeInTheDocument();
+
       expect(
-        within(mobileNav).getByRole("menuitem", { name: /contact/i }),
+        within(mobileNavigation).getByRole("link", {
+          name: /^contact$/i,
+          hidden: true,
+        }),
       ).toBeInTheDocument();
+
       expect(
-        within(mobileNav).getByRole("menuitem", { name: /blogs/i }),
+        within(mobileNavigation).getByRole("link", {
+          name: /^blogs$/i,
+          hidden: true,
+        }),
       ).toBeInTheDocument();
     });
 
     test("closes when overlay is clicked", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
       fireEvent.click(
         screen.getByRole("button", {
-          name: /toggle navigation menu/i,
+          name: /open navigation menu/i,
         }),
       );
 
@@ -364,111 +398,144 @@ describe("Navbar", () => {
         ".navbar-mobile-overlay",
       ) as HTMLElement;
 
-      expect(overlay).toBeTruthy();
+      expect(overlay).toBeInTheDocument();
+      expect(overlay).toHaveClass("navbar-mobile-overlay-open");
 
       fireEvent.click(overlay);
 
-      const mobileMenu = screen.getByRole("menu", {
-        hidden: true,
-      });
+      const mobileMenu = document.getElementById("mobile-menu");
 
       expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
-      expect(mobileMenu.className).not.toContain("navbar-mobile-menu-open");
+      expect(mobileMenu).toHaveAttribute("inert");
+      expect(mobileMenu).not.toHaveClass("navbar-mobile-menu-open");
     });
 
     test("closes when a mobile navigation link is clicked", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
       fireEvent.click(
         screen.getByRole("button", {
-          name: /toggle navigation menu/i,
+          name: /open navigation menu/i,
         }),
       );
 
-      const homeLink = screen.getAllByRole("menuitem", {
-        name: /home/i,
-      })[1]; // mobile version
+      const mobileMenu = document.getElementById("mobile-menu");
 
-      fireEvent.click(homeLink);
+      const mobileNavigation = within(mobileMenu as HTMLElement).getByRole(
+        "navigation",
+        {
+          name: /mobile navigation/i,
+          hidden: true,
+        },
+      );
 
-      const mobileMenu = screen.getByRole("menu", {
+      const homeLink = within(mobileNavigation).getByRole("link", {
+        name: /^home$/i,
         hidden: true,
       });
 
-      expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
-      expect(mobileMenu.className).not.toContain("navbar-mobile-menu-open");
-    });
-  });
-
-  describe("route changes", () => {
-    test("closes mobile menu when pathname changes", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
-      const { rerender } = render(<Navbar />);
-
-      // open menu first
-      fireEvent.click(
-        screen.getByRole("button", {
-          name: /toggle navigation menu/i,
-        }),
-      );
-
-      expect(screen.getByRole("menu", { hidden: true })).toHaveAttribute(
-        "aria-hidden",
-        "false",
-      );
-
-      // simulate route change
-      usePathnameMock.mockReturnValue("/works");
-
-      rerender(<Navbar />);
-
-      const mobileMenu = screen.getByRole("menu", { hidden: true });
+      fireEvent.click(homeLink);
 
       expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
-      expect(mobileMenu.className).not.toContain("navbar-mobile-menu-open");
+      expect(mobileMenu).toHaveAttribute("inert");
+      expect(mobileMenu).not.toHaveClass("navbar-mobile-menu-open");
     });
   });
 
   describe("body scroll locking", () => {
     test("locks body scroll when mobile menu opens", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
       fireEvent.click(
         screen.getByRole("button", {
-          name: /toggle navigation menu/i,
+          name: /open navigation menu/i,
         }),
       );
 
       expect(document.body.style.overflow).toBe("hidden");
     });
-    test("restores body scroll when mobile menu closes", (): void => {
-      usePathnameMock.mockReturnValue("/");
 
+    test("restores body scroll when mobile menu closes", (): void => {
       render(<Navbar />);
 
       const toggleButton = screen.getByRole("button", {
-        name: /toggle navigation menu/i,
+        name: /open navigation menu/i,
       });
 
-      // open
       fireEvent.click(toggleButton);
+
       expect(document.body.style.overflow).toBe("hidden");
 
-      // close
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /close navigation menu/i,
+        }),
+      );
+
+      expect(document.body.style.overflow).toBe("");
+    });
+  });
+
+  describe("keyboard interaction", () => {
+    test("closes mobile menu when Escape is pressed", (): void => {
+      render(<Navbar />);
+
+      const toggleButton = screen.getByRole("button", {
+        name: /open navigation menu/i,
+      });
+
       fireEvent.click(toggleButton);
-      expect(document.body.style.overflow).toBe("unset");
+
+      expect(
+        screen.getByRole("button", {
+          name: /close navigation menu/i,
+        }),
+      ).toBeInTheDocument();
+
+      fireEvent.keyDown(document, {
+        key: "Escape",
+      });
+
+      expect(
+        screen.getByRole("button", {
+          name: /open navigation menu/i,
+        }),
+      ).toBeInTheDocument();
+
+      expect(
+        screen.getByRole("button", {
+          name: /open navigation menu/i,
+        }),
+      ).toHaveFocus();
+
+      expect(document.body.style.overflow).toBe("");
+    });
+
+    test("does not close mobile menu for other keys", (): void => {
+      render(<Navbar />);
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /open navigation menu/i,
+        }),
+      );
+
+      fireEvent.keyDown(document, {
+        key: "Enter",
+      });
+
+      expect(
+        screen.getByRole("button", {
+          name: /close navigation menu/i,
+        }),
+      ).toBeInTheDocument();
+
+      expect(document.body.style.overflow).toBe("hidden");
     });
   });
 
   describe("scroll behavior", () => {
-    test("adds scrolled class after scrolling past threshold", async () => {
-      usePathnameMock.mockReturnValue("/");
-
+    test("adds scrolled class after scrolling past threshold", (): void => {
       render(<Navbar />);
 
       const nav = screen.getByRole("navigation", {
@@ -479,14 +546,10 @@ describe("Navbar", () => {
         setScrollY(60);
       });
 
-      await waitFor(() => {
-        expect(nav).toHaveClass("navbar-scrolled");
-      });
+      expect(nav).toHaveClass("navbar-scrolled");
     });
 
-    test("removes scrolled class when above threshold", async () => {
-      usePathnameMock.mockReturnValue("/");
-
+    test("removes scrolled class when above threshold", (): void => {
       render(<Navbar />);
 
       const nav = screen.getByRole("navigation", {
@@ -497,47 +560,31 @@ describe("Navbar", () => {
         setScrollY(60);
       });
 
-      await waitFor(() => {
-        expect(nav).toHaveClass("navbar-scrolled");
-      });
+      expect(nav).toHaveClass("navbar-scrolled");
 
       act(() => {
         setScrollY(10);
       });
 
-      await waitFor(() => {
-        expect(nav).not.toHaveClass("navbar-scrolled");
-      });
-
-      setScrollY(10);
-
-      expect(nav.className).not.toContain("navbar-scrolled");
+      expect(nav).not.toHaveClass("navbar-scrolled");
     });
 
-    test("hides navbar when scrolling down", async () => {
-      usePathnameMock.mockReturnValue("/");
-
+    test("hides navbar when scrolling down", (): void => {
       render(<Navbar />);
 
       const nav = screen.getByRole("navigation", {
         name: /primary navigation/i,
       });
+
       act(() => {
         setScrollY(120);
       });
 
-      act(() => {
-        setScrollY(200);
-      });
-
-      await waitFor(() => {
-        expect(nav).toHaveClass("navbar-hidden");
-      });
+      expect(nav).toHaveClass("navbar-hidden");
+      expect(nav).not.toHaveClass("navbar-visible");
     });
 
-    test("shows navbar when scrolling up", async () => {
-      usePathnameMock.mockReturnValue("/");
-
+    test("shows navbar when scrolling up", (): void => {
       render(<Navbar />);
 
       const nav = screen.getByRole("navigation", {
@@ -548,25 +595,19 @@ describe("Navbar", () => {
         setScrollY(200);
       });
 
-      await waitFor(() => {
-        expect(nav).toHaveClass("navbar-hidden");
-      });
+      expect(nav).toHaveClass("navbar-hidden");
 
       act(() => {
         setScrollY(100);
       });
 
-      await waitFor(() => {
-        expect(nav).toHaveClass("navbar-visible");
-        expect(nav).not.toHaveClass("navbar-hidden");
-      });
+      expect(nav).toHaveClass("navbar-visible");
+      expect(nav).not.toHaveClass("navbar-hidden");
     });
   });
 
   describe("accessibility", () => {
     test("has primary navigation label", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
       render(<Navbar />);
 
       expect(
@@ -576,13 +617,24 @@ describe("Navbar", () => {
       ).toBeInTheDocument();
     });
 
-    test("updates aria-expanded on mobile toggle", (): void => {
-      usePathnameMock.mockReturnValue("/");
+    test("has mobile navigation label", (): void => {
+      render(<Navbar />);
 
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      expect(
+        within(mobileMenu as HTMLElement).getByRole("navigation", {
+          name: /mobile navigation/i,
+          hidden: true,
+        }),
+      ).toBeInTheDocument();
+    });
+
+    test("updates aria-expanded on mobile toggle", (): void => {
       render(<Navbar />);
 
       const toggleButton = screen.getByRole("button", {
-        name: /toggle navigation menu/i,
+        name: /open navigation menu/i,
       });
 
       expect(toggleButton).toHaveAttribute("aria-expanded", "false");
@@ -592,26 +644,47 @@ describe("Navbar", () => {
       expect(toggleButton).toHaveAttribute("aria-expanded", "true");
     });
 
-    test("updates aria-hidden on mobile menu", (): void => {
-      usePathnameMock.mockReturnValue("/");
-
+    test("updates aria-hidden and inert on mobile menu", (): void => {
       render(<Navbar />);
 
-      const toggleButton = screen.getByRole("button", {
-        name: /toggle navigation menu/i,
-      });
-
-      fireEvent.click(toggleButton);
-
-      const mobileMenu = screen.getByRole("menu", {
-        hidden: true,
-      });
-
-      expect(mobileMenu).toHaveAttribute("aria-hidden", "false");
-
-      fireEvent.click(toggleButton);
+      const mobileMenu = document.getElementById("mobile-menu");
 
       expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
+      expect(mobileMenu).toHaveAttribute("inert");
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /open navigation menu/i,
+        }),
+      );
+
+      expect(mobileMenu).toHaveAttribute("aria-hidden", "false");
+      expect(mobileMenu).not.toHaveAttribute("inert");
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /close navigation menu/i,
+        }),
+      );
+
+      expect(mobileMenu).toHaveAttribute("aria-hidden", "true");
+      expect(mobileMenu).toHaveAttribute("inert");
+    });
+
+    test("does not use menuitem or menubar roles", (): void => {
+      render(<Navbar />);
+
+      expect(
+        screen.queryByRole("menuitem", {
+          hidden: true,
+        }),
+      ).not.toBeInTheDocument();
+
+      expect(
+        screen.queryByRole("menubar", {
+          hidden: true,
+        }),
+      ).not.toBeInTheDocument();
     });
   });
 });

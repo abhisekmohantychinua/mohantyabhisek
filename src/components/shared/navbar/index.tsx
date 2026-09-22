@@ -6,106 +6,136 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { JSX } from "react";
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CtaLink } from "../cta-link";
 
-export default function Navbar(): JSX.Element {
-  // State management for scroll behavior and mobile menu
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+interface NavigationItem {
+  name: string;
+  href: string;
+}
 
+const navigationItems: NavigationItem[] = [
+  { name: "Home", href: "/" },
+  { name: "Work", href: "/works" },
+  { name: "Contact", href: "/contact" },
+  { name: "Blogs", href: "/blogs" },
+];
+
+export default function Navbar(): JSX.Element {
   const pathname = usePathname();
 
-  /**
-   * Navigation items with their display names and routes
-   * Kept simple and focused on core user journeys
-   */
-  const navigationItems = [
-    { name: "Home", href: "/" },
-    { name: "Work", href: "/works" },
-    { name: "Contact", href: "/contact" },
-    { name: "Blogs", href: "/blogs" },
-  ];
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const lastScrollY = useRef(0);
+  const mobileMenuToggleRef = useRef<HTMLButtonElement>(null);
 
   /**
-   * Handle scroll behavior for background appearance and navbar visibility
-   * Background fades in after 40-60px of scroll
-   * Optional hide/show behavior based on scroll direction
+   * Update the navbar appearance and visibility based on scroll position.
+   *
+   * The previous scroll position is kept in a ref so the scroll listener
+   * only needs to be registered once.
    */
   useEffect(() => {
     const handleScroll = (): void => {
       const currentScrollY = window.scrollY;
+      const previousScrollY = lastScrollY.current;
 
-      // Background appearance logic
       setIsScrolled(currentScrollY > 50);
 
-      // Hide/show logic (optional behavior)
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down - hide navbar
+      if (currentScrollY > previousScrollY && currentScrollY > 100) {
+        // Scrolling down: hide the navbar.
         setIsNavbarVisible(false);
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up - show navbar
+      } else if (currentScrollY < previousScrollY) {
+        // Scrolling up: show the navbar.
         setIsNavbarVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return (): void => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+
+    return (): void => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   /**
-   * Close mobile menu when route changes
-   */
-  useEffect(() => {
-    // Defer the state update to avoid synchronous setState inside the effect
-    startTransition(() => {
-      setIsMobileMenuOpen(false);
-    });
-  }, [pathname]);
-
-  /**
-   * Prevent body scroll when mobile menu is open
+   * Prevent the document from scrolling while the mobile menu is open.
+   *
+   * This effect synchronizes React state with the external DOM API.
    */
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     }
 
     return (): void => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
   /**
-   * Check if a navigation item is currently active
+   * Close the mobile menu when Escape is pressed.
+   *
+   * Focus is returned to the menu toggle so keyboard users retain
+   * a predictable position in the navigation.
+   */
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent): void => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      setIsMobileMenuOpen(false);
+      mobileMenuToggleRef.current?.focus();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return (): void => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
+  /**
+   * Determine whether a navigation item represents the current route.
    */
   const isActiveLink = (href: string): boolean => {
     if (href === "/") {
       return pathname === "/";
     }
+
     return pathname.startsWith(href);
+  };
+
+  /**
+   * Close the mobile menu.
+   */
+  const closeMobileMenu = (): void => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <>
-      {/* Main navbar container with conditional classes for scroll states */}
+      {/* Primary navigation */}
       <nav
         className={`navbar ${isScrolled ? "navbar-scrolled" : ""} ${
           isNavbarVisible ? "navbar-visible" : "navbar-hidden"
         }`}
-        role="navigation"
         aria-label="Primary navigation"
       >
-        {/* Inner container for content alignment */}
         <div className="navbar-container">
-          {/* Logo zone - always routes to home */}
+          {/* Logo */}
           <div className="navbar-logo-zone">
             <Link
               href="/"
@@ -123,23 +153,27 @@ export default function Navbar(): JSX.Element {
             </Link>
           </div>
 
-          {/* Desktop navigation items */}
-          <div className="navbar-nav-desktop" role="menubar">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`navbar-nav-link ${
-                  isActiveLink(item.href) ? "navbar-nav-link-active" : ""
-                }`}
-                role="menuitem"
-              >
-                {item.name}
-              </Link>
-            ))}
+          {/* Desktop navigation */}
+          <div className="navbar-nav-desktop">
+            {navigationItems.map((item) => {
+              const active = isActiveLink(item.href);
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`navbar-nav-link ${
+                    active ? "navbar-nav-link-active" : ""
+                  }`}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Utility zone - language selector */}
+          {/* Utility actions and mobile menu toggle */}
           <div className="navbar-utility-zone">
             <CtaLink
               href="tel:+919439485166"
@@ -150,61 +184,71 @@ export default function Navbar(): JSX.Element {
               Call Me
             </CtaLink>
 
-            {/* Mobile menu toggle */}
             <button
+              ref={mobileMenuToggleRef}
+              type="button"
               className="navbar-mobile-toggle"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label="Toggle navigation menu"
+              aria-label={
+                isMobileMenuOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
             >
-              <span className="navbar-mobile-toggle-line"></span>
-              <span className="navbar-mobile-toggle-line"></span>
-              <span className="navbar-mobile-toggle-line"></span>
+              <span className="navbar-mobile-toggle-line" />
+              <span className="navbar-mobile-toggle-line" />
+              <span className="navbar-mobile-toggle-line" />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="navbar-mobile-overlay"
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+      {/* Mobile menu backdrop */}
+      <div
+        className={`navbar-mobile-overlay ${
+          isMobileMenuOpen ? "navbar-mobile-overlay-open" : ""
+        }`}
+        aria-hidden="true"
+        onClick={closeMobileMenu}
+      />
 
-      {/* Mobile slide-in menu panel */}
+      {/* Mobile navigation */}
       <div
         id="mobile-menu"
         className={`navbar-mobile-menu ${
           isMobileMenuOpen ? "navbar-mobile-menu-open" : ""
         }`}
-        role="menu"
         aria-hidden={!isMobileMenuOpen}
+        inert={!isMobileMenuOpen}
       >
         <div className="navbar-mobile-menu-content">
-          {/* Mobile navigation links */}
-          <nav className="navbar-mobile-nav" role="menubar">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`navbar-mobile-nav-link ${
-                  isActiveLink(item.href) ? "navbar-mobile-nav-link-active" : ""
-                }`}
-                role="menuitem"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <nav className="navbar-mobile-nav" aria-label="Mobile navigation">
+            {navigationItems.map((item) => {
+              const active = isActiveLink(item.href);
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`navbar-mobile-nav-link ${
+                    active ? "navbar-mobile-nav-link-active" : ""
+                  }`}
+                  aria-current={active ? "page" : undefined}
+                  onClick={closeMobileMenu}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
+
           <CtaLink
             href="tel:+919439485166"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={closeMobileMenu}
           >
             Call Me
           </CtaLink>
