@@ -3,7 +3,7 @@ import "./styles.css";
 import Image from "next/image";
 import type { JSX } from "react";
 
-import BrandMark from "@/components/shared/brand-mark";
+import AnimatedBrandMark from "@/components/shared/animated-brand-mark";
 import {
   Carousel,
   CarouselContent,
@@ -57,7 +57,7 @@ export default function Solutions(): JSX.Element {
         internal operations, solutions are designed around business goals,
         practical requirements, and long-term usability.
       </p>
-      <BrandMark
+      <AnimatedBrandMark
         variant="line-horizontal"
         className="solutions__brand-mark"
         height={1200}
