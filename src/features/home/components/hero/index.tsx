@@ -6,7 +6,6 @@ import Link from "next/link";
 import type { JSX } from "react";
 
 import AnimatedBrandMark from "@/components/shared/animated-brand-mark";
-import BrandMark from "@/components/shared/brand-mark";
 import CtaDialog from "@/components/shared/cta-dialog";
 import { Button } from "@/components/ui/button";
 

@@ -1,14 +1,19 @@
+"use client";
+
 import "./styles.css";
 
 import Image from "next/image";
 import type { JSX } from "react";
+import { useState } from "react";
 
-import AnimatedBrandMark from "@/components/shared/animated-brand-mark";
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+
+import AnimatedScroll from "./animated-scroll";
 
 type SolutionCard = {
   tag: string;
@@ -17,6 +22,7 @@ type SolutionCard = {
   image: string;
   caption: string;
 };
+
 const solutions: SolutionCard[] = [
   {
     tag: "Website Development",
@@ -46,23 +52,26 @@ const solutions: SolutionCard[] = [
 ];
 
 export default function Solutions(): JSX.Element {
+  const [api, setApi] = useState<CarouselApi>();
+
   return (
     <section className="solutions">
       <span className="solutions__kicker kicker">Solutions</span>
+
       <h2 className="solutions__heading">
         Websites, Web Applications, And Business Systems
       </h2>
+
       <p className="solutions__description">
         From establishing an online presence to building products and improving
         internal operations, solutions are designed around business goals,
         practical requirements, and long-term usability.
       </p>
-      <AnimatedBrandMark
-        variant="line-horizontal"
-        className="solutions__brand-mark"
-        height={1200}
-      />
+
+      <AnimatedScroll api={api} />
+
       <Carousel
+        setApi={setApi}
         opts={{
           dragFree: true,
           align: "start",
@@ -77,11 +86,15 @@ export default function Solutions(): JSX.Element {
             >
               <article className="solutions__card">
                 <span className="solutions__card-tag">{solution.tag}</span>
+
                 <h3 className="solutions__card-heading">{solution.heading}</h3>
+
                 <hr className="solutions__card-divider divider" />
+
                 <p className="solutions__card-description">
                   {solution.description}
                 </p>
+
                 <figure className="solutions__card-background">
                   <Image
                     src={solution.image}
@@ -91,6 +104,7 @@ export default function Solutions(): JSX.Element {
                     className="solutions__card-image"
                     priority={index === 0}
                   />
+
                   <figcaption className="solutions__card-caption">
                     {solution.caption}
                   </figcaption>
