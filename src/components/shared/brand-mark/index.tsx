@@ -92,19 +92,19 @@ export const BrandMark = React.forwardRef<SVGSVGElement, BrandMarkProps>(
           <rect
             x={0}
             y={0}
+            width={length}
+            height={thicknessValue}
+            fill="var(--color-primary)"
+            className={primaryClassName}
+          />
+
+          <rect
+            x={0}
+            y={0}
             width={length * accent}
             height={thicknessValue}
             fill="var(--color-accent)"
             className={accentClassName}
-          />
-
-          <rect
-            x={length * accent}
-            y={0}
-            width={length * (1 - accent)}
-            height={thicknessValue}
-            fill="var(--color-primary)"
-            className={primaryClassName}
           />
         </svg>
       );
@@ -124,18 +124,18 @@ export const BrandMark = React.forwardRef<SVGSVGElement, BrandMarkProps>(
           x={0}
           y={0}
           width={thicknessValue}
-          height={length * accent}
-          fill="var(--color-accent)"
-          className={accentClassName}
+          height={length}
+          fill="var(--color-primary)"
+          className={primaryClassName}
         />
 
         <rect
           x={0}
-          y={length * accent}
+          y={0}
           width={thicknessValue}
-          height={length * (1 - accent)}
-          fill="var(--color-primary)"
-          className={primaryClassName}
+          height={length * accent}
+          fill="var(--color-accent)"
+          className={accentClassName}
         />
       </svg>
     );

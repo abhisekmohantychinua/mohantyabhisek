@@ -13,14 +13,19 @@ describe("BrandMark", () => {
 
       expect(svg).toHaveAttribute("width", "1");
       expect(svg).toHaveAttribute("height", "150");
-
       expect(rects).toHaveLength(2);
 
-      expect(rects[0]).toHaveAttribute("height", "75");
-      expect(rects[0]).toHaveAttribute("fill", "var(--color-accent)");
+      expect(rects[0]).toHaveAttribute("x", "0");
+      expect(rects[0]).toHaveAttribute("y", "0");
+      expect(rects[0]).toHaveAttribute("width", "1");
+      expect(rects[0]).toHaveAttribute("height", "150");
+      expect(rects[0]).toHaveAttribute("fill", "var(--color-primary)");
 
+      expect(rects[1]).toHaveAttribute("x", "0");
+      expect(rects[1]).toHaveAttribute("y", "0");
+      expect(rects[1]).toHaveAttribute("width", "1");
       expect(rects[1]).toHaveAttribute("height", "75");
-      expect(rects[1]).toHaveAttribute("fill", "var(--color-primary)");
+      expect(rects[1]).toHaveAttribute("fill", "var(--color-accent)");
     });
 
     test("renders a horizontal line", () => {
@@ -31,10 +36,19 @@ describe("BrandMark", () => {
 
       expect(svg).toHaveAttribute("width", "150");
       expect(svg).toHaveAttribute("height", "1");
-
       expect(rects).toHaveLength(2);
-      expect(rects[0]).toHaveAttribute("width", "75");
+
+      expect(rects[0]).toHaveAttribute("x", "0");
+      expect(rects[0]).toHaveAttribute("y", "0");
+      expect(rects[0]).toHaveAttribute("width", "150");
+      expect(rects[0]).toHaveAttribute("height", "1");
+      expect(rects[0]).toHaveAttribute("fill", "var(--color-primary)");
+
+      expect(rects[1]).toHaveAttribute("x", "0");
+      expect(rects[1]).toHaveAttribute("y", "0");
       expect(rects[1]).toHaveAttribute("width", "75");
+      expect(rects[1]).toHaveAttribute("height", "1");
+      expect(rects[1]).toHaveAttribute("fill", "var(--color-accent)");
     });
 
     test("renders a circle", () => {
@@ -45,13 +59,15 @@ describe("BrandMark", () => {
 
       expect(svg).toHaveAttribute("width", "100");
       expect(svg).toHaveAttribute("height", "100");
-
       expect(circles).toHaveLength(2);
+
+      expect(circles[0]).toHaveAttribute("stroke", "var(--color-primary)");
+      expect(circles[1]).toHaveAttribute("stroke", "var(--color-accent)");
     });
   });
 
   describe("animation targets", () => {
-    test("applies primary and accent classes to vertical line segments", () => {
+    test("applies primary and accent classes to vertical line layers", () => {
       const { container } = render(
         <BrandMark
           primaryClassName="brand-primary"
@@ -59,13 +75,22 @@ describe("BrandMark", () => {
         />,
       );
 
-      const rects = container.querySelectorAll("rect");
+      const primary = container.querySelector(".brand-primary");
+      const accent = container.querySelector(".brand-accent");
 
-      expect(rects[0]).toHaveClass("brand-accent");
-      expect(rects[1]).toHaveClass("brand-primary");
+      expect(primary).toBeInTheDocument();
+      expect(accent).toBeInTheDocument();
+
+      expect(primary).toHaveAttribute("x", "0");
+      expect(primary).toHaveAttribute("y", "0");
+      expect(primary).toHaveAttribute("height", "150");
+
+      expect(accent).toHaveAttribute("x", "0");
+      expect(accent).toHaveAttribute("y", "0");
+      expect(accent).toHaveAttribute("height", "75");
     });
 
-    test("applies primary and accent classes to horizontal line segments", () => {
+    test("applies primary and accent classes to horizontal line layers", () => {
       const { container } = render(
         <BrandMark
           variant="line-horizontal"
@@ -74,13 +99,22 @@ describe("BrandMark", () => {
         />,
       );
 
-      const rects = container.querySelectorAll("rect");
+      const primary = container.querySelector(".brand-primary");
+      const accent = container.querySelector(".brand-accent");
 
-      expect(rects[0]).toHaveClass("brand-accent");
-      expect(rects[1]).toHaveClass("brand-primary");
+      expect(primary).toBeInTheDocument();
+      expect(accent).toBeInTheDocument();
+
+      expect(primary).toHaveAttribute("x", "0");
+      expect(primary).toHaveAttribute("y", "0");
+      expect(primary).toHaveAttribute("width", "150");
+
+      expect(accent).toHaveAttribute("x", "0");
+      expect(accent).toHaveAttribute("y", "0");
+      expect(accent).toHaveAttribute("width", "75");
     });
 
-    test("applies primary and accent classes to circle segments", () => {
+    test("applies primary and accent classes to circle layers", () => {
       const { container } = render(
         <BrandMark
           variant="circle"
@@ -89,10 +123,14 @@ describe("BrandMark", () => {
         />,
       );
 
-      const circles = container.querySelectorAll("circle");
+      const primary = container.querySelector(".brand-primary");
+      const accent = container.querySelector(".brand-accent");
 
-      expect(circles[0]).toHaveClass("brand-primary");
-      expect(circles[1]).toHaveClass("brand-accent");
+      expect(primary).toBeInTheDocument();
+      expect(accent).toBeInTheDocument();
+
+      expect(primary).toHaveAttribute("stroke", "var(--color-primary)");
+      expect(accent).toHaveAttribute("stroke", "var(--color-accent)");
     });
   });
 
@@ -108,8 +146,11 @@ describe("BrandMark", () => {
       expect(svg).toHaveAttribute("width", "4");
       expect(svg).toHaveAttribute("height", "200");
 
-      expect(rects[0]).toHaveAttribute("height", "50");
-      expect(rects[1]).toHaveAttribute("height", "150");
+      expect(rects[0]).toHaveAttribute("width", "4");
+      expect(rects[0]).toHaveAttribute("height", "200");
+
+      expect(rects[1]).toHaveAttribute("width", "4");
+      expect(rects[1]).toHaveAttribute("height", "50");
     });
 
     test("applies custom dimensions to horizontal lines", () => {
@@ -124,8 +165,11 @@ describe("BrandMark", () => {
 
       const rects = container.querySelectorAll("rect");
 
-      expect(rects[0]).toHaveAttribute("width", "50");
-      expect(rects[1]).toHaveAttribute("width", "150");
+      expect(rects[0]).toHaveAttribute("width", "200");
+      expect(rects[0]).toHaveAttribute("height", "4");
+
+      expect(rects[1]).toHaveAttribute("width", "50");
+      expect(rects[1]).toHaveAttribute("height", "4");
     });
 
     test("applies custom dimensions to circles", () => {
@@ -146,6 +190,11 @@ describe("BrandMark", () => {
 
       expect(circles[0]).toHaveAttribute("stroke-width", "12");
       expect(circles[1]).toHaveAttribute("stroke-width", "12");
+
+      expect(circles[1]).toHaveAttribute(
+        "stroke-dasharray",
+        expect.stringContaining(""),
+      );
     });
   });
 
