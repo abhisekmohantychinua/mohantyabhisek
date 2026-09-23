@@ -1,4 +1,5 @@
 <!-- markdownlint-disable MD024 -->
+
 # Website Content - mohantyabhisek.com
 
 ## Home Page
@@ -6,7 +7,7 @@
 ### Hero Section
 
 **Heading**
-Custom Websites And Web Applications Built With  
+Custom Websites And Web Applications Built With
 `Clarity` And Purpose.
 
 **Description**
@@ -19,7 +20,7 @@ Start a Conversation
 View My Work ->
 
 **Image**
-![Every solution starts with understanding the business.](../public/hero.png)
+![Every solution starts with understanding the business.](../public/hero.jpg)
 
 ### About Section
 
@@ -62,7 +63,7 @@ Websites For Businesses
 Websites designed to communicate clearly, build credibility, and help people understand your business before the first conversation begins.
 
 **Image**
-![Helping people understand your business before the first conversation.](../public/services/business-website.png)
+![Helping people understand your business before the first conversation.](../public/services/business-website.jpg)
 
 #### Custom Web Apps Card
 
@@ -76,7 +77,7 @@ Custom Web Applications & SaaS Products
 Applications designed around user workflows, product requirements, and business objectives, with scalability and usability considered from the start.
 
 **Image**
-![From product ideas to usable software.](../public/services/saas.png)
+![From product ideas to usable software.](../public/services/saas.jpg)
 
 #### ERP, CRM Systems Card
 
@@ -90,7 +91,7 @@ ERP, CRM & Internal Management Systems
 Custom systems that help teams manage operations, centralize information, and streamline day-to-day processes across the business.
 
 **Image**
-![Bringing people, processes, and information together.](../public/services/business-operations.png)
+![Bringing people, processes, and information together.](../public/services/business-operations.jpg)
 
 ### Testimonials Section
 
@@ -207,7 +208,7 @@ Articles exploring website strategy, web application development, business syste
 Continue Reading
 
 **Section CTA**
-Visit Blog ->  
+Visit Blog ->
 
 ### CTA Section
 

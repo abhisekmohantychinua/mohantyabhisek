@@ -108,6 +108,49 @@ describe("sitemap", () => {
       );
     });
 
+    test("includes image sitemap entries for works", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      const workEntry = result.find(
+        (entry) => entry.url === "https://mohantyabhisek.com/works/sample-work",
+      );
+
+      expect(workEntry).toEqual(
+        expect.objectContaining({
+          images: [
+            "https://example.com/thumbnail.jpg",
+            "https://example.com/gallery-1.jpg",
+            "https://example.com/gallery-2.jpg",
+          ],
+        }),
+      );
+    });
+
+    test("includes video sitemap entries for works", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      const workEntry = result.find(
+        (entry) => entry.url === "https://mohantyabhisek.com/works/sample-work",
+      );
+
+      expect(workEntry).toEqual(
+        expect.objectContaining({
+          videos: [
+            {
+              title: "Featured Video",
+              description: "Featured video description",
+              thumbnail_loc: "https://example.com/thumbnail.jpg",
+              content_loc: "https://example.com/video.mp4",
+            },
+          ],
+        }),
+      );
+    });
+
     test("includes blog sitemap entries", async () => {
       const lastModifiedAt = new Date("2026-06-15T00:00:00.000Z");
 
