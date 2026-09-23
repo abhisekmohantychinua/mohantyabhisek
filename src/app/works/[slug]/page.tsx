@@ -121,7 +121,7 @@ export async function generateMetadata({
 
       images: [
         {
-          url: work.featuredVideo.thumbnail.url,
+          url: SITE_URL + work.featuredVideo.thumbnail.url,
           width: work.featuredVideo.thumbnail.width,
           height: work.featuredVideo.thumbnail.height,
           alt: work.featuredVideo.thumbnail.alt,
@@ -130,7 +130,7 @@ export async function generateMetadata({
 
       videos: [
         {
-          url: work.featuredVideo.url,
+          url: SITE_URL + work.featuredVideo.url,
           width: work.featuredVideo.thumbnail.width,
           height: work.featuredVideo.thumbnail.height,
         },
@@ -143,7 +143,7 @@ export async function generateMetadata({
       title: work.metadata.title,
       description: work.metadata.description,
 
-      images: [work.featuredVideo.thumbnail.url],
+      images: [SITE_URL + work.featuredVideo.thumbnail.url],
     },
   };
 }
@@ -204,11 +204,11 @@ export function mapToVideoJsonLd(workSlug: string, video: Video): object {
 
     duration: `PT${video.duration}S`,
 
-    contentUrl: video.url,
+    contentUrl: SITE_URL + video.url,
 
     thumbnail: {
       "@type": "ImageObject",
-      url: video.thumbnail.url,
+      url: SITE_URL + video.thumbnail.url,
       width: video.thumbnail.width,
       height: video.thumbnail.height,
     },
