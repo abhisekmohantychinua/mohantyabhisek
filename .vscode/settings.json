@@ -19,6 +19,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.wordWrap": "on",
+  "editor.wordWrapIndicator": true,
   "editor.formatOnSave": true,
   "js/ts.referencesCodeLens.enabled": true,
   "js/ts.implementationsCodeLens.enabled": false,
