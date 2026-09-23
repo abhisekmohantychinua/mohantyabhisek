@@ -11,7 +11,7 @@ interface Work {
   title: string;
   description: string;
   sectors: string[]; // categories
-  url: string; // live link
+  url?: string; // live link
 
   contents: string[];
 
