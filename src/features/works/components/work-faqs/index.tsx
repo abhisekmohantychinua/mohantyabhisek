@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { Fragment, type JSX } from "react";
 
 import type Work from "../../models/work";
 
@@ -10,10 +10,10 @@ export default function WorkFaq({ faqs }: WorkFaqProps): JSX.Element {
       <h2>FAQs</h2>
       <dl>
         {faqs.map((faq, index) => (
-          <>
+          <Fragment key={index}>
             <dt key={index}>{faq.question}</dt>
             <dd>{faq.answer}</dd>
-          </>
+          </Fragment>
         ))}
       </dl>
     </section>
