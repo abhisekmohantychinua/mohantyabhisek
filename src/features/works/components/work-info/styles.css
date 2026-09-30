@@ -68,7 +68,7 @@
 
 .work-info__associate-link,
 .work-info__associate-name {
-  @apply ms-2;
+  @apply ms-2 mb-1 block;
   @apply max-lg:ms-0;
 }
 
