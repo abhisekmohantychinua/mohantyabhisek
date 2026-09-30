@@ -35,7 +35,8 @@
 }
 
 .hero__bottom-sectors {
-  @apply flex items-start justify-start gap-2;
+  @apply flex w-1/2 flex-wrap items-start justify-start gap-2;
+  @apply max-md:w-full;
 }
 .hero__bottom-sector {
   @apply bg-secondary/15 hover:bg-secondary/25 text-foreground rounded-sm px-3 py-2;
