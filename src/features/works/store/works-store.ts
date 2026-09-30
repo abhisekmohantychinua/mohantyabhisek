@@ -184,7 +184,22 @@ export const works: Work[] = [
     ],
     partners: [],
     teamMembers: [],
-    collaborators: [],
+    collaborators: [
+      {
+        name: "Shivangi Mishra",
+        link: {
+          url: "https://www.behance.net/shivangimishra2023",
+          platform: "Behance",
+        },
+      },
+      {
+        name: "Priyanshu Patil",
+        link: {
+          url: "https://linkedin.com/in/patilpriyanshu",
+          platform: "LinkedIn",
+        },
+      },
+    ],
     faqs: [
       {
         question: "What was built for Northeast Auto Creations?",
