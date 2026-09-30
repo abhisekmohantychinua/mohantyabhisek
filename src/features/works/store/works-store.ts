@@ -44,12 +44,17 @@ export const works: Work[] = [
     metadata: {
       title: "Northeast Auto Creations Website | Abhisek",
       description:
-        "A website for Northeast Auto Creations, presenting its custom automotive services, vehicle projects, and expertise in vehicle customization.",
+        "A digital experience for Northeast Auto Creations, bringing vehicles, automotive products, services, packages, bookings, and online payments together.",
     },
     title: "Northeast Auto Creations",
     description:
       "Built to accommodate a business that had outgrown the boundaries of a conventional workshop website, bringing services, products, vehicle listings, and bookings together under one brand.",
-    sectors: ["Business Website", "Automotive", "Custom Vehicle Services"],
+    sectors: [
+      "Business Website",
+      "Automotive",
+      "Automotive Services",
+      "Automotive Retail",
+    ],
     contents: [
       "Northeast Auto Creations had built a solid presence as a multi-brand car workshop in Lalmati, Guwahati. Routine servicing, mechanical repairs, denting and painting, AC work, insurance claims, premium detailing, customization, and pre-owned vehicles all happened on the ground. Customers found the name easily on Google, Instagram and LinkedIn, yet the existing website never kept pace. It felt dated, made exploration difficult and left most real interactions offline.",
 
@@ -62,102 +67,108 @@ export const works: Work[] = [
     featuredVideo: {
       slug: "northeast-auto-creations-featured-video",
       url: "/works/northeast-auto-creations/video.mp4",
-      alt: "Northeast Auto Creations website and automotive customization project showcase.",
-      caption: "Northeast Auto Creations website showcase.",
+      alt: "The result is a website that finally matches the standard of the business itself. Customers now move from first visit to booking or purchase with clarity, while the team holds a digital presence that no longer lags behind the quality of their work.",
+      caption: "Northeast Auto Creations website walkthrough.",
       transcript:
-        "A walkthrough of the Northeast Auto Creations website, presenting the custom automotive shop and its vehicle customization work.",
+        "The video opens with Northeast Auto Creations and its online presence before transitioning into the website. The homepage introduces the automotive business and highlights its services, pre-owned vehicles, and customer booking options. The Services section presents offerings including vehicle customization, detailing, restoration, and related automotive services. The video then moves through the product area, showing automotive accessories and care products that visitors can browse and purchase. A product is selected and the shopping flow continues into checkout, where product and delivery information are reviewed before the order is placed. The video then shows the payment experience and order confirmation before returning to the broader Northeast Auto Creations digital experience.",
       title: "Northeast Auto Creations Website Showcase",
       description:
-        "A short walkthrough of the Northeast Auto Creations website and its presentation of custom automotive services and portfolio work.",
+        "A visual walkthrough of the Northeast Auto Creations website, presenting its automotive services, products, vehicle listings, booking experience, shopping flow, checkout, and payment process.",
       thumbnail: {
         slug: "northeast-auto-creations-video-thumbnail",
         url: "/works/northeast-auto-creations/image-1.png",
-        alt: "Northeast Auto Creations website preview.",
-        caption: "Northeast Auto Creations website preview.",
+        alt: "Northeast Auto Creations website displayed across multiple screens with automotive services, pre-owned cars, products, and booking features.",
+        caption: "Northeast Auto Creations website and digital experience.",
         title: "Northeast Auto Creations Website Preview",
         description:
-          "A preview image from the Northeast Auto Creations website project.",
+          "A multi-screen preview of the Northeast Auto Creations website, combining its automotive brand, service presentation, vehicle listings, product catalogue, and booking experience.",
         width: 1440,
         height: 810,
       },
-      duration: 50.837,
+      duration: 51,
       uploadedAt: new Date("2026-09-30T00:00:00.000Z"),
     },
     gallery: [
       {
         slug: "northeast-auto-creations-gallery-1",
         url: "/works/northeast-auto-creations/image-1.png",
-        alt: "Northeast Auto Creations website project presentation.",
-        caption: "Northeast Auto Creations website preview.",
-        title: "Northeast Auto Creations Website Preview",
+        alt: "Northeast Auto Creations website showing the pre-owned cars, products, and service package sections",
+        caption:
+          "A unified automotive website bringing cars, products, services, and service packages together.",
+        title: "Northeast Auto Creations Website",
         description:
-          "A project image presenting the Northeast Auto Creations website and automotive brand.",
+          "A view of the Northeast Auto Creations website combining vehicle listings, automotive products, service packages, and booking actions within a single interface.",
         width: 1440,
         height: 810,
       },
       {
         slug: "northeast-auto-creations-gallery-2",
         url: "/works/northeast-auto-creations/image-2.png",
-        alt: "Northeast Auto Creations website design presentation.",
-        caption: "Website design and project presentation.",
-        title: "Northeast Auto Creations Website Design",
+        alt: "Northeast Auto Creations services page displaying automotive services and car service packages",
+        caption:
+          "Automotive services and service packages organized into a single digital experience.",
+        title: "Automotive Services & Packages",
         description:
-          "A project image showing the website design created for the custom automotive shop.",
+          "The website brings together services such as car restoration, customization, detailing, pickup and drop, pre-owned cars, maintenance, insurance claims, and towing alongside dedicated service packages.",
         width: 1440,
         height: 810,
       },
       {
         slug: "northeast-auto-creations-gallery-3",
         url: "/works/northeast-auto-creations/image-3.png",
-        alt: "Northeast Auto Creations digital portfolio presentation.",
-        caption: "Automotive portfolio presentation.",
-        title: "Northeast Auto Creations Portfolio",
+        alt: "Strapi CMS interface showing Northeast Auto Creations content types, media library, and editable website content",
+        caption:
+          "A Strapi-powered content system for managing website content and media.",
+        title: "Strapi CMS Content Management",
         description:
-          "A project image presenting the shop's automotive portfolio through its website.",
+          "The project uses Strapi CMS to manage structured website content and media, with dedicated content types and a media library for maintaining pages, accessories, blogs, packages, services, and related assets.",
         width: 1440,
         height: 810,
       },
       {
         slug: "northeast-auto-creations-gallery-4",
         url: "/works/northeast-auto-creations/image-4.png",
-        alt: "Northeast Auto Creations website experience across screen layouts.",
-        caption: "Responsive website presentation.",
-        title: "Northeast Auto Creations Responsive Website",
+        alt: "Multiple Northeast Auto Creations website screens showing products, login, packages, pre-owned cars, and services",
+        caption:
+          "Multiple views of the Northeast Auto Creations website across its core customer journeys.",
+        title: "Northeast Auto Creations Website Interface",
         description:
-          "A project image presenting the custom automotive website across screen layouts.",
+          "A collection of interface views covering product browsing, authentication, vehicle listings, service packages, and automotive services, showing how the different parts of the platform work together.",
         width: 1440,
         height: 810,
       },
       {
         slug: "northeast-auto-creations-gallery-5",
         url: "/works/northeast-auto-creations/image-5.png",
-        alt: "Northeast Auto Creations website project image.",
-        caption: "Northeast Auto Creations digital experience.",
-        title: "Northeast Auto Creations Digital Experience",
+        alt: "Northeast Auto Creations checkout interface showing product details, delivery information, order review, and PhonePe payment",
+        caption: "A multi-step checkout flow with integrated online payments.",
+        title: "Online Payment & Checkout Flow",
         description:
-          "A project image from the website created to showcase the shop's services and customization work.",
+          "The checkout experience guides customers through product details, delivery information, order review, and payment, including direct online payment through the PhonePe gateway.",
         width: 1440,
         height: 810,
       },
       {
         slug: "northeast-auto-creations-gallery-6",
         url: "/works/northeast-auto-creations/image-6.png",
-        alt: "Northeast Auto Creations automotive website design.",
-        caption: "Automotive website design detail.",
-        title: "Northeast Auto Creations Website Detail",
+        alt: "Northeast Auto Creations blog page displaying automotive articles, guides, and maintenance content",
+        caption:
+          "An automotive content hub for guides, maintenance advice, and vehicle insights.",
+        title: "Automotive Blog & Insights",
         description:
-          "A project image highlighting the website built for Northeast Auto Creations.",
+          "The website includes a dedicated blog and insights section where automotive knowledge is organized into articles covering car care, maintenance, insurance, servicing, and related topics.",
         width: 1440,
         height: 810,
       },
       {
         slug: "northeast-auto-creations-gallery-7",
         url: "/works/northeast-auto-creations/image-7.png",
-        alt: "Northeast Auto Creations project portfolio image.",
-        caption: "Custom automotive project presentation.",
-        title: "Northeast Auto Creations Project Presentation",
+        alt: "Northeast Auto Creations profiles displayed across Instagram, Facebook, and WhatsApp",
+        caption:
+          "Northeast Auto Creations represented across its social and messaging platforms.",
+        title: "Social Media Presence",
         description:
-          "A project image presenting Northeast Auto Creations and its vehicle customization work.",
+          "A collection of Northeast Auto Creations' Instagram, Facebook, and WhatsApp profiles, showing how the business extends its digital presence beyond the website.",
         width: 1440,
         height: 810,
       },
@@ -176,20 +187,55 @@ export const works: Work[] = [
     collaborators: [],
     faqs: [
       {
+        question: "What was built for Northeast Auto Creations?",
+        answer:
+          "A comprehensive automotive website was built to bring together pre-owned cars, automotive products, services, service packages, bookings, and customer information in one platform.",
+      },
+      {
+        question: "What can customers do through the website?",
+        answer:
+          "Customers can explore pre-owned cars, browse automotive products and services, view service packages, book appointments, and purchase products through the website.",
+      },
+      {
+        question: "Does the website support online product purchases?",
+        answer:
+          "Yes. The website includes a multi-step checkout flow covering product details, delivery information, order review, and online payment.",
+      },
+      {
+        question: "How are payments handled on the website?",
+        answer:
+          "The website integrates the PhonePe payment gateway, allowing customers to make payments directly through the checkout experience using supported payment methods.",
+      },
+      {
         question:
-          "What was the Northeast Auto Creations website designed to do?",
+          "What types of automotive services are presented on the website?",
         answer:
-          "The website was designed to showcase the shop's custom automotive services, portfolio, and expertise in vehicle customization.",
+          "The platform presents services including car restoration, customisation and modification, denting and painting, detailing and design, pickup and drop, pre-owned cars, maintenance, cashless insurance claims, and car towing.",
       },
       {
-        question: "Who is the website for?",
+        question: "How is the website content managed?",
         answer:
-          "It gives people interested in custom automotive work a place to explore Northeast Auto Creations and its services.",
+          "The website uses Strapi CMS to manage structured content and media. This allows content such as pages, services, packages, accessories, blogs, and other website information to be updated without modifying the website interface directly.",
       },
       {
-        question: "What does the project emphasize?",
+        question: "Does the website include an automotive content section?",
         answer:
-          "The experience emphasizes the shop's automotive work and makes its services and portfolio easier to discover online.",
+          "Yes. A dedicated blog and insights section provides automotive articles covering topics such as car care, maintenance, servicing, insurance, and vehicle-related guidance.",
+      },
+      {
+        question: "Does the project include product and accessory management?",
+        answer:
+          "Yes. The website includes an accessories/product browsing experience where automotive products can be presented with information and pricing, alongside filtering and sorting options.",
+      },
+      {
+        question: "How are the different automotive offerings organized?",
+        answer:
+          "The website separates the business's offerings into areas such as products, pre-owned cars, accessories, services, packages, and blog content, while keeping them within a consistent website experience.",
+      },
+      {
+        question: "Does the project include a social media presence?",
+        answer:
+          "The project also represents Northeast Auto Creations across Instagram, Facebook, and WhatsApp, extending the business's digital presence beyond the website.",
       },
     ],
     postedAt: new Date("2026-09-30T00:00:00.000Z"),
