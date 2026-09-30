@@ -3,6 +3,23 @@ import type { WorkCard } from "../models/work";
 
 export const workCards: WorkCard[] = [
   {
+    slug: "northeast-auto-creations",
+    title: "Northeast Auto Creations",
+    description:
+      "Built to accommodate a business that had outgrown the boundaries of a conventional workshop website, bringing services, products, vehicle listings, and bookings together under one brand.",
+    image: {
+      slug: "northeast-auto-creations-card",
+      url: "/works/northeast-auto-creations/image-1.png",
+      alt: "Northeast Auto Creations website preview",
+      caption: "Northeast Auto Creations brand preview",
+      title: "Northeast Auto Creations",
+      description:
+        "A custom automotive shop website designed to highlight its services, portfolio, and expertise in vehicle customization.",
+      width: 512,
+      height: 384,
+    },
+  },
+  {
     slug: "iron-core",
     title: "IronCore Fitness",
     description:
@@ -22,6 +39,162 @@ export const workCards: WorkCard[] = [
 ];
 
 export const works: Work[] = [
+  {
+    slug: "northeast-auto-creations",
+    metadata: {
+      title: "Northeast Auto Creations Website | Abhisek",
+      description:
+        "A website for Northeast Auto Creations, presenting its custom automotive services, vehicle projects, and expertise in vehicle customization.",
+    },
+    title: "Northeast Auto Creations",
+    description:
+      "Built to accommodate a business that had outgrown the boundaries of a conventional workshop website, bringing services, products, vehicle listings, and bookings together under one brand.",
+    sectors: ["Business Website", "Automotive", "Custom Vehicle Services"],
+    contents: [
+      "Northeast Auto Creations had built a solid presence as a multi-brand car workshop in Lalmati, Guwahati. Routine servicing, mechanical repairs, denting and painting, AC work, insurance claims, premium detailing, customization, and pre-owned vehicles all happened on the ground. Customers found the name easily on Google, Instagram and LinkedIn, yet the existing website never kept pace. It felt dated, made exploration difficult and left most real interactions offline.",
+
+      "What was required was a website that could carry the full weight of the business something practical, dependable and capable of supporting both customer journeys and day-to-day operations. The design stayed quiet and deliberate: clear hierarchy, clean layouts and a mobile-first structure that allowed seamless movement from checking services to browsing accessories or available cars. Nothing ornamental. Just an experience that felt as reliable as the work leaving the workshop.",
+
+      "A flexible content system was put in place behind the pages so services, packages, listings and posts could be kept current without constant technical intervention. Booking, shopping and payment flows were woven directly into the journey, enabling visitors to complete what they started without leaving the site. The work moved through requirements, close collaboration with the UI/UX designer and content developer, careful structuring of information, development, testing and launch.",
+
+      "The result is a website that finally matches the standard of the business itself. Customers now move from first visit to booking or purchase with clarity, while the team holds a digital presence that no longer lags behind the quality of their work.",
+    ],
+    featuredVideo: {
+      slug: "northeast-auto-creations-featured-video",
+      url: "/works/northeast-auto-creations/video.mp4",
+      alt: "Northeast Auto Creations website and automotive customization project showcase.",
+      caption: "Northeast Auto Creations website showcase.",
+      transcript:
+        "A walkthrough of the Northeast Auto Creations website, presenting the custom automotive shop and its vehicle customization work.",
+      title: "Northeast Auto Creations Website Showcase",
+      description:
+        "A short walkthrough of the Northeast Auto Creations website and its presentation of custom automotive services and portfolio work.",
+      thumbnail: {
+        slug: "northeast-auto-creations-video-thumbnail",
+        url: "/works/northeast-auto-creations/image-1.png",
+        alt: "Northeast Auto Creations website preview.",
+        caption: "Northeast Auto Creations website preview.",
+        title: "Northeast Auto Creations Website Preview",
+        description:
+          "A preview image from the Northeast Auto Creations website project.",
+        width: 1440,
+        height: 810,
+      },
+      duration: 50.837,
+      uploadedAt: new Date("2026-09-30T00:00:00.000Z"),
+    },
+    gallery: [
+      {
+        slug: "northeast-auto-creations-gallery-1",
+        url: "/works/northeast-auto-creations/image-1.png",
+        alt: "Northeast Auto Creations website project presentation.",
+        caption: "Northeast Auto Creations website preview.",
+        title: "Northeast Auto Creations Website Preview",
+        description:
+          "A project image presenting the Northeast Auto Creations website and automotive brand.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "northeast-auto-creations-gallery-2",
+        url: "/works/northeast-auto-creations/image-2.png",
+        alt: "Northeast Auto Creations website design presentation.",
+        caption: "Website design and project presentation.",
+        title: "Northeast Auto Creations Website Design",
+        description:
+          "A project image showing the website design created for the custom automotive shop.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "northeast-auto-creations-gallery-3",
+        url: "/works/northeast-auto-creations/image-3.png",
+        alt: "Northeast Auto Creations digital portfolio presentation.",
+        caption: "Automotive portfolio presentation.",
+        title: "Northeast Auto Creations Portfolio",
+        description:
+          "A project image presenting the shop's automotive portfolio through its website.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "northeast-auto-creations-gallery-4",
+        url: "/works/northeast-auto-creations/image-4.png",
+        alt: "Northeast Auto Creations website experience across screen layouts.",
+        caption: "Responsive website presentation.",
+        title: "Northeast Auto Creations Responsive Website",
+        description:
+          "A project image presenting the custom automotive website across screen layouts.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "northeast-auto-creations-gallery-5",
+        url: "/works/northeast-auto-creations/image-5.png",
+        alt: "Northeast Auto Creations website project image.",
+        caption: "Northeast Auto Creations digital experience.",
+        title: "Northeast Auto Creations Digital Experience",
+        description:
+          "A project image from the website created to showcase the shop's services and customization work.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "northeast-auto-creations-gallery-6",
+        url: "/works/northeast-auto-creations/image-6.png",
+        alt: "Northeast Auto Creations automotive website design.",
+        caption: "Automotive website design detail.",
+        title: "Northeast Auto Creations Website Detail",
+        description:
+          "A project image highlighting the website built for Northeast Auto Creations.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "northeast-auto-creations-gallery-7",
+        url: "/works/northeast-auto-creations/image-7.png",
+        alt: "Northeast Auto Creations project portfolio image.",
+        caption: "Custom automotive project presentation.",
+        title: "Northeast Auto Creations Project Presentation",
+        description:
+          "A project image presenting Northeast Auto Creations and its vehicle customization work.",
+        width: 1440,
+        height: 810,
+      },
+    ],
+    clients: [
+      {
+        name: "Northeast Auto Creations",
+        link: {
+          url: "https://northeastautocreations.com",
+          platform: "Website",
+        },
+      },
+    ],
+    partners: [],
+    teamMembers: [],
+    collaborators: [],
+    faqs: [
+      {
+        question:
+          "What was the Northeast Auto Creations website designed to do?",
+        answer:
+          "The website was designed to showcase the shop's custom automotive services, portfolio, and expertise in vehicle customization.",
+      },
+      {
+        question: "Who is the website for?",
+        answer:
+          "It gives people interested in custom automotive work a place to explore Northeast Auto Creations and its services.",
+      },
+      {
+        question: "What does the project emphasize?",
+        answer:
+          "The experience emphasizes the shop's automotive work and makes its services and portfolio easier to discover online.",
+      },
+    ],
+    postedAt: new Date("2026-09-30T00:00:00.000Z"),
+    lastModifiedAt: new Date("2026-09-30T00:00:00.000Z"),
+  },
   {
     slug: "iron-core",
     metadata: {
