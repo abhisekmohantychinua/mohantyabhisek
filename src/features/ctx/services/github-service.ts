@@ -2,7 +2,9 @@ import type { DownloadParams } from "../models/download-params";
 import type { DownloadableArtifact } from "../models/downloadable-artifact";
 import type { GitHubRelease } from "../models/github-release";
 import type { GitHubReleaseAsset } from "../models/github-release-asset";
+import type { GitHubReleaseSummary } from "../models/github-release-summery";
 import { GitHubServiceError } from "../models/github-service-error";
+import type Release from "../models/release";
 
 const GITHUB_API_URL = "https://api.github.com";
 const GITHUB_API_VERSION = "2026-03-10";
@@ -286,4 +288,80 @@ function findReleaseAsset(
   }
 
   return matchingAssets[0];
+}
+
+/**
+ * Retrieves published releases from the configured GitHub repository.
+ *
+ * Drafts and releases without a publication date are excluded.
+ * The returned data is mapped to the public release model.
+ *
+ * @returns A promise resolving to the published releases.
+ * @throws {GitHubServiceError} With status 500 if GitHub configuration
+ * is missing.
+ * @throws {GitHubServiceError} With status 502 or 503 if GitHub returns
+ * an unsuccessful response or an invalid release structure.
+ * @throws {TypeError} If the request fails at the network level.
+ * @throws {SyntaxError} If GitHub returns invalid JSON.
+ */
+export async function getGitHubReleases(): Promise<Release[]> {
+  const { repository, pat } = getGitHubConfig();
+
+  return fetch(`${GITHUB_API_URL}/repos/${repository}/releases`, {
+    method: "GET",
+    headers: {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${pat}`,
+      "X-GitHub-Api-Version": GITHUB_API_VERSION,
+    },
+    cache: "no-store",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new GitHubServiceError(
+          "Unable to retrieve releases from GitHub.",
+          response.status === 404 ? 404 : response.status >= 500 ? 503 : 502,
+        );
+      }
+
+      return response.json() as Promise<unknown>;
+    })
+    .then((data) => {
+      if (!Array.isArray(data) || !data.every(isGitHubReleaseSummary)) {
+        throw new GitHubServiceError(
+          "GitHub release response has an invalid structure.",
+          502,
+        );
+      }
+
+      return data
+        .filter((release) => !release.draft && release.published_at !== null)
+        .map((release) => ({
+          tag: release.tag_name,
+          name: release.name?.trim() || release.tag_name,
+          releasedAt: release.published_at,
+        }));
+    });
+}
+
+/**
+ * Checks whether an unknown value contains the required fields
+ * of a GitHub release summary.
+ *
+ * @param value - Unknown response data received from GitHub.
+ * @returns `true` if the value satisfies the release summary structure.
+ */
+function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseSummary {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const release = value as Record<string, unknown>;
+
+  return (
+    typeof release.tag_name === "string" &&
+    (typeof release.name === "string" || release.name === null) &&
+    typeof release.draft === "boolean" &&
+    (typeof release.published_at === "string" || release.published_at === null)
+  );
 }
