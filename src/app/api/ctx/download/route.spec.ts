@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import type { DownloadableArtifact } from "@/features/ctx/models/downloadable-artifact";
-import type { GitHubRelease } from "@/features/ctx/models/github-release";
+import type { GitHubRelease } from "@/features/ctx/models/github-artifact-release";
 import { GitHubServiceError } from "@/features/ctx/models/github-service-error";
 import {
   getDownloadableArtifact,

@@ -1,12 +1,10 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import type { DownloadParams } from "../models/download-params";
-import type GitHubRelease from "../models/github-release";
-import type {
-  GitHubReleaseAsset,
-  GitHubReleaseDetail,
-  GitHubReleaseVerbose,
-} from "../models/github-release";
+import type GitHubArtifactRelease from "../models/github-artifact-release";
+import type { GitHubReleaseAsset } from "../models/github-artifact-release";
+import type GitHubReleaseDetailed from "../models/github-release-detailed";
+import type GitHubReleaseMeta from "../models/github-release-meta";
 import {
   getDownloadableArtifact,
   getGitHubRelease,
@@ -33,7 +31,9 @@ function createAsset(
   };
 }
 
-function createRelease(overrides: Partial<GitHubRelease> = {}): GitHubRelease {
+function createRelease(
+  overrides: Partial<GitHubArtifactRelease> = {},
+): GitHubArtifactRelease {
   return {
     tag_name: RELEASE_TAG,
     assets: [createAsset()],
@@ -282,7 +282,7 @@ describe("github-service", () => {
     const createReleaseForArch = (
       arch: Architecture,
       assetOverrides: Partial<ReturnType<typeof createAsset>> = {},
-    ): GitHubRelease =>
+    ): GitHubArtifactRelease =>
       createRelease({
         assets: [
           createAsset({
@@ -668,7 +668,7 @@ describe("github-service", () => {
 
     function createReleaseSummary(
       overrides: Record<string, unknown> = {},
-    ): GitHubReleaseDetail {
+    ): GitHubReleaseMeta {
       return {
         tag_name: "v1.2.3",
         name: "CTX CLI v1.2.3",
@@ -907,8 +907,8 @@ describe("github-service", () => {
     const RELEASE_URL = `https://api.github.com/repos/${REPOSITORY}/releases/tags`;
 
     function createVerboseRelease(
-      overrides: Partial<GitHubReleaseVerbose> = {},
-    ): GitHubReleaseVerbose {
+      overrides: Partial<GitHubReleaseDetailed> = {},
+    ): GitHubReleaseDetailed {
       return {
         tag_name: RELEASE_TAG,
         name: "CTX CLI v1.2.3",
@@ -1106,19 +1106,19 @@ describe("github-service", () => {
       },
       createVerboseRelease({
         tag_name: 123,
-      } as unknown as Partial<GitHubReleaseVerbose>),
+      } as unknown as Partial<GitHubReleaseDetailed>),
       createVerboseRelease({
         name: 123,
-      } as unknown as Partial<GitHubReleaseVerbose>),
+      } as unknown as Partial<GitHubReleaseDetailed>),
       createVerboseRelease({
         draft: "false",
-      } as unknown as Partial<GitHubReleaseVerbose>),
+      } as unknown as Partial<GitHubReleaseDetailed>),
       createVerboseRelease({
         published_at: 123,
-      } as unknown as Partial<GitHubReleaseVerbose>),
+      } as unknown as Partial<GitHubReleaseDetailed>),
       createVerboseRelease({
         body: 123,
-      } as unknown as Partial<GitHubReleaseVerbose>),
+      } as unknown as Partial<GitHubReleaseDetailed>),
     ])("rejects an invalid verbose release response: %j", async (data) => {
       fetchMock.mockResolvedValue(createJsonResponse(data));
 

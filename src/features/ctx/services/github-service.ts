@@ -1,14 +1,12 @@
 import type { DownloadParams } from "../models/download-params";
 import type { DownloadableArtifact } from "../models/downloadable-artifact";
-import type GitHubRelease from "../models/github-release";
-import type {
-  GitHubReleaseAsset,
-  GitHubReleaseDetail,
-  GitHubReleaseVerbose,
-} from "../models/github-release";
+import type GitHubArtifactRelease from "../models/github-artifact-release";
+import type { GitHubReleaseAsset } from "../models/github-artifact-release";
+import type GitHubReleaseDetailed from "../models/github-release-detailed";
+import type GitHubReleaseMeta from "../models/github-release-meta";
 import { GitHubServiceError } from "../models/github-service-error";
-import type ReleaseDetail from "../models/release";
-import type { ReleaseVerbose } from "../models/release";
+import type ReleaseDetailed from "../models/release-detailed";
+import type ReleaseMeta from "../models/release-meta";
 
 const GITHUB_API_URL = "https://api.github.com";
 const GITHUB_API_VERSION = "2026-03-10";
@@ -67,7 +65,7 @@ function getGitHubConfig(): {
  */
 export async function getGitHubRelease(
   version?: string,
-): Promise<GitHubRelease> {
+): Promise<GitHubArtifactRelease> {
   const { repository, pat } = getGitHubConfig();
 
   const releaseUrl = getReleaseUrl(repository, version);
@@ -130,7 +128,7 @@ function getReleaseUrl(repository: string, version?: string): string {
  * @param value - Unknown response data received from GitHub.
  * @returns `true` if the value satisfies the minimum release structure.
  */
-function isGitHubRelease(value: unknown): value is GitHubRelease {
+function isGitHubRelease(value: unknown): value is GitHubArtifactRelease {
   if (typeof value !== "object" || value === null) {
     return false;
   }
@@ -179,7 +177,7 @@ function isGitHubRelease(value: unknown): value is GitHubRelease {
  * @throws {TypeError} If the asset request fails at the network level.
  */
 export async function getDownloadableArtifact(
-  release: GitHubRelease,
+  release: GitHubArtifactRelease,
   params: DownloadParams,
 ): Promise<DownloadableArtifact> {
   const { pat } = getGitHubConfig();
@@ -308,7 +306,7 @@ function findReleaseAsset(
  * @throws {TypeError} If the request fails at the network level.
  * @throws {SyntaxError} If GitHub returns invalid JSON.
  */
-export async function getGitHubReleases(): Promise<ReleaseDetail[]> {
+export async function getGitHubReleases(): Promise<ReleaseMeta[]> {
   const { repository, pat } = getGitHubConfig();
 
   return fetch(`${GITHUB_API_URL}/repos/${repository}/releases`, {
@@ -359,7 +357,7 @@ export async function getGitHubReleases(): Promise<ReleaseDetail[]> {
  * @param value - Unknown response data received from GitHub.
  * @returns `true` if the value satisfies the release summary structure.
  */
-function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseDetail {
+function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseMeta {
   if (typeof value !== "object" || value === null) {
     return false;
   }
@@ -393,7 +391,7 @@ function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseDetail {
  */
 export async function getGitHubReleaseVerbose(
   tag: string,
-): Promise<ReleaseVerbose> {
+): Promise<ReleaseDetailed> {
   const { repository, pat } = getGitHubConfig();
 
   return fetch(
@@ -450,7 +448,9 @@ export async function getGitHubReleaseVerbose(
  * @param value - Unknown response data received from GitHub.
  * @returns `true` if the value satisfies the verbose release structure.
  */
-function isGithubReleaseVerbose(value: unknown): value is GitHubReleaseVerbose {
+function isGithubReleaseVerbose(
+  value: unknown,
+): value is GitHubReleaseDetailed {
   if (!isGitHubReleaseSummary(value)) {
     return false;
   }

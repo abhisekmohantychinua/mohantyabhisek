@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { GitHubServiceError } from "@/features/ctx/models/github-service-error";
-import type { ReleaseVerbose } from "@/features/ctx/models/release";
+import type { ReleaseVerbose } from "@/features/ctx/models/release-detailed";
 import { getGitHubReleaseVerbose } from "@/features/ctx/services/github-service";
 
 import { GET } from "./route";

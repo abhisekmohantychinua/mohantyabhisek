@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { GitHubServiceError } from "@/features/ctx/models/github-service-error";
-import type Release from "@/features/ctx/models/release";
+import type Release from "@/features/ctx/models/release-detailed";
 import { getGitHubReleases } from "@/features/ctx/services/github-service";
 
 import { GET } from "./route";
