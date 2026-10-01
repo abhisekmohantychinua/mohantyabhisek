@@ -212,7 +212,7 @@ export async function getDownloadableArtifact(
       : Number.NaN;
 
     const contentLength =
-      Number.isFinite(parsedContentLength) && parsedContentLength > 0
+      Number.isSafeInteger(parsedContentLength) && parsedContentLength > 0
         ? parsedContentLength
         : asset.size > 0
           ? asset.size
