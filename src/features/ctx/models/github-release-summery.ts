@@ -14,3 +14,7 @@ export interface GitHubReleaseSummary {
   /** Publication timestamp, which may be null. */
   published_at: string | null;
 }
+
+export interface GitHubReleaseVerbose extends GitHubReleaseSummary {
+  body: string | null;
+}

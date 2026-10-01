@@ -18,3 +18,7 @@ interface Release {
 }
 
 export default Release;
+
+export interface ReleaseVerbose extends Release {
+  content: string | null;
+}

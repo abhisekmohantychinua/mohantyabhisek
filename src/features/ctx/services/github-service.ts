@@ -2,9 +2,13 @@ import type { DownloadParams } from "../models/download-params";
 import type { DownloadableArtifact } from "../models/downloadable-artifact";
 import type { GitHubRelease } from "../models/github-release";
 import type { GitHubReleaseAsset } from "../models/github-release-asset";
-import type { GitHubReleaseSummary } from "../models/github-release-summery";
+import type {
+  GitHubReleaseSummary,
+  GitHubReleaseVerbose,
+} from "../models/github-release-summery";
 import { GitHubServiceError } from "../models/github-service-error";
 import type Release from "../models/release";
+import { ReleaseVerbose } from "../models/release";
 
 const GITHUB_API_URL = "https://api.github.com";
 const GITHUB_API_VERSION = "2026-03-10";
@@ -368,4 +372,90 @@ function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseSummary {
     typeof release.draft === "boolean" &&
     (typeof release.published_at === "string" || release.published_at === null)
   );
+}
+
+/**
+ * Retrieves a published release by its tag from the configured GitHub
+ * repository, including its release notes.
+ *
+ * Drafts and releases without a publication date are not exposed.
+ *
+ * @param tag - The release tag to retrieve.
+ * @returns A promise resolving to the verbose public release model.
+ * @throws {GitHubServiceError} With status 500 if GitHub configuration
+ * is missing.
+ * @throws {GitHubServiceError} With status 404 if the release does not
+ * exist, is a draft, or has not been published.
+ * @throws {GitHubServiceError} With status 502 or 503 if GitHub returns
+ * an unsuccessful response or an invalid release structure.
+ * @throws {TypeError} If the request fails at the network level.
+ * @throws {SyntaxError} If GitHub returns invalid JSON.
+ */
+export async function getGitHubReleaseVerbose(
+  tag: string,
+): Promise<ReleaseVerbose> {
+  const { repository, pat } = getGitHubConfig();
+
+  return fetch(
+    `${GITHUB_API_URL}/repos/${repository}/releases/tags/${encodeURIComponent(tag)}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${pat}`,
+        "X-GitHub-Api-Version": GITHUB_API_VERSION,
+      },
+      cache: "no-store",
+    },
+  )
+    .then((response) => {
+      if (response.status === 404) {
+        throw new GitHubServiceError("GitHub release not found.", 404);
+      }
+
+      if (!response.ok) {
+        throw new GitHubServiceError(
+          "Unable to retrieve release information from GitHub.",
+          response.status >= 500 ? 503 : 502,
+        );
+      }
+
+      return response.json() as Promise<unknown>;
+    })
+    .then((data) => {
+      if (!isGithubReleaseVerbose(data)) {
+        throw new GitHubServiceError(
+          "GitHub release response is missing required fields.",
+          502,
+        );
+      }
+
+      if (data.draft || data.published_at === null) {
+        throw new GitHubServiceError("GitHub release not found.", 404);
+      }
+
+      return {
+        tag: data.tag_name,
+        name: data.name?.trim() || data.tag_name,
+        releasedAt: data.published_at,
+        content: data.body,
+      };
+    });
+}
+
+/**
+ * Checks whether an unknown value contains the required fields
+ * of a verbose GitHub release.
+ *
+ * @param value - Unknown response data received from GitHub.
+ * @returns `true` if the value satisfies the verbose release structure.
+ */
+function isGithubReleaseVerbose(value: unknown): value is GitHubReleaseVerbose {
+  if (!isGitHubReleaseSummary(value)) {
+    return false;
+  }
+
+  const release = value as unknown as Record<string, unknown>;
+
+  return typeof release.body === "string" || release.body === null;
 }
