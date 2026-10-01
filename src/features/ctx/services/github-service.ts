@@ -252,15 +252,12 @@ function isValidGitHubAssetUrl(value: string): boolean {
 }
 
 /**
- * Finds the release asset whose filename contains the requested
- * architecture identifier.
- *
- * Asset filenames are expected to contain identifiers such as
- * `linux-amd64` or `windows-amd64`.
+ * Finds the release asset with the exact expected filename
+ * for the requested architecture.
  *
  * @param assets - Assets published with the GitHub release.
  * @param arch - Target architecture to match.
- * @returns The unique matching release asset.
+ * @returns The exact matching release asset.
  * @throws {GitHubServiceError} With status 404 if no asset matches.
  * @throws {GitHubServiceError} With status 502 if multiple assets match.
  */
@@ -268,31 +265,22 @@ function findReleaseAsset(
   assets: GitHubReleaseAsset[],
   arch: DownloadParams["arch"],
 ): GitHubReleaseAsset {
-  const matchingAssets = assets.filter((asset) =>
-    asset.name.toLowerCase().includes(arch.toLowerCase()),
-  );
-
   const expectedFilename = RELEASE_ARCHIVES[arch];
 
-  const asset = assets.find((item) => item.name === expectedFilename);
+  const matchingAssets = assets.filter(
+    (asset) => asset.name === expectedFilename,
+  );
 
-  if (!asset) {
+  if (matchingAssets.length === 0) {
     throw new GitHubServiceError(
       `Release artifact not found: ${expectedFilename}`,
       404,
     );
   }
 
-  if (matchingAssets.length === 0) {
-    throw new GitHubServiceError(
-      `No release asset found for architecture "${arch}".`,
-      404,
-    );
-  }
-
   if (matchingAssets.length > 1) {
     throw new GitHubServiceError(
-      `Multiple release assets found for architecture "${arch}".`,
+      `Multiple release assets found: ${expectedFilename}`,
       502,
     );
   }
