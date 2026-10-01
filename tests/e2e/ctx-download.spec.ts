@@ -26,6 +26,7 @@ const RELEASE_ARCHIVES = {
 
 const TEST_TIMEOUT = 5 * 60 * 1000;
 const DOWNLOAD_TIMEOUT = 4 * 60 * 1000;
+const DOWNLOAD_EVENT_TIMEOUT = 30 * 1000;
 
 const isGitHubConfigured = Boolean(
   process.env.CTX_CLI_GITHUB_REPO && process.env.CTX_CLI_GITHUB_PAT,
@@ -152,9 +153,13 @@ test.describe("GET /api/ctx/download", () => {
           { timeout: DOWNLOAD_TIMEOUT },
         );
 
-        const downloadPromise = page.waitForEvent("download", {
-          timeout: DOWNLOAD_TIMEOUT,
-        });
+        // Attach a rejection handler immediately so a failed HTTP
+        // response does not leave an unhandled event promise.
+        const downloadPromise = page
+          .waitForEvent("download", {
+            timeout: DOWNLOAD_EVENT_TIMEOUT,
+          })
+          .catch(() => null);
 
         await page.evaluate((href) => {
           const link = document.createElement("a");
@@ -168,6 +173,23 @@ test.describe("GET /api/ctx/download", () => {
 
         const response = await responsePromise;
 
+        if (response.status() !== 200) {
+          const errorBody = await response.json().catch(() => undefined);
+
+          // Close the page to cancel any pending download event.
+          await page.close();
+
+          expect(
+            response.status(),
+            [
+              `The ${arch} endpoint should return HTTP 200.`,
+              `Response body: ${JSON.stringify(errorBody)}`,
+            ].join("\n"),
+          ).toBe(200);
+
+          return;
+        }
+
         expect(
           response.status(),
           `The ${arch} endpoint should return HTTP 200.`,
@@ -180,8 +202,9 @@ test.describe("GET /api/ctx/download", () => {
 
         const contentDisposition = headers["content-disposition"];
 
+        // filename is optional; filename* is the UTF-8 encoded value.
         expect(contentDisposition).toMatch(
-          /^attachment;\s*filename="[^"]+";\s*filename\*=UTF-8''[^;]+$/i,
+          /^attachment;\s*(?:filename="[^"]+";\s*)?filename\*=UTF-8''[^;]+$/i,
         );
 
         expect(getContentDispositionFilename(contentDisposition)).toBe(
@@ -201,18 +224,32 @@ test.describe("GET /api/ctx/download", () => {
         const download = await downloadPromise;
 
         expect(
+          download,
+          `The ${arch} download event should be received.`,
+        ).not.toBeNull();
+
+        if (!download) {
+          return;
+        }
+
+        expect(
           await download.failure(),
           `The ${arch} download should complete without an error.`,
         ).toBeNull();
 
-        // Some browser engines report a generic suggested filename.
-        // The actual artifact filename is verified from Content-Disposition.
+        // Browser engines may report a generic suggested filename.
+        // The artifact's actual name is validated using Content-Disposition.
         expect(download.suggestedFilename().length).toBeGreaterThan(0);
 
         const filePath = await download.path();
+
         expect(filePath).not.toBeNull();
 
-        const file = await stat(filePath!);
+        if (!filePath) {
+          return;
+        }
+
+        const file = await stat(filePath);
 
         expect(
           file.size,
