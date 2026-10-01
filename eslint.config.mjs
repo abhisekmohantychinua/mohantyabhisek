@@ -227,6 +227,11 @@ const eslintConfig = defineConfig([
           pattern: "src/app/api/works/**",
         },
 
+        {
+          type: "api-ctx",
+          pattern: "src/app/api/ctx/**",
+        },
+
         // =====================================================
         // FEATURE PUBLIC APIs
         // =====================================================
@@ -268,6 +273,11 @@ const eslintConfig = defineConfig([
         {
           type: "feature-works",
           pattern: "src/features/works/**",
+        },
+
+        {
+          type: "feature-ctx",
+          pattern: "src/features/ctx/**",
         },
 
         // =====================================================
@@ -477,6 +487,22 @@ const eslintConfig = defineConfig([
               ],
             },
 
+            {
+              from: { type: "api-ctx" },
+
+              allow: [
+                { to: { type: "feature-ctx" } },
+
+                { to: { type: "components" } },
+                { to: { type: "services" } },
+                { to: { type: "hooks" } },
+                { to: { type: "stores" } },
+                { to: { type: "models" } },
+                { to: { type: "lib" } },
+                { to: { type: "config" } },
+              ],
+            },
+
             // =================================================
             // FEATURE RULES
             // =================================================
@@ -554,6 +580,22 @@ const eslintConfig = defineConfig([
                 { to: { type: "feature-home-public" } },
                 { to: { type: "feature-blogs-public" } },
                 { to: { type: "feature-contact-public" } },
+
+                { to: { type: "components" } },
+                { to: { type: "services" } },
+                { to: { type: "hooks" } },
+                { to: { type: "stores" } },
+                { to: { type: "models" } },
+                { to: { type: "lib" } },
+                { to: { type: "config" } },
+              ],
+            },
+
+            {
+              from: { type: "feature-ctx" },
+
+              allow: [
+                { to: { type: "feature-ctx" } },
 
                 { to: { type: "components" } },
                 { to: { type: "services" } },
