@@ -282,7 +282,7 @@ function findReleaseAsset(
 
   if (matchingAssets.length > 1) {
     throw new GitHubServiceError(
-      `Multiple release assets found: ${expectedFilename}`,
+      `Multiple release assets found for architecture "${arch}".`,
       502,
     );
   }
@@ -317,10 +317,14 @@ export async function getGitHubReleases(): Promise<Release[]> {
     cache: "no-store",
   })
     .then((response) => {
+      if (response.status === 404) {
+        throw new GitHubServiceError("GitHub release not found.", 404);
+      }
+
       if (!response.ok) {
         throw new GitHubServiceError(
           "Unable to retrieve releases from GitHub.",
-          response.status === 404 ? 404 : response.status >= 500 ? 503 : 502,
+          response.status >= 500 ? 503 : 502,
         );
       }
 
@@ -329,7 +333,7 @@ export async function getGitHubReleases(): Promise<Release[]> {
     .then((data) => {
       if (!Array.isArray(data) || !data.every(isGitHubReleaseSummary)) {
         throw new GitHubServiceError(
-          "GitHub release response has an invalid structure.",
+          "GitHub release response is missing required fields.",
           502,
         );
       }
