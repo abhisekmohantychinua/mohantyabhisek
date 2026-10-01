@@ -23,8 +23,6 @@ export async function GET(): Promise<NextResponse> {
       },
     });
   } catch (error: unknown) {
-    console.error("Failed to retrieve CTX CLI releases", error);
-
     if (error instanceof GitHubServiceError) {
       return NextResponse.json<ErrorResponse>(
         {
@@ -39,6 +37,7 @@ export async function GET(): Promise<NextResponse> {
       );
     }
 
+    console.error("Failed to retrieve CTX CLI releases", error);
     return NextResponse.json<ErrorResponse>(
       {
         message: "Failed to retrieve CTX CLI releases",

@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { GitHubServiceError } from "@/features/ctx/models/github-service-error";
-import type { ReleaseVerbose } from "@/features/ctx/models/release-detailed";
+import type ReleaseDetailed from "@/features/ctx/models/release-detailed";
 import { getGitHubReleaseVerbose } from "@/features/ctx/services/github-service";
 
 import { GET } from "./route";
@@ -12,8 +12,8 @@ vi.mock("@/features/ctx/services/github-service", () => ({
 }));
 
 function createRelease(
-  overrides: Partial<ReleaseVerbose> = {},
-): ReleaseVerbose {
+  overrides: Partial<ReleaseDetailed> = {},
+): ReleaseDetailed {
   return {
     tag: "v1.2.3",
     name: "CTX CLI v1.2.3",
@@ -184,9 +184,10 @@ describe("GET /api/ctx/releases/[tag]", () => {
         "Failed to retrieve CTX CLI release",
         error,
       );
+      expect(logSpy).toHaveBeenCalledTimes(1);
     });
 
-    test("logs GitHub service errors", async () => {
+    test("does not log GitHub service errors", async () => {
       const error = new GitHubServiceError("Release access denied.", 403);
       const logSpy = vi.spyOn(console, "error");
 
@@ -194,10 +195,7 @@ describe("GET /api/ctx/releases/[tag]", () => {
 
       await GET(createRequest(), createContext());
 
-      expect(logSpy).toHaveBeenCalledWith(
-        "Failed to retrieve CTX CLI release",
-        error,
-      );
+      expect(logSpy).not.toHaveBeenCalled();
     });
   });
 });

@@ -203,52 +203,6 @@ describe("github-service", () => {
       },
     );
 
-    test.each([
-      null,
-      "invalid",
-      123,
-      {},
-      { tag_name: "v1.2.3" },
-      { assets: [] },
-      { tag_name: 123, assets: [] },
-      { tag_name: "v1.2.3", assets: {} },
-      { tag_name: "v1.2.3", assets: [null] },
-      {
-        tag_name: "v1.2.3",
-        assets: [{ name: "asset" }],
-      },
-      {
-        tag_name: "v1.2.3",
-        assets: [{ name: "asset", url: ASSET_URL, size: -1 }],
-      },
-      {
-        tag_name: "v1.2.3",
-        assets: [{ name: "asset", url: ASSET_URL, size: Number.NaN }],
-      },
-    ])("rejects an invalid release response: %j", async (data) => {
-      fetchMock.mockResolvedValue(createJsonResponse(data));
-
-      await expect(getGitHubRelease()).rejects.toMatchObject({
-        name: "GitHubServiceError",
-        message: "GitHub release response is missing required fields.",
-        status: 502,
-      });
-    });
-
-    test("rejects when the parsed JSON value is undefined", async () => {
-      fetchMock.mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: vi.fn().mockResolvedValue(undefined),
-      });
-
-      await expect(getGitHubRelease()).rejects.toMatchObject({
-        name: "GitHubServiceError",
-        message: "GitHub release response is missing required fields.",
-        status: 502,
-      });
-    });
-
     test("propagates network errors", async () => {
       const error = new TypeError("Network unavailable");
       fetchMock.mockRejectedValue(error);
@@ -847,43 +801,6 @@ describe("github-service", () => {
       },
     );
 
-    test.each([
-      null,
-      "invalid",
-      123,
-      {},
-      [null],
-      ["invalid"],
-      [{}],
-      [{ tag_name: "v1.2.3" }],
-      [createReleaseSummary({ tag_name: 123 })],
-      [createReleaseSummary({ name: 123 })],
-      [createReleaseSummary({ draft: "false" })],
-      [createReleaseSummary({ published_at: 123 })],
-    ])("rejects an invalid release list response: %j", async (data) => {
-      fetchMock.mockResolvedValue(createJsonResponse(data));
-
-      await expect(getGitHubReleases()).rejects.toMatchObject({
-        name: "GitHubServiceError",
-        message: "GitHub release response is missing required fields.",
-        status: 502,
-      });
-    });
-
-    test("rejects when the parsed JSON value is undefined", async () => {
-      fetchMock.mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: vi.fn().mockResolvedValue(undefined),
-      });
-
-      await expect(getGitHubReleases()).rejects.toMatchObject({
-        name: "GitHubServiceError",
-        message: "GitHub release response is missing required fields.",
-        status: 502,
-      });
-    });
-
     test("propagates network errors", async () => {
       const error = new TypeError("Network unavailable");
       fetchMock.mockRejectedValue(error);
@@ -1090,58 +1007,6 @@ describe("github-service", () => {
         });
       },
     );
-
-    test.each([
-      null,
-      "invalid",
-      123,
-      {},
-      { tag_name: RELEASE_TAG },
-      { tag_name: RELEASE_TAG, name: "CTX CLI" },
-      {
-        tag_name: RELEASE_TAG,
-        name: "CTX CLI",
-        draft: false,
-        published_at: "2026-09-20T12:00:00Z",
-      },
-      createVerboseRelease({
-        tag_name: 123,
-      } as unknown as Partial<GitHubReleaseDetailed>),
-      createVerboseRelease({
-        name: 123,
-      } as unknown as Partial<GitHubReleaseDetailed>),
-      createVerboseRelease({
-        draft: "false",
-      } as unknown as Partial<GitHubReleaseDetailed>),
-      createVerboseRelease({
-        published_at: 123,
-      } as unknown as Partial<GitHubReleaseDetailed>),
-      createVerboseRelease({
-        body: 123,
-      } as unknown as Partial<GitHubReleaseDetailed>),
-    ])("rejects an invalid verbose release response: %j", async (data) => {
-      fetchMock.mockResolvedValue(createJsonResponse(data));
-
-      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
-        name: "GitHubServiceError",
-        message: "GitHub release response is missing required fields.",
-        status: 502,
-      });
-    });
-
-    test("rejects when the parsed JSON value is undefined", async () => {
-      fetchMock.mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: vi.fn().mockResolvedValue(undefined),
-      });
-
-      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
-        name: "GitHubServiceError",
-        message: "GitHub release response is missing required fields.",
-        status: 502,
-      });
-    });
 
     test("propagates network errors", async () => {
       const error = new TypeError("Network unavailable");

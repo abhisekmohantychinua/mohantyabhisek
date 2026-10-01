@@ -56,8 +56,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       headers,
     });
   } catch (error: unknown) {
-    console.error("Failed to download CTX CLI artifact", error);
-
     if (error instanceof GitHubServiceError) {
       return NextResponse.json<ErrorResponse>(
         {
@@ -72,6 +70,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       );
     }
 
+    console.error("Failed to download CTX CLI artifact", error);
     return NextResponse.json<ErrorResponse>(
       {
         message: "Failed to download CTX CLI artifact",

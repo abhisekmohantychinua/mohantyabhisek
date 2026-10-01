@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import type { DownloadableArtifact } from "@/features/ctx/models/downloadable-artifact";
-import type { GitHubRelease } from "@/features/ctx/models/github-artifact-release";
+import type GitHubArtifactRelease from "@/features/ctx/models/github-artifact-release";
 import { GitHubServiceError } from "@/features/ctx/models/github-service-error";
 import {
   getDownloadableArtifact,
@@ -23,11 +23,11 @@ function createRequest(query = ""): NextRequest {
   return new NextRequest(`${BASE_URL}${query}`);
 }
 
-function createRelease(): GitHubRelease {
+function createRelease(): GitHubArtifactRelease {
   return {
     tag_name: "v1.2.3",
     assets: [],
-  } as GitHubRelease;
+  };
 }
 
 function createArtifact(

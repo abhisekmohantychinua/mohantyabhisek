@@ -58,7 +58,7 @@ function getGitHubConfig(): {
  * @throws {GitHubServiceError} With status 404 if the requested release
  * does not exist.
  * @throws {GitHubServiceError} With status 502 or 503 if GitHub returns
- * an unsuccessful response or an invalid release structure.
+ * an unsuccessful response.
  * @throws {TypeError} If the request fails at the network level.
  * @throws {SyntaxError} If GitHub returns a response that cannot be
  * parsed as JSON.
@@ -93,16 +93,7 @@ export async function getGitHubRelease(
 
       return response.json() as Promise<unknown>;
     })
-    .then((data) => {
-      if (!isGitHubRelease(data)) {
-        throw new GitHubServiceError(
-          "GitHub release response is missing required fields.",
-          502,
-        );
-      }
-
-      return data;
-    });
+    .then((data) => data as unknown as GitHubArtifactRelease);
 }
 
 /**
@@ -119,36 +110,6 @@ function getReleaseUrl(repository: string, version?: string): string {
     : "/releases/latest";
 
   return `${GITHUB_API_URL}/repos/${repository}${endpoint}`;
-}
-
-/**
- * Checks whether an unknown value contains the release fields required
- * to identify and download a release asset.
- *
- * @param value - Unknown response data received from GitHub.
- * @returns `true` if the value satisfies the minimum release structure.
- */
-function isGitHubRelease(value: unknown): value is GitHubArtifactRelease {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const release = value as Record<string, unknown>;
-
-  return (
-    typeof release.tag_name === "string" &&
-    Array.isArray(release.assets) &&
-    release.assets.every(
-      (asset: unknown) =>
-        typeof asset === "object" &&
-        asset !== null &&
-        typeof (asset as Record<string, unknown>).name === "string" &&
-        typeof (asset as Record<string, unknown>).url === "string" &&
-        typeof (asset as Record<string, unknown>).size === "number" &&
-        Number.isFinite((asset as Record<string, unknown>).size) &&
-        ((asset as Record<string, unknown>).size as number) >= 0,
-    )
-  );
 }
 
 /**
@@ -302,7 +263,7 @@ function findReleaseAsset(
  * @throws {GitHubServiceError} With status 500 if GitHub configuration
  * is missing.
  * @throws {GitHubServiceError} With status 502 or 503 if GitHub returns
- * an unsuccessful response or an invalid release structure.
+ * an unsuccessful response.
  * @throws {TypeError} If the request fails at the network level.
  * @throws {SyntaxError} If GitHub returns invalid JSON.
  */
@@ -332,44 +293,15 @@ export async function getGitHubReleases(): Promise<ReleaseMeta[]> {
 
       return response.json() as Promise<unknown>;
     })
-    .then((data) => {
-      if (!Array.isArray(data) || !data.every(isGitHubReleaseSummary)) {
-        throw new GitHubServiceError(
-          "GitHub release response is missing required fields.",
-          502,
-        );
-      }
-
-      return data
+    .then((data) =>
+      (data as unknown as GitHubReleaseMeta[])
         .filter((release) => !release.draft && release.published_at !== null)
         .map((release) => ({
           tag: release.tag_name,
           name: release.name?.trim() || release.tag_name,
           releasedAt: release.published_at,
-        }));
-    });
-}
-
-/**
- * Checks whether an unknown value contains the required fields
- * of a GitHub release summary.
- *
- * @param value - Unknown response data received from GitHub.
- * @returns `true` if the value satisfies the release summary structure.
- */
-function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseMeta {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const release = value as Record<string, unknown>;
-
-  return (
-    typeof release.tag_name === "string" &&
-    (typeof release.name === "string" || release.name === null) &&
-    typeof release.draft === "boolean" &&
-    (typeof release.published_at === "string" || release.published_at === null)
-  );
+        })),
+    );
 }
 
 /**
@@ -385,7 +317,7 @@ function isGitHubReleaseSummary(value: unknown): value is GitHubReleaseMeta {
  * @throws {GitHubServiceError} With status 404 if the release does not
  * exist, is a draft, or has not been published.
  * @throws {GitHubServiceError} With status 502 or 503 if GitHub returns
- * an unsuccessful response or an invalid release structure.
+ * an unsuccessful response.
  * @throws {TypeError} If the request fails at the network level.
  * @throws {SyntaxError} If GitHub returns invalid JSON.
  */
@@ -421,41 +353,17 @@ export async function getGitHubReleaseVerbose(
       return response.json() as Promise<unknown>;
     })
     .then((data) => {
-      if (!isGithubReleaseVerbose(data)) {
-        throw new GitHubServiceError(
-          "GitHub release response is missing required fields.",
-          502,
-        );
-      }
+      const release = data as unknown as GitHubReleaseDetailed;
 
-      if (data.draft || data.published_at === null) {
+      if (release.draft || release.published_at === null) {
         throw new GitHubServiceError("GitHub release not found.", 404);
       }
 
       return {
-        tag: data.tag_name,
-        name: data.name?.trim() || data.tag_name,
-        releasedAt: data.published_at,
-        content: data.body,
+        tag: release.tag_name,
+        name: release.name?.trim() || release.tag_name,
+        releasedAt: release.published_at,
+        content: release.body,
       };
     });
-}
-
-/**
- * Checks whether an unknown value contains the required fields
- * of a verbose GitHub release.
- *
- * @param value - Unknown response data received from GitHub.
- * @returns `true` if the value satisfies the verbose release structure.
- */
-function isGithubReleaseVerbose(
-  value: unknown,
-): value is GitHubReleaseDetailed {
-  if (!isGitHubReleaseSummary(value)) {
-    return false;
-  }
-
-  const release = value as unknown as Record<string, unknown>;
-
-  return typeof release.body === "string" || release.body === null;
 }
