@@ -27,7 +27,11 @@ function createRequest(): NextRequest {
   return new Request("http://localhost/api/ctx/releases/v1.2.3") as NextRequest;
 }
 
-function createContext(tag = "v1.2.3") {
+function createContext(tag = "v1.2.3"): {
+  params: Promise<{
+    tag: string;
+  }>;
+} {
   return {
     params: Promise.resolve({ tag }),
   };
