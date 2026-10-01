@@ -5,7 +5,7 @@ import type { GitHubReleaseAsset } from "../models/github-release-asset";
 import { GitHubServiceError } from "../models/github-service-error";
 
 const GITHUB_API_URL = "https://api.github.com";
-const GITHUB_API_VERSION = "2022-11-28";
+const GITHUB_API_VERSION = "2026-03-10";
 
 /**
  * Retrieves the GitHub configuration required for release requests.
