@@ -6,6 +6,13 @@ import { GitHubServiceError } from "../models/github-service-error";
 
 const GITHUB_API_URL = "https://api.github.com";
 const GITHUB_API_VERSION = "2026-03-10";
+const RELEASE_ARCHIVES: Record<DownloadParams["arch"], string> = {
+  "linux-amd64": "ctx-linux-amd64.tar.gz",
+  "linux-arm64": "ctx-linux-arm64.tar.gz",
+  "windows-amd64": "ctx-windows-amd64.zip",
+  "macos-amd64": "ctx-macos-amd64.tar.gz",
+  "macos-arm64": "ctx-macos-arm64.tar.gz",
+};
 
 /**
  * Retrieves the GitHub configuration required for release requests.
@@ -29,109 +36,6 @@ function getGitHubConfig(): {
   }
 
   return { repository, pat };
-}
-
-/**
- * Builds the GitHub API URL for a specific release or the latest release.
- *
- * @param repository - GitHub repository in owner/repository format.
- * @param version - Optional release tag. When omitted, the latest
- * published release endpoint is used.
- * @returns The fully qualified GitHub API URL.
- */
-function getReleaseUrl(repository: string, version?: string): string {
-  const endpoint = version
-    ? `/releases/tags/${encodeURIComponent(version)}`
-    : "/releases/latest";
-
-  return `${GITHUB_API_URL}/repos/${repository}${endpoint}`;
-}
-
-/**
- * Checks whether an unknown value contains the release fields required
- * to identify and download a release asset.
- *
- * @param value - Unknown response data received from GitHub.
- * @returns `true` if the value satisfies the minimum release structure.
- */
-function isGitHubRelease(value: unknown): value is GitHubRelease {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const release = value as Record<string, unknown>;
-
-  return (
-    typeof release.tag_name === "string" &&
-    Array.isArray(release.assets) &&
-    release.assets.every(
-      (asset: unknown) =>
-        typeof asset === "object" &&
-        asset !== null &&
-        typeof (asset as Record<string, unknown>).name === "string" &&
-        typeof (asset as Record<string, unknown>).url === "string" &&
-        typeof (asset as Record<string, unknown>).size === "number" &&
-        Number.isFinite((asset as Record<string, unknown>).size) &&
-        ((asset as Record<string, unknown>).size as number) >= 0,
-    )
-  );
-}
-
-/**
- * Ensures that a release asset URL points to the GitHub API host.
- *
- * This prevents the service from making server-side requests to
- * unexpected hosts using a URL obtained from an API response.
- *
- * @param value - Asset URL returned by GitHub.
- * @returns `true` if the URL uses HTTPS and the GitHub API hostname.
- */
-function isValidGitHubAssetUrl(value: string): boolean {
-  try {
-    const url = new URL(value);
-
-    return url.protocol === "https:" && url.hostname === "api.github.com";
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Finds the release asset whose filename contains the requested
- * architecture identifier.
- *
- * Asset filenames are expected to contain identifiers such as
- * `linux-amd64` or `windows-amd64`.
- *
- * @param assets - Assets published with the GitHub release.
- * @param arch - Target architecture to match.
- * @returns The unique matching release asset.
- * @throws {GitHubServiceError} With status 404 if no asset matches.
- * @throws {GitHubServiceError} With status 502 if multiple assets match.
- */
-function findReleaseAsset(
-  assets: GitHubReleaseAsset[],
-  arch: DownloadParams["arch"],
-): GitHubReleaseAsset {
-  const matchingAssets = assets.filter((asset) =>
-    asset.name.toLowerCase().includes(arch.toLowerCase()),
-  );
-
-  if (matchingAssets.length === 0) {
-    throw new GitHubServiceError(
-      `No release asset found for architecture "${arch}".`,
-      404,
-    );
-  }
-
-  if (matchingAssets.length > 1) {
-    throw new GitHubServiceError(
-      `Multiple release assets found for architecture "${arch}".`,
-      502,
-    );
-  }
-
-  return matchingAssets[0];
 }
 
 /**
@@ -198,6 +102,52 @@ export async function getGitHubRelease(
 }
 
 /**
+ * Builds the GitHub API URL for a specific release or the latest release.
+ *
+ * @param repository - GitHub repository in owner/repository format.
+ * @param version - Optional release tag. When omitted, the latest
+ * published release endpoint is used.
+ * @returns The fully qualified GitHub API URL.
+ */
+function getReleaseUrl(repository: string, version?: string): string {
+  const endpoint = version
+    ? `/releases/tags/${encodeURIComponent(version)}`
+    : "/releases/latest";
+
+  return `${GITHUB_API_URL}/repos/${repository}${endpoint}`;
+}
+
+/**
+ * Checks whether an unknown value contains the release fields required
+ * to identify and download a release asset.
+ *
+ * @param value - Unknown response data received from GitHub.
+ * @returns `true` if the value satisfies the minimum release structure.
+ */
+function isGitHubRelease(value: unknown): value is GitHubRelease {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const release = value as Record<string, unknown>;
+
+  return (
+    typeof release.tag_name === "string" &&
+    Array.isArray(release.assets) &&
+    release.assets.every(
+      (asset: unknown) =>
+        typeof asset === "object" &&
+        asset !== null &&
+        typeof (asset as Record<string, unknown>).name === "string" &&
+        typeof (asset as Record<string, unknown>).url === "string" &&
+        typeof (asset as Record<string, unknown>).size === "number" &&
+        Number.isFinite((asset as Record<string, unknown>).size) &&
+        ((asset as Record<string, unknown>).size as number) >= 0,
+    )
+  );
+}
+
+/**
  * Resolves and downloads the release asset matching the requested
  * architecture, returning its metadata and binary stream.
  *
@@ -222,7 +172,7 @@ export async function getGitHubRelease(
  * response, or the response has no body.
  * @throws {TypeError} If the asset request fails at the network level.
  */
-export function getDownloadableArtifact(
+export async function getDownloadableArtifact(
   release: GitHubRelease,
   params: DownloadParams,
 ): Promise<DownloadableArtifact> {
@@ -280,4 +230,72 @@ export function getDownloadableArtifact(
       stream: response.body,
     };
   });
+}
+
+/**
+ * Ensures that a release asset URL points to the GitHub API host.
+ *
+ * This prevents the service from making server-side requests to
+ * unexpected hosts using a URL obtained from an API response.
+ *
+ * @param value - Asset URL returned by GitHub.
+ * @returns `true` if the URL uses HTTPS and the GitHub API hostname.
+ */
+function isValidGitHubAssetUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+
+    return url.protocol === "https:" && url.hostname === "api.github.com";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Finds the release asset whose filename contains the requested
+ * architecture identifier.
+ *
+ * Asset filenames are expected to contain identifiers such as
+ * `linux-amd64` or `windows-amd64`.
+ *
+ * @param assets - Assets published with the GitHub release.
+ * @param arch - Target architecture to match.
+ * @returns The unique matching release asset.
+ * @throws {GitHubServiceError} With status 404 if no asset matches.
+ * @throws {GitHubServiceError} With status 502 if multiple assets match.
+ */
+function findReleaseAsset(
+  assets: GitHubReleaseAsset[],
+  arch: DownloadParams["arch"],
+): GitHubReleaseAsset {
+  const matchingAssets = assets.filter((asset) =>
+    asset.name.toLowerCase().includes(arch.toLowerCase()),
+  );
+
+  const expectedFilename = RELEASE_ARCHIVES[arch];
+
+  const asset = assets.find((item) => item.name === expectedFilename);
+
+  if (!asset) {
+    throw new GitHubServiceError(
+      `Release artifact not found: ${expectedFilename}`,
+      404,
+    );
+  }
+
+  if (matchingAssets.length === 0) {
+    throw new GitHubServiceError(
+      `No release asset found for architecture "${arch}".`,
+      404,
+    );
+  }
+
+  if (matchingAssets.length > 1) {
+    throw new GitHubServiceError(
+      `Multiple release assets found for architecture "${arch}".`,
+      502,
+    );
+  }
+
+  return matchingAssets[0];
 }

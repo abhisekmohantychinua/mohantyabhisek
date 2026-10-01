@@ -43,7 +43,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const headers = new Headers({
       "Content-Type": artifact.contentType,
-      "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(artifact.filename)}`,
+      "Content-Disposition": `attachment; filename="${artifact.filename}"; filename*=UTF-8''${encodeURIComponent(artifact.filename)}`,
       "Cache-Control": "private, no-store",
     });
 
