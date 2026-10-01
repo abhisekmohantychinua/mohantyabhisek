@@ -3,11 +3,15 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import type { DownloadParams } from "../models/download-params";
 import type { GitHubRelease } from "../models/github-release";
 import type { GitHubReleaseAsset } from "../models/github-release-asset";
-import type { GitHubReleaseSummary } from "../models/github-release-summery";
+import type {
+  GitHubReleaseSummary,
+  GitHubReleaseVerbose,
+} from "../models/github-release-summery";
 import {
   getDownloadableArtifact,
   getGitHubRelease,
   getGitHubReleases,
+  getGitHubReleaseVerbose,
 } from "./github-service";
 
 const REPOSITORY = "owner/ctx-cli";
@@ -896,6 +900,265 @@ describe("github-service", () => {
       });
 
       await expect(getGitHubReleases()).rejects.toBe(error);
+    });
+  });
+
+  describe("getGitHubReleaseVerbose", () => {
+    const RELEASE_URL = `https://api.github.com/repos/${REPOSITORY}/releases/tags`;
+
+    function createVerboseRelease(
+      overrides: Partial<GitHubReleaseVerbose> = {},
+    ): GitHubReleaseVerbose {
+      return {
+        tag_name: RELEASE_TAG,
+        name: "CTX CLI v1.2.3",
+        draft: false,
+        published_at: "2026-09-20T12:00:00Z",
+        body: "## What's Changed\n- Added new features.",
+        ...overrides,
+      };
+    }
+
+    test("retrieves a published release by its tag", async () => {
+      const release = createVerboseRelease();
+      fetchMock.mockResolvedValue(createJsonResponse(release));
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).resolves.toEqual({
+        tag: RELEASE_TAG,
+        name: "CTX CLI v1.2.3",
+        releasedAt: "2026-09-20T12:00:00Z",
+        content: "## What's Changed\n- Added new features.",
+      });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(fetchMock).toHaveBeenCalledWith(`${RELEASE_URL}/${RELEASE_TAG}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: `Bearer ${PAT}`,
+          "X-GitHub-Api-Version": "2026-03-10",
+        },
+        cache: "no-store",
+      });
+    });
+
+    test("encodes special characters in the release tag", async () => {
+      fetchMock.mockResolvedValue(createJsonResponse(createVerboseRelease()));
+
+      await getGitHubReleaseVerbose("v1.2.3+build");
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        `${RELEASE_URL}/v1.2.3%2Bbuild`,
+        expect.any(Object),
+      );
+    });
+
+    test("falls back to the tag when the release name is null", async () => {
+      fetchMock.mockResolvedValue(
+        createJsonResponse(createVerboseRelease({ name: null })),
+      );
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).resolves.toMatchObject(
+        {
+          tag: RELEASE_TAG,
+          name: RELEASE_TAG,
+        },
+      );
+    });
+
+    test("falls back to the tag when the release name is empty", async () => {
+      fetchMock.mockResolvedValue(
+        createJsonResponse(createVerboseRelease({ name: "  " })),
+      );
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).resolves.toMatchObject(
+        {
+          tag: RELEASE_TAG,
+          name: RELEASE_TAG,
+        },
+      );
+    });
+
+    test("trims whitespace from the release name", async () => {
+      fetchMock.mockResolvedValue(
+        createJsonResponse(createVerboseRelease({ name: "  CTX CLI  " })),
+      );
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).resolves.toMatchObject(
+        {
+          name: "CTX CLI",
+        },
+      );
+    });
+
+    test("returns null content when the release body is null", async () => {
+      fetchMock.mockResolvedValue(
+        createJsonResponse(createVerboseRelease({ body: null })),
+      );
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).resolves.toMatchObject(
+        {
+          content: null,
+        },
+      );
+    });
+
+    test("rejects a draft release with 404", async () => {
+      fetchMock.mockResolvedValue(
+        createJsonResponse(createVerboseRelease({ draft: true })),
+      );
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub release not found.",
+        status: 404,
+      });
+    });
+
+    test("rejects a release without a publication date with 404", async () => {
+      fetchMock.mockResolvedValue(
+        createJsonResponse(createVerboseRelease({ published_at: null })),
+      );
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub release not found.",
+        status: 404,
+      });
+    });
+
+    test("rejects when the repository configuration is missing", async () => {
+      vi.stubEnv("CTX_CLI_GITHUB_REPO", "");
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub integration is not configured.",
+        status: 500,
+      });
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    test("rejects when the personal access token is missing", async () => {
+      vi.stubEnv("CTX_CLI_GITHUB_PAT", "");
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub integration is not configured.",
+        status: 500,
+      });
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    test("maps a missing release to 404", async () => {
+      fetchMock.mockResolvedValue(new Response(null, { status: 404 }));
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub release not found.",
+        status: 404,
+      });
+    });
+
+    test.each([400, 401, 403, 429])(
+      "maps GitHub HTTP status %i to 502",
+      async (status) => {
+        fetchMock.mockResolvedValue(new Response(null, { status }));
+
+        await expect(
+          getGitHubReleaseVerbose(RELEASE_TAG),
+        ).rejects.toMatchObject({
+          name: "GitHubServiceError",
+          message: "Unable to retrieve release information from GitHub.",
+          status: 502,
+        });
+      },
+    );
+
+    test.each([500, 502, 503])(
+      "maps GitHub server status %i to 503",
+      async (status) => {
+        fetchMock.mockResolvedValue(new Response(null, { status }));
+
+        await expect(
+          getGitHubReleaseVerbose(RELEASE_TAG),
+        ).rejects.toMatchObject({
+          name: "GitHubServiceError",
+          message: "Unable to retrieve release information from GitHub.",
+          status: 503,
+        });
+      },
+    );
+
+    test.each([
+      null,
+      "invalid",
+      123,
+      {},
+      { tag_name: RELEASE_TAG },
+      { tag_name: RELEASE_TAG, name: "CTX CLI" },
+      {
+        tag_name: RELEASE_TAG,
+        name: "CTX CLI",
+        draft: false,
+        published_at: "2026-09-20T12:00:00Z",
+      },
+      createVerboseRelease({
+        tag_name: 123,
+      } as unknown as Partial<GitHubReleaseVerbose>),
+      createVerboseRelease({
+        name: 123,
+      } as unknown as Partial<GitHubReleaseVerbose>),
+      createVerboseRelease({
+        draft: "false",
+      } as unknown as Partial<GitHubReleaseVerbose>),
+      createVerboseRelease({
+        published_at: 123,
+      } as unknown as Partial<GitHubReleaseVerbose>),
+      createVerboseRelease({
+        body: 123,
+      } as unknown as Partial<GitHubReleaseVerbose>),
+    ])("rejects an invalid verbose release response: %j", async (data) => {
+      fetchMock.mockResolvedValue(createJsonResponse(data));
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub release response is missing required fields.",
+        status: 502,
+      });
+    });
+
+    test("rejects when the parsed JSON value is undefined", async () => {
+      fetchMock.mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: vi.fn().mockResolvedValue(undefined),
+      });
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toMatchObject({
+        name: "GitHubServiceError",
+        message: "GitHub release response is missing required fields.",
+        status: 502,
+      });
+    });
+
+    test("propagates network errors", async () => {
+      const error = new TypeError("Network unavailable");
+      fetchMock.mockRejectedValue(error);
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toBe(error);
+    });
+
+    test("propagates JSON parsing errors", async () => {
+      const error = new SyntaxError("Invalid JSON");
+      fetchMock.mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: vi.fn().mockRejectedValue(error),
+      });
+
+      await expect(getGitHubReleaseVerbose(RELEASE_TAG)).rejects.toBe(error);
     });
   });
 });
