@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import type { DownloadParams } from "../models/download-params";
-import type { GitHubRelease } from "../models/github-release";
-import type { GitHubReleaseAsset } from "../models/github-release-asset";
+import type GitHubRelease from "../models/github-release";
 import type {
-  GitHubReleaseSummary,
+  GitHubReleaseAsset,
+  GitHubReleaseDetail,
   GitHubReleaseVerbose,
-} from "../models/github-release-summery";
+} from "../models/github-release";
 import {
   getDownloadableArtifact,
   getGitHubRelease,
@@ -668,7 +668,7 @@ describe("github-service", () => {
 
     function createReleaseSummary(
       overrides: Record<string, unknown> = {},
-    ): GitHubReleaseSummary {
+    ): GitHubReleaseDetail {
       return {
         tag_name: "v1.2.3",
         name: "CTX CLI v1.2.3",
