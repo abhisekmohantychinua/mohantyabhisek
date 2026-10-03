@@ -15,8 +15,8 @@ export const downloadParamsSchema = z
     version: z
       .string()
       .regex(
-        /^v\d+\.\d+\.\d+(?:-SNAPSHOT)?$/,
-        "Version must be in the format vX.Y.Z or vX.Y.Z-SNAPSHOT.",
+        /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/,
+        "Version must follow SemVer 2.0.0, prefixed with 'v'.",
       )
       .optional(),
   })
