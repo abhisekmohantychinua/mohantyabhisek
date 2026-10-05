@@ -1,23 +1,16 @@
 import "./styles.css";
 
 import {
-  ArrowUpRight,
-  Globe2,
-  Instagram,
-  Linkedin,
-  Mail,
-  MessageCircle,
-} from "lucide-react";
+  SiInstagram,
+  SiTelegram,
+  SiWhatsapp,
+} from "@icons-pack/react-simple-icons";
+import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { JSX } from "react";
 
-const contactMethods: {
-  name: string;
-  value: string;
-  href: string;
-  icon: typeof Mail;
-}[] = [
+const contactMethods = [
   {
     name: "Email",
     value: "mohantyabhisek@hotmail.com",
@@ -32,21 +25,21 @@ const contactMethods: {
   },
   {
     name: "Telegram",
-    value: "https://t.me/mohantyabhisek",
+    value: "t.me/mohantyabhisek",
     href: "https://t.me/mohantyabhisek",
-    icon: Instagram,
+    icon: SiTelegram,
   },
   {
     name: "WhatsApp",
     value: "wa.me/919439485166",
     href: "https://wa.me/919439485166",
-    icon: MessageCircle,
+    icon: SiWhatsapp,
   },
   {
     name: "Instagram",
     value: "@coderabhisek",
     href: "https://www.instagram.com/coderabhisek",
-    icon: Instagram,
+    icon: SiInstagram,
   },
 ] as const;
 
@@ -71,7 +64,7 @@ export default function ContactInfo(): JSX.Element {
 
         <div className="contact-info__right">
           <h2 id="contact-info-heading" className="contact-info__right-heading">
-            Available <span className="highlight">In</span>
+            Ways To <span className="highlight">Reach Me</span>
           </h2>
 
           <div className="contact-info__links">
