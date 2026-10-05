@@ -84,13 +84,13 @@ describe("GET /api/ctx/download", () => {
 
       expect(response.status).toBe(400);
       expect(await response.json()).toEqual({
-        message: "Version must be in the format vX.Y.Z or vX.Y.Z-SNAPSHOT.",
+        message: "Version must follow SemVer 2.0.0, prefixed with 'v'.",
       });
       expect(getGitHubRelease).not.toHaveBeenCalled();
       expect(getDownloadableArtifact).not.toHaveBeenCalled();
     });
 
-    test.each(["1.2.3", "v1.2", "v1.2.3-beta", "v1.2.3-SNAPSHOT-extra"])(
+    test.each(["1.2.3", "v1.2", "v1.2.3.4"])(
       "returns 400 for invalid version %s",
       async (version) => {
         const response = await GET(
@@ -101,6 +101,30 @@ describe("GET /api/ctx/download", () => {
         expect(getGitHubRelease).not.toHaveBeenCalled();
       },
     );
+    test.each([
+      "v1.2.3",
+      "v1.2.3-beta",
+      "v1.2.3-SNAPSHOT-extra",
+      "v1.2.3+build.123",
+      "v1.2.3-beta.1+build.123",
+    ])("accepts valid SemVer version %s", async (version) => {
+      const release = createRelease();
+      const artifact = createArtifact({ version });
+
+      vi.mocked(getGitHubRelease).mockResolvedValue(release);
+      vi.mocked(getDownloadableArtifact).mockResolvedValue(artifact);
+
+      const response = await GET(
+        createRequest(`?arch=${ARCH}&version=${encodeURIComponent(version)}`),
+      );
+
+      expect(response.status).toBe(200);
+      expect(getGitHubRelease).toHaveBeenCalledWith(version);
+      expect(getDownloadableArtifact).toHaveBeenCalledWith(release, {
+        arch: ARCH,
+        version,
+      });
+    });
     const artifacts: DownloadableArtifact["arch"][] = [
       "windows-amd64",
       "linux-amd64",

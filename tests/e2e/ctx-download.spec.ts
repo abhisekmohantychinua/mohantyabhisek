@@ -2,6 +2,8 @@ import { stat } from "node:fs/promises";
 
 import { expect, test } from "@playwright/test";
 
+// BUG: FIX THE SEMVER SCHEMA UPDATE ALONG WITH CREATING A SEMVER RELEASE AT CTX-CLI
+
 const DOWNLOAD_ENDPOINT = "/api/ctx/download";
 const BASE_URL =
   process.env.PLAYWRIGHT_TEST_BASE_URL ?? "http://localhost:3000";

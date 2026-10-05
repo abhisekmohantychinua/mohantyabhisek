@@ -58,7 +58,7 @@
 
 .testimonials__card-content {
   @apply text-3xl leading-11 font-medium;
-  @apply leading-8 max-sm:text-xl;
+  @apply max-sm:text-xl max-sm:leading-8;
 }
 
 .testimonials__card-profile {
