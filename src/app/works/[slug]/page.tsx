@@ -18,6 +18,14 @@ type WorkPageParams = {
   }>;
 };
 
+export function generateStaticParams(): {
+  slug: string;
+}[] {
+  return works.map((work) => ({
+    slug: work.slug,
+  }));
+}
+
 export default async function WorkPage({
   params,
 }: WorkPageParams): Promise<JSX.Element> {
