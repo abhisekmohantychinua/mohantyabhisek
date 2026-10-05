@@ -11,35 +11,39 @@ export default async function Contact(): Promise<JSX.Element> {
       <Header />
       <ContactInfo />
       <ContactEnquiries />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }
 
 export const metadata: Metadata = {
-  title: "Clarity Before You Build | Contact Abhisek",
+  title: "Reach Out In A Way That Works For You | Abhisek",
   description:
-    "For businesses unsure what website or web app they actually need. A structured conversation to bring clarity before decisions are made.",
+    "Reach out to Abhisek Mohanty by email, WhatsApp, LinkedIn, Instagram, Telegram, or phone for websites, web applications, and business systems.",
   openGraph: {
     type: "website",
-    title: "Clarity Before You Build — Contact Abhisek",
+    title: "Reach Out In A Way That Works For You | Abhisek",
     description:
-      "A structured conversation for businesses and founders who want clarity before building a website or web app.",
+      "Reach out to Abhisek Mohanty by email, WhatsApp, LinkedIn, Instagram, Telegram, or phone for websites, web applications, and business systems.",
     url: "https://mohantyabhisek.com/contact",
     images: [
       {
-        url: "https://mohantyabhisek.com/og-image.jpg",
+        url: "https://mohantyabhisek.com/contact-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Website & Web App Solutions for Businesses | Abhisek",
+        alt: "Reach Out In A Way That Works For You | Abhisek",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Clarity Before You Build — Contact Abhisek",
+    title: "Reach Out In A Way That Works For You | Abhisek",
     description:
-      "For those who want clarity and structure before committing to a website or web app.",
-    images: ["https://mohantyabhisek.com/og-image.jpg"],
+      "Reach out to Abhisek Mohanty by email, WhatsApp, LinkedIn, Instagram, Telegram, or phone for websites, web applications, and business systems.",
+    images: ["https://mohantyabhisek.com/contact-og-image.jpg"],
   },
   alternates: {
     canonical: "https://mohantyabhisek.com/contact",
@@ -53,18 +57,22 @@ const jsonLd = {
   "@type": "Person",
   "@id": "https://mohantyabhisek.com/#person",
   name: "Abhisek Mohanty",
-  url: "https://mohantyabhisek.com/contact",
+  url: "https://mohantyabhisek.com/",
   image: "https://mohantyabhisek.com/developer.jpg",
-  jobTitle: "Website & Web App Consultant",
+  jobTitle: "Website & Web Application Consultant",
   sameAs: [
     "https://www.linkedin.com/in/mohanty-abhisek",
+    "https://github.com/abhisekmohantychinua",
     "https://www.instagram.com/coderabhisek",
+    "https://t.me/mohantyabhisek",
+    "https://wa.me/919439485166",
   ],
   contactPoint: [
     {
       "@type": "ContactPoint",
       telephone: "+919439485166",
       email: "mohantyabhisek@hotmail.com",
+      url: "https://wa.me/919439485166",
       contactType: "consulting",
       availableLanguage: ["English", "Hindi", "Odia"],
     },
@@ -74,5 +82,5 @@ const jsonLd = {
     "@id": "https://mohantyabhisek.com/#organization",
   },
   description:
-    "Website and web app consultant focused on clarity, structure, and purpose-driven digital solutions for businesses.",
+    "Website and web application consultant focused on clarity, structure, and purpose-driven digital solutions for businesses.",
 };

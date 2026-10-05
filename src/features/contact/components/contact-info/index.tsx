@@ -1,6 +1,7 @@
 import "./styles.css";
 
 import {
+  SiGithub,
   SiInstagram,
   SiTelegram,
   SiWhatsapp,
@@ -19,19 +20,25 @@ const contactMethods = [
   },
   {
     name: "LinkedIn",
-    value: "linkedin.com/in/mohanty-abhisek",
+    value: "mohanty-abhisek",
     href: "https://www.linkedin.com/in/mohanty-abhisek",
     icon: Linkedin,
   },
   {
     name: "Telegram",
-    value: "t.me/mohantyabhisek",
+    value: "@mohantyabhisek",
     href: "https://t.me/mohantyabhisek",
     icon: SiTelegram,
   },
   {
+    name: "GitHub",
+    value: "abhisekmohantychinua",
+    href: "https://github.com/abhisekmohantychinua",
+    icon: SiGithub,
+  },
+  {
     name: "WhatsApp",
-    value: "wa.me/919439485166",
+    value: "+91 94394 85166",
     href: "https://wa.me/919439485166",
     icon: SiWhatsapp,
   },
