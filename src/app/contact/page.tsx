@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { JSX } from "react";
 
+import ContactEnquiries from "@/features/contact/components/contact-enquiries";
 import ContactInfo from "@/features/contact/components/contact-info";
 import Header from "@/features/contact/components/header";
 
@@ -9,6 +10,7 @@ export default async function Contact(): Promise<JSX.Element> {
     <>
       <Header />
       <ContactInfo />
+      <ContactEnquiries />
     </>
   );
 }
