@@ -1,84 +1,13 @@
-import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import type { JSX } from "react";
+
+import Header from "@/features/contact/components/header";
 
 export default async function Contact(): Promise<JSX.Element> {
   return (
-    <section className="container mx-auto flex h-[80vh] flex-col items-center justify-center">
-      <div className="mb-5 h-60 w-60 overflow-hidden rounded-full object-cover">
-        <Image
-          src="/developer.jpg"
-          alt="Developer Photo"
-          width={4080}
-          height={3060}
-          className="h-full w-full object-cover"
-          priority
-        />
-      </div>
-
-      <h1
-        id="contact-heading"
-        className="font-break text-primary text-center text-4xl font-bold md:text-6xl"
-      >
-        Abhisek Mohanty
-      </h1>
-      <p className="text-xl md:text-2xl">Website & Web App Consultant</p>
-      <div className="bg-secondary my-4 h-px w-full max-w-md"></div>
-      <p className="text-foreground/80 text-sm md:text-lg">
-        Start with clarity, build with purpose.
-        <br />A practical,structured approach.
-      </p>
-
-      {/* Social media links */}
-      <div
-        className="my-2 flex w-full items-center justify-center space-x-4"
-        aria-label="Social links"
-      >
-        <Link
-          href="https://www.linkedin.com/in/mohanty-abhisek"
-          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
-          aria-label="LinkedIn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Linkedin size={20} />
-        </Link>
-        <Link
-          href="https://www.instagram.com/abhisek.mohanty/"
-          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
-          aria-label="Instagram"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Instagram size={20} />
-        </Link>
-        <Link
-          href="mailto:mohantyabhisek@hotmail.com"
-          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
-          aria-label="Email"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Mail size={20} />
-        </Link>
-        <Link
-          href="tel:+919439485166"
-          className="bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200"
-          aria-label="Phone"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Phone size={20} />
-        </Link>
-      </div>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </section>
+    <>
+      <Header />
+    </>
   );
 }
 
