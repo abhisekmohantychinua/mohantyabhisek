@@ -58,8 +58,8 @@ export default function ContactInfo(): JSX.Element {
           <Image
             src="/developer.jpg"
             alt="Abhisek Mohanty"
-            width={4080}
-            height={3060}
+            width={448}
+            height={597}
             className="contact-info__image"
             priority
           />
