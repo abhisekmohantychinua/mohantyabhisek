@@ -6,7 +6,8 @@
   @apply max-sm:px-4 max-sm:py-4;
 }
 .read-more__heading {
-  @apply text-primary mb-4 text-xl font-medium md:text-2xl;
+  @apply my-9 text-4xl leading-14;
+  @apply max-sm:my-6 max-sm:text-3xl max-sm:leading-10;
 }
 .read-more__grid {
   @apply grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3;

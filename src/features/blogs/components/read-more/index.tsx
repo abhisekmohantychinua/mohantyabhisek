@@ -12,12 +12,14 @@ type ReadMoreProps = {
 export default async function ReadMore({
   slug,
 }: ReadMoreProps): Promise<JSX.Element | null> {
+  // TODO: Replace with more better read more picking algorithm
   const latestBlogs = await getLatestThreeBlogCardsExceptSlug(slug);
 
   if (latestBlogs.length === 0) {
     return null; // Don't render the section if there are no blogs to show
   }
 
+  // TODO: Write a better heading for this section.
   return (
     <section className="read-more__section" aria-labelledby="read-more-heading">
       <h3 className="read-more__heading">Read More</h3>

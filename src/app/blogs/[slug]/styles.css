@@ -2,76 +2,90 @@
 
 /* Scope everything inside blog-wrapper */
 .blog-wrapper {
+  @apply container mx-auto max-w-6xl px-12;
+  @apply max-2xl:max-w-4xl max-2xl:px-8;
+  @apply max-sm:px-4;
+}
+
+.blog-wrapper {
   /* Headings */
   h1 {
-    @apply text-primary mx-auto mb-4 px-4 font-sans text-3xl leading-snug font-semibold;
-    @apply sm:mb-6 sm:text-4xl sm:leading-tight;
-    @apply md:max-w-3xl md:px-0 md:text-5xl;
-    @apply lg:max-w-full lg:px-4 lg:text-5xl;
-    @apply xl:max-w-5xl xl:px-0;
-    @apply 2xl:mb-6 2xl:text-5xl; /* smaller relative to previous 2xl 6xl */
+    @apply mt-6 mb-2 text-5xl leading-16;
+    @apply max-sm:text-4xl max-sm:leading-12;
   }
 
   h2 {
-    @apply text-primary mx-auto mt-10 mb-4 max-w-5xl text-2xl leading-snug font-semibold;
-    @apply sm:text-2xl;
-    @apply md:text-3xl;
+    @apply mt-5 mb-[6px] text-4xl leading-12;
+    @apply max-sm:text-3xl max-sm:leading-10;
   }
 
   h3 {
-    @apply text-primary mx-auto mt-8 mb-3 max-w-5xl text-xl font-semibold;
-    @apply sm:text-xl;
-    @apply md:text-2xl;
+    @apply mt-4 mb-[5px] text-3xl leading-10;
+    @apply max-sm:text-2xl max-sm:leading-8;
   }
 
   h4 {
-    @apply text-primary mx-auto mt-6 mb-2 max-w-5xl text-lg font-semibold;
-    @apply sm:text-lg;
-  }
-
-  /* Sections */
-  section {
-    @apply container mx-auto px-12 py-12;
-    @apply max-xl:px-8 max-xl:py-8;
-    @apply max-sm:px-4 max-sm:py-4;
+    @apply mt-3 mb-1 text-2xl leading-8;
+    @apply max-sm:text-xl max-sm:leading-6;
   }
 
   /* Paragraphs */
   p {
-    @apply text-muted-foreground mx-auto mb-6 max-w-5xl text-base leading-relaxed;
-    @apply sm:text-lg sm:leading-8;
+    @apply mb-2 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
   }
 
   /* Links */
   a {
-    @apply text-primary underline underline-offset-4 transition-colors;
-  }
-
-  a:hover {
-    @apply text-primary/80;
+    @apply text-primary transition-colors;
+    @apply hover:decoration-primary hover:underline hover:decoration-1 hover:underline-offset-4;
+    @apply visited:text-primary/50;
+    @apply focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-4;
+    @apply active:text-primary/50;
   }
 
   /* Lists */
+  /* BUG: The dotted lists look weird on mobile devices farther from its line. Then when line folds the dot stays at the top. */
   ul,
   ol {
-    @apply text-muted-foreground mx-auto mb-6 max-w-5xl pl-6;
+    @apply -mt-2 mb-2 ps-12;
+    @apply max-2xl:ps-8;
+    @apply max-sm:ps-4;
   }
 
   ul {
     @apply list-disc;
   }
+  ul li {
+    @apply marker:text-accent marker:text-2xl;
+  }
 
   ol {
     @apply list-decimal;
   }
-
-  li {
-    @apply mb-2 leading-relaxed;
+  ol li {
+    @apply marker:font-medium;
   }
 
-  /* Blockquotes */
+  li {
+    @apply mb-2 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
+  }
+
+  /* Block quotes */
+  blockquote,
+  blockquote p {
+    @apply text-3xl leading-11 font-medium;
+    @apply max-sm:text-xl max-sm:leading-8;
+  }
+
   blockquote {
-    @apply border-primary text-muted-foreground mx-auto my-8 max-w-5xl border-l-4 pl-6 italic;
+    @apply relative my-8 flex min-h-24 items-center justify-start px-12 text-center;
+    @apply before:pointer-events-none before:absolute before:inset-0 before:-z-10;
+    @apply before:bg-[url("/quote.svg")] before:bg-top-left before:content-[""];
+    @apply before:bg-size-[4rem] before:bg-no-repeat;
+    @apply max-2xl:ps-8;
+    @apply max-sm:px-4 max-sm:before:bg-size-[2rem];
   }
 
   /* Code blocks */
@@ -79,52 +93,45 @@
     @apply bg-muted mx-auto my-8 max-w-5xl overflow-x-auto rounded-lg p-4 text-sm;
   }
 
-  code {
-    @apply bg-muted rounded px-1.5 py-0.5 font-mono text-sm;
-  }
-
-  /* Images */
-  img {
-    @apply mx-auto my-8 max-w-5xl rounded-lg;
-  }
-
   /* Horizontal rule */
   hr {
-    @apply border-border mx-auto my-12 max-w-5xl;
+    @apply border-foreground mx-auto my-10;
+    @apply max-sm:my-6;
   }
 
   /* Tables */
+  .table-wrapper {
+    @apply w-full overflow-x-auto;
+  }
   table {
-    @apply mx-auto my-8 w-full max-w-5xl border-collapse;
+    @apply border-foreground my-8 border-separate border-spacing-0 overflow-hidden rounded-2xl border;
   }
 
-  th,
   td {
-    @apply border-border border px-4 py-2 text-left;
+    @apply border-accent border-t border-r px-4 py-2 text-left text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
+    @apply even:bg-accent/10;
+    @apply last:border-r-0;
   }
 
   th {
-    @apply bg-muted font-semibold;
+    @apply bg-secondary/10 px-8 py-4 text-2xl leading-10 font-semibold;
+    @apply first:rounded-tl-2xl last:rounded-tr-2xl;
+    @apply max-sm:text-xl max-sm:leading-8;
   }
 
   caption {
-    @apply text-primary mb-4 text-left font-semibold;
+    @apply mx-auto ms-2 mb-2 text-left font-semibold;
   }
 
   /* Definition lists */
-  dl {
-    @apply mx-auto my-8 max-w-5xl;
-  }
-
   dt {
-    @apply text-primary mt-6 font-semibold;
+    @apply mt-4 text-lg leading-7 font-semibold;
+    @apply max-sm:text-base max-sm:leading-6;
   }
 
   dd {
-    @apply text-muted-foreground mt-2 mb-4 pl-4 leading-relaxed;
-  }
-
-  .blog-wrapper hr {
-    @apply border-border my-12;
+    @apply mb-4 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
   }
 }

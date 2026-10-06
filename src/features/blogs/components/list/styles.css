@@ -15,7 +15,7 @@
 }
 
 .blog-list__grid {
-  @apply grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3;
+  @apply grid grid-cols-1 justify-items-center gap-8 md:grid-cols-2 lg:grid-cols-3;
 }
 
 .blog-list__scroll-anchor {
