@@ -45,6 +45,7 @@
   }
 
   /* Lists */
+  /* BUG: The dotted lists look weird on mobile devices farther from its line. Then when line folds the dot stays at the top. */
   ul,
   ol {
     @apply -mt-2 mb-2 ps-12;
