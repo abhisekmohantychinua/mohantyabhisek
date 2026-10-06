@@ -12,6 +12,8 @@ import {
   getBySlug,
 } from "@/features/blogs/services/blog-service";
 
+import Styles from "./styles";
+
 const SITE_URL = "https://mohantyabhisek.com";
 export const revalidate = 86400; // revalidate every 24 hours
 
@@ -51,6 +53,7 @@ export default async function BlogPage({
         id="blog-wrapper"
         dangerouslySetInnerHTML={{ __html: rawHtml }}
       ></article>
+      <Styles />
       <ReadMore slug={blog.slug} />
       <script
         type="application/ld+json"
