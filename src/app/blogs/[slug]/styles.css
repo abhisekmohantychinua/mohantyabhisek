@@ -5,9 +5,7 @@
   @apply container mx-auto max-w-6xl px-12;
   @apply max-2xl:max-w-4xl max-2xl:px-8;
   @apply max-sm:px-4;
-}
 
-.blog-wrapper {
   /* Headings */
   h1 {
     @apply mt-6 mb-2 text-5xl leading-16;
@@ -47,14 +45,14 @@
   /* Lists */
   ul,
   ol {
-    @apply -mt-2 mb-2 ps-16;
+    @apply -mt-2 mb-2 list-none ps-16;
     @apply max-2xl:ps-12;
     @apply max-sm:ps-8;
   }
 
-  ul,
-  ol {
-    @apply list-none;
+  li {
+    @apply mb-2 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
   }
 
   ul li,
@@ -82,11 +80,6 @@
     @apply absolute -start-8 top-0 font-medium;
     @apply max-2xl:-start-6;
     @apply max-sm:-start-4;
-  }
-
-  li {
-    @apply mb-2 text-lg leading-7;
-    @apply max-sm:text-base max-sm:leading-6;
   }
 
   /* Block quotes */
@@ -120,6 +113,7 @@
   .table-wrapper {
     @apply w-full overflow-x-auto;
   }
+
   table {
     @apply border-foreground my-8 border-separate border-spacing-0 overflow-hidden rounded-2xl border;
   }
