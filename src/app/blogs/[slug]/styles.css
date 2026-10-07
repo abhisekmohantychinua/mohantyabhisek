@@ -45,26 +45,43 @@
   }
 
   /* Lists */
-  /* BUG: The dotted lists look weird on mobile devices farther from its line. Then when line folds the dot stays at the top. */
   ul,
   ol {
-    @apply -mt-2 mb-2 ps-12;
-    @apply max-2xl:ps-8;
-    @apply max-sm:ps-4;
+    @apply -mt-2 mb-2 ps-16;
+    @apply max-2xl:ps-12;
+    @apply max-sm:ps-8;
   }
 
-  ul {
-    @apply list-disc;
+  ul,
+  ol {
+    @apply list-none;
   }
-  ul li {
-    @apply marker:text-accent marker:text-2xl;
+
+  ul li,
+  ol li {
+    @apply relative;
+  }
+
+  ul li::before {
+    content: "";
+    @apply bg-accent absolute -start-8 top-[10px] size-2 rounded-full;
+    @apply max-2xl:-start-6;
+    @apply max-sm:-start-4 max-sm:top-[9px] max-sm:size-1.5;
   }
 
   ol {
-    @apply list-decimal;
+    counter-reset: list-item;
   }
+
   ol li {
-    @apply marker:font-medium;
+    counter-increment: list-item;
+  }
+
+  ol li::before {
+    content: counter(list-item) ".";
+    @apply absolute -start-8 top-0 font-medium;
+    @apply max-2xl:-start-6;
+    @apply max-sm:-start-4;
   }
 
   li {
