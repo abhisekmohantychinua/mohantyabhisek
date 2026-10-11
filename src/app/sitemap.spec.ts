@@ -16,20 +16,20 @@ vi.mock("@/features/works/store/works-store", () => ({
       lastModifiedAt: new Date("2026-07-01T00:00:00.000Z"),
 
       featuredVideo: {
-        url: "https://example.com/video.mp4",
+        url: "/works/sample-work/video.mp4",
         title: "Featured Video",
         description: "Featured video description",
         thumbnail: {
-          url: "https://example.com/thumbnail.jpg",
+          url: "/works/sample-work/thumbnail.jpg",
         },
       },
 
       gallery: [
         {
-          url: "https://example.com/gallery-1.jpg",
+          url: "/works/sample-work/image-1.jpg",
         },
         {
-          url: "https://example.com/gallery-2.jpg",
+          url: "/works/sample-work/image-2.jpg",
         },
       ],
     },
@@ -90,17 +90,19 @@ describe("sitemap", () => {
             priority: 1,
 
             images: [
-              "https://example.com/thumbnail.jpg",
-              "https://example.com/gallery-1.jpg",
-              "https://example.com/gallery-2.jpg",
+              "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+              "https://mohantyabhisek.com/works/sample-work/image-1.jpg",
+              "https://mohantyabhisek.com/works/sample-work/image-2.jpg",
             ],
 
             videos: [
               {
                 title: "Featured Video",
                 description: "Featured video description",
-                thumbnail_loc: "https://example.com/thumbnail.jpg",
-                content_loc: "https://example.com/video.mp4",
+                thumbnail_loc:
+                  "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+                content_loc:
+                  "https://mohantyabhisek.com/works/sample-work/video.mp4",
               },
             ],
           }),
@@ -120,9 +122,9 @@ describe("sitemap", () => {
       expect(workEntry).toEqual(
         expect.objectContaining({
           images: [
-            "https://example.com/thumbnail.jpg",
-            "https://example.com/gallery-1.jpg",
-            "https://example.com/gallery-2.jpg",
+            "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+            "https://mohantyabhisek.com/works/sample-work/image-1.jpg",
+            "https://mohantyabhisek.com/works/sample-work/image-2.jpg",
           ],
         }),
       );
@@ -143,8 +145,10 @@ describe("sitemap", () => {
             {
               title: "Featured Video",
               description: "Featured video description",
-              thumbnail_loc: "https://example.com/thumbnail.jpg",
-              content_loc: "https://example.com/video.mp4",
+              thumbnail_loc:
+                "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+              content_loc:
+                "https://mohantyabhisek.com/works/sample-work/video.mp4",
             },
           ],
         }),

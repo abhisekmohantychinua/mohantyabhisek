@@ -61,7 +61,7 @@ function getWorkPaths(): MetadataRoute.Sitemap {
   return works.map((work) => {
     const galleryImages = work.gallery
       .filter((item) => !("thumbnail" in item))
-      .map((image) => image.url);
+      .map((image) => `https://mohantyabhisek.com${image.url}`);
 
     return {
       url: `https://mohantyabhisek.com/works/${work.slug}`,
@@ -72,14 +72,17 @@ function getWorkPaths(): MetadataRoute.Sitemap {
 
       priority: 1.0,
 
-      images: [work.featuredVideo.thumbnail.url, ...galleryImages],
+      images: [
+        `https://mohantyabhisek.com${work.featuredVideo.thumbnail.url}`,
+        ...galleryImages,
+      ],
 
       videos: [
         {
           title: work.featuredVideo.title,
           description: work.featuredVideo.description,
-          thumbnail_loc: work.featuredVideo.thumbnail.url,
-          content_loc: work.featuredVideo.url,
+          thumbnail_loc: `https://mohantyabhisek.com${work.featuredVideo.thumbnail.url}`,
+          content_loc: `https://mohantyabhisek.com${work.featuredVideo.url}`,
         },
       ],
     };
