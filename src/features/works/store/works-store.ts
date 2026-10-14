@@ -40,6 +40,81 @@ export const workCards: WorkCard[] = [
 
 export const works: Work[] = [
   {
+    slug: "travel-mitra",
+    metadata: {
+      title: "Travel Mitra Website | Abhisek",
+      description:
+        "Travel Mitra is a travel booking platform that allows users to explore and book flights, hotels, and travel packages with ease.",
+    },
+    title: "Travel Mitra",
+    description:
+      "A Custom Web Application built for the internal operations of a travel agency that owns no vehicles. The system brings a scattered network of owners, drivers and bookings into one place where the work can actually be managed.",
+    sectors: ["Travel", "Travel Agency", "Web Application"],
+    contents: [
+      "Travel Mitra sits between independent owners, drivers, and the people who book trips. That arrangement keeps the business flexible, but it also multiplies the moving parts. As trip volume grew, the real problem wasn't the work itself; it was coordination: which vehicle belonged to whom, which driver was free, what pricing applied to a given owner, how much fuel had been used, whether a payment had cleared. That information lived in scattered notebooks, spreadsheets and phone calls and staff spent more time chasing it down than acting on it.",
+      "The company already knew how to run the business. What it lacked was a single, reliable place to hold that work. So the goal was never a generic booking tool; it was a system shaped around how Travel Mitra actually operates, trip after trip.",
+      "At its core are the people and assets that keep operations moving. Owners are registered with contact details, bank information, and verification records, so the fleet stays organised rather than scattered across memory. Each vehicle holds its own pricing: daily rate, per-kilometre charge, night halt fee, fuel cost because no two owners price the same way, and a fixed structure would break on contact with reality. Drivers are linked directly to their vehicles, removing the back-and-forth when assignments shift at short notice. Pre-bookings lock in trips ahead of the rush. Duty slips replace the paper trail entirely vehicle, driver, customer, timing, kilometres, charges, penalties, tolls, all in one record. Payments and fuel entries stay tied to the right trip and the right person, so what was spent and what was paid is never in question. Search and reports surface any of this in seconds.",
+      "The system was designed around Travel Mitra’s existing workflow and what worked best for the team rather than forcing them into a predefined structure. A key challenge was choosing between a desktop and web application. We chose web because a single server could make the system accessible across devices through a browser, while keeping development and maintenance costs lower. The trade-offs more frequent server calls, less client-side processing, and a slightly lighter UX were acceptable for the business's requirements.",
+      "The result is steady. Less time spent chasing information, cleaner settlements for owners, better service for customers and a team that can scale trip volume without scaling headcount at the same rate. This is not software built for a market. It's a tool built for one company's way of working, so that work stays visible as it grows.",
+    ],
+    featuredVideo: {
+      slug: "travel-mitra-featured-video",
+      url: "/works/travel-mitra/video.mp4",
+      alt: "Travel Mitra website walkthrough showcasing its flight, hotel, and travel package booking features.",
+      caption:
+        "Travel Mitra website walkthrough showcasing its flight, hotel, and travel package booking features.",
+      transcript:
+        "The video opens with a Google search for Travel Mitra before transitioning into the Travel Mitra website. The homepage introduces Travel Mitra with the message “Your Gateway to Seamless Travel” and highlights flight, hotel, and travel package booking features. The Flights section presents a search interface for flights, allowing users to enter departure and destination locations, select travel dates, and view available flight options. The Hotels section provides a similar search interface for hotels, enabling users to browse accommodations based on location, check-in/check-out dates, and room preferences. The Travel Packages section showcases curated travel packages that combine flights, hotels, and activities for popular destinations. The video then demonstrates the booking process for a selected flight and hotel package, including entering passenger details, selecting payment options, and confirming the booking. It concludes with a confirmation page displaying the booking details and a thank-you message.",
+      title: "Travel Mitra Website Showcase",
+      description:
+        "A visual walkthrough of the Travel Mitra website, showcasing its flight, hotel, and travel package booking features.",
+      thumbnail: {
+        slug: "travel-mitra-video-thumbnail",
+        url: "/works/travel-mitra/image-1.png",
+        alt: "Travel Mitra website visual featuring its flight, hotel, and travel package booking interface.",
+        caption: "Travel Mitra website and booking experience.",
+        title: "Travel Mitra Website Preview",
+        description:
+          "A visual preview of the Travel Mitra website combining its flight, hotel, and travel package booking features.",
+        width: 1440,
+        height: 810,
+      },
+      duration: 45,
+      uploadedAt: new Date("2026-09-30T00:00:00.000Z"),
+    },
+    gallery: [
+      {
+        slug: "travel-mitra-gallery-1",
+        url: "/works/travel-mitra/image-1.png",
+        alt: "Travel Mitra website showing the flight booking interface with search options and available flights.",
+        caption:
+          "A unified travel booking platform bringing flights, hotels, and packages together.",
+        title: "Travel Mitra Website",
+        description:
+          "A view of the Travel Mitra website combining flight search, hotel booking, and travel package options within a single interface.",
+        width: 1440,
+        height: 810,
+      },
+    ],
+    clients: [
+      {
+        name: "Travel Mitra",
+      },
+    ],
+    partners: [],
+    teamMembers: [],
+    collaborators: [],
+    faqs: [
+      {
+        question: "What is Travel Mitra?",
+        answer:
+          "Travel Mitra is a travel booking platform that allows users to explore and book flights, hotels, and travel packages with ease.",
+      },
+    ],
+    postedAt: new Date("2026-09-30T00:00:00.000Z"),
+    lastModifiedAt: new Date("2026-09-30T00:00:00.000Z"),
+  },
+  {
     slug: "northeast-auto-creations",
     metadata: {
       title: "Northeast Auto Creations Website | Abhisek",
