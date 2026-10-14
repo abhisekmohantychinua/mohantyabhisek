@@ -42,32 +42,37 @@ export const works: Work[] = [
   {
     slug: "travel-mitra",
     metadata: {
-      title: "Travel Mitra Website | Abhisek",
+      title: "Travel Mitra | Abhisek",
       description:
-        "Travel Mitra is a travel booking platform that allows users to explore and book flights, hotels, and travel packages with ease.",
+        "Explore Travel Mitra, a custom travel-agency management system for coordinating vehicles, drivers, bookings, duty slips, expenses, and payments.",
     },
     title: "Travel Mitra",
     description:
       "A Custom Web Application built for the internal operations of a travel agency that owns no vehicles. The system brings a scattered network of owners, drivers and bookings into one place where the work can actually be managed.",
-    sectors: ["Travel", "Travel Agency", "Web Application"],
+    sectors: [
+      "Travel & Tourism",
+      "Travel Agency Operations",
+      "Fleet Management",
+      "Business Operations Management",
+    ],
     contents: [
       "Travel Mitra sits between independent owners, drivers, and the people who book trips. That arrangement keeps the business flexible, but it also multiplies the moving parts. As trip volume grew, the real problem wasn't the work itself; it was coordination: which vehicle belonged to whom, which driver was free, what pricing applied to a given owner, how much fuel had been used, whether a payment had cleared. That information lived in scattered notebooks, spreadsheets and phone calls and staff spent more time chasing it down than acting on it.",
       "The company already knew how to run the business. What it lacked was a single, reliable place to hold that work. So the goal was never a generic booking tool; it was a system shaped around how Travel Mitra actually operates, trip after trip.",
-      "At its core are the people and assets that keep operations moving. Owners are registered with contact details, bank information, and verification records, so the fleet stays organised rather than scattered across memory. Each vehicle holds its own pricing: daily rate, per-kilometre charge, night halt fee, fuel cost because no two owners price the same way, and a fixed structure would break on contact with reality. Drivers are linked directly to their vehicles, removing the back-and-forth when assignments shift at short notice. Pre-bookings lock in trips ahead of the rush. Duty slips replace the paper trail entirely vehicle, driver, customer, timing, kilometres, charges, penalties, tolls, all in one record. Payments and fuel entries stay tied to the right trip and the right person, so what was spent and what was paid is never in question. Search and reports surface any of this in seconds.",
+      "At its core are the people and assets that keep operations moving. Owners are registered with contact details, bank information, and verification records, so the fleet stays organized rather than scattered across memory. Each vehicle holds its own pricing: daily rate, per-kilometer charge, night halt fee, fuel cost because no two owners price the same way, and a fixed structure would break on contact with reality. Drivers are linked directly to their vehicles, removing the back-and-forth when assignments shift at short notice. Pre-bookings lock in trips ahead of the rush. Duty slips replace the paper trail entirely vehicle, driver, customer, timing, kilometers, charges, penalties, tolls, all in one record. Payments and fuel entries stay tied to the right trip and the right person, so what was spent and what was paid is never in question. Search and reports surface any of this in seconds.",
       "The system was designed around Travel Mitra’s existing workflow and what worked best for the team rather than forcing them into a predefined structure. A key challenge was choosing between a desktop and web application. We chose web because a single server could make the system accessible across devices through a browser, while keeping development and maintenance costs lower. The trade-offs more frequent server calls, less client-side processing, and a slightly lighter UX were acceptable for the business's requirements.",
       "The result is steady. Less time spent chasing information, cleaner settlements for owners, better service for customers and a team that can scale trip volume without scaling headcount at the same rate. This is not software built for a market. It's a tool built for one company's way of working, so that work stays visible as it grows.",
     ],
     featuredVideo: {
       slug: "travel-mitra-featured-video",
       url: "/works/travel-mitra/video.mp4",
-      alt: "Travel Mitra management system walkthrough showing the admin dashboard, vehicle records, prebooked trips, duty slips, expense reports, and payment management.",
+      alt: "Travel Mitra management system walkthrough showing the admin dashboard, vehicle records, pre-booked trips, duty slips, expense reports, and payment management.",
       caption:
         "Travel Mitra’s internal operations system for managing vehicles, drivers, bookings, expenses, and payments.",
       transcript:
-        "The video opens with title cards reading “Manual” and “Digital Power,” followed by the Travel Mitra logo. It then introduces the management dashboard, displaying summary counts for vehicles, drivers, owners, and bookings alongside recent bookings and travel activity. The walkthrough moves to the vehicle management section, showing registered vehicles and their associated details. It then demonstrates a vehicle record form, followed by the People menu with sections for owners, drivers, employees, and fuel providers. The Prebooked Travels section displays scheduled trips. The video proceeds through duty-slip creation and a duty-slip record containing booking and customer information, with actions to copy, edit, download, or cancel the record. It then showcases fuel expense records, spending records, and the payments section, illustrating how the system brings travel operations and financial tracking into one place.",
+        "The video opens with title cards reading “Manual” and “Digital Power”, followed by the Travel Mitra logo. It then introduces the management dashboard, displaying summary counts for vehicles, drivers, owners, and bookings alongside recent bookings and travel activity. The walkthrough moves to the vehicle management section, showing registered vehicles and their associated details. It then demonstrates a vehicle record form, followed by the People menu with sections for owners, drivers, employees, and fuel providers. The Pre-booked Travels section displays scheduled trips. The video proceeds through duty-slip creation and a duty-slip record containing booking and customer information, with actions to copy, edit, download, or cancel the record. It then showcases fuel expense records, spending records, and the payments section, illustrating how the system brings travel operations and financial tracking into one place.",
       title: "Travel Mitra Management System Showcase",
       description:
-        "A visual walkthrough of Travel Mitra’s custom web application for travel-agency operations, showcasing its dashboard, vehicle and people management, prebooked trips, duty slips, fuel expenses, spending records, and payment tracking. ",
+        "A visual walkthrough of Travel Mitra’s custom web application for travel-agency operations, showcasing its dashboard, vehicle and people management, pre-booked trips, duty slips, fuel expenses, spending records, and payment tracking. ",
       thumbnail: {
         slug: "travel-mitra-video-thumbnail",
         url: "/works/travel-mitra/image-1.png",
@@ -163,13 +168,61 @@ export const works: Work[] = [
     partners: [],
     teamMembers: [],
     collaborators: [],
+
     faqs: [
       {
-        question: "What is Travel Mitra?",
+        question: "What is the Travel Mitra management system?",
         answer:
-          "Travel Mitra is a travel booking platform that allows users to explore and book flights, hotels, and travel packages with ease.",
+          "Travel Mitra is a custom web application built to manage the internal operations of a travel agency that coordinates trips using vehicles owned by independent vehicle owners. It brings vehicle records, owner and driver information, prebookings, duty slips, expenses, and payments into one centralized system.",
+      },
+      {
+        question: "What operational challenges does Travel Mitra address?",
+        answer:
+          "The system addresses the coordination challenges that arise when vehicle details, driver assignments, trip records, pricing, fuel expenses, and payments are scattered across notebooks, spreadsheets, and phone calls. By bringing this information together, it helps staff find records, coordinate trips, and track financial details more efficiently.",
+      },
+      {
+        question: "How does Travel Mitra manage vehicles and their owners?",
+        answer:
+          "The application maintains vehicle records alongside their associated owners, drivers, and pricing details. Since different owners can have different rates and charges, each vehicle can retain its own pricing structure, including per-kilometre rates, daily rent, night-halt fees, fuel costs, and other applicable charges.",
+      },
+      {
+        question: "How are drivers assigned to vehicles?",
+        answer:
+          "Travel Mitra links drivers directly to vehicle records, helping staff identify the driver associated with a vehicle and manage assignments when arrangements change at short notice.",
+      },
+      {
+        question: "What is prebooking used for in Travel Mitra?",
+        answer:
+          "The prebooking feature records trips in advance, helping the team organize upcoming travel requirements before the day of travel and keep scheduled bookings accessible within the management system.",
+      },
+      {
+        question: "How does the duty-slip feature work?",
+        answer:
+          "Duty slips bring trip-related information into a single record, including the vehicle, driver, customer, timing, kilometres, charges, penalties, and tolls. The system replaces scattered paper records with organized digital entries that can be accessed and managed from the application.",
+      },
+      {
+        question: "Can Travel Mitra track fuel expenses and payments?",
+        answer:
+          "Yes. The application includes fuel and spending records alongside payment management. These records help the team track expenses and payments against the relevant trips and people, supporting clearer financial tracking and owner settlements.",
+      },
+      {
+        question:
+          "How does Travel Mitra handle different vehicle pricing structures?",
+        answer:
+          "The system accommodates vehicle-specific pricing rather than forcing every vehicle into one fixed rate structure. Depending on the vehicle, pricing details can include per-kilometre charges, daily rent, night-halt fees, base prices, overtime rates, lubricant costs, and other applicable charges.",
+      },
+      {
+        question: "Why was Travel Mitra developed as a web application?",
+        answer:
+          "A web application allows the team to access the system through a browser across devices while using a single server. This approach was selected to keep development and maintenance costs lower than a desktop-focused alternative. The design accepts trade-offs such as more frequent server requests and less client-side processing in favor of the business's practical requirements.",
+      },
+      {
+        question: "How does Travel Mitra help a travel agency manage growth?",
+        answer:
+          "By centralizing operational records and reducing the time spent searching for information, Travel Mitra helps the team coordinate more trips without increasing administrative effort at the same rate. It also supports clearer owner settlements and more consistent service for customers.",
       },
     ],
+
     postedAt: new Date("2026-09-30T00:00:00.000Z"),
     lastModifiedAt: new Date("2026-09-30T00:00:00.000Z"),
   },
