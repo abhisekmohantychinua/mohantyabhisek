@@ -60,26 +60,27 @@ export const works: Work[] = [
     featuredVideo: {
       slug: "travel-mitra-featured-video",
       url: "/works/travel-mitra/video.mp4",
-      alt: "Travel Mitra website walkthrough showcasing its flight, hotel, and travel package booking features.",
+      alt: "Travel Mitra management system walkthrough showing the admin dashboard, vehicle records, prebooked trips, duty slips, expense reports, and payment management.",
       caption:
-        "Travel Mitra website walkthrough showcasing its flight, hotel, and travel package booking features.",
+        "Travel Mitra’s internal operations system for managing vehicles, drivers, bookings, expenses, and payments.",
       transcript:
-        "The video opens with a Google search for Travel Mitra before transitioning into the Travel Mitra website. The homepage introduces Travel Mitra with the message “Your Gateway to Seamless Travel” and highlights flight, hotel, and travel package booking features. The Flights section presents a search interface for flights, allowing users to enter departure and destination locations, select travel dates, and view available flight options. The Hotels section provides a similar search interface for hotels, enabling users to browse accommodations based on location, check-in/check-out dates, and room preferences. The Travel Packages section showcases curated travel packages that combine flights, hotels, and activities for popular destinations. The video then demonstrates the booking process for a selected flight and hotel package, including entering passenger details, selecting payment options, and confirming the booking. It concludes with a confirmation page displaying the booking details and a thank-you message.",
-      title: "Travel Mitra Website Showcase",
+        "The video opens with title cards reading “Manual” and “Digital Power,” followed by the Travel Mitra logo. It then introduces the management dashboard, displaying summary counts for vehicles, drivers, owners, and bookings alongside recent bookings and travel activity. The walkthrough moves to the vehicle management section, showing registered vehicles and their associated details. It then demonstrates a vehicle record form, followed by the People menu with sections for owners, drivers, employees, and fuel providers. The Prebooked Travels section displays scheduled trips. The video proceeds through duty-slip creation and a duty-slip record containing booking and customer information, with actions to copy, edit, download, or cancel the record. It then showcases fuel expense records, spending records, and the payments section, illustrating how the system brings travel operations and financial tracking into one place.",
+      title: "Travel Mitra Management System Showcase",
       description:
-        "A visual walkthrough of the Travel Mitra website, showcasing its flight, hotel, and travel package booking features.",
+        "A visual walkthrough of Travel Mitra’s custom web application for travel-agency operations, showcasing its dashboard, vehicle and people management, prebooked trips, duty slips, fuel expenses, spending records, and payment tracking. ",
       thumbnail: {
         slug: "travel-mitra-video-thumbnail",
         url: "/works/travel-mitra/image-1.png",
-        alt: "Travel Mitra website visual featuring its flight, hotel, and travel package booking interface.",
-        caption: "Travel Mitra website and booking experience.",
-        title: "Travel Mitra Website Preview",
+        alt: "Travel Mitra management dashboard displaying vehicle, driver, owner, and booking summaries in a navy-and-white administrative interface.",
+        caption:
+          "Travel Mitra’s operations dashboard and travel management interface.",
+        title: "Travel Mitra Management System Preview",
         description:
-          "A visual preview of the Travel Mitra website combining its flight, hotel, and travel package booking features.",
+          "A preview of Travel Mitra’s custom travel-agency management system, featuring its administrative dashboard and tools for coordinating vehicles, drivers, bookings, expenses, and payments.",
         width: 1440,
         height: 810,
       },
-      duration: 45,
+      duration: 54,
       uploadedAt: new Date("2026-09-30T00:00:00.000Z"),
     },
     gallery: [
