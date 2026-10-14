@@ -42,9 +42,9 @@ export const works: Work[] = [
   {
     slug: "travel-mitra",
     metadata: {
-      title: "Travel Mitra | Abhisek",
+      title: "Travel Mitra Operation Management System | Abhisek",
       description:
-        "Explore Travel Mitra, a custom travel-agency management system for coordinating vehicles, drivers, bookings, duty slips, expenses, and payments.",
+        "Explore a custom web application built for Travel Mitra to manage vehicles, drivers, bookings, duty slips, expenses, payments, and operational reports.",
     },
     title: "Travel Mitra",
     description:
@@ -65,23 +65,23 @@ export const works: Work[] = [
     featuredVideo: {
       slug: "travel-mitra-featured-video",
       url: "/works/travel-mitra/video.mp4",
-      alt: "Travel Mitra management system walkthrough showing the admin dashboard, vehicle records, pre-booked trips, duty slips, expense reports, and payment management.",
+      alt: "Travel Mitra management system walkthrough showing the dashboard, vehicle records, people management, pre-booked trips, duty slips, expenses, payments, and operational reports.",
       caption:
-        "Travel Mitra’s internal operations system for managing vehicles, drivers, bookings, expenses, and payments.",
+        "A walkthrough of the custom management system built around Travel Mitra's travel and fleet operations.",
       transcript:
-        "The video opens with title cards reading “Manual” and “Digital Power”, followed by the Travel Mitra logo. It then introduces the management dashboard, displaying summary counts for vehicles, drivers, owners, and bookings alongside recent bookings and travel activity. The walkthrough moves to the vehicle management section, showing registered vehicles and their associated details. It then demonstrates a vehicle record form, followed by the People menu with sections for owners, drivers, employees, and fuel providers. The Pre-booked Travels section displays scheduled trips. The video proceeds through duty-slip creation and a duty-slip record containing booking and customer information, with actions to copy, edit, download, or cancel the record. It then showcases fuel expense records, spending records, and the payments section, illustrating how the system brings travel operations and financial tracking into one place.",
+        "The video opens with a title card introducing the problem of manual paperwork, followed by Travel Mitra branding. The administrative dashboard appears, presenting summary counts for vehicles, drivers, owners, and bookings, along with recent bookings, daily travel activity, and shortcuts for common operations. The walkthrough moves to fleet management, showing registered vehicles and their associated information, including vehicle-specific pricing details. The People menu then introduces records for owners, drivers, employees, and fuel providers. The video continues through pre-booked trips and duty-slip management, showing how scheduled travel and trip-related records are organized within the system. Additional screens demonstrate owner records, fuel expenses, spending information, and payment management. The presentation concludes by showcasing multiple report templates for different business purposes, including monthly vehicle reports, duty slips, and reports covering vehicle usage, expenses, fuel, and payable amounts.",
       title: "Travel Mitra Management System Showcase",
       description:
-        "A visual walkthrough of Travel Mitra’s custom web application for travel-agency operations, showcasing its dashboard, vehicle and people management, pre-booked trips, duty slips, fuel expenses, spending records, and payment tracking. ",
+        "A visual walkthrough of a custom web application developed for Travel Mitra's internal operations. The video showcases the administrative dashboard, vehicle and people management, pre-booked trips, duty slips, fuel expenses, spending records, payment tracking, and operational report templates.",
       thumbnail: {
         slug: "travel-mitra-video-thumbnail",
         url: "/works/travel-mitra/image-1.png",
-        alt: "Travel Mitra management dashboard displaying vehicle, driver, owner, and booking summaries in a navy-and-white administrative interface.",
+        alt: "Travel Mitra administrative dashboard displaying vehicle, driver, owner, and booking summaries in a navy-and-white interface.",
         caption:
-          "Travel Mitra’s operations dashboard and travel management interface.",
+          "Travel Mitra's centralized dashboard for monitoring travel operations.",
         title: "Travel Mitra Management System Preview",
         description:
-          "A preview of Travel Mitra’s custom travel-agency management system, featuring its administrative dashboard and tools for coordinating vehicles, drivers, bookings, expenses, and payments.",
+          "A preview of the custom management system developed for Travel Mitra, featuring its administrative dashboard and summary cards for vehicles, drivers, owners, and bookings.",
         width: 1440,
         height: 810,
       },
@@ -92,70 +92,72 @@ export const works: Work[] = [
       {
         slug: "travel-mitra-gallery-1",
         url: "/works/travel-mitra/image-1.png",
-        alt: "Travel Mitra admin dashboard showing vehicle, driver, owner, and booking summaries alongside recent bookings and travel activity.",
-        caption: "A centralized dashboard for monitoring travel operations.",
-        title: "Travel Mitra Operations Dashboard",
+        alt: "Travel Mitra administrative dashboard showing vehicle, driver, owner, and booking summaries, recent activity sections, and shortcuts for common operations.",
+        caption:
+          "Travel Mitra dashboard for monitoring fleet records, bookings, and daily travel operations.",
+        title: "Travel Mitra Administrative Dashboard",
         description:
-          "The Travel Mitra dashboard brings key operational summaries, recent bookings, daily travel activity, and common management actions together in one interface.",
+          "An overview of the Travel Mitra management dashboard, featuring vehicle, driver, owner, and booking statistics, recent bookings, daily travel activity, and shortcuts for common administrative tasks.",
         width: 1440,
         height: 810,
       },
       {
         slug: "travel-mitra-gallery-2",
         url: "/works/travel-mitra/image-2.png",
-        alt: "Travel Mitra management interface showing daily duty-slip records and administrative screens for tracking assigned trips.",
+        alt: "Travel Mitra management interface collage showing daily duty slips, booking records, vehicle owner profiles, and administrative dashboard screens.",
         caption:
-          "Duty slips and trip records organized within the management system.",
-        title: "Travel Mitra Duty Slip Management",
+          "A unified interface for managing bookings, duty slips, and vehicle owner records.",
+        title: "Travel Mitra Booking and Duty Slip Management",
         description:
-          "A visual overview of Travel Mitra’s duty-slip interface, illustrating how trip-related records are organized within the application for operational tracking and administration.",
+          "A visual overview of Travel Mitra's administrative interface, highlighting daily duty slip records, booking information, vehicle owner management, and dashboard elements used to coordinate travel operations.",
         width: 1440,
         height: 810,
       },
       {
         slug: "travel-mitra-gallery-3",
         url: "/works/travel-mitra/image-3.png",
-        alt: "Travel Mitra application login screen with email and password fields beside a photograph of an office workspace.",
+        alt: "Travel Mitra application login screen featuring email and password fields alongside a photograph of an office workspace.",
         caption:
-          "A dedicated login interface for the Travel Mitra management application.",
-        title: "Travel Mitra Application Login Screen",
+          "Application login experience with Travel Mitra branding and a dedicated sign-in interface.",
+        title: "Travel Mitra Application Login Interface",
         description:
-          "The login screen introduces the Travel Mitra application through a branded authentication interface with email and password fields, account recovery, and login access.",
+          "A preview of the Travel Mitra application's login screen, combining brand identity, an email and password form, account recovery links, and an office workspace photograph.",
         width: 1440,
         height: 810,
       },
       {
         slug: "travel-mitra-gallery-4",
         url: "/works/travel-mitra/image-4.png",
-        alt: "Travel Mitra vehicle owner management screen displaying owner profiles, contact details, bank information, and verification controls.",
-        caption: "Owner records and verification details managed in one place.",
+        alt: "Travel Mitra vehicle owners management screen displaying owner profiles, contact information, verification controls, bank details, and edit and delete actions.",
+        caption:
+          "Vehicle owner records organized into searchable profile cards with verification and account management controls.",
         title: "Travel Mitra Vehicle Owner Management",
         description:
-          "The vehicle owner management interface organizes owner profiles and their associated contact and banking details, with controls for verification, editing, and record management.",
+          "A vehicle owner management interface featuring searchable owner records, contact and address details, expandable bank information, verification actions, and controls for editing or removing records.",
         width: 1440,
         height: 810,
       },
       {
         slug: "travel-mitra-gallery-5",
         url: "/works/travel-mitra/image-5.png",
-        alt: "Travel Mitra fleet management interface displaying vehicle cards with registration numbers, assigned owners and drivers, and vehicle-specific rates.",
+        alt: "Travel Mitra fleet management screen displaying vehicle records, registration numbers, vehicle types, assigned owners and drivers, and operational pricing details.",
         caption:
-          "Fleet records with vehicle assignments and individual pricing details.",
+          "Fleet records with vehicle assignments, rental rates, and vehicle-specific pricing information.",
         title: "Travel Mitra Fleet Management Interface",
         description:
-          "The vehicle management screen organizes registered vehicles, their assigned owners and drivers, and pricing details such as per-kilometre rates, night-halt charges, daily rent, and other applicable costs.",
+          "A fleet management interface showing vehicle registration details, vehicle categories, assigned owners and drivers, and pricing information such as per-kilometer rates, daily rent, night halt charges, and other operational fees.",
         width: 1440,
         height: 810,
       },
       {
         slug: "travel-mitra-gallery-6",
         url: "/works/travel-mitra/image-6.png",
-        alt: "Travel Mitra report examples showing a monthly vehicle report, a duty-slip document, and an on-access vehicle report.",
+        alt: "Travel Mitra report templates showing a monthly vehicle report, a daily duty slip, and an on-access vehicle report with trip, expense, fuel, and payment details.",
         caption:
-          "Report templates for vehicle activity, trip records, and operational expenses.",
-        title: "Travel Mitra Operational Reports",
+          "Multiple report templates for vehicle operations, duty slips, expenses, and trip records.",
+        title: "Travel Mitra Operational Report Templates",
         description:
-          "A collection of report formats generated by the Travel Mitra system, including monthly vehicle summaries, duty-slip documents, and reports covering vehicle usage, expenses, fuel, and payable amounts.",
+          "A presentation of three report formats used for travel and fleet operations: a monthly vehicle report, a daily duty slip, and an on-access vehicle report. The templates organize trip information, vehicle charges, expenses, fuel records, and payable amounts.",
         width: 1440,
         height: 810,
       },
@@ -171,55 +173,60 @@ export const works: Work[] = [
 
     faqs: [
       {
-        question: "What is the Travel Mitra management system?",
+        question: "Why did Travel Mitra need a custom management system?",
         answer:
-          "Travel Mitra is a custom web application built to manage the internal operations of a travel agency that coordinates trips using vehicles owned by independent vehicle owners. It brings vehicle records, owner and driver information, prebookings, duty slips, expenses, and payments into one centralized system.",
-      },
-      {
-        question: "What operational challenges does Travel Mitra address?",
-        answer:
-          "The system addresses the coordination challenges that arise when vehicle details, driver assignments, trip records, pricing, fuel expenses, and payments are scattered across notebooks, spreadsheets, and phone calls. By bringing this information together, it helps staff find records, coordinate trips, and track financial details more efficiently.",
-      },
-      {
-        question: "How does Travel Mitra manage vehicles and their owners?",
-        answer:
-          "The application maintains vehicle records alongside their associated owners, drivers, and pricing details. Since different owners can have different rates and charges, each vehicle can retain its own pricing structure, including per-kilometre rates, daily rent, night-halt fees, fuel costs, and other applicable charges.",
-      },
-      {
-        question: "How are drivers assigned to vehicles?",
-        answer:
-          "Travel Mitra links drivers directly to vehicle records, helping staff identify the driver associated with a vehicle and manage assignments when arrangements change at short notice.",
-      },
-      {
-        question: "What is prebooking used for in Travel Mitra?",
-        answer:
-          "The prebooking feature records trips in advance, helping the team organize upcoming travel requirements before the day of travel and keep scheduled bookings accessible within the management system.",
-      },
-      {
-        question: "How does the duty-slip feature work?",
-        answer:
-          "Duty slips bring trip-related information into a single record, including the vehicle, driver, customer, timing, kilometres, charges, penalties, and tolls. The system replaces scattered paper records with organized digital entries that can be accessed and managed from the application.",
-      },
-      {
-        question: "Can Travel Mitra track fuel expenses and payments?",
-        answer:
-          "Yes. The application includes fuel and spending records alongside payment management. These records help the team track expenses and payments against the relevant trips and people, supporting clearer financial tracking and owner settlements.",
+          "Travel Mitra coordinates trips using vehicles owned by independent vehicle owners rather than maintaining its own fleet. As trip volume grew, vehicle details, driver assignments, pricing, fuel usage, and payment information became harder to coordinate because they were spread across notebooks, spreadsheets, and phone calls. A custom system brought these operational records together in one place.",
       },
       {
         question:
-          "How does Travel Mitra handle different vehicle pricing structures?",
+          "How does the system manage vehicles owned by different people?",
         answer:
-          "The system accommodates vehicle-specific pricing rather than forcing every vehicle into one fixed rate structure. Depending on the vehicle, pricing details can include per-kilometre charges, daily rent, night-halt fees, base prices, overtime rates, lubricant costs, and other applicable charges.",
+          "Each vehicle has its own record linked to its owner and assigned driver. The system also accommodates individual pricing arrangements, including per-kilometer rates, daily rent, night-halt fees, fuel costs, and other applicable charges. This lets Travel Mitra manage a varied network of independently owned vehicles without imposing one fixed pricing structure.",
       },
       {
-        question: "Why was Travel Mitra developed as a web application?",
+        question:
+          "How does Travel Mitra organize vehicle owners and their information?",
         answer:
-          "A web application allows the team to access the system through a browser across devices while using a single server. This approach was selected to keep development and maintenance costs lower than a desktop-focused alternative. The design accepts trade-offs such as more frequent server requests and less client-side processing in favor of the business's practical requirements.",
+          "Owner records bring contact details, banking information, and verification records into the management system. Keeping these details alongside the associated vehicle information makes owner records easier to access and helps support clearer financial settlements.",
       },
       {
-        question: "How does Travel Mitra help a travel agency manage growth?",
+        question:
+          "How does the system handle driver assignments and upcoming trips?",
         answer:
-          "By centralizing operational records and reducing the time spent searching for information, Travel Mitra helps the team coordinate more trips without increasing administrative effort at the same rate. It also supports clearer owner settlements and more consistent service for customers.",
+          "Drivers are linked directly to vehicle records, helping staff identify the driver associated with a vehicle when assignments change. The pre-booking feature records upcoming trips in advance, giving the team a place to organize scheduled travel requirements before the day of the journey.",
+      },
+      {
+        question: "What information can a duty slip contain?",
+        answer:
+          "A duty slip brings the key details of a trip into one record, including the vehicle, driver, customer, timings, kilometers, charges, penalties, and tolls. This replaces scattered paper records with structured digital information that staff can access and manage within the application.",
+      },
+      {
+        question:
+          "Can the system track fuel expenses and payments alongside trip records?",
+        answer:
+          "Yes. The application includes fuel expense records, spending records, and payment management. These features help the team keep track of what was spent and paid, connecting operational activity with the financial information needed for clearer settlements.",
+      },
+      {
+        question:
+          "How does the system accommodate different vehicle rates and charges?",
+        answer:
+          "Instead of applying one standard rate to every vehicle, the system supports vehicle-specific pricing. Depending on the arrangement, this can include per-kilometer charges, daily rent, night-halt fees, base prices, overtime rates, lubricant costs, and other applicable charges.",
+      },
+      {
+        question: "What reports can be generated from the system?",
+        answer:
+          "The project includes multiple report formats for different operational needs, including monthly vehicle reports, duty-slip documents, and reports covering vehicle usage, expenses, fuel, and payable amounts. These formats help present operational and financial records in a more structured form.",
+      },
+      {
+        question:
+          "Why was a web application chosen instead of a desktop application?",
+        answer:
+          "A web application allows the team to access the system through a browser across devices while using a single server. This approach was selected to keep development and maintenance costs lower. The project accepted trade-offs such as more frequent server requests and less client-side processing because they were suitable for the business's requirements.",
+      },
+      {
+        question: "How does the system help Travel Mitra handle more trips?",
+        answer:
+          "By making vehicle, owner, driver, booking, expense, and payment information easier to find and manage, the system reduces time spent chasing records and coordinating details manually. The intended outcome is cleaner owner settlements, better service for customers, and the ability to manage a higher volume of trips without increasing administrative effort at the same rate.",
       },
     ],
 
