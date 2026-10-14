@@ -3,6 +3,23 @@ import type { WorkCard } from "../models/work";
 
 export const workCards: WorkCard[] = [
   {
+    slug: "travel-mitra",
+    title: "Travel Mitra",
+    description:
+      "A custom web application built for the internal operations of a travel agency that owns no vehicles. The system brings a scattered network of owners, drivers and bookings into one place where the work can actually be managed.",
+    image: {
+      slug: "travel-mitra-card",
+      url: "/works/travel-mitra/image-1.png",
+      alt: "Travel Mitra management system dashboard preview",
+      caption: "Travel Mitra management system preview",
+      title: "Travel Mitra",
+      description:
+        "A custom web application built for the internal operations of a travel agency that owns no vehicles. The system brings a scattered network of owners, drivers and bookings into one place where the work can actually be managed.",
+      width: 512,
+      height: 384,
+    },
+  },
+  {
     slug: "northeast-auto-creations",
     title: "Northeast Auto Creations",
     description:
@@ -42,7 +59,7 @@ export const works: Work[] = [
   {
     slug: "travel-mitra",
     metadata: {
-      title: "Travel Mitra Operation Management System | Abhisek",
+      title: "Travel Mitra Fleet Management System | Abhisek",
       description:
         "Explore a custom web application built for Travel Mitra to manage vehicles, drivers, bookings, duty slips, expenses, payments, and operational reports.",
     },
