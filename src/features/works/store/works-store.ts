@@ -103,7 +103,7 @@ export const works: Work[] = [
         height: 810,
       },
       duration: 54,
-      uploadedAt: new Date("2026-09-30T00:00:00.000Z"),
+      uploadedAt: new Date("2026-10-14T00:00:00.000Z"),
     },
     gallery: [
       {
@@ -247,8 +247,8 @@ export const works: Work[] = [
       },
     ],
 
-    postedAt: new Date("2026-09-30T00:00:00.000Z"),
-    lastModifiedAt: new Date("2026-09-30T00:00:00.000Z"),
+    postedAt: new Date("2026-10-14T00:00:00.000Z"),
+    lastModifiedAt: new Date("2026-10-14T00:00:00.000Z"),
   },
   {
     slug: "northeast-auto-creations",
