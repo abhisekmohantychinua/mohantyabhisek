@@ -10,6 +10,7 @@ import {
 import CtaForm from "./cta-form";
 
 type CtaStepperProps = {
+  initialMessage?: string;
   onSubmitSuccess?: () => void;
 };
 
@@ -17,6 +18,7 @@ type CtaStepperProps = {
 export type CtaStep = "message" | "contact";
 
 export default function CtaStepper({
+  initialMessage,
   onSubmitSuccess,
 }: CtaStepperProps): JSX.Element {
   // State to track the current step
@@ -46,6 +48,7 @@ export default function CtaStepper({
       <CtaForm
         currentStepperStep={currentStep}
         changeStepperStep={changeStep}
+        initialMessage={initialMessage}
         onSubmitSuccess={onSubmitSuccess}
       />
     </>

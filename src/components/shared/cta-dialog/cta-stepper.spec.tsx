@@ -22,6 +22,7 @@ vi.mock("./cta-form", () => ({
   default: (props: {
     currentStepperStep: "message" | "contact";
     changeStepperStep: () => void;
+    initialMessage?: string;
     onSubmitSuccess?: () => void;
   }): JSX.Element => {
     ctaFormMock(props);
@@ -140,6 +141,16 @@ describe("CtaStepper", () => {
         expect.objectContaining({
           currentStepperStep: "contact",
         }),
+      );
+    });
+
+    test("passes the initial message to the form unchanged", (): void => {
+      const initialMessage = "A prefilled message from a shared link.";
+
+      render(<CtaStepper initialMessage={initialMessage} />);
+
+      expect(ctaFormMock).toHaveBeenLastCalledWith(
+        expect.objectContaining({ initialMessage }),
       );
     });
 

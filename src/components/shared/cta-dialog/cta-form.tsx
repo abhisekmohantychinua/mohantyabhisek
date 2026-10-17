@@ -20,6 +20,7 @@ type CtaFormProps = {
   currentStepperStep: CtaStep;
   onSubmitSuccess?: () => void;
   changeStepperStep: () => void;
+  initialMessage?: string;
 };
 
 export type CtaFormValues = z.infer<typeof contactDetailSchema>;
@@ -28,11 +29,12 @@ export default function CtaForm({
   currentStepperStep,
   onSubmitSuccess,
   changeStepperStep,
+  initialMessage,
 }: CtaFormProps): JSX.Element {
   // Initialize the form with react-hook-form and zod validation
   const form = useForm<z.infer<typeof contactDetailSchema>>({
     defaultValues: {
-      message: "",
+      message: initialMessage ?? "",
       phone: "",
       email: "",
       instagram: "",

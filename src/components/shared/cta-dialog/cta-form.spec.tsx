@@ -1,6 +1,6 @@
 import type { RenderResult } from "@testing-library/react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import type { JSX, ReactNode } from "react";
+import type { ComponentProps, JSX, ReactNode } from "react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import CtaForm from "./cta-form";
@@ -30,7 +30,7 @@ vi.mock("@/components/ui/dialog", () => ({
 }));
 
 const renderForm = (
-  overrides = {},
+  overrides: Partial<ComponentProps<typeof CtaForm>> = {},
 ): RenderResult & {
   onSubmitSuccess: ReturnType<typeof vi.fn<() => void>>;
   changeStepperStep: ReturnType<typeof vi.fn<() => void>>;
@@ -88,6 +88,40 @@ describe("CtaForm", () => {
         }),
       ).toBeInTheDocument();
     });
+
+    test("initializes the message textarea from initialMessage", () => {
+      const initialMessage = "I need a website for my business.";
+
+      renderForm({ initialMessage });
+
+      expect(screen.getByLabelText(/message/i)).toHaveValue(initialMessage);
+    });
+
+    test("starts the message textarea empty when initialMessage is absent", () => {
+      renderForm();
+
+      expect(screen.getByLabelText(/message/i)).toHaveValue("");
+    });
+
+    test("preserves all 500 supplied message characters", () => {
+      const initialMessage = "x".repeat(500);
+
+      renderForm({ initialMessage });
+
+      expect(screen.getByLabelText(/message/i)).toHaveValue(initialMessage);
+    });
+
+    test("keeps contact fields empty when a message is prefilled", () => {
+      renderForm({
+        currentStepperStep: "contact",
+        initialMessage: "Prefilled message",
+      });
+
+      expect(screen.getByLabelText(/email/i)).toHaveValue("");
+      expect(screen.getByLabelText(/phone/i)).toHaveValue("");
+      expect(screen.getByLabelText(/linkedin/i)).toHaveValue("");
+      expect(screen.getByLabelText(/instagram/i)).toHaveValue("");
+    });
   });
 
   describe("step validation", () => {
@@ -129,6 +163,34 @@ describe("CtaForm", () => {
   });
 
   describe("submission", () => {
+    test("includes initialMessage in React Hook Form submission data", async () => {
+      fetchMock.mockResolvedValue({ ok: true });
+      const initialMessage = "A message supplied through a shared link.";
+      const { rerender } = renderForm({ initialMessage });
+
+      rerender(
+        <CtaForm
+          currentStepperStep="contact"
+          initialMessage={initialMessage}
+          onSubmitSuccess={vi.fn()}
+          changeStepperStep={vi.fn()}
+        />,
+      );
+      fireEvent.change(screen.getByLabelText(/email/i), {
+        target: { value: "test@example.com" },
+      });
+      fireEvent.submit(screen.getByRole("form"));
+
+      await waitFor(() => {
+        expect(fetchMock).toHaveBeenCalledWith(
+          "/api/contact",
+          expect.objectContaining({
+            body: expect.stringContaining(initialMessage),
+          }),
+        );
+      });
+    });
+
     test("submits form successfully", async () => {
       fetchMock.mockResolvedValue({
         ok: true,
