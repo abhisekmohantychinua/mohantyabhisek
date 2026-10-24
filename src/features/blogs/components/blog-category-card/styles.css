@@ -1,0 +1,34 @@
+@reference "../../../../app/globals.css";
+
+.blog-category-card__wrapper {
+  @apply bg-background border-background block min-h-[340px] w-md rounded-xl border px-8 py-11 text-start;
+  @apply max-2xl:min-h-[320px] max-2xl:w-xs max-2xl:px-6 max-2xl:py-9;
+  @apply focus-visible:ring-foreground focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
+  @apply transform transition-all duration-300 ease-out;
+  @apply hover:border-foreground hover:shadow-lg;
+}
+
+.blog-category-card__updated {
+  @apply text-foreground/70 mb-5 text-base leading-6;
+  @apply max-2xl:mb-4;
+  @apply max-sm:text-sm;
+}
+
+.blog-category-card__heading {
+  @apply text-foreground mb-5 overflow-hidden text-3xl leading-10;
+  @apply max-2xl:text-2xl max-2xl:leading-9;
+  @apply max-sm:text-xl max-sm:leading-8;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.blog-category-card__description {
+  @apply text-foreground mb-7 overflow-hidden text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}

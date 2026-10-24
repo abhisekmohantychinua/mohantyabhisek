@@ -5,6 +5,7 @@ interface Blog {
   title: string;
   description: string;
   content: string;
+  blogCategorySlug: string;
   topics: string[];
   faqs: Faq[];
   postedAt: Date;

@@ -5,8 +5,10 @@ import { getMongoDb } from "@/lib/mongodb";
 import {
   getAllBlogSitemap,
   getAllBlogSlugs,
+  getBlogCardsByCategorySlug,
   getBlogCardsPage,
   getBySlug,
+  getCachedBlogCardsByCategorySlug,
   getCachedBlogCardsPage,
   getLatestThreeBlogCardsExceptSlug,
 } from "./blog-service";
@@ -46,6 +48,7 @@ describe("blog-service", () => {
     sortMock.mockReturnValue({
       skip: skipMock,
       limit: limitMock,
+      toArray: toArrayMock,
     });
 
     findMock.mockReturnValue({
@@ -288,6 +291,91 @@ describe("blog-service", () => {
     });
   });
 
+  describe("getBlogCardsByCategorySlug", () => {
+    test("queries published blogs assigned to the category slug", async () => {
+      toArrayMock.mockResolvedValue([]);
+
+      await getBlogCardsByCategorySlug("web-development");
+
+      expect(findMock).toHaveBeenCalledWith(
+        {
+          blogCategorySlug: "web-development",
+          status: "PUBLISHED",
+        },
+        {
+          projection: {
+            _id: 0,
+            slug: 1,
+            title: 1,
+            description: 1,
+            postedAt: 1,
+          },
+        },
+      );
+    });
+
+    test("sorts matching blog cards by latest post date without pagination", async () => {
+      toArrayMock.mockResolvedValue([]);
+
+      await getBlogCardsByCategorySlug("web-development");
+
+      expect(sortMock).toHaveBeenCalledWith({ postedAt: -1 });
+      expect(skipMock).not.toHaveBeenCalled();
+      expect(limitMock).not.toHaveBeenCalled();
+    });
+
+    test("returns matching blog cards mapped from database documents", async () => {
+      const postedAt = new Date("2026-06-15T00:00:00.000Z");
+      toArrayMock.mockResolvedValue([
+        {
+          slug: "building-a-business-website",
+          title: "Building a Business Website",
+          description: "A guide to business websites.",
+          postedAt,
+        },
+      ]);
+
+      await expect(
+        getBlogCardsByCategorySlug("web-development"),
+      ).resolves.toEqual([
+        {
+          slug: "building-a-business-website",
+          title: "Building a Business Website",
+          description: "A guide to business websites.",
+          postedAt,
+        },
+      ]);
+    });
+  });
+
+  describe("getCachedBlogCardsByCategorySlug", () => {
+    test("uses a category-specific cache key and one-day revalidation", async () => {
+      toArrayMock.mockResolvedValue([]);
+
+      await getCachedBlogCardsByCategorySlug("web-development");
+
+      expect(unstableCacheMock).toHaveBeenCalledWith(
+        expect.any(Function),
+        ["blog-category-web-development"],
+        { revalidate: 86400 },
+      );
+    });
+
+    test("returns the result from getBlogCardsByCategorySlug", async () => {
+      const card = {
+        slug: "building-a-business-website",
+        title: "Building a Business Website",
+        description: "A guide to business websites.",
+        postedAt: new Date("2026-06-15T00:00:00.000Z"),
+      };
+      toArrayMock.mockResolvedValue([card]);
+
+      await expect(
+        getCachedBlogCardsByCategorySlug("web-development"),
+      ).resolves.toEqual([card]);
+    });
+  });
+
   describe("getLatestThreeBlogCardsExceptSlug", () => {
     test("queries published blogs excluding the provided slug", async () => {
       toArrayMock.mockResolvedValue([]);
@@ -395,6 +483,7 @@ describe("blog-service", () => {
             title: 1,
             description: 1,
             content: 1,
+            blogCategorySlug: 1,
             topics: 1,
             faqs: 1,
             postedAt: 1,
@@ -413,6 +502,7 @@ describe("blog-service", () => {
         title: "My Blog",
         description: "Blog description",
         content: "# Blog Content",
+        blogCategorySlug: "web-development",
         topics: ["react", "nextjs"],
         faqs: [
           {
@@ -431,6 +521,7 @@ describe("blog-service", () => {
         title: "My Blog",
         description: "Blog description",
         content: "# Blog Content",
+        blogCategorySlug: "web-development",
         topics: ["react", "nextjs"],
         faqs: [
           {
@@ -460,6 +551,7 @@ describe("blog-service", () => {
         title: "My Blog",
         description: "Blog description",
         content: "Content",
+        blogCategorySlug: "web-development",
         topics: [],
         faqs: [],
         postedAt,
