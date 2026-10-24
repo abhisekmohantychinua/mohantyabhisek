@@ -9,7 +9,7 @@ type CategoryHeaderProps = {
 
 export default function CategoryHeader({
   title = "Explore Blog Categories",
-  description = "Browse thoughtful writing on websites, applications, business systems, and the decisions behind building digital solutions.",
+  description = "Browse blog posts by topic, from website development and web applications to business systems, digital strategy, and the decisions behind building useful digital solutions.",
 }: CategoryHeaderProps): JSX.Element {
   return (
     <header className="blog-category-header">
@@ -19,7 +19,7 @@ export default function CategoryHeader({
       >
         {title === "Explore Blog Categories" ? (
           <>
-            Explore Blog <span className="highlight">Categories</span>
+            Explore Blogs By <span className="highlight">Category</span>
           </>
         ) : (
           title

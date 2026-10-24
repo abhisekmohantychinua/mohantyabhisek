@@ -32,11 +32,3 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-
-.blog-category-card__action {
-  @apply text-primary inline-flex items-center gap-2 font-medium;
-}
-
-.blog-category-card__action svg {
-  @apply size-4;
-}

@@ -33,7 +33,3 @@
 .blog-category-card-skeleton__line-short {
   @apply w-5/6;
 }
-
-.blog-category-card-skeleton__action {
-  @apply mt-auto h-6 w-40;
-}

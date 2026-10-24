@@ -4,6 +4,7 @@ import type { JSX } from "react";
 
 import BlogCategoryPosts from "@/features/blogs/components/blog-category-posts";
 import CategoryHeader from "@/features/blogs/components/category-header";
+import type { BlogCard } from "@/features/blogs/models/blog";
 import type BlogCategory from "@/features/blogs/models/blog-category";
 import {
   getBlogCategoryBySlug,
@@ -50,7 +51,7 @@ export default async function BlogCategoryPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(createJsonLd(category)),
+          __html: JSON.stringify(createJsonLd(category, blogs)),
         }}
       />
     </>
@@ -67,24 +68,31 @@ export async function generateMetadata({
   }
 
   const url = `${CATEGORIES_URL}/${category.slug}`;
+  const title = `${category.title} Blogs | Abhisek`;
+  const description = category.description;
 
   return {
-    title: `${category.title} | Blog Category | Abhisek`,
-    description: category.description,
+    title,
+    description,
+
     openGraph: {
       type: "website",
-      title: category.title,
-      description: category.description,
       url,
+      title,
+      description,
+      siteName: "Abhisek",
     },
+
     twitter: {
       card: "summary",
-      title: category.title,
-      description: category.description,
+      title,
+      description,
     },
+
     alternates: {
       canonical: url,
     },
+
     robots: {
       index: true,
       follow: true,
@@ -92,7 +100,7 @@ export async function generateMetadata({
   };
 }
 
-function createJsonLd(category: BlogCategory): object {
+function createJsonLd(category: BlogCategory, blogs: BlogCard[]): object {
   const url = `${CATEGORIES_URL}/${category.slug}`;
 
   return {
@@ -104,6 +112,7 @@ function createJsonLd(category: BlogCategory): object {
     description: category.description,
     dateCreated: category.createdAt,
     dateModified: category.lastModifiedAt,
+
     isPartOf: [
       {
         "@type": "CollectionPage",
@@ -118,24 +127,29 @@ function createJsonLd(category: BlogCategory): object {
         "@id": `${SITE_URL}/#website`,
       },
     ],
+
     publisher: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
     },
+
     mainEntity: {
-      "@type": "DefinedTerm",
-      "@id": `${url}/#category`,
-      name: category.title,
-      description: category.description,
-      url,
-      dateCreated: category.createdAt,
-      dateModified: category.lastModifiedAt,
-      inDefinedTermSet: {
-        "@type": "DefinedTermSet",
-        "@id": `${CATEGORIES_URL}/#category-set`,
-        name: "Blog Categories",
-        url: CATEGORIES_URL,
-      },
+      "@type": "ItemList",
+      "@id": `${url}/#blog-list`,
+      name: `${category.title} Blog Posts`,
+      numberOfItems: blogs.length,
+      itemListElement: blogs.map((blog, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "BlogPosting",
+          "@id": `${SITE_URL}/blogs/${blog.slug}/#blogposting`,
+          url: `${SITE_URL}/blogs/${blog.slug}`,
+          headline: blog.title,
+          description: blog.description,
+          datePublished: blog.postedAt,
+        },
+      })),
     },
   };
 }

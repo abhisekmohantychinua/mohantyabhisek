@@ -1,6 +1,5 @@
 import "./styles.css";
 
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import type { JSX } from "react";
 
@@ -21,8 +20,12 @@ export default function BlogCategoryCard({
       className="blog-category-card__wrapper"
     >
       <article className="blog-category-card">
+        <h3 className="blog-category-card__heading">{blogCategory.title}</h3>
+        <p className="blog-category-card__description">
+          {blogCategory.description}
+        </p>
         <p className="blog-category-card__updated">
-          Updated{" "}
+          Updated on{" "}
           <time dateTime={updatedAt.toISOString()}>
             {updatedAt.toLocaleDateString(undefined, {
               year: "numeric",
@@ -31,14 +34,6 @@ export default function BlogCategoryCard({
             })}
           </time>
         </p>
-        <h3 className="blog-category-card__heading">{blogCategory.title}</h3>
-        <p className="blog-category-card__description">
-          {blogCategory.description}
-        </p>
-        <span className="blog-category-card__action">
-          Explore category
-          <ArrowUpRight aria-hidden="true" />
-        </span>
       </article>
     </Link>
   );

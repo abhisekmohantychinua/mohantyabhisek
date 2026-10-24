@@ -27,21 +27,21 @@ export default async function BlogCategoriesPage(): Promise<JSX.Element> {
 }
 
 export const metadata: Metadata = {
-  title: "Blog Categories | Abhisek",
+  title: "Blog Categories — Explore Topics | Abhisek",
   description:
-    "Explore blog categories covering websites, web applications, business systems, and digital strategy.",
+    "Explore blog categories covering website development, web applications, business systems, digital strategy, and practical decisions behind building digital solutions.",
   openGraph: {
     type: "website",
-    title: "Blog Categories | Abhisek",
+    title: "Blog Categories — Explore Topics | Abhisek",
     description:
-      "Explore blog categories covering websites, web applications, business systems, and digital strategy.",
+      "Explore blog categories covering website development, web applications, business systems, digital strategy, and practical decisions behind building digital solutions.",
     url: PAGE_URL,
   },
   twitter: {
     card: "summary",
-    title: "Blog Categories | Abhisek",
+    title: "Blog Categories — Explore Topics | Abhisek",
     description:
-      "Explore blog categories covering websites, web applications, business systems, and digital strategy.",
+      "Explore blog categories covering website development, web applications, business systems, digital strategy, and practical decisions behind building digital solutions.",
   },
   alternates: {
     canonical: PAGE_URL,
@@ -53,35 +53,38 @@ export const metadata: Metadata = {
 };
 
 function createJsonLd(categories: BlogCategory[]): object {
+  const categoryUrl = (slug: string): string => `${PAGE_URL}/${slug}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": `${PAGE_URL}/#webpage`,
     url: PAGE_URL,
-    name: "Blog Categories",
+    name: "Explore Blogs By Category",
     description:
-      "Browse articles by category, covering websites, web applications, business systems, and digital strategy.",
-    isPartOf: [
-      {
-        "@type": "CollectionPage",
-        "@id": `${SITE_URL}/blogs/#webpage`,
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-      },
-    ],
+      "Browse blog posts by topic, from website development and web applications to business systems, digital strategy, and the decisions behind building useful digital solutions.",
+    isPartOf: {
+      "@type": "CollectionPage",
+      "@id": `${SITE_URL}/blogs/#webpage`,
+    },
     publisher: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
     },
     mainEntity: {
       "@type": "ItemList",
+      name: "Blog Categories",
+      numberOfItems: categories.length,
       itemListElement: categories.map((category, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `${PAGE_URL}/${category.slug}`,
-        name: category.title,
+        item: {
+          "@type": "CollectionPage",
+          "@id": `${categoryUrl(category.slug)}#webpage`,
+          url: categoryUrl(category.slug),
+          name: category.title,
+          description: category.description,
+        },
       })),
     },
   };
