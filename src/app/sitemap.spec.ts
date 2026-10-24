@@ -1,7 +1,14 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
-const { getAllBlogSitemapMock } = vi.hoisted(() => ({
-  getAllBlogSitemapMock: vi.fn(),
+const { getAllBlogSitemapMock, getCachedAllBlogCategoryMock } = vi.hoisted(
+  () => ({
+    getAllBlogSitemapMock: vi.fn(),
+    getCachedAllBlogCategoryMock: vi.fn(),
+  }),
+);
+
+vi.mock("@/features/blogs/services/blog-category-service", () => ({
+  getCachedAllBlogCategory: getCachedAllBlogCategoryMock,
 }));
 
 vi.mock("@/features/blogs/services/blog-service", () => ({
@@ -52,6 +59,7 @@ describe("sitemap", () => {
   describe("sitemap", () => {
     test("returns static sitemap paths", async () => {
       getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
 
       const result = await sitemap();
 
@@ -67,6 +75,9 @@ describe("sitemap", () => {
             url: "https://mohantyabhisek.com/blogs",
           }),
           expect.objectContaining({
+            url: "https://mohantyabhisek.com/blogs/categories",
+          }),
+          expect.objectContaining({
             url: "https://mohantyabhisek.com/works",
           }),
         ]),
@@ -75,6 +86,7 @@ describe("sitemap", () => {
 
     test("includes work sitemap entries", async () => {
       getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
 
       const result = await sitemap();
 
@@ -112,6 +124,7 @@ describe("sitemap", () => {
 
     test("includes image sitemap entries for works", async () => {
       getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
 
       const result = await sitemap();
 
@@ -132,6 +145,7 @@ describe("sitemap", () => {
 
     test("includes video sitemap entries for works", async () => {
       getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
 
       const result = await sitemap();
 
@@ -164,6 +178,7 @@ describe("sitemap", () => {
           lastModifiedAt,
         },
       ]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
 
       const result = await sitemap();
 
@@ -187,6 +202,7 @@ describe("sitemap", () => {
       getAllBlogSitemapMock.mockRejectedValue(
         new Error("Database unavailable"),
       );
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
 
       const result = await sitemap();
 
@@ -209,6 +225,47 @@ describe("sitemap", () => {
       consoleErrorSpy.mockRestore();
     });
 
+    test("includes blog category sitemap entries", async () => {
+      const lastModifiedAt = new Date("2026-06-20T00:00:00.000Z");
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([
+        {
+          slug: "web-development",
+          lastModifiedAt,
+        },
+      ]);
+
+      const result = await sitemap();
+
+      expect(result).toContainEqual({
+        url: "https://mohantyabhisek.com/blogs/categories/web-development",
+        lastModified: lastModifiedAt,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    });
+
+    test("returns other sitemap paths when category retrieval fails", async () => {
+      const consoleErrorSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockRejectedValue(
+        new Error("Database unavailable"),
+      );
+
+      const result = await sitemap();
+
+      expect(
+        result.some(
+          (entry) => entry.url === "https://mohantyabhisek.com/blogs",
+        ),
+      ).toBe(true);
+      expect(consoleErrorSpy).toHaveBeenCalled();
+
+      consoleErrorSpy.mockRestore();
+    });
+
     test("combines static, work and blog sitemap entries", async () => {
       getAllBlogSitemapMock.mockResolvedValue([
         {
@@ -220,10 +277,16 @@ describe("sitemap", () => {
           lastModifiedAt: new Date(),
         },
       ]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([
+        {
+          slug: "web-development",
+          lastModifiedAt: new Date(),
+        },
+      ]);
 
       const result = await sitemap();
 
-      expect(result).toHaveLength(7);
+      expect(result).toHaveLength(9);
     });
   });
 });

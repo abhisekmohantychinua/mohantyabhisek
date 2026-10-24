@@ -1,33 +1,43 @@
 import type { MetadataRoute } from "next";
 
 import type { BlogSitemap } from "@/features/blogs/models/blog";
+import type BlogCategory from "@/features/blogs/models/blog-category";
+import { getCachedAllBlogCategory } from "@/features/blogs/services/blog-category-service";
 import { getAllBlogSitemap } from "@/features/blogs/services/blog-service";
 import { works } from "@/features/works/store/works-store";
+
+const SITE_URL = "https://mohantyabhisek.com";
 
 export const revalidate = 86400; // 24 hours in seconds
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths: MetadataRoute.Sitemap = [
     {
-      url: "https://mohantyabhisek.com",
+      url: SITE_URL,
       lastModified: new Date("2026-01-22T16:02:59.617Z"),
       changeFrequency: "monthly",
       priority: 1.0,
     },
     {
-      url: "https://mohantyabhisek.com/contact",
+      url: `${SITE_URL}/contact`,
       lastModified: new Date("2026-01-22T16:02:59.617Z"),
       changeFrequency: "yearly",
       priority: 0.8,
     },
     {
-      url: "https://mohantyabhisek.com/blogs",
+      url: `${SITE_URL}/blogs`,
       lastModified: new Date("2026-02-15T12:00:00.000Z"),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: "https://mohantyabhisek.com/works",
+      url: `${SITE_URL}/blogs/categories`,
+      lastModified: new Date("2026-10-24T00:00:00.000Z"),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/works`,
       lastModified: new Date("2026-07-15T12:00:00.000Z"),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -35,8 +45,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const workPaths = getWorkPaths();
-  const dynamicPaths = await getDynamicPaths();
-  return staticPaths.concat(workPaths).concat(dynamicPaths);
+  const [dynamicPaths, blogCategoryPaths] = await Promise.all([
+    getDynamicPaths(),
+    getBlogCategoryPaths(),
+  ]);
+  return staticPaths
+    .concat(workPaths)
+    .concat(dynamicPaths)
+    .concat(blogCategoryPaths);
 }
 
 async function getDynamicPaths(): Promise<MetadataRoute.Sitemap> {
@@ -44,7 +60,7 @@ async function getDynamicPaths(): Promise<MetadataRoute.Sitemap> {
     .then((blogs: BlogSitemap[]): MetadataRoute.Sitemap => {
       return blogs.map((blog: BlogSitemap) => {
         return {
-          url: `https://mohantyabhisek.com/blogs/${blog.slug}`,
+          url: `${SITE_URL}/blogs/${blog.slug}`,
           lastModified: blog.lastModifiedAt,
           changeFrequency: "yearly",
           priority: 0.9,
@@ -57,14 +73,30 @@ async function getDynamicPaths(): Promise<MetadataRoute.Sitemap> {
     });
 }
 
+async function getBlogCategoryPaths(): Promise<MetadataRoute.Sitemap> {
+  return getCachedAllBlogCategory()
+    .then((categories: BlogCategory[]): MetadataRoute.Sitemap => {
+      return categories.map((category: BlogCategory) => ({
+        url: `${SITE_URL}/blogs/categories/${category.slug}`,
+        lastModified: category.lastModifiedAt,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      }));
+    })
+    .catch((error: unknown) => {
+      console.error("Error fetching blog category sitemap entries: ", error);
+      return [];
+    });
+}
+
 function getWorkPaths(): MetadataRoute.Sitemap {
   return works.map((work) => {
     const galleryImages = work.gallery
       .filter((item) => !("thumbnail" in item))
-      .map((image) => `https://mohantyabhisek.com${image.url}`);
+      .map((image) => `${SITE_URL}${image.url}`);
 
     return {
-      url: `https://mohantyabhisek.com/works/${work.slug}`,
+      url: `${SITE_URL}/works/${work.slug}`,
 
       lastModified: work.lastModifiedAt,
 
@@ -73,7 +105,7 @@ function getWorkPaths(): MetadataRoute.Sitemap {
       priority: 1.0,
 
       images: [
-        `https://mohantyabhisek.com${work.featuredVideo.thumbnail.url}`,
+        `${SITE_URL}${work.featuredVideo.thumbnail.url}`,
         ...galleryImages,
       ],
 
@@ -81,8 +113,8 @@ function getWorkPaths(): MetadataRoute.Sitemap {
         {
           title: work.featuredVideo.title,
           description: work.featuredVideo.description,
-          thumbnail_loc: `https://mohantyabhisek.com${work.featuredVideo.thumbnail.url}`,
-          content_loc: `https://mohantyabhisek.com${work.featuredVideo.url}`,
+          thumbnail_loc: `${SITE_URL}${work.featuredVideo.thumbnail.url}`,
+          content_loc: `${SITE_URL}${work.featuredVideo.url}`,
         },
       ],
     };

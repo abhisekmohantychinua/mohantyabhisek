@@ -228,6 +228,37 @@ CollectionPage
 
 ---
 
+## Blog Category Pages
+
+### Category Listing
+
+The `/blogs/categories` page uses a `CollectionPage` whose `mainEntity` is an
+`ItemList` of the categories available on the site. Each item links to its
+corresponding category page.
+
+### Category Detail
+
+Each `/blogs/categories/{slug}` page uses a `CollectionPage` with a
+`DefinedTerm` as its `mainEntity`. The term is linked to the category set and
+includes the category name, description, creation date, modification date, and
+canonical URL.
+
+### Relationships
+
+```txt
+CollectionPage
+├── isPartOf → Blog Categories CollectionPage
+├── isPartOf → Blog CollectionPage
+├── publisher → Organization
+└── mainEntity → DefinedTerm
+    └── inDefinedTermSet → DefinedTermSet
+```
+
+Category names and descriptions are sourced from the `blogcategories` content
+collection. Do not emit category pages for categories that cannot be fetched.
+
+---
+
 ## Blog Detail Page
 
 ### Schema
@@ -262,7 +293,7 @@ FAQPage
 Generated from:
 
 ```ts
-blog.faqs
+blog.faqs;
 ```
 
 ### Rules
@@ -305,14 +336,14 @@ CreativeWork
 
 ## Suggested Mapping
 
-| Work Field | Schema Property |
-|------------|----------------|
-| title | name |
-| description | description |
-| postedAt | datePublished |
-| lastModifiedAt | dateModified |
-| sectors | about |
-| images | image |
+| Work Field     | Schema Property |
+| -------------- | --------------- |
+| title          | name            |
+| description    | description     |
+| postedAt       | datePublished   |
+| lastModifiedAt | dateModified    |
+| sectors        | about           |
+| images         | image           |
 
 ---
 

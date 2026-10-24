@@ -1,0 +1,39 @@
+@reference "../../../../app/globals.css";
+
+.blog-category-card-skeleton {
+  @apply bg-background border-background flex min-h-[340px] w-md flex-col rounded-xl border px-8 py-11;
+  @apply max-2xl:min-h-[320px] max-2xl:w-xs max-2xl:px-6 max-2xl:py-9;
+}
+
+.blog-category-card-skeleton__updated {
+  @apply mb-5 h-6 w-40;
+  @apply max-2xl:mb-4;
+}
+
+.blog-category-card-skeleton__heading {
+  @apply mb-5 space-y-3;
+}
+
+.blog-category-card-skeleton__title {
+  @apply h-9 w-full;
+}
+
+.blog-category-card-skeleton__title-short {
+  @apply w-3/4;
+}
+
+.blog-category-card-skeleton__description {
+  @apply mb-7 space-y-3;
+}
+
+.blog-category-card-skeleton__line {
+  @apply h-6 w-full;
+}
+
+.blog-category-card-skeleton__line-short {
+  @apply w-5/6;
+}
+
+.blog-category-card-skeleton__action {
+  @apply mt-auto h-6 w-40;
+}
