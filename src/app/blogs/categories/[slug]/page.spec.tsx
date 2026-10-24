@@ -79,9 +79,24 @@ describe("blog category detail page", () => {
       url: "https://mohantyabhisek.com/blogs/categories/web-development",
       name: category.title,
       mainEntity: {
-        "@type": "DefinedTerm",
-        name: category.title,
-        description: category.description,
+        "@type": "ItemList",
+        name: "Web Development Blog Posts",
+        numberOfItems: 1,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "BlogPosting",
+              "@id":
+                "https://mohantyabhisek.com/blogs/website-guide/#blogposting",
+              url: "https://mohantyabhisek.com/blogs/website-guide",
+              headline: "A Website Guide",
+              description: "A guide for websites.",
+              datePublished: "2026-02-01T00:00:00.000Z",
+            },
+          },
+        ],
       },
     });
   });
@@ -94,7 +109,7 @@ describe("blog category detail page", () => {
     });
 
     expect(result).toMatchObject({
-      title: "Web Development | Blog Category | Abhisek",
+      title: "Web Development Blogs | Abhisek",
       description: category.description,
       alternates: {
         canonical:

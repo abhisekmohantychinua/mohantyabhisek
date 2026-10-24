@@ -46,8 +46,14 @@ describe("blog categories page", () => {
           {
             "@type": "ListItem",
             position: 1,
-            url: "https://mohantyabhisek.com/blogs/categories/web-development",
-            name: "Web Development",
+            item: {
+              "@type": "CollectionPage",
+              "@id":
+                "https://mohantyabhisek.com/blogs/categories/web-development#webpage",
+              url: "https://mohantyabhisek.com/blogs/categories/web-development",
+              name: "Web Development",
+              description: "Articles about web development.",
+            },
           },
         ],
       },
@@ -58,6 +64,6 @@ describe("blog categories page", () => {
     expect(metadata.alternates?.canonical).toBe(
       "https://mohantyabhisek.com/blogs/categories",
     );
-    expect(metadata.title).toBe("Blog Categories | Abhisek");
+    expect(metadata.title).toBe("Blog Categories — Explore Topics | Abhisek");
   });
 });
