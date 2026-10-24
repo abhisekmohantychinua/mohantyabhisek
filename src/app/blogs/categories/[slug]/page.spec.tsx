@@ -3,10 +3,12 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 
 const {
   getBlogCategoryBySlugMock,
+  getCachedBlogCardsByCategorySlugMock,
   getCachedAllBlogCategoryMock,
   notFoundMock,
 } = vi.hoisted(() => ({
   getBlogCategoryBySlugMock: vi.fn(),
+  getCachedBlogCardsByCategorySlugMock: vi.fn(),
   getCachedAllBlogCategoryMock: vi.fn(),
   notFoundMock: vi.fn(() => {
     throw new Error("NOT_FOUND");
@@ -20,6 +22,10 @@ vi.mock("next/navigation", () => ({
 vi.mock("@/features/blogs/services/blog-category-service", () => ({
   getBlogCategoryBySlug: getBlogCategoryBySlugMock,
   getCachedAllBlogCategory: getCachedAllBlogCategoryMock,
+}));
+
+vi.mock("@/features/blogs/services/blog-service", () => ({
+  getCachedBlogCardsByCategorySlug: getCachedBlogCardsByCategorySlugMock,
 }));
 
 import BlogCategoryPage, {
@@ -42,15 +48,32 @@ describe("blog category detail page", () => {
 
   test("fetches the category and renders its category JSON-LD", async () => {
     getBlogCategoryBySlugMock.mockResolvedValue(category);
+    getCachedBlogCardsByCategorySlugMock.mockResolvedValue([
+      {
+        slug: "website-guide",
+        title: "A Website Guide",
+        description: "A guide for websites.",
+        postedAt: new Date("2026-02-01"),
+      },
+    ]);
 
     const markup = renderToStaticMarkup(
       await BlogCategoryPage({
         params: Promise.resolve({ slug: category.slug }),
       }),
     );
-    const jsonLd = JSON.parse(markup.match(/>(.*)<\/script>/)?.[1] ?? "{}");
+    const jsonLdMarkup = markup.match(
+      /<script type="application\/ld\+json">(.*?)<\/script>/,
+    )?.[1];
+    const jsonLd = JSON.parse(jsonLdMarkup ?? "{}");
 
     expect(getBlogCategoryBySlugMock).toHaveBeenCalledWith(category.slug);
+    expect(getCachedBlogCardsByCategorySlugMock).toHaveBeenCalledWith(
+      category.slug,
+    );
+    expect(markup).toContain("A Website Guide");
+    expect(markup).toContain("/blogs/website-guide");
+    expect(markup).toContain("Articles about web development.");
     expect(jsonLd).toMatchObject({
       "@type": "CollectionPage",
       url: "https://mohantyabhisek.com/blogs/categories/web-development",

@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { JSX } from "react";
 
+import BlogCategoryPosts from "@/features/blogs/components/blog-category-posts";
+import CategoryHeader from "@/features/blogs/components/category-header";
 import type BlogCategory from "@/features/blogs/models/blog-category";
 import {
   getBlogCategoryBySlug,
   getCachedAllBlogCategory,
 } from "@/features/blogs/services/blog-category-service";
+import { getCachedBlogCardsByCategorySlug } from "@/features/blogs/services/blog-service";
 
 const SITE_URL = "https://mohantyabhisek.com";
 const CATEGORIES_URL = `${SITE_URL}/blogs/categories`;
@@ -28,19 +31,29 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export default async function BlogCategoryPage({
   params,
 }: BlogCategoryPageParams): Promise<JSX.Element> {
-  const category = await getBlogCategoryBySlug((await params).slug);
+  const slug = (await params).slug;
+  const category = await getBlogCategoryBySlug(slug);
 
   if (!category) {
     notFound();
   }
 
+  const blogs = await getCachedBlogCardsByCategorySlug(category.slug);
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(createJsonLd(category)),
-      }}
-    />
+    <>
+      <CategoryHeader
+        title={category.title}
+        description={category.description}
+      />
+      <BlogCategoryPosts categoryTitle={category.title} blogs={blogs} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(createJsonLd(category)),
+        }}
+      />
+    </>
   );
 }
 

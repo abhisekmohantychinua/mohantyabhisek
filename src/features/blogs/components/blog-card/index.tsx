@@ -12,7 +12,7 @@ type BlogCardProps = {
 };
 export default function BlogCard({ blogCard }: BlogCardProps): JSX.Element {
   return (
-    <Link href={`blogs/${blogCard.slug}`} className="blog-card__wrapper">
+    <Link href={`/blogs/${blogCard.slug}`} className="blog-card__wrapper">
       <article className="blog-card">
         <time
           className="blog-card__date"

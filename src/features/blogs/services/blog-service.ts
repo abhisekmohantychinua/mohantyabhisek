@@ -30,6 +30,63 @@ export async function getCachedBlogCardsPage(
   )();
 }
 
+/**
+ * Fetches and caches all published blog cards for a category for one day.
+ *
+ * @param categorySlug - Slug identifying the blog category.
+ * @returns Matching blog cards, newest publication date first.
+ */
+export async function getCachedBlogCardsByCategorySlug(
+  categorySlug: string,
+): Promise<BlogCard[]> {
+  return unstable_cache(
+    async () => getBlogCardsByCategorySlug(categorySlug),
+    [`blog-category-${categorySlug}`],
+    {
+      revalidate: 86400,
+    },
+  )();
+}
+
+/**
+ * Fetches all published blog cards assigned to a category.
+ *
+ * @param categorySlug - Slug identifying the blog category.
+ * @returns Matching blog cards, newest publication date first.
+ */
+export async function getBlogCardsByCategorySlug(
+  categorySlug: string,
+): Promise<BlogCard[]> {
+  const db = await getMongoDb();
+
+  const blogs = await db
+    .collection("blogs")
+    .find(
+      {
+        blogCategorySlug: categorySlug,
+        status: "PUBLISHED",
+      },
+      {
+        projection: {
+          _id: 0,
+          slug: 1,
+          title: 1,
+          description: 1,
+          postedAt: 1,
+        },
+      },
+    )
+    .sort({ postedAt: -1 })
+    .toArray();
+
+  return blogs.map(({ slug, title, description, postedAt }) => ({
+    slug,
+    title,
+    description,
+    postedAt,
+  }));
+}
+
 export async function getBlogCardsPage(
   index?: number,
 ): Promise<PageResponse<BlogCard>>;
@@ -181,6 +238,7 @@ export async function getBySlug(slug: string): Promise<Blog | null> {
         title: 1,
         description: 1,
         content: 1,
+        blogCategorySlug: 1,
         topics: 1,
         faqs: 1,
         postedAt: 1,
@@ -196,6 +254,7 @@ export async function getBySlug(slug: string): Promise<Blog | null> {
     title: doc.title,
     description: doc.description,
     content: doc.content,
+    blogCategorySlug: doc.blogCategorySlug,
     topics: doc.topics,
     faqs: doc.faqs,
     postedAt: doc.postedAt,
