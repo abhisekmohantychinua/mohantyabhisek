@@ -53,6 +53,23 @@ export const workCards: WorkCard[] = [
       height: 384,
     },
   },
+  {
+    slug: "cropedly",
+    title: "Cropedly",
+    description:
+      "From image enhancement to payments and APIs, we connected every piece to build Cropedly as a complete SaaS product.",
+    image: {
+      slug: "cropedly-card",
+      url: "/works/cropedly/image-1.png",
+      alt: "Cropedly hero preview",
+      caption: "Cropedly brand preview",
+      title: "Cropedly",
+      description:
+        "Cropedly is an AI-powered image enhancement platform that makes high-quality upscaling and refinement simple, fast, and accessible to anyone.",
+      width: 512,
+      height: 384,
+    },
+  },
 ];
 
 export const works: Work[] = [
@@ -611,5 +628,189 @@ export const works: Work[] = [
     ],
     postedAt: new Date("2026-09-24T00:00:00.000Z"),
     lastModifiedAt: new Date("2026-09-24T00:00:00.000Z"),
+  },
+  {
+    slug: "cropedly",
+    metadata: {
+      title: "Cropedly — AI-Powered SaaS Web Application | Abhisek",
+      description:
+        "An AI image enhancement SaaS developed by Abhisek, combining image processing, user accounts, subscriptions, payments, API access, and content management.",
+    },
+    title: "Cropedly",
+    description:
+      "From image enhancement to payments and APIs, we connected every piece to build Cropedly as a complete SaaS product.",
+    sectors: [
+      "Artificial Intelligence",
+      "SaaS",
+      "SaaS Website",
+      "SaaS Web Application",
+      "Image Enhancer",
+    ],
+    contents: [
+      "Cropedly is an AI-powered image enhancement platform that makes high-quality upscaling and refinement simple, fast, and accessible to anyone.",
+      "We took a clear product vision and turned it into a complete production-ready SaaS. Not just an enhancement tool but a fully operational platform with the infrastructure, monetization, and growth systems required to support real users and a scalable business.",
+      "The core experience is intentionally simple: upload an image, enhance it, download the result. Around that workflow we built the essential layers of a modern SaaS product: user accounts, Google social login, public API access, flexible pricing plans, international payments via PayPal, advertising integration, and a self-hosted WordPress blog running inside the main application. That blog is more than content storage. It is a deliberate marketing engine designed to publish articles, guides, and stories that attract organic traffic, build authority, and continuously feed the growth of the product.",
+      "What makes the architecture distinctive is the deliberate combination of technologies chosen purely for their strengths. Spring Boot powers the entire API layer. FastAPI serves the AI model securely inside a private network. Self-hosted WordPress handles the CMS and content marketing side, backed by MySQL, while MongoDB supports the application data. Everything is containerized and managed with Docker. These tools come from different ecosystems and serve different purposes, yet each is best-in-class in its domain. By selecting and integrating them thoughtfully, we created a cohesive platform that leverages the right tool for every job rather than forcing a single stack to do everything.",
+      "The result is a live platform that unites AI image enhancement, payments, marketing content, and API capabilities in one place while keeping the experience clean and effortless for the person using it.",
+      "Cropedly's interface is the smallest part of what we built. The harder work was everything holding it up: accounts, payments, an API, a content engine, assembled so the product could function on its own. ",
+    ],
+    featuredVideo: {
+      slug: "cropedly-featured-video",
+      title: "Cropedly — AI Photo Enhancement and Image Upscaling",
+      description:
+        "Explore Cropedly, an AI photo enhancer and image upscaler designed to help users improve their images online. This product showcase demonstrates the image upload and enhancement workflow, image preview and download experience, website interface, pricing plans, and the technology behind the product. It also highlights Cropedly’s visual identity and content experience.",
+      alt: "A product demonstration of Cropedly showing its AI photo enhancement and image upscaling interface, image upload and download process, website features, pricing plans, and brand presentation.",
+      caption:
+        "A look at Cropedly, an AI-powered photo enhancer and image upscaler, from its image enhancement interface to its features and pricing.",
+      transcript:
+        "The video opens with a promotional introduction to Cropedly and its AI-powered image enhancement experience. It showcases the platform's interface, where users can upload images, enhance them, preview the results, and download the processed images. The presentation then features Cropedly's website design, sample image enhancements, and a collection of interface elements. It moves on to the platform's pricing section, displaying Free, Starter, Pro, and Enterprise plans, followed by its blog and insights section. The video also highlights the technologies used to build the platform before closing with the Cropedly logo and a statement about bringing everything together to create a complete SaaS product.",
+      url: "/works/cropedly/video.mp4",
+      thumbnail: {
+        slug: "cropedly-video-thumbnail",
+        url: "/works/cropedly/image-1.png",
+        title: "Cropedly — AI Photo Enhancer",
+        description:
+          "Cropedly project showcase featuring its AI photo enhancer and image upscaler across a mobile phone, laptop, and tablet, with the headline introducing its image enhancement platform.",
+        alt: "Cropedly project showcase featuring its AI photo enhancer and image upscaler across a smartphone, laptop, and tablet, highlighting the platform's image upload interface, website, and pricing plans.",
+        caption:
+          "A preview of Cropedly, showcasing its AI-powered image enhancement platform across mobile and desktop interfaces.",
+        width: 1440,
+        height: 810,
+      },
+      duration: 43,
+      uploadedAt: new Date("2026-11-04T00:00:00.000Z"),
+    },
+    gallery: [
+      {
+        slug: "cropedly-gallery-1",
+        url: "/works/cropedly/image-1.png",
+        alt: "Cropedly product showcase featuring its AI image enhancement interface, mobile experience, website content, and pricing dashboard across smartphone, laptop, and tablet mockups.",
+        caption:
+          "An overview of Cropedly's image enhancement platform and its responsive website experience.",
+        title: "Cropedly — Complete Product Showcase",
+        description:
+          "A visual overview of Cropedly, presenting its AI photo enhancer and image upscaler alongside the platform's mobile interface, website design, insights section, and pricing experience.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "cropedly-gallery-2",
+        url: "/works/cropedly/image-2.png",
+        alt: "Cropedly's mobile interface displayed in overlapping smartphone mockups, featuring the AI photo enhancer, image upload area, and sample images.",
+        caption:
+          "A closer look at Cropedly's mobile image enhancement experience.",
+        title: "Cropedly — Mobile Image Enhancement Experience",
+        description:
+          "A mobile-focused presentation of Cropedly's AI photo enhancer and image upscaler. The design highlights the image upload interface, sample images, and responsive experience for users accessing the platform on smartphones.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "cropedly-gallery-3",
+        url: "/works/cropedly/image-3.png",
+        alt: 'Cropedly\'s insights page displaying the heading "Insights That Help Your Images Shine," supporting text, and a collection of blog post cards.',
+        caption:
+          "Cropedly's insights section featuring guides and creative tips about image enhancement.",
+        title: "Cropedly — Blog and Insights Section",
+        description:
+          "A showcase of Cropedly's blog section, designed to share useful guides, creative tips, and information about creating better-quality images. The page features a grid of blog post cards within the platform's visual identity.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "cropedly-gallery-4",
+        url: "/works/cropedly/image-4.png",
+        alt: "Cropedly's audience page showing its image enhancer for e-commerce sellers, marketing teams, graphic designers, photographers, content creators, and freelancers.",
+        caption:
+          "Cropedly's image enhancement platform presented for different creative and professional audiences.",
+        title: "Cropedly — Platform Audience and Use Cases",
+        description:
+          "A presentation of the audiences Cropedly serves, including e-commerce sellers, marketing teams, graphic designers, photographers, content creators, and freelancers. The interface introduces the platform's value through a dedicated audience section.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "cropedly-gallery-5",
+        url: "/works/cropedly/image-5.png",
+        alt: "Cropedly's pricing section displaying Free, Starter, Pro, and Enterprise plans with their respective prices and included features.",
+        caption:
+          "Cropedly's subscription options, from a free plan to custom enterprise solutions.",
+        title: "Cropedly — Subscription Plans and Pricing",
+        description:
+          "A showcase of Cropedly's pricing structure, featuring four plans: Free, Starter, Pro, and Enterprise. Each plan presents its pricing and included features, illustrating the platform's subscription options for different user requirements.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        slug: "cropedly-gallery-6",
+        url: "/works/cropedly/image-6.png",
+        alt: "Cropedly's AI photo enhancer displayed across laptop and tablet mockups, showing the image upload interface and before-and-after photo enhancement examples.",
+        caption:
+          "Transforming ordinary photos with Cropedly's AI-powered image enhancement experience.",
+        title: "Cropedly — AI Photo Enhancement Workflow",
+        description:
+          "A visual presentation of Cropedly's core image enhancement experience. The design showcases the image upload interface alongside sample photos and before-and-after comparisons, highlighting how users can improve their images through the platform.",
+        width: 1440,
+        height: 810,
+      },
+    ],
+    clients: [
+      {
+        name: "Umang Dayal",
+        link: {
+          platform: "LinkedIn",
+          url: "https://www.linkedin.com/in/umang-dayal-founder",
+        },
+      },
+    ],
+    partners: [],
+    teamMembers: [],
+    collaborators: [],
+    faqs: [
+      {
+        question: "What is Cropedly?",
+        answer:
+          "Cropedly is an AI-powered image enhancement platform that helps users improve image quality through high-quality upscaling and refinement. It makes the process simple: upload an image, enhance it, and download the result.",
+      },
+      {
+        question: "What features does Cropedly offer?",
+        answer:
+          "Cropedly combines AI image enhancement with the essential features of a complete SaaS platform. It includes user accounts, Google social login, public API access, flexible subscription plans, PayPal payments, advertising integration, and a built-in WordPress blog for content publishing.",
+      },
+      {
+        question: "How does the image enhancement process work?",
+        answer:
+          "The core workflow is straightforward. Users upload an image to Cropedly, process it through the AI enhancement system, and download the enhanced result.",
+      },
+      {
+        question:
+          "Is Cropedly a complete SaaS product or just an image enhancement tool?",
+        answer:
+          "Cropedly is a complete, production-ready SaaS platform. Beyond its core image enhancement functionality, it includes user management, subscription and payment infrastructure, API access, advertising integration, and a content marketing system.",
+      },
+      {
+        question: "Does Cropedly provide an API?",
+        answer:
+          "Yes. Cropedly includes public API access, allowing its image enhancement capabilities to be accessed beyond the main web interface.",
+      },
+      {
+        question: "How are payments and subscriptions handled?",
+        answer:
+          "Cropedly supports flexible pricing plans and international payments through PayPal. Its subscription structure includes Free, Starter, Pro, and Enterprise plans.",
+      },
+      {
+        question: "What technologies were used to build Cropedly?",
+        answer:
+          "Cropedly uses Spring Boot for its API layer, FastAPI to serve the AI model within a private network, and self-hosted WordPress for content management. MySQL supports the WordPress CMS, while MongoDB handles application data. Docker is used to containerize and manage the platform's services.",
+      },
+      {
+        question:
+          "Why does Cropedly use multiple technologies instead of a single technology stack?",
+        answer:
+          "Each technology was selected for its strengths and specific responsibilities. Spring Boot handles the application API, FastAPI serves the AI model, and WordPress manages content publishing. This approach allows different parts of the platform to use suitable technologies while working together as one cohesive product.",
+      },
+    ],
+    postedAt: new Date("2026-11-04T00:00:00.000Z"),
+    lastModifiedAt: new Date("2026-11-04T00:00:00.000Z"),
   },
 ];
