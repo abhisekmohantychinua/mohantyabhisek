@@ -2,8 +2,6 @@ import { stat } from "node:fs/promises";
 
 import { expect, test } from "@playwright/test";
 
-// BUG: FIX THE SEMVER SCHEMA UPDATE ALONG WITH CREATING A SEMVER RELEASE AT CTX-CLI
-
 const DOWNLOAD_ENDPOINT = "/api/ctx/download";
 const BASE_URL =
   process.env.PLAYWRIGHT_TEST_BASE_URL ?? "http://localhost:3000";
@@ -99,15 +97,16 @@ test.describe("GET /api/ctx/download", () => {
       expect(response.status()).toBe(400);
 
       await expect(response.json()).resolves.toEqual({
-        message: "Version must be in the format vX.Y.Z or vX.Y.Z-SNAPSHOT.",
+        message: "Version must follow SemVer 2.0.0, prefixed with 'v'.",
       });
     });
 
     for (const version of [
       "1.2.3",
       "v1.2",
-      "v1.2.3-beta",
-      "v1.2.3-SNAPSHOT-extra",
+      "v1.2.3.4",
+      "v01.2.3",
+      "v1.2.3-01",
     ]) {
       test(`returns 400 for invalid version format: ${version}`, async ({
         request,
