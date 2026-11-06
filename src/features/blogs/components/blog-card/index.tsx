@@ -24,7 +24,9 @@ export default function BlogCard({ blogCard }: BlogCardProps): JSX.Element {
             day: "numeric",
           })}
         </time>
-        <h3 className="blog-card__heading">{blogCard.title}</h3>
+        <h3 title={blogCard.title} className="blog-card__heading">
+          {blogCard.title} &#x2026;
+        </h3>
         <p className="blog-card__description">{blogCard.description}</p>
         <Button variant="ghost" size="sm">
           Read More

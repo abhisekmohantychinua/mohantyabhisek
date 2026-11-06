@@ -14,38 +14,13 @@
 }
 
 .blog-card__heading {
-  @apply text-foreground mb-10 overflow-hidden text-3xl leading-11;
-  @apply max-2xl:mb-8;
-  @apply max-sm:text-xl max-sm:leading-9;
-
-  /* Force three-line visual block and truncate overflow */
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-
-  @media (width < 96rem) {
-    -webkit-line-clamp: 3;
-  }
-  @media (width < 40rem) {
-    -webkit-line-clamp: 4;
-  }
+  @apply text-foreground mb-10 line-clamp-4 overflow-hidden text-3xl leading-11;
+  @apply max-2xl:mb-8 max-2xl:line-clamp-3;
+  @apply max-sm:line-clamp-4 max-sm:text-xl max-sm:leading-9;
 }
 
 .blog-card__description {
-  @apply text-foreground mb-7 overflow-hidden text-lg leading-7;
-  @apply max-2xl:mb-6;
-
-  @apply max-sm:text-base max-sm:leading-6;
-
-  /* Force three-line visual and overflow */
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-
-  @media (width < 96rem) {
-    -webkit-line-clamp: 4;
-  }
-  @media (width < 40rem) {
-    -webkit-line-clamp: 5;
-  }
+  @apply text-foreground mb-7 line-clamp-5 overflow-hidden text-lg leading-7;
+  @apply max-2xl:mb-6 max-2xl:line-clamp-4;
+  @apply max-sm:line-clamp-5 max-sm:text-base max-sm:leading-6;
 }
