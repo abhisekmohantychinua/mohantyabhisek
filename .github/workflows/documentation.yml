@@ -45,7 +45,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          mkdir -p out/api-doc
+          mkdir -p out/api-docs
 
           cp docs/api-docs/index.html out/api-docs/index.html
           cp docs/api-docs/openapi.json out/api-docs/openapi.json
