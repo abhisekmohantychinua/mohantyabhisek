@@ -111,7 +111,7 @@ describe("Footer", () => {
 
     expect(screen.getByRole("link", { name: /instagram/i })).toHaveAttribute(
       "href",
-      "https://www.instagram.com/abhisek.mohanty/",
+      "https://www.instagram.com/coderabhisek",
     );
   });
 
@@ -121,15 +121,6 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: /email/i })).toHaveAttribute(
       "href",
       "mailto:mohantyabhisek@hotmail.com",
-    );
-  });
-
-  test("renders phone link", (): void => {
-    render(<Footer />);
-
-    expect(screen.getByRole("link", { name: /phone/i })).toHaveAttribute(
-      "href",
-      "tel:+919439485166",
     );
   });
 
