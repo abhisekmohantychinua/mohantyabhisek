@@ -12,8 +12,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
-    "docs:api": "typedoc",
-    "docs:api:clean": "rm -rf docs-api"
+    "docs:api": "typedoc"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

@@ -10,7 +10,7 @@
   "entryPointStrategy": "expand",
   "out": "out",
   "name": "Abhisek — Codebase Documentation",
-  "readme": "docs/api/README.md",
+  "readme": "README.md",
   "exclude": [
     "**/*.test.ts",
     "**/*.spec.ts",

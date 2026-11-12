@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -47,8 +47,8 @@ jobs:
 
           mkdir -p out/api-doc
 
-          cp docs/api-doc/index.html out/api-docs/index.html
-          cp docs/api-doc/openapi.json out/api-docs/openapi.json
+          cp docs/api-docs/index.html out/api-docs/index.html
+          cp docs/api-docs/openapi.json out/api-docs/openapi.json
 
       # Preserve generated output outside the Git working tree.
       - name: Prepare Documentation Snapshot
