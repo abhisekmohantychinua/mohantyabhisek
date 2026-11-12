@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "skills": {
+    "openapi-spec-generation": {
+      "source": "wshobson/agents",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": "plugins/documentation-generation/skills/openapi-spec-generation/SKILL.md",
+      "computedHash": "7d034b06630d89c13d4ac440529eb1832ac8643beddb62ba68fc05324e0a21f1",
+      "installMode": "copy"
+    }
+  }
+}
