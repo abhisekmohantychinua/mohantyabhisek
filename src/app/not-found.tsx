@@ -1,0 +1,41 @@
+"use client";
+
+import Link from "next/link";
+import type { JSX } from "react";
+
+import { Button } from "@/components/ui/button";
+import FuzzyText from "@/components/ui/fuzzy-text";
+
+export default function NotFound(): JSX.Element {
+  return (
+    <section className="container mx-auto min-h-[80vh] flex flex-col justify-center items-center gap-6 px-6 lg:px-8">
+      <FuzzyText
+        baseIntensity={0.07}
+        hoverIntensity={0.2}
+        fuzzRange={15}
+        fps={30}
+        glitchMode
+        color="var(--foreground)"
+      >
+        404
+      </FuzzyText>
+      <FuzzyText
+        baseIntensity={0.03}
+        hoverIntensity={0.1}
+        fuzzRange={8}
+        fps={30}
+        color="#2b2b2b"
+        fontSize="clamp(1.5rem, 5vw, 2.5rem)"
+      >
+        Oops! Page Not Found
+      </FuzzyText>
+      <p className="max-w-md text-foreground/60">
+        The page you are looking for does not exist. It might have been moved or
+        deleted.
+      </p>
+      <Button variant="outline" className="mt-4" asChild>
+        <Link href="/">Go to Home</Link>
+      </Button>
+    </section>
+  );
+}

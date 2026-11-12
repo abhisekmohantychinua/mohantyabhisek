@@ -1,0 +1,91 @@
+@reference "../../../../app/globals.css";
+
+.contact-info {
+  @apply bg-primary text-primary-foreground w-full;
+}
+
+.contact-info__block {
+  @apply container mx-auto flex w-full max-w-[1440px] items-start justify-center gap-12 px-12 py-12;
+  @apply max-xl:gap-10 max-xl:px-8 max-xl:py-8;
+  @apply max-lg:flex-col max-lg:items-center;
+  @apply max-sm:px-4 max-sm:py-8;
+}
+
+.contact-info__figure {
+  @apply h-[597px] w-md overflow-hidden rounded-lg;
+  @apply max-xl:h-[512px] max-xl:w-sm;
+  @apply max-sm:h-96 max-sm:w-2xs;
+}
+
+.contact-info__right {
+  @apply h-[597px] max-xl:h-[512px] max-sm:h-96;
+}
+
+.contact-info__right-heading {
+  @apply mb-8 text-4xl leading-14 font-normal;
+  @apply max-sm:mb-6 max-sm:text-3xl max-sm:leading-10;
+}
+
+.contact-info__links {
+  @apply flex max-h-[512px] max-w-md flex-col gap-6 overflow-y-scroll;
+  @apply max-xl:max-h-[420px] max-xl:max-w-none;
+  @apply max-sm:max-h-72 max-sm:gap-4;
+}
+
+.contact-info__link {
+  @apply flex items-center gap-4 rounded-lg border border-white/60 px-6 py-4 no-underline;
+  @apply max-sm:gap-2 max-sm:px-3 max-sm:py-2;
+  @apply transition-colors duration-200;
+  @apply hover:bg-white/10;
+  @apply focus-visible:bg-white/10;
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+}
+
+.contact-info__icon {
+  @apply text-primary flex size-16 items-center justify-center rounded-sm bg-white;
+  @apply max-sm:size-12;
+}
+.contact-info__icon-svg {
+  @apply size-10 stroke-2;
+  @apply max-sm:size-6 max-sm:stroke-2;
+}
+
+.contact-info__link:hover .contact-info__icon {
+  @apply bg-accent;
+}
+
+.contact-info__link-content {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.contact-info__link-name {
+  @apply text-3xl leading-11;
+  @apply max-sm:text-xl max-sm:leading-8;
+}
+
+.contact-info__link-value {
+  @apply truncate text-lg leading-7 text-white/80;
+  @apply max-sm:text-base max-sm:leading-6;
+}
+
+.contact-info__link:hover .contact-info__link-value {
+  @apply text-accent/80;
+}
+
+.contact-info__arrow {
+  @apply shrink-0;
+}
+
+.contact-info__links {
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE/old Edge */
+  -ms-overflow-style: none;
+}
+
+.contact-info__links::-webkit-scrollbar {
+  display: none;
+}

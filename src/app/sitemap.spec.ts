@@ -1,0 +1,292 @@
+import { beforeEach, describe, expect, test, vi } from "vitest";
+
+const { getAllBlogSitemapMock, getCachedAllBlogCategoryMock } = vi.hoisted(
+  () => ({
+    getAllBlogSitemapMock: vi.fn(),
+    getCachedAllBlogCategoryMock: vi.fn(),
+  }),
+);
+
+vi.mock("@/features/blogs/services/blog-category-service", () => ({
+  getCachedAllBlogCategory: getCachedAllBlogCategoryMock,
+}));
+
+vi.mock("@/features/blogs/services/blog-service", () => ({
+  getAllBlogSitemap: getAllBlogSitemapMock,
+}));
+
+vi.mock("@/features/works/store/works-store", () => ({
+  works: [
+    {
+      slug: "sample-work",
+
+      lastModifiedAt: new Date("2026-07-01T00:00:00.000Z"),
+
+      featuredVideo: {
+        url: "/works/sample-work/video.mp4",
+        title: "Featured Video",
+        description: "Featured video description",
+        thumbnail: {
+          url: "/works/sample-work/thumbnail.jpg",
+        },
+      },
+
+      gallery: [
+        {
+          url: "/works/sample-work/image-1.jpg",
+        },
+        {
+          url: "/works/sample-work/image-2.jpg",
+        },
+      ],
+    },
+  ],
+}));
+
+import sitemap, { revalidate } from "./sitemap";
+
+describe("sitemap", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  describe("revalidate", () => {
+    test("revalidates once every 24 hours", () => {
+      expect(revalidate).toBe(86400);
+    });
+  });
+
+  describe("sitemap", () => {
+    test("returns static sitemap paths", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      expect(result).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            url: "https://mohantyabhisek.com",
+          }),
+          expect.objectContaining({
+            url: "https://mohantyabhisek.com/contact",
+          }),
+          expect.objectContaining({
+            url: "https://mohantyabhisek.com/blogs",
+          }),
+          expect.objectContaining({
+            url: "https://mohantyabhisek.com/blogs/categories",
+          }),
+          expect.objectContaining({
+            url: "https://mohantyabhisek.com/works",
+          }),
+        ]),
+      );
+    });
+
+    test("includes work sitemap entries", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      expect(result).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            url: "https://mohantyabhisek.com/works/sample-work",
+
+            lastModified: new Date("2026-07-01T00:00:00.000Z"),
+
+            changeFrequency: "monthly",
+
+            priority: 1,
+
+            images: [
+              "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+              "https://mohantyabhisek.com/works/sample-work/image-1.jpg",
+              "https://mohantyabhisek.com/works/sample-work/image-2.jpg",
+            ],
+
+            videos: [
+              {
+                title: "Featured Video",
+                description: "Featured video description",
+                thumbnail_loc:
+                  "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+                content_loc:
+                  "https://mohantyabhisek.com/works/sample-work/video.mp4",
+              },
+            ],
+          }),
+        ]),
+      );
+    });
+
+    test("includes image sitemap entries for works", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      const workEntry = result.find(
+        (entry) => entry.url === "https://mohantyabhisek.com/works/sample-work",
+      );
+
+      expect(workEntry).toEqual(
+        expect.objectContaining({
+          images: [
+            "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+            "https://mohantyabhisek.com/works/sample-work/image-1.jpg",
+            "https://mohantyabhisek.com/works/sample-work/image-2.jpg",
+          ],
+        }),
+      );
+    });
+
+    test("includes video sitemap entries for works", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      const workEntry = result.find(
+        (entry) => entry.url === "https://mohantyabhisek.com/works/sample-work",
+      );
+
+      expect(workEntry).toEqual(
+        expect.objectContaining({
+          videos: [
+            {
+              title: "Featured Video",
+              description: "Featured video description",
+              thumbnail_loc:
+                "https://mohantyabhisek.com/works/sample-work/thumbnail.jpg",
+              content_loc:
+                "https://mohantyabhisek.com/works/sample-work/video.mp4",
+            },
+          ],
+        }),
+      );
+    });
+
+    test("includes blog sitemap entries", async () => {
+      const lastModifiedAt = new Date("2026-06-15T00:00:00.000Z");
+
+      getAllBlogSitemapMock.mockResolvedValue([
+        {
+          slug: "react-hooks",
+          lastModifiedAt,
+        },
+      ]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      expect(result).toEqual(
+        expect.arrayContaining([
+          {
+            url: "https://mohantyabhisek.com/blogs/react-hooks",
+            lastModified: lastModifiedAt,
+            changeFrequency: "yearly",
+            priority: 0.9,
+          },
+        ]),
+      );
+    });
+
+    test("returns static and work paths when blog retrieval fails", async () => {
+      const consoleErrorSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+
+      getAllBlogSitemapMock.mockRejectedValue(
+        new Error("Database unavailable"),
+      );
+      getCachedAllBlogCategoryMock.mockResolvedValue([]);
+
+      const result = await sitemap();
+
+      expect(
+        result.some(
+          (entry) =>
+            entry.url === "https://mohantyabhisek.com/works/sample-work",
+        ),
+      ).toBe(true);
+
+      expect(
+        result.some(
+          (entry) =>
+            entry.url === "https://mohantyabhisek.com/blogs/react-hooks",
+        ),
+      ).toBe(false);
+
+      expect(consoleErrorSpy).toHaveBeenCalled();
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    test("includes blog category sitemap entries", async () => {
+      const lastModifiedAt = new Date("2026-06-20T00:00:00.000Z");
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([
+        {
+          slug: "web-development",
+          lastModifiedAt,
+        },
+      ]);
+
+      const result = await sitemap();
+
+      expect(result).toContainEqual({
+        url: "https://mohantyabhisek.com/blogs/categories/web-development",
+        lastModified: lastModifiedAt,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    });
+
+    test("returns other sitemap paths when category retrieval fails", async () => {
+      const consoleErrorSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+      getAllBlogSitemapMock.mockResolvedValue([]);
+      getCachedAllBlogCategoryMock.mockRejectedValue(
+        new Error("Database unavailable"),
+      );
+
+      const result = await sitemap();
+
+      expect(
+        result.some(
+          (entry) => entry.url === "https://mohantyabhisek.com/blogs",
+        ),
+      ).toBe(true);
+      expect(consoleErrorSpy).toHaveBeenCalled();
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    test("combines static, work and blog sitemap entries", async () => {
+      getAllBlogSitemapMock.mockResolvedValue([
+        {
+          slug: "blog-1",
+          lastModifiedAt: new Date(),
+        },
+        {
+          slug: "blog-2",
+          lastModifiedAt: new Date(),
+        },
+      ]);
+      getCachedAllBlogCategoryMock.mockResolvedValue([
+        {
+          slug: "web-development",
+          lastModifiedAt: new Date(),
+        },
+      ]);
+
+      const result = await sitemap();
+
+      expect(result).toHaveLength(9);
+    });
+  });
+});

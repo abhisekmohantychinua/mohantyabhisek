@@ -1,0 +1,26 @@
+@reference "../../../app/globals.css";
+
+/* Calm, full-width invitation with centered narrow column */
+.cta-section {
+  @apply bg-primary/80 text-background relative w-full py-16 text-center;
+  @apply max-xl:px-8;
+  @apply max-sm:px-4;
+}
+
+.cta-section::before {
+  @apply absolute top-0 left-1/2 -z-10 h-full w-screen -translate-x-1/2 content-[""];
+  background-image: url("/cta-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.cta-section__heading {
+  @apply mx-auto mb-7 max-w-2xl text-4xl leading-14;
+  @apply leading-11 max-sm:text-3xl;
+}
+
+.cta-section__description {
+  @apply mx-auto mb-10 max-w-2xl text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+}

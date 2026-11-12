@@ -1,0 +1,229 @@
+/* Neutral Sans – Regular */
+@font-face {
+  font-family: "Neutral Sans";
+  src: url("/fonts/neutral-sans/NeutralSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Neutral Sans – Medium */
+@font-face {
+  font-family: "Neutral Sans";
+  src: url("/fonts/neutral-sans/NeutralSans-Meidum.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Neutral Sans – Bold */
+@font-face {
+  font-family: "Neutral Sans";
+  src: url("/fonts/neutral-sans/NeutralSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Neutral Sans – Black */
+@font-face {
+  font-family: "Neutral Sans";
+  src: url("/fonts/neutral-sans/NeutralSans-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Neutral Sans – Variable Font (optional but powerful) */
+@font-face {
+  font-family: "Neutral Sans VF";
+  src: url("/fonts/neutral-sans/NeutralSansVF.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Break – ExtraLight */
+@font-face {
+  font-family: "Break";
+  src: url("/fonts/break/break extralight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Break – Light */
+@font-face {
+  font-family: "Break";
+  src: url("/fonts/break/break light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Break – Regular */
+@font-face {
+  font-family: "Break";
+  src: url("/fonts/break/break regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Break – SemiBold */
+@font-face {
+  font-family: "Break";
+  src: url("/fonts/break/break semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Break – Bold */
+@font-face {
+  font-family: "Break";
+  src: url("/fonts/break/break bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-background: #f7f9fc;
+  --color-foreground: #2b2b2b;
+
+  --font-sans:
+    "Neutral Sans", "Neutral Sans VF", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --font-break:
+    "Break", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --color-sidebar-ring: #1f3a5f;
+  --color-sidebar-border: #e5e7eb;
+  --color-sidebar-accent-foreground: #2b2b2b;
+  --color-sidebar-accent: #f1f3f7;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-primary: #1f3a5f;
+  --color-sidebar-foreground: #2b2b2b;
+  --color-sidebar: #ffffff;
+
+  --color-chart-5: #9ca3af;
+  --color-chart-4: #6b7280;
+  --color-chart-3: #c89b3c;
+  --color-chart-2: #3a7d7c;
+  --color-chart-1: #1f3a5f;
+
+  --color-ring: #1f3a5f;
+  --color-input: #e5e7eb;
+  --color-border: #e5e7eb;
+  --color-destructive: #ef4444;
+
+  --color-accent-foreground: #ffffff;
+  --color-accent: #c89b3c;
+
+  --color-muted-foreground: #6b7280;
+  --color-muted: #f1f3f7;
+
+  --color-secondary-foreground: #ffffff;
+  --color-secondary: #3a7d7c;
+
+  --color-primary-foreground: #ffffff;
+  --color-primary: #1f3a5f;
+
+  --color-popover-foreground: #2b2b2b;
+  --color-popover: #ffffff;
+
+  --color-card-foreground: #2b2b2b;
+  --color-card: #ffffff;
+
+  --radius-sm: calc(0.625rem - 4px);
+  --radius-md: calc(0.625rem - 2px);
+  --radius-lg: 0.625rem;
+  --radius-xl: calc(0.625rem + 4px);
+  --radius-2xl: calc(0.625rem + 8px);
+  --radius-3xl: calc(0.625rem + 12px);
+  --radius-4xl: calc(0.625rem + 16px);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Custom Font Families */
+  --font-neutral-sans:
+    "Neutral Sans", "Neutral Sans VF", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-break:
+    "Break", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Custom Color Palette */
+  --background: #f7f9fc; /* Background */
+  --foreground: #2b2b2b; /* Charcoal */
+  --card: #ffffff;
+  --card-foreground: #2b2b2b; /* Charcoal */
+  --popover: #ffffff;
+  --popover-foreground: #2b2b2b; /* Charcoal */
+  --primary: #1f3a5f; /* Deep Blue */
+  --primary-foreground: #ffffff;
+  --secondary: #3a7d7c; /* Muted Teal */
+  --secondary-foreground: #ffffff;
+  --muted: #f1f3f7;
+  --muted-foreground: #6b7280;
+  --accent: #c89b3c; /* Soft Gold */
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #1f3a5f; /* Deep Blue */
+  --chart-1: #1f3a5f; /* Deep Blue */
+  --chart-2: #3a7d7c; /* Muted Teal */
+  --chart-3: #c89b3c; /* Soft Gold */
+  --chart-4: #6b7280;
+  --chart-5: #9ca3af;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2b2b2b; /* Charcoal */
+  --sidebar-primary: #1f3a5f; /* Deep Blue */
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f3f7;
+  --sidebar-accent-foreground: #2b2b2b; /* Charcoal */
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #1f3a5f; /* Deep Blue */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply overflow-x-hidden;
+  }
+  body {
+    @apply text-foreground overflow-x-hidden bg-white font-sans;
+  }
+  main {
+    @apply mt-16 overflow-x-hidden;
+  }
+  img {
+    @apply h-full w-full object-cover object-center;
+  }
+  figcaption {
+    @apply sr-only;
+  }
+}
+
+@layer components {
+  .highlight {
+    @apply text-accent font-bold;
+  }
+  .kicker {
+    @apply text-secondary rounded-full bg-[#2B2B2B1A] px-6 py-3 text-xl leading-16;
+    @apply max-sm:text-lg;
+  }
+  .divider {
+    @apply bg-foreground mx-auto h-px w-full;
+  }
+}

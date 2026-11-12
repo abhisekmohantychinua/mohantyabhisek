@@ -1,0 +1,18 @@
+import type { JSX } from "react";
+
+export default function Loading(): JSX.Element {
+  return (
+    <div className="flex items-center justify-center min-h-[80vh]">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-[30vh] h-[30vh] object-cover"
+      >
+        <source src="/loader.webm" type="video/webm" />
+        <source src="/loader.mp4" type="video/mp4" />
+      </video>
+    </div>
+  );
+}

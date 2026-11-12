@@ -1,0 +1,17 @@
+@reference "../../../../app/globals.css";
+
+.contact-enquiries {
+  @apply relative py-12 text-center;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:px-4 max-sm:py-4;
+}
+
+.contact-enquiries__heading {
+  @apply my-9 text-4xl leading-14;
+  @apply max-sm:my-6 max-sm:text-3xl max-sm:leading-10;
+}
+
+.contact-enquiries__description {
+  @apply mx-auto max-w-5xl text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+}

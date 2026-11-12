@@ -1,0 +1,69 @@
+@reference "../../../app/globals.css";
+
+.footer {
+  @apply container mx-auto flex items-center justify-center gap-8 px-12 py-12 text-center;
+  @apply max-xl:px-8 max-xl:py-8;
+  @apply max-sm:flex-col max-sm:gap-10 max-sm:px-4 max-sm:py-4;
+}
+
+.footer__left {
+  @apply min-w-2xs text-start;
+  @apply max-sm:text-center;
+}
+.footer__left-logo {
+  @apply mb-6 block h-[45px] w-40 overflow-hidden object-cover object-center;
+  @apply max-sm:mx-auto;
+}
+.footer__left-tagline {
+  @apply text-lg leading-7;
+}
+
+.footer__right {
+  @apply flex w-full flex-col items-end justify-center;
+  @apply max-sm:items-center;
+}
+
+.footer__right-nav {
+  @apply flex items-center justify-center gap-10;
+}
+
+.footer__right-nav-link {
+  @apply relative text-lg leading-7 transition-colors duration-200;
+  @apply max-sm:text-base max-sm:leading-6;
+
+  /* Legacy Code */
+  @apply after:bg-secondary after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:transition-all after:duration-300 after:ease-out;
+}
+.footer__right-nav-link:hover {
+  @apply after:w-full;
+}
+
+.footer__right-divider {
+  @apply my-6;
+}
+
+.footer__right-bottom {
+  @apply flex items-center justify-end gap-9;
+  @apply max-sm:gap-7;
+}
+.footer__right-social {
+  @apply flex items-center justify-center gap-7;
+  @apply max-sm:gap-5;
+}
+
+/* Legacy Code */
+.footer__right-social a {
+  @apply bg-accent/0 hover:bg-accent/20 hover:text-accent inline-flex items-center justify-center rounded-full p-2 transition-colors duration-200;
+}
+
+.footer-icon {
+  @apply h-5 w-5 stroke-current;
+}
+
+.footer-bottom {
+  @apply mt-10 w-full;
+}
+.footer-meta {
+  @apply text-lg leading-7;
+  @apply max-sm:text-base max-sm:leading-6;
+}

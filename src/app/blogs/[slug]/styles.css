@@ -1,0 +1,148 @@
+@reference "../../globals.css";
+
+/* Scope everything inside blog-wrapper */
+.blog-wrapper {
+  @apply container mx-auto max-w-6xl px-12;
+  @apply max-2xl:max-w-4xl max-2xl:px-8;
+  @apply max-sm:px-4;
+
+  /* Headings */
+  h1 {
+    @apply mt-6 mb-2 text-5xl leading-16;
+    @apply max-sm:text-4xl max-sm:leading-12;
+  }
+
+  h2 {
+    @apply mt-5 mb-[6px] text-4xl leading-12;
+    @apply max-sm:text-3xl max-sm:leading-10;
+  }
+
+  h3 {
+    @apply mt-4 mb-[5px] text-3xl leading-10;
+    @apply max-sm:text-2xl max-sm:leading-8;
+  }
+
+  h4 {
+    @apply mt-3 mb-1 text-2xl leading-8;
+    @apply max-sm:text-xl max-sm:leading-6;
+  }
+
+  /* Paragraphs */
+  p {
+    @apply mb-2 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary transition-colors;
+    @apply hover:decoration-primary hover:underline hover:decoration-1 hover:underline-offset-4;
+    @apply visited:text-primary/50;
+    @apply focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-4;
+    @apply active:text-primary/50;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    @apply -mt-2 mb-2 list-none ps-16;
+    @apply max-2xl:ps-12;
+    @apply max-sm:ps-8;
+  }
+
+  li {
+    @apply mb-2 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
+  }
+
+  ul li,
+  ol li {
+    @apply relative;
+  }
+
+  ul li::before {
+    content: "";
+    @apply bg-accent absolute -start-8 top-[10px] size-2 rounded-full;
+    @apply max-2xl:-start-6;
+    @apply max-sm:-start-4 max-sm:top-[9px] max-sm:size-1.5;
+  }
+
+  ol {
+    counter-reset: list-item;
+  }
+
+  ol li {
+    counter-increment: list-item;
+  }
+
+  ol li::before {
+    content: counter(list-item) ".";
+    @apply absolute -start-8 top-0 font-medium;
+    @apply max-2xl:-start-6;
+    @apply max-sm:-start-4;
+  }
+
+  /* Block quotes */
+  blockquote,
+  blockquote p {
+    @apply text-3xl leading-11 font-medium;
+    @apply max-sm:text-xl max-sm:leading-8;
+  }
+
+  blockquote {
+    @apply relative my-8 flex min-h-24 items-center justify-start px-12 text-center;
+    @apply before:pointer-events-none before:absolute before:inset-0 before:-z-10;
+    @apply before:bg-[url("/quote.svg")] before:bg-top-left before:content-[""];
+    @apply before:bg-size-[4rem] before:bg-no-repeat;
+    @apply max-2xl:ps-8;
+    @apply max-sm:px-4 max-sm:before:bg-size-[2rem];
+  }
+
+  /* Code blocks */
+  pre {
+    @apply bg-muted mx-auto my-8 max-w-5xl overflow-x-auto rounded-lg p-4 text-sm;
+  }
+
+  /* Horizontal rule */
+  hr {
+    @apply border-foreground mx-auto my-10;
+    @apply max-sm:my-6;
+  }
+
+  /* Tables */
+  .table-wrapper {
+    @apply w-full overflow-x-auto;
+  }
+
+  table {
+    @apply border-foreground my-8 border-separate border-spacing-0 overflow-hidden rounded-2xl border;
+  }
+
+  td {
+    @apply border-accent border-t border-r px-4 py-2 text-left text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
+    @apply even:bg-accent/10;
+    @apply last:border-r-0;
+  }
+
+  th {
+    @apply bg-secondary/10 px-8 py-4 text-2xl leading-10 font-semibold;
+    @apply first:rounded-tl-2xl last:rounded-tr-2xl;
+    @apply max-sm:text-xl max-sm:leading-8;
+  }
+
+  caption {
+    @apply mx-auto ms-2 mb-2 text-left font-semibold;
+  }
+
+  /* Definition lists */
+  dt {
+    @apply mt-4 text-lg leading-7 font-semibold;
+    @apply max-sm:text-base max-sm:leading-6;
+  }
+
+  dd {
+    @apply mb-4 text-lg leading-7;
+    @apply max-sm:text-base max-sm:leading-6;
+  }
+}

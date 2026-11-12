@@ -1,0 +1,20 @@
+{
+  "cSpell.words": [
+    "blogmetadatas",
+    "Cropedly",
+    "Embla",
+    "GSAP",
+    "Mohanty",
+    "mohantyabhisek",
+    "Odia",
+    "unstub"
+  ],
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "file": ".agents/commit-message.md"
+    }
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

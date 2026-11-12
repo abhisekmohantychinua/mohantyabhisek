@@ -1,0 +1,641 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Abhisek Mohanty Website API",
+    "version": "0.1.0",
+    "summary": "Public APIs for the Abhisek Mohanty website and CTX CLI releases.",
+    "description": "HTTP APIs used by mohantyabhisek.com for published blog listings, contact enquiries, and public CTX CLI release information and downloads.\n\nThese endpoints do not require caller authentication. The CTX release endpoints use server-side GitHub configuration; GitHub credentials are not sent by API consumers.",
+    "contact": {
+      "name": "Abhisek Mohanty",
+      "url": "https://mohantyabhisek.com/contact",
+      "email": "mohantyabhisek@hotmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://mohantyabhisek.com",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Blogs",
+      "description": "Browse and search published blog cards."
+    },
+    {
+      "name": "Contact",
+      "description": "Submit a contact enquiry."
+    },
+    {
+      "name": "CTX CLI Releases",
+      "description": "Browse published CTX CLI releases and download platform archives."
+    }
+  ],
+  "paths": {
+    "/api/blogs": {
+      "get": {
+        "operationId": "getBlogCards",
+        "summary": "List published blog cards",
+        "description": "Returns up to 12 published blog cards, ordered newest first. Search matches blog titles and slugs. A missing, non-numeric, or negative page index is treated as 0. Non-search results may be cached for up to one day.",
+        "tags": [
+          "Blogs"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "description": "Optional search text matched against published blog titles and slugs. Leading and trailing whitespace is removed.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "web applications"
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "required": false,
+            "description": "Zero-based page index. Defaults to 0; invalid or negative values are normalized to 0.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of published blog cards.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlogPageResponse"
+                },
+                "example": {
+                  "items": [
+                    {
+                      "slug": "building-business-websites",
+                      "title": "Building Better Business Websites",
+                      "description": "A practical guide to building a website around business goals.",
+                      "postedAt": "2026-10-12T10:30:00.000Z"
+                    }
+                  ],
+                  "currentIndex": 0,
+                  "isLastIndex": true
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/api/contact": {
+      "post": {
+        "operationId": "submitContactEnquiry",
+        "summary": "Submit a contact enquiry",
+        "description": "Validates the enquiry and sends it to the configured recipient by email. All request properties are required; provide an empty string for any contact method not supplied. At least one contact method must be non-empty.",
+        "tags": [
+          "Contact"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactEnquiryRequest"
+              },
+              "example": {
+                "message": "I would like to discuss a website for my business.",
+                "email": "client@example.com",
+                "phone": "",
+                "instagram": "",
+                "linkedin": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The enquiry email was sent successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                },
+                "example": null
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "description": "The request could not be processed or the enquiry email could not be sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Failed to submit contact form"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ctx/releases": {
+      "get": {
+        "operationId": "getCtxCliReleases",
+        "summary": "List published CTX CLI releases",
+        "description": "Returns published releases from the server-configured GitHub repository. Draft releases and releases without a publication date are excluded. Responses are marked private and non-cacheable.",
+        "tags": [
+          "CTX CLI Releases"
+        ],
+        "responses": {
+          "200": {
+            "description": "Published release metadata, newest releases as returned by GitHub.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Caching policy for the response.",
+                "schema": {
+                  "type": "string",
+                  "example": "private, no-store"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReleaseMeta"
+                  }
+                },
+                "example": [
+                  {
+                    "tag": "v1.2.3",
+                    "name": "CTX CLI v1.2.3",
+                    "releasedAt": "2026-09-20T12:00:00Z"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/ctx/releases/{tag}": {
+      "get": {
+        "operationId": "getCtxCliRelease",
+        "summary": "Get a published CTX CLI release",
+        "description": "Returns release metadata and Markdown release notes for a published release tag. Draft and unpublished releases are not exposed. Responses are marked private and non-cacheable.",
+        "tags": [
+          "CTX CLI Releases"
+        ],
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "required": true,
+            "description": "The release tag, typically a v-prefixed semantic version.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "example": "v1.2.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Published release metadata and release notes.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Caching policy for the response.",
+                "schema": {
+                  "type": "string",
+                  "example": "private, no-store"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReleaseDetailed"
+                },
+                "example": {
+                  "tag": "v1.2.3",
+                  "name": "CTX CLI v1.2.3",
+                  "releasedAt": "2026-09-20T12:00:00Z",
+                  "content": "## What's Changed\n- Added new features."
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/ctx/download": {
+      "get": {
+        "operationId": "downloadCtxCliArtifact",
+        "summary": "Download a CTX CLI release artifact",
+        "description": "Streams the archive matching the requested architecture. If version is omitted, the latest published release is used. Responses are marked private and non-cacheable; the content type and optional content length are inherited from the GitHub asset response.",
+        "tags": [
+          "CTX CLI Releases"
+        ],
+        "parameters": [
+          {
+            "name": "arch",
+            "in": "query",
+            "required": true,
+            "description": "Target operating system and CPU architecture.",
+            "schema": {
+              "$ref": "#/components/schemas/CtxArchitecture"
+            },
+            "example": "linux-amd64"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "description": "Optional release version following SemVer 2.0.0 with a leading v. When omitted, the latest release is downloaded.",
+            "schema": {
+              "type": "string",
+              "pattern": "^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+            },
+            "example": "v1.2.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested archive streamed as a binary response.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Attachment disposition with the original release asset filename.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"ctx-linux-amd64.tar.gz\"; filename*=UTF-8''ctx-linux-amd64.tar.gz"
+                }
+              },
+              "Content-Length": {
+                "description": "Archive size in bytes, when known.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "Cache-Control": {
+                "description": "Caching policy for the response.",
+                "schema": {
+                  "type": "string",
+                  "example": "private, no-store"
+                }
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BlogCard": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "slug",
+          "title",
+          "description",
+          "postedAt"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "URL slug identifying the published blog post."
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "postedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Publication timestamp serialized as an ISO 8601 date-time."
+          }
+        }
+      },
+      "BlogPageResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "currentIndex",
+          "isLastIndex"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlogCard"
+            },
+            "maxItems": 12
+          },
+          "currentIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Zero-based page index returned by the endpoint."
+          },
+          "isLastIndex": {
+            "type": "boolean",
+            "description": "True when there are no more blog cards after this page."
+          }
+        }
+      },
+      "ContactEnquiryRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "message",
+          "phone",
+          "email",
+          "instagram",
+          "linkedin"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 500,
+            "description": "Enquiry message."
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^(?:\\+?[1-9][0-9]{7,14})?$",
+            "description": "Optional phone number; use an empty string if omitted."
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "const": ""
+              }
+            ],
+            "description": "Optional email address; use an empty string if omitted."
+          },
+          "instagram": {
+            "type": "string",
+            "pattern": "^(?:(?:https?://)?(?:www\\.)?instagram\\.com/[A-Za-z0-9._]+)?$",
+            "description": "Optional Instagram profile URL; use an empty string if omitted."
+          },
+          "linkedin": {
+            "type": "string",
+            "pattern": "^(?:(?:https?://)?(?:www\\.)?linkedin\\.com/in/[A-Za-z0-9-_%]+)?$",
+            "description": "Optional LinkedIn profile URL; use an empty string if omitted."
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "phone": {
+                "minLength": 1
+              }
+            },
+            "required": [
+              "phone"
+            ]
+          },
+          {
+            "properties": {
+              "email": {
+                "not": {
+                  "const": ""
+                }
+              }
+            },
+            "required": [
+              "email"
+            ]
+          },
+          {
+            "properties": {
+              "instagram": {
+                "minLength": 1
+              }
+            },
+            "required": [
+              "instagram"
+            ]
+          },
+          {
+            "properties": {
+              "linkedin": {
+                "minLength": 1
+              }
+            },
+            "required": [
+              "linkedin"
+            ]
+          }
+        ]
+      },
+      "ReleaseMeta": {
+        "type": "object",
+        "required": [
+          "tag",
+          "name",
+          "releasedAt"
+        ],
+        "properties": {
+          "tag": {
+            "type": "string",
+            "description": "Git tag identifying the release."
+          },
+          "name": {
+            "type": "string",
+            "description": "Release name, falling back to the tag when no name is provided."
+          },
+          "releasedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Publication timestamp. Unpublished releases are excluded."
+          }
+        }
+      },
+      "ReleaseDetailed": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ReleaseMeta"
+          },
+          {
+            "type": "object",
+            "required": [
+              "content"
+            ],
+            "properties": {
+              "content": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Release notes in Markdown, or null when no notes are available."
+              }
+            }
+          }
+        ]
+      },
+      "CtxArchitecture": {
+        "type": "string",
+        "enum": [
+          "windows-amd64",
+          "linux-amd64",
+          "linux-arm64",
+          "macos-amd64",
+          "macos-arm64"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "The submitted request failed validation.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "message": "Version must follow SemVer 2.0.0, prefixed with 'v'."
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The requested release or matching artifact was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "message": "GitHub release not found."
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "The request could not be completed because of a server-side error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "message": "Failed to retrieve CTX CLI releases"
+            }
+          }
+        }
+      },
+      "BadGateway": {
+        "description": "An upstream GitHub response could not be used.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "message": "Failed to retrieve the CTX CLI release"
+            }
+          }
+        }
+      },
+      "ServiceUnavailable": {
+        "description": "The upstream GitHub service is unavailable.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "message": "Failed to retrieve CTX CLI releases"
+            }
+          }
+        }
+      }
+    }
+  }
+}
