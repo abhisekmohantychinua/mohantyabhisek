@@ -19,7 +19,7 @@ test("sitemap media resources are accessible", async ({ page, request }) => {
       throw new Error("The sitemap contains invalid XML.");
     }
 
-    const getUrls = (tagName: string) =>
+    const getUrls = (tagName: string): string[] =>
       Array.from(document.getElementsByTagName("*"))
         .filter((element) => element.localName === tagName)
         .map((element) => element.textContent?.trim() ?? "")

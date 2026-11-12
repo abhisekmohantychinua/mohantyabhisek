@@ -1,7 +1,7 @@
 import "./styles.css";
 
 import { SiInstagram, SiTelegram } from "@icons-pack/react-simple-icons";
-import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { JSX } from "react";
