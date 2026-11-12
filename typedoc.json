@@ -20,5 +20,31 @@
   "excludePrivate": true,
   "excludeInternal": true,
   "excludeExternals": true,
-  "githubPages": true
+  "githubPages": true,
+  "hideGenerator": true,
+  "searchInComments": true,
+  "searchInDocuments": true,
+  "lightHighlightTheme": "github-light",
+  "darkHighlightTheme": "github-dark",
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": false,
+    "includeFolders": true,
+    "compactFolders": true,
+    "excludeReferences": true
+  },
+  "categorizeByGroup": false,
+  "headings": {
+    "readme": true,
+    "document": false
+  },
+  "navigationLinks": {
+    "Website": "https://mohantyabhisek.com",
+    "API Reference": "https://abhisekmohantychinua.github.io/mohantyabhisek/api-doc/",
+    "GitHub": "https://github.com/abhisekmohantychinua/mohantyabhisek"
+  },
+  "sidebarLinks": {
+    "Website": "https://mohantyabhisek.com",
+    "GitHub": "https://github.com/abhisekmohantychinua/mohantyabhisek"
+  }
 }
