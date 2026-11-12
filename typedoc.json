@@ -9,7 +9,7 @@
   ],
   "entryPointStrategy": "expand",
   "out": "out",
-  "name": "Abhisek — Codebase Documentation",
+  "name": "mohantyabhisek.com",
   "readme": "README.md",
   "exclude": [
     "**/*.test.ts",
@@ -21,11 +21,18 @@
   "excludeInternal": true,
   "excludeExternals": true,
   "githubPages": true,
-  "hideGenerator": true,
-  "searchInComments": true,
-  "searchInDocuments": true,
+  "theme": "default",
   "lightHighlightTheme": "github-light",
   "darkHighlightTheme": "github-dark",
+  "navigationLinks": {
+    "Website": "https://mohantyabhisek.com",
+    "API Reference": "https://abhisekmohantychinua.github.io/mohantyabhisek/api-docs/",
+    "GitHub": "https://github.com/abhisekmohantychinua/mohantyabhisek"
+  },
+  "sidebarLinks": {
+    "Website": "https://mohantyabhisek.com",
+    "GitHub": "https://github.com/abhisekmohantychinua/mohantyabhisek"
+  },
   "navigation": {
     "includeCategories": true,
     "includeGroups": false,
@@ -34,17 +41,5 @@
     "excludeReferences": true
   },
   "categorizeByGroup": false,
-  "headings": {
-    "readme": true,
-    "document": false
-  },
-  "navigationLinks": {
-    "Website": "https://mohantyabhisek.com",
-    "API Reference": "https://abhisekmohantychinua.github.io/mohantyabhisek/api-doc/",
-    "GitHub": "https://github.com/abhisekmohantychinua/mohantyabhisek"
-  },
-  "sidebarLinks": {
-    "Website": "https://mohantyabhisek.com",
-    "GitHub": "https://github.com/abhisekmohantychinua/mohantyabhisek"
-  }
+  "hideGenerator": true
 }
