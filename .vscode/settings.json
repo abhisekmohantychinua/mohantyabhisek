@@ -17,15 +17,6 @@
       "file": ".vscode/copilot/commit-message.md"
     }
   ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "editor.wordWrap": "on",
-  "editor.wordWrapIndicator": true,
-  "editor.formatOnSave": true,
-  "js/ts.referencesCodeLens.enabled": true,
-  "js/ts.implementationsCodeLens.enabled": false,
-  "mermaidChart.showGenerateDiagramCodeLens": false,
   "files.associations": {
     "*.css": "tailwindcss"
   }

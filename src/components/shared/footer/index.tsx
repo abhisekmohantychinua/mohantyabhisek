@@ -1,5 +1,6 @@
 import "./styles.css";
 
+import { SiInstagram, SiTelegram } from "@icons-pack/react-simple-icons";
 import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,11 +62,11 @@ export default function Footer(): JSX.Element {
               <Linkedin size={20} />
             </Link>
             <Link
-              href="https://www.instagram.com/abhisek.mohanty/"
+              href="https://www.instagram.com/coderabhisek"
               className="footer__right-social-link"
               aria-label="Instagram"
             >
-              <Instagram size={20} />
+              <SiInstagram size={20} />
             </Link>
             <Link
               href="mailto:mohantyabhisek@hotmail.com"
@@ -75,11 +76,11 @@ export default function Footer(): JSX.Element {
               <Mail size={20} />
             </Link>
             <Link
-              href="tel:+919439485166"
+              href="https://t.me/mohantyabhisek"
               className="footer__right-social-link"
-              aria-label="Phone"
+              aria-label="Telegram"
             >
-              <Phone size={20} />
+              <SiTelegram size={20} />
             </Link>
           </div>
         </div>
