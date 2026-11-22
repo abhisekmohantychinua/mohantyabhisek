@@ -1,8 +1,10 @@
 import "./styles.css";
 
 import {
+  SiDiscord,
   SiGithub,
   SiInstagram,
+  SiReddit,
   SiTelegram,
   SiWhatsapp,
 } from "@icons-pack/react-simple-icons";
@@ -29,6 +31,18 @@ const contactMethods = [
     value: "@mohantyabhisek",
     href: "https://t.me/mohantyabhisek",
     icon: SiTelegram,
+  },
+  {
+    name: "Reddit",
+    value: "@mohantyabhisek",
+    href: "https://www.reddit.com/user/mohantyabhisek",
+    icon: SiReddit,
+  },
+  {
+    name: "Discord",
+    value: "@mohantyabhisek",
+    href: "https://discord.com/users/1573968794940870818",
+    icon: SiDiscord,
   },
   {
     name: "GitHub",

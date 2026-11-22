@@ -62,8 +62,10 @@ const jsonLd = {
   jobTitle: "Website & Web Application Consultant",
   sameAs: [
     "https://www.linkedin.com/in/mohanty-abhisek",
-    "https://github.com/abhisekmohantychinua",
     "https://www.instagram.com/coderabhisek",
+    "https://www.reddit.com/user/mohantyabhisek",
+    "https://discord.com/users/1573968794940870818",
+    "https://github.com/abhisekmohantychinua",
     "https://t.me/mohantyabhisek",
     "https://wa.me/919439485166",
   ],
@@ -75,6 +77,12 @@ const jsonLd = {
       url: "https://wa.me/919439485166",
       contactType: "consulting",
       availableLanguage: ["English", "Hindi", "Odia"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "professional networking",
+      url: "https://discord.com/users/1573968794940870818",
+      availableLanguage: ["English"],
     },
   ],
   worksFor: {

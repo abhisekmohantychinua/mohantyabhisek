@@ -74,7 +74,7 @@ const jsonLd = {
     "@type": "Person",
     "@id": "https://mohantyabhisek.com/#person",
     name: "Abhisek Mohanty",
-    jobTitle: "Website & Web App Consultant",
+    jobTitle: "Website & Web Application Consultant",
     url: "https://mohantyabhisek.com",
   },
   sameAs: [
